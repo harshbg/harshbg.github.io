@@ -10,4 +10,11 @@ I am currently a Sr. Software Engineer at <a href="https://www.build.com" target
 Email: <a href="mailto:{{site.email}}?Subject=From Blog Site:">{{site.email}}</a>
 
 ## Resume
-<iframe src="https://drive.google.com/open?id=18xHF4SRS3pEAnxkowZhucR2UFtVALNuD" width="100%" height="900"></iframe>
+<iframe src="https://drive.google.com/file/d/1RymCWMsz_pgQPE1LDzMs02Q9_BHKOzYw/view?usp=sharing" width="100%" height="900"></iframe>
+
+
+ I enjoy storytelling with statistics 
+ 
+ I enjoy machine learning, parallel computing, web programming, physics, chemistry, and all things data science.
+ 
+ I live in San Francisco, where I enjoy hot beverages, books, and making music.

@@ -6,7 +6,7 @@ date:   2018-02-04 21:28:15 +0700
 First of all, Thank you for stopping by.
 
 # Who am I?
-Hi, I am `Tauseef Jamadar`, a *Software Engineer* and a *Technology Enthusiast* from Chico, CA who loves to write software to build great products
+Hi, I am `Harsh Gupta`, a *Software Engineer* and a *Technology Enthusiast* from Chico, CA who loves to write software to build great products
 and help business succeed with their goals. 
 
 I was born in Mumbai, India and travelled to the United States for my masters program in Computer Science from [CSU, Chico][csu-chico] and graduated with Honors in the year 2011.

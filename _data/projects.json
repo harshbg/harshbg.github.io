@@ -36,16 +36,16 @@
 		"tags": ["PHP","HTML","CMS"]
 	},
 	{
-		"name": "Tire Derived Aggregate",
-		"image": "tda.png",
+		"name": "Intelligence Analytics Challange",
+		"image": "TI.PNG",
 		"date": "Oct 2016",
 		"url": "http://ttc.ecst.csuchico.edu/TDAtc/index.php",
 		"tags": ["PHP","HTML","CMS"]
 	},{
-		"name": "JM Watts Chico",
-		"image": "jmwattschico.png",
+		"name": "Texas Instruments Analytics Challange",
+		"image": "TI.PNG",
 		"url": "http://jmwattschico.com/",
-		"date": "May 2017",
-		"tags": ["HTML","CSS","Javascript"]
+		"date": "December 2017",
+		"tags": ["R","Tableau","Excel"]
 	}
 ]
