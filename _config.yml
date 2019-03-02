@@ -1,12 +1,12 @@
 title: Harsh Gupta
-description: My Portfolio of Data Science, Analytics, My Career, & Existential food for your soul.
+description: Stuff that I come across and find interesting.
 author: Harsh Gupta
-email: Harsh.Gupta5@utdallas.edu
+email: harshbg@gmail.com
 phone: (214) 532-5542
 github: https://github.com/harshbg
-about: I am a Business Analytics student at <a href="https://www.utdallas.edu/" target="_blank"> UT Dallas</a> and a Data Science enthusiast.   I enjoy storytelling with statistics. 
-disqus_shortname: DataJourneyman
-google_analytics: UA-42822568-2
+about: I am a Business Analytics student at <a href="https://www.utdallas.edu/" target="_blank"> UT Dallas</a> and a Data Science enthusiast.   I enjoy storytelling with statistics.
+disqus_shortname: programming
+google_analytics: UA-31048387-6
 avatar_url: /static/img/me.jpg
 
 enableTags: true
@@ -40,10 +40,12 @@ urls:
       url: /projects/
     - text: Blogs
       url: /blogs/
+    - text: Tweets
+      url: /tweets/
     - text: XML Feed
       url: /feed.xml
 # url: "http://localhost:4000"
-url: "http://gupta-harsh.com"
+url: "https://harshbg.github.io/"
 baseurl: ""
 paginate: 20
 per_page: 20
