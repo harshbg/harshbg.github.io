@@ -1,5 +1,5 @@
 ---
-layout: testing
+layout: project_single
 title: Testing
 permalink: /testing/
 ---
