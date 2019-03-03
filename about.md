@@ -19,7 +19,7 @@ You can find the links to reports in the publication section <a href="https://ww
 
 <p>
 At spare time, I enjoy reading everything and anything, listening podcasts, exploring new places, travel & photography. 
-If you would like to work with me, or have questions/comments, please contact me using the <a href="hello@gupta-harsh.com" target="_blank">email</a>, 
+If you would like to work with me, or have questions/comments, please contact me using the <a href="mailto:{{site.email}}?Subject=From Blog Site:">email</a>, 
 on <a href="https://www.linkedin.com/in/harshbg/" target="_blank">LinkedIn</a>, or via <a href="https://twitter.com/harshbg" target="_blank">Twitter</a>. 
 My CV can be downloaded <a href="https://drive.google.com/file/d/1RymCWMsz_pgQPE1LDzMs02Q9_BHKOzYw/view" target="_blank">here</a>.
 </p>
@@ -27,4 +27,4 @@ My CV can be downloaded <a href="https://drive.google.com/file/d/1RymCWMsz_pgQP
 Email: <a href="mailto:{{site.email}}?Subject=From Blog Site:">{{site.email}}</a>
 
 ## Resume
-<iframe src="https://drive.google.com/file/d/1RymCWMsz_pgQPE1LDzMs02Q9_BHKOzYw/view" width="100%" height="900"></iframe>
+<iframe src="https://drive.google.com/file/d/1RymCWMsz_pgQPE1LDzMs02Q9_BHKOzYw" width="100%" height="900"></iframe>
