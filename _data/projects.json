@@ -15,32 +15,32 @@
 		"tags": ["Extension","Javascript"]
 	},
 	{
-		"name": "Live Band Club",
-		"image": "livebandclub.png",
-		"url": "http://livebandclub.com",
-		"date": "June 2016",
-		"tags": ["HTML","Javascript","PHP"]
+		"name": "PUBG-Game-Data-Analysis",
+		"image": "pubg.png",
+		"url": "https://github.com/harshbg/PUBG-Game-Data-Analysis",
+		"date": "November 2018",
+		"tags": ["Hive","Spark","PHP"]
 	},
 	{
-		"name": "Pavement Preservation Treatment Database",
+		"name": "Twitter Sentiment Analysis - Karnatka State Elections 2018(India)",
 		"image": "pp_logo.png",
 		"date": "Oct 2015",
-		"url": "http://ceresearch.ecst.csuchico.edu/cp2c/alaskappdb/",
-		"tags": ["PHP","HTML"]
+		"url": "https://github.com/harshbg/Twitter-Sentiment-Analysis-using-R",
+		"tags": ["R","Excel"]
 	},
 	{
 		"name": "Street Saver Certification Program",
-		"image": "streetsaver.png",
+		"image": "ca.jpg",
 		"date": "Oct 2015",
 		"url": "http://ttc.ecst.csuchico.edu/mtcrcp/login/index.php",
-		"tags": ["PHP","HTML","CMS"]
+		"tags": ["Python","Machine Learning","CMS"]
 	},
 	{
 		"name": "Intelligence Analytics Challange",
-		"image": "TI.PNG",
+		"image": "hp.PNG",
 		"date": "Oct 2016",
 		"url": "http://ttc.ecst.csuchico.edu/TDAtc/index.php",
-		"tags": ["PHP","HTML","CMS"]
+		"tags": ["R","Tableau","Excel"]
 	},{
 		"name": "Texas Instruments Analytics Challange",
 		"image": "TI.PNG",
