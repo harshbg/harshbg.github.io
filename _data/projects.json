@@ -1,58 +1,59 @@
 [
 	{
+		"slug": "Machine Learning",
+		"name": "100 Days of Machine Learning",
+		"image": "ml101.jpg",
+		"url": "https://github.com/harshbg/100-Days-of-Machine-Learning-and-Data-Science",
+		"date": "September 2018",
+		"tags": ["R", "Python", "SQL", "Machine Learning"]
+	},
+	{
 		"slug": "etrucking-soft",
 		"name": "Shaving Blade Analysis",
-		"image": "blades.PNG",
+		"image": "blades.png",
 		"url": "https://github.com/harshbg/Shaving-Blades-Analysis",
-		"date": "Jan 2014",
+		"date": "April 2018",
 		"tags": ["SAS", "Excel"]
 	},
 	{
-		"slug": "etrucking-soft",
-		"name": "Etrucking Software",
-		"image": "etruckingsoft.png",
-		"url": "http://etruckingsoft.com",
-		"date": "Jan 2014",
-		"tags": ["Angular JS", "Nodejs", "HTML", "API"]
-	},
-	{
-		"name": "Easy Links",
-		"image": "easy-links.jpg",
-		"date": "May 2017",
-		"description": "This is internal chrome extension, that was developed for my company to provide quick navigation with internal tools.",
-		"tags": ["Extension","Javascript"]
+		"name": "Energy Efficiency Optimization	using Neural Networks",
+		"image": "eopt.png",
+		"date": "May 2018",
+		"tags": ["Python","Machine Learning"]
 	},
 	{
 		"name": "PUBG-Game-Data-Analysis",
 		"image": "pubg.PNG",
 		"url": "https://github.com/harshbg/PUBG-Game-Data-Analysis",
+		"description": "An Analysis of Player Unknown's Battle Grounds (PUBG) Game Data using Hive and Spark.",
 		"date": "November 2018",
 		"tags": ["Hive","Spark","PHP"]
 	},
 	{
 		"name": "Twitter Sentiment Analysis - Karnatka State Elections 2018(India)",
 		"image": "sentiment.PNG",
-		"date": "Oct 2015",
+		"date": "May 2018",
+		"description": "An analysis of Sentiments on Election Day in Karnataka State Elections (India) 2018 using R",
 		"url": "https://github.com/harshbg/Twitter-Sentiment-Analysis-using-R",
 		"tags": ["R","Excel"]
 	},
 	{
-		"name": "Street Saver Certification Program",
+		"name": "Cardiac Arrhythmia Multi-Class Classification",
 		"image": "ca.jpg",
-		"date": "Oct 2015",
-		"url": "http://ttc.ecst.csuchico.edu/mtcrcp/login/index.php",
-		"tags": ["Python","Machine Learning","CMS"]
+		"date": "March 2018",
+		"url": "https://github.com/harshbg/Cardiac-Arrhythmia-Multi-Class-Classification",
+		"tags": ["Python","Machine Learning"]
 	},
 	{
-		"name": "Intelligence Analytics Challange",
-		"image": "hp.PNG",
-		"date": "Oct 2016",
-		"url": "http://ttc.ecst.csuchico.edu/TDAtc/index.php",
+		"name": "US Housing Price Analysis",
+		"image": "hp2.png",
+		"date": "February 2018",
+		"url": "https://github.com/harshbg/US-Housing-Price-Analysis",
 		"tags": ["R","Tableau","Excel"]
 	},{
-		"name": "Texas Instruments Analytics Challange",
+		"name": "Texas Instruments Intern Survey Prediction System",
 		"image": "TI.PNG",
-		"url": "http://jmwattschico.com/",
+		"url": "http://www.gupta-harsh.com/TIchallange/",
 		"date": "December 2017",
 		"tags": ["R","Tableau","Excel"]
 	}
