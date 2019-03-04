@@ -2,7 +2,7 @@
 	{
 		"slug": "etrucking-soft",
 		"name": "Shaving Blade Analysis",
-		"image": "etruckingsoft.png",
+		"image": "blades.PNG",
 		"url": "https://github.com/harshbg/Shaving-Blades-Analysis",
 		"date": "Jan 2014",
 		"tags": ["SAS", "Excel"]
@@ -31,7 +31,7 @@
 	},
 	{
 		"name": "Twitter Sentiment Analysis - Karnatka State Elections 2018(India)",
-		"image": "sentiment.png",
+		"image": "sentiment.PNG",
 		"date": "Oct 2015",
 		"url": "https://github.com/harshbg/Twitter-Sentiment-Analysis-using-R",
 		"tags": ["R","Excel"]
