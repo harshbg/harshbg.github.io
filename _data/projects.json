@@ -1,6 +1,14 @@
 [
 	{
 		"slug": "etrucking-soft",
+		"name": "Shaving Blade Analysis",
+		"image": "etruckingsoft.png",
+		"url": "https://github.com/harshbg/Shaving-Blades-Analysis",
+		"date": "Jan 2014",
+		"tags": ["SAS", "Excel"]
+	},
+	{
+		"slug": "etrucking-soft",
 		"name": "Etrucking Software",
 		"image": "etruckingsoft.png",
 		"url": "http://etruckingsoft.com",
@@ -16,14 +24,14 @@
 	},
 	{
 		"name": "PUBG-Game-Data-Analysis",
-		"image": "pubg.png",
+		"image": "pubg.PNG",
 		"url": "https://github.com/harshbg/PUBG-Game-Data-Analysis",
 		"date": "November 2018",
 		"tags": ["Hive","Spark","PHP"]
 	},
 	{
 		"name": "Twitter Sentiment Analysis - Karnatka State Elections 2018(India)",
-		"image": "pp_logo.png",
+		"image": "sentiment.png",
 		"date": "Oct 2015",
 		"url": "https://github.com/harshbg/Twitter-Sentiment-Analysis-using-R",
 		"tags": ["R","Excel"]
