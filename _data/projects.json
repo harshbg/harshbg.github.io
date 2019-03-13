@@ -22,12 +22,20 @@
 		"tags": ["Python","Machine Learning"]
 	},
 	{
-		"name": "PUBG-Game-Data-Analysis",
+		"name": "PUBG Game Data Analysis",
 		"image": "pubg.PNG",
 		"url": "https://github.com/harshbg/PUBG-Game-Data-Analysis",
 		"description": "An Analysis of Player Unknown's Battle Grounds (PUBG) Game Data using Hive and Spark.",
 		"date": "November 2018",
-		"tags": ["Hive","Spark","PHP"]
+		"tags": ["Hive","Spark"]
+	},
+	{
+		"name": "US Consumer Time Spend Analysis",
+		"image": "consumer.jpg",
+		"url": "https://github.com/harshbg/US-Consumer-Time-Spend-Analysis",
+		"description": "An analysis of the time spending habbits of American consumers. The project was done as part of Round 1 of Intelligence Analytics Challenge 3.0 at the University of Texas at Dallas.",
+		"date": "March 2018",
+		"tags": ["R","Tableau","Excel"]
 	},
 	{
 		"name": "Twitter Sentiment Analysis - Karnatka State Elections 2018(India)",
