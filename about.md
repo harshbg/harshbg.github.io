@@ -27,6 +27,8 @@ My CV can be downloaded <a href="https://drive.google.com/file/d/1RymCWMsz_pgQP
 Email: <a href="mailto:{{site.email}}?Subject=From Blog Site:">{{site.email}}</a>
 
 
-<p>
+
+
+
+
 ![UTD](./static/img/utd1.jpg)
-</p>
