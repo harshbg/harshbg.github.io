@@ -31,4 +31,4 @@ Email: <a href="mailto:{{site.email}}?Subject=From Blog Site:">{{site.email}}</a
 
 
 
-![UTD](./static/img/utd1.jpg)
+![Harsh Gupta University of Texas at Dallas](./static/img/utd1.jpg)
