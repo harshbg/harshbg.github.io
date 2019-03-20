@@ -28,6 +28,8 @@ social:
     #   link: "#"
     - icon: fa-github
       link: "https://github.com/harshbg"
+    - icon: fa-book
+      link: "https://www.goodreads.com/user/show/48393933-harsh-gupta"
 
 share:
   twitter_username: harshbg
