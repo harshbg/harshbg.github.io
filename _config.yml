@@ -18,16 +18,14 @@ collections:
     permalink: /project/:path/
 
 social:
+    - icon: fa-linkedin
+      link: "https://www.linkedin.com/in/harshbg/"
+    - icon: fa-github
+      link: "https://github.com/harshbg"
     - icon: fa-facebook
       link: "https://www.facebook.com/harshbg"
     - icon: fa-twitter
       link: "https://twitter.com/harshbg"
-    - icon: fa-linkedin
-      link: "https://www.linkedin.com/in/harshbg/"
-    # - icon: fa-stack-exchange
-    #   link: "#"
-    - icon: fa-github
-      link: "https://github.com/harshbg"
     - icon: fa-book
       link: "https://www.goodreads.com/user/show/48393933-harsh-gupta"
 
