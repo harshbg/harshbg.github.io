@@ -12,16 +12,16 @@ To check out the exciting projects that I'm working on right now, click <a href=
 </p>
 
 <p>
-Before coming to UT Dallas, I studied Electronics and Telecommunication Engineering at <a href="http://www.unipune.ac.in/" target="_blank">University of Pune</a> and worked 
-for <a href="https://www.marketsandmarkets.com/" target="_blank">Markets and Markets</a> as an Analyst for Semiconductor Technology industry. 
-During my stint I published 15+ business intelligence reports on high growth technology markets. 
+Before coming to UT Dallas, I studied Electronics and Telecommunication Engineering at the <a href="http://www.unipune.ac.in/" target="_blank">University of Pune</a> and worked 
+at <a href="https://www.marketsandmarkets.com/" target="_blank">Markets and Markets</a> as an Analyst for Semiconductor Technology industry. 
+During my short stint with the organization, I published 15+ business intelligence reports on high growth technology markets. 
 You can find the links to reports in the publication section <a href="https://www.linkedin.com/in/harshbg/" target="_blank">here</a>.
 </p>
 
 <p>
-At spare time, I enjoy reading everything and anything, listening podcasts, exploring new places, travel & photography. 
-If you would like to work with me, or have questions/comments, please contact me using the <a href="hello@gupta-harsh.com" target="_blank">email</a>, 
-on <a href="https://www.linkedin.com/in/harshbg/" target="_blank">LinkedIn</a>, or via <a href="https://twitter.com/harshbg" target="_blank">Twitter</a>. 
+In my leisure time, I enjoy reading everything and anything, listening to podcasts, exploring new places, traveling, and capturing beautiful moments in my camera. 
+If you loved what you read here and feel like we can collaborate to produce some exciting stuff, or if you
+just want to shoot a question, please feel free to connect with me on <a href="hello@gupta-harsh.com" target="_blank">email</a>, <a href="https://www.linkedin.com/in/harshbg/" target="_blank">LinkedIn</a>, or <a href="https://twitter.com/harshbg" target="_blank">Twitter</a>.
 My CV can be downloaded <a href="https://drive.google.com/file/d/1RymCWMsz_pgQPE1LDzMs02Q9_BHKOzYw/view" target="_blank">here</a>.
 </p>
 
