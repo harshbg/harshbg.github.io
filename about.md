@@ -4,10 +4,11 @@ title: About
 permalink: /about/
 ---
 <p>
-I am currently a Business Analytics student at <a href="https://www.utdallas.edu/" target="_blank">The University of Texas at Dallas</a>. 
-I consider myself an aspiring Data Scientist. I love to retrieve data, and wrangle it- and provide insights not otherwise possible without the skills behind the craft. 
-My favorite areas of interest include- Visualizations and Story-Telling with Datasets and Statistics, Machine Learning, Neural Networks, AI, and all things data science. 
-You can see what projects I am working on <a href="https://github.com/harshbg" target="_blank">here</a>.
+Hi there! I'm Harsh, and I am a Business Analytics student at <a href="https://www.utdallas.edu/" target="_blank">The University of Texas at Dallas</a>. 
+An aspiring Data Scientist, I love to retrieve data and wrangle it to provide insights that can help anyone achieve their business outcomes ... 
+something that's not otherwise possible without the skills behind the craft. My favorite areas of interest include Visualization and Story-Telling with Datasets and Statistics, Machine Learning, Neural Networks, AI, and all things data science.
+
+To check out the exciting projects that I'm working on right now, click <a href="https://github.com/harshbg" target="_blank">here</a>.
 </p>
 
 <p>
