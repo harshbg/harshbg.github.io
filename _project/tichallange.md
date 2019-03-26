@@ -4,6 +4,9 @@ title:  "Texas Instruments Intern Survey Prediction System"
 slug: "cool-project"
 permalink: /TIchallange/
 ---
+
+The NDA agreement signed with the company restricts us from publishing more details about the data and the code used for the project.
+
 <p>
 ▪ Used logistic regression and clustering in R to analyze HR survey data for 400+ interns to increase full-time conversion rate
 </p>

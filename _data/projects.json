@@ -1,11 +1,12 @@
 [
+	
 	{
-		"slug": "Machine Learning",
-		"name": "100 Days of Machine Learning",
-		"image": "ml101.jpg",
-		"url": "https://github.com/harshbg/100-Days-of-Machine-Learning-and-Data-Science",
-		"date": "September 2018",
-		"tags": ["R", "Python", "SQL", "Machine Learning"]
+		"name": "US Consumer Time Spend Analysis",
+		"image": "consumer.jpg",
+		"url": "https://github.com/harshbg/US-Consumer-Time-Spend-Analysis",
+		"description": "An analysis of the time spending habbits of American consumers. The project was done as part of Round 1 of Intelligence Analytics Challenge 3.0 at the University of Texas at Dallas.",
+		"date": "March 2018",
+		"tags": ["R","Tableau","Excel"]
 	},
 	{
 		"slug": "etrucking-soft",
@@ -14,6 +15,13 @@
 		"url": "https://github.com/harshbg/Shaving-Blades-Analysis",
 		"date": "April 2018",
 		"tags": ["SAS", "Excel"]
+	},
+	{
+		"name": "US Housing Price Analysis",
+		"image": "hp2.png",
+		"date": "February 2018",
+		"url": "https://github.com/harshbg/US-Housing-Price-Analysis",
+		"tags": ["R","Tableau","Excel"]
 	},
 	{
 		"name": "Energy Efficiency Optimization	using Neural Networks",
@@ -30,12 +38,19 @@
 		"tags": ["Hive","Spark"]
 	},
 	{
-		"name": "US Consumer Time Spend Analysis",
-		"image": "consumer.jpg",
-		"url": "https://github.com/harshbg/US-Consumer-Time-Spend-Analysis",
-		"description": "An analysis of the time spending habbits of American consumers. The project was done as part of Round 1 of Intelligence Analytics Challenge 3.0 at the University of Texas at Dallas.",
+		"name": "Cardiac Arrhythmia Multi-Class Classification",
+		"image": "ca.jpg",
 		"date": "March 2018",
-		"tags": ["R","Tableau","Excel"]
+		"url": "https://github.com/harshbg/Cardiac-Arrhythmia-Multi-Class-Classification",
+		"tags": ["Python","Machine Learning"]
+	},
+	{
+		"slug": "Machine Learning",
+		"name": "100 Days of Machine Learning",
+		"image": "ml101.jpg",
+		"url": "https://github.com/harshbg/100-Days-of-Machine-Learning-and-Data-Science",
+		"date": "September 2018",
+		"tags": ["R", "Python", "SQL", "Machine Learning"]
 	},
 	{
 		"name": "Twitter Sentiment Analysis - Karnatka State Elections 2018(India)",
@@ -46,19 +61,6 @@
 		"tags": ["R","Excel"]
 	},
 	{
-		"name": "Cardiac Arrhythmia Multi-Class Classification",
-		"image": "ca.jpg",
-		"date": "March 2018",
-		"url": "https://github.com/harshbg/Cardiac-Arrhythmia-Multi-Class-Classification",
-		"tags": ["Python","Machine Learning"]
-	},
-	{
-		"name": "US Housing Price Analysis",
-		"image": "hp2.png",
-		"date": "February 2018",
-		"url": "https://github.com/harshbg/US-Housing-Price-Analysis",
-		"tags": ["R","Tableau","Excel"]
-	},{
 		"name": "Texas Instruments Intern Survey Prediction System",
 		"image": "TI.PNG",
 		"url": "http://www.gupta-harsh.com/TIchallange/",
