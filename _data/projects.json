@@ -27,11 +27,12 @@
 		"name": "Energy Efficiency Optimization	using Neural Networks",
 		"image": "eopt.png",
 		"date": "May 2018",
+		"url": "https://github.com/harshbg/Energy-Efficiency-Enhancement-using-Neural-Networks",
 		"tags": ["Python","Machine Learning"]
 	},
 	{
 		"name": "PUBG Game Data Analysis",
-		"image": "pubg.PNG",
+		"image": "pubg.jpg",
 		"url": "https://github.com/harshbg/PUBG-Game-Data-Analysis",
 		"description": "An Analysis of Player Unknown's Battle Grounds (PUBG) Game Data using Hive and Spark.",
 		"date": "November 2018",
