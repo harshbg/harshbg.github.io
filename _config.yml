@@ -42,8 +42,8 @@ urls:
       url: /blogs/
     - text: Tweets
       url: /tweets/
-    - text: XML Feed
-      url: /feed.xml
+#    - text: XML Feed
+#      url: /feed.xml
 # url: "http://localhost:4000"
 url: "https://harshbg.github.io"
 baseurl: ""
