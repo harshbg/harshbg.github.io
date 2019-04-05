@@ -19,7 +19,7 @@ collections:
 
 social:
     - icon: fa-linkedin
-      link: "bit.ly/harshbg-ln"
+      link: "https://bit.ly/harshbg-ln"
     - icon: fa-github
       link: "bit.ly/harshbg-git"
     - icon: fa-facebook
