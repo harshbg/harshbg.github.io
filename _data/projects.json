@@ -3,7 +3,7 @@
 	{
 		"name": "US Consumer Time Spend Analysis",
 		"image": "consumer.jpg",
-		"url": "https://github.com/harshbg/US-Consumer-Time-Spend-Analysis",
+		"url": "http://bit.ly/2YPoxeM",
 		"description": "An analysis of the time spending habbits of American consumers. The project was done as part of Round 1 of Intelligence Analytics Challenge 3.0 at the University of Texas at Dallas.",
 		"date": "March 2018",
 		"tags": ["R","Tableau","Excel"]
@@ -12,7 +12,7 @@
 		"slug": "etrucking-soft",
 		"name": "Shaving Blade Analysis",
 		"image": "blades.png",
-		"url": "https://github.com/harshbg/Shaving-Blades-Analysis",
+		"url": "http://bit.ly/2FWDnHR",
 		"date": "April 2018",
 		"tags": ["SAS", "Excel"]
 	},
@@ -20,20 +20,20 @@
 		"name": "US Housing Price Analysis",
 		"image": "hp2.png",
 		"date": "February 2018",
-		"url": "https://github.com/harshbg/US-Housing-Price-Analysis",
+		"url": "http://bit.ly/2WLD8WL",
 		"tags": ["R","Tableau","Excel"]
 	},
 	{
 		"name": "Energy Efficiency Optimization	using Neural Networks",
 		"image": "eopt.png",
 		"date": "May 2018",
-		"url": "https://github.com/harshbg/Energy-Efficiency-Enhancement-using-Neural-Networks",
+		"url": "http://bit.ly/2OTpn5w",
 		"tags": ["Python","Machine Learning"]
 	},
 	{
 		"name": "PUBG Game Data Analysis",
 		"image": "pubg.jpg",
-		"url": "https://github.com/harshbg/PUBG-Game-Data-Analysis",
+		"url": "http://bit.ly/2G4KXS5",
 		"description": "An Analysis of Player Unknown's Battle Grounds (PUBG) Game Data using Hive and Spark.",
 		"date": "November 2018",
 		"tags": ["Hive","Spark"]
@@ -42,14 +42,14 @@
 		"name": "Cardiac Arrhythmia Multi-Class Classification",
 		"image": "ca.jpg",
 		"date": "March 2018",
-		"url": "https://github.com/harshbg/Cardiac-Arrhythmia-Multi-Class-Classification",
+		"url": "http://bit.ly/2VomNqF",
 		"tags": ["Python","Machine Learning"]
 	},
 	{
 		"slug": "Machine Learning",
 		"name": "100 Days of Machine Learning",
 		"image": "ml101.jpg",
-		"url": "https://github.com/harshbg/100-Days-of-Machine-Learning-and-Data-Science",
+		"url": "http://bit.ly/2VvANiJ",
 		"date": "September 2018",
 		"tags": ["R", "Python", "SQL", "Machine Learning"]
 	},
@@ -58,7 +58,7 @@
 		"image": "sentiment.PNG",
 		"date": "May 2018",
 		"description": "An analysis of Sentiments on Election Day in Karnataka State Elections (India) 2018 using R",
-		"url": "https://github.com/harshbg/Twitter-Sentiment-Analysis-using-R",
+		"url": "http://bit.ly/2Vr8X6S",
 		"tags": ["R","Excel"]
 	},
 	{
