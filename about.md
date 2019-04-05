@@ -21,7 +21,7 @@ You can find the links to reports in the publication section <a href="bit.ly/har
 <p>
 In my leisure time, I enjoy reading everything and anything, listening to podcasts, exploring new places, traveling, and capturing beautiful moments in my camera. 
 If you loved what you read here and feel like we can collaborate to produce some exciting stuff, or if you
-just want to shoot a question, please feel free to connect with me on <a href="hello@gupta-harsh.com" target="_blank">email</a>, <a href="bit.ly/harshbg-ln" target="_blank">LinkedIn</a>, or <a href="bit.ly/harshbg-tw" target="_blank">Twitter</a>.
+just want to shoot a question, please feel free to connect with me on <a href="hello@gupta-harsh.com" target="_blank">email</a>, <a href="http://bit.ly/harshbg-ln" target="_blank">LinkedIn</a>, or <a href="http://bit.ly/harshbg-tw" target="_blank">Twitter</a>.
 My CV can be downloaded <a href="http://bit.ly/2ORbNzI" target="_blank">here</a>.
 </p>
 
