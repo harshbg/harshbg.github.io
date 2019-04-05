@@ -19,15 +19,15 @@ collections:
 
 social:
     - icon: fa-linkedin
-      link: "https://www.linkedin.com/in/harshbg/"
+      link: "bit.ly/harshbg-ln"
     - icon: fa-github
-      link: "https://github.com/harshbg"
+      link: "bit.ly/harshbg-git"
     - icon: fa-facebook
-      link: "https://www.facebook.com/harshbg"
+      link: "bit.ly/harshbg-fb"
     - icon: fa-twitter
-      link: "https://twitter.com/harshbg"
+      link: "bit.ly/harshbg-tw"
     - icon: fa-book
-      link: "https://www.goodreads.com/harshbg"
+      link: "bit.ly/harshbg-book"
 
 share:
   twitter_username: harshbg
