@@ -15,7 +15,7 @@ To check out the exciting projects that I'm working on right now, click <a href=
 Before coming to UT Dallas, I studied Electronics and Telecommunication Engineering at the <a href="http://www.unipune.ac.in/" target="_blank">University of Pune</a> and worked 
 at <a href="https://www.marketsandmarkets.com/" target="_blank">Markets and Markets</a> as an Analyst for Semiconductor Technology industry. 
 During my short stint with the organization, I published 15+ business intelligence reports on high growth technology markets. 
-You can find the links to reports in the publication section <a href="bit.ly/harshbg-ln" target="_blank">here</a>.
+You can find the links to reports in the publication section <a href="http://bit.ly/harshbg-ln" target="_blank">here</a>.
 </p>
 
 <p>
