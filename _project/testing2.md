@@ -46,11 +46,7 @@ title: Testing 2
                     <h5 data-aos="zoom-out-up" data-aos-delay="350" class="source-sans-pro-font" style="line-height: 24px;">I create software, design websites, and make ideas happen</h5>
                     <br>
                     <!-- <a href="mailto:harshsrinivas@gmail.com"><h5 data-aos="zoom-out-up" data-aos-delay="550" class="header_link">harshsrinivas@gmail.com</h5></a> -->
-                    <div data-aos="zoom-out-up" data-aos-delay="650" id="header_social_links">
-                        <a class="header_link" href="https://github.com/harshasrinivas" target="_blank"><i aria-hidden="true" class=
-                        "fa fa-github fa-3x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="header_link" href="https://www.linkedin.com/in/harshasrinivas" id="li_icon" target="_blank"><i aria-hidden="true" class=
-                        "fa fa-linkedin-square fa-3x"></i></a>
-                    </div>
+
                 </div>
             </div>
             <nav>
@@ -59,7 +55,7 @@ title: Testing 2
         </div>
     </header>
 
-    <div class="container" id="resume">
+    <div class="row" id="resume">
         <hr>
         <br>
         <div class="row">
