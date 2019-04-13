@@ -3,7 +3,7 @@ layout: default
 permalink: /testing2/
 title: Testing 2
 ---
-<!DOCTYPE html>
+
 <!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
@@ -39,44 +39,6 @@ title: Testing 2
 
 <body>
 
-
-
-
-   <!-- About Section
-   ================================================== -->
-   <section id="about">
-
-      <div class="row">
-
-         <div class="three columns">
-
-            <img class="profile-pic"  src="images/cvpic.jpg" alt="" />
-
-         </div>
-
-         <div class="nine columns main-col">
-
-            <h2>About Me</h2>
-
-            <p>I am an Android | Web Developer | Fashion Model. I am proud holder of MissTourismWestpokot and MissCorporateNyeri Crown. I play basketball, position bigforward, jersey number 6. I believe that everyone has the power to be whatever they want in this life if they put there mind to it, you decide and define your own destiny, your own legend.
-            </p>
-
-            <div class="row">
-
-               <div class="columns download">
-                  <p>
-
-                     <a href="ValentineRuttoCv.pdf" class="button"><i class="fa fa-download" download></i>Download Resume</a>
-                  </p>
-               </div>
-
-            </div> <!-- end row -->
-
-         </div> <!-- end .main-col -->
-
-      </div>
-
-   </section> <!-- About Section End-->
 
 
    <!-- Resume Section
