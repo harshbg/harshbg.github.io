@@ -4,7 +4,6 @@ permalink: /testings/
 title: Testings
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
