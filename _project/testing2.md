@@ -4,8 +4,80 @@ permalink: /testing2/
 title: Testing 2
 ---
 
+<html lang="en">
 
-</div>
+<head>
+
+<!-- Google verification -->
+<meta name="google-site-verification" content="Y8neqj_JwmJMlFqlegksgSvOv9ay6FjTz4ImKaIz84M" />
+<!-- -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+    <meta name="description" content="I am Harshavardhan Srinivas, I code and I know things.">
+    <title>Harshavardhan Srinivas | Coder | Product Developer</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href="src/style.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="src/img/icon.png">
+</head>
+
+<body>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-79626611-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+    <header id="head">
+        <div class="post">
+            <div id="header_blob">
+                <img alt="Harsha avatar" data-aos="zoom-out-up" class="circle responsive-img z-depth-3" id="my_picture" src="src/img/avatar.png">
+                <div id="header_text">
+                    <br>
+                    <h1 data-aos="zoom-out-up" data-aos-delay="250" style="line-height: 48px;">Harshavardhan Srinivas</h1>
+                    <h5 data-aos="zoom-out-up" data-aos-delay="350" class="source-sans-pro-font" style="line-height: 24px;">I create software, design websites, and make ideas happen</h5>
+                    <br>
+                    <!-- <a href="mailto:harshsrinivas@gmail.com"><h5 data-aos="zoom-out-up" data-aos-delay="550" class="header_link">harshsrinivas@gmail.com</h5></a> -->
+                    <div data-aos="zoom-out-up" data-aos-delay="650" id="header_social_links">
+                        <a class="header_link" href="https://github.com/harshasrinivas" target="_blank"><i aria-hidden="true" class=
+                        "fa fa-github fa-3x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="header_link" href="https://www.linkedin.com/in/harshasrinivas" id="li_icon" target="_blank"><i aria-hidden="true" class=
+                        "fa fa-linkedin-square fa-3x"></i></a>
+                    </div>
+                </div>
+            </div>
+            <nav>
+                <div class="nav-wrapper">
+                    <ul id="nav-mobile">
+                        <li class="link_underline">
+                            <a class="waves-effect waves-light btn-flat btn-large header_btn scroll animated_link2" href="#about_me" data-aos="flip-down" data-aos-delay="750">
+                            About Me</a>
+                        </li>
+                        <li class="link_underline">
+                            <a class="waves-effect waves-light btn-flat btn-large header_btn scroll" href="#resume" data-aos="flip-down" data-aos-delay="800">
+                            Resume</a>
+                        </li>
+                        <li class="link_underline">
+                            <a class="waves-effect waves-light btn-flat btn-large header_btn scroll" href="#contact_me" data-aos="flip-down" data-aos-delay="850">
+                            Contact</a>
+                        </li>
+                        <li class="link_underline">
+                            <a class="waves-effect waves-light btn-flat btn-large header_btn scroll" href="http://harshasrinivas.com/blog/" data-aos="flip-down" data-aos-delay="900" rel="nofollow" target="_blank">
+                            Blog</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
     <div class="container" id="resume">
         <hr>
         <br>
@@ -146,3 +218,10 @@ title: Testing 2
         </div>
         <br>
     </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.js"></script>
+    <script src="src/script.js"></script>
