@@ -1,15 +1,15 @@
 ---
-layout: page
+layout: default
 permalink: /testing2/
 title: Testing 2
 ---
-
 <html lang="en">
 
 <head>
 
 <!-- Google verification -->
 <meta name="google-site-verification" content="Y8neqj_JwmJMlFqlegksgSvOv9ay6FjTz4ImKaIz84M" />
+
 <!-- -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
