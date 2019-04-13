@@ -55,7 +55,7 @@ title: Testing 2
         </div>
     </header>
 
-    <div class="row" id="resume">
+    <div class="center" id="resume">
         <hr>
         <br>
         <div class="row">
