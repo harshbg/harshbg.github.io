@@ -54,26 +54,7 @@ title: Testing 2
                 </div>
             </div>
             <nav>
-                <div class="nav-wrapper">
-                    <ul id="nav-mobile">
-                        <li class="link_underline">
-                            <a class="waves-effect waves-light btn-flat btn-large header_btn scroll animated_link2" href="#about_me" data-aos="flip-down" data-aos-delay="750">
-                            About Me</a>
-                        </li>
-                        <li class="link_underline">
-                            <a class="waves-effect waves-light btn-flat btn-large header_btn scroll" href="#resume" data-aos="flip-down" data-aos-delay="800">
-                            Resume</a>
-                        </li>
-                        <li class="link_underline">
-                            <a class="waves-effect waves-light btn-flat btn-large header_btn scroll" href="#contact_me" data-aos="flip-down" data-aos-delay="850">
-                            Contact</a>
-                        </li>
-                        <li class="link_underline">
-                            <a class="waves-effect waves-light btn-flat btn-large header_btn scroll" href="http://harshasrinivas.com/blog/" data-aos="flip-down" data-aos-delay="900" rel="nofollow" target="_blank">
-                            Blog</a>
-                        </li>
-                    </ul>
-                </div>
+                
             </nav>
         </div>
     </header>
