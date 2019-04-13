@@ -77,20 +77,7 @@ title: Testings
             </nav>
         </div>
     </header>
-    <div class="container" id="about_me">
-        <div class="row center">
-            <img alt="Idea icon" class="center" src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/light-bulb-icon.png" width="150" data-aos="zoom-out-up">
-            <h2 class="light-blue-text text-darken-4 center" data-aos="zoom-out-up">About Me</h2>
-            <br>
-        </div>
-        <div class="row">
-            <p class="col s12 m8 offset-m2 center" data-aos="zoom-out-up">Hello! I'm <strong>Harsha</strong>, a 22-year old programmer with a high level of expertise in <strong>Software Development</strong> and a knack for <strong>entrepreneurship</strong>
-            <br><br>
-            <span>I'm currently pursuing my Masters Degree in Computer Science at Santa Clara University and I spend most of my time working on <a href="https://github.com/harshasrinivas" target="_blank" class="styled_link">Open Source</a>, attending Hackathons or browsing Reddit / Quora!</span>
-            <br><br>
-            <span>I'll be joining </span><img alt="Facebook" src="src/img/fb.png" height="60" style="vertical-align:middle;"><span> as a Software Engineering Intern next summer</span>
-        </div>
-    </div>
+
     <div class="container" id="resume">
         <hr>
         <br>
@@ -232,43 +219,10 @@ title: Testings
         <br>
     </div>
 
-    <footer class="page-footer">
-        <div class="container">
-            <div class="row" id="contact_me">
-                <h4 class="center white-text" data-aos="zoom-out-up">CONNECT WITH ME</h4>
-                <h5 class="center white-text col s6 offset-s3" data-aos="zoom-out-up">
-                Have an interesting idea?
-                <br>
-                Get in touch with me!
-                </h5>
-            </div>
-            <div class="row center">
-                <br>
-                <a class="social_links tooltipped" data-position="bottom" data-delay="50" data-tooltip="harshsrinivas@gmail.com" href="mailto:harshsrinivas@gmail.com" target="_blank"><i aria-hidden="true" class="fa fa-envelope-o fa-5x" data-aos="flip-up" data-aos-delay="400"></i></a>
-                <a class="social_links tooltipped" data-position="bottom" data-delay="50" data-tooltip="github.com/harshasrinivas" href="https://github.com/harshasrinivas" target="_blank"><i aria-hidden="true" class="fa fa-github fa-5x" data-aos="flip-up" data-aos-delay="600"></i></a>
-                <a class="social_links tooltipped" data-position="bottom" data-delay="50" data-tooltip="linkedin.com/in/harshasrinivas" href="https://www.linkedin.com/in/harshasrinivas" target="_blank"><i aria-hidden="true" class="fa fa-linkedin-square fa-5x" data-aos="flip-up" data-aos-delay="800"></i></a>
-                <a class="social_links tooltipped" data-position="bottom" data-delay="50" data-tooltip="twitter.com/harshasrinivas" href="https://www.twitter.com/harshasrinivas" target="_blank"><i aria-hidden="true" class="fa fa-twitter fa-5x" data-aos="flip-up" data-aos-delay="1000"></i></a>
-                <!-- <a class="social_links tooltipped" data-position="bottom" data-delay="50" data-tooltip="upwork.com/freelancers/~01e3ff43d3571b9710" href="https://www.upwork.com/freelancers/~01e3ff43d3571b9710" target="_blank"><i aria-hidden="true" class="fa fa-usd fa-5x" data-aos="flip-up" data-aos-delay="1200"></i></a> -->
-                <!-- <br>
-                <br>
-                <hr> -->
-                <br>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container center">
-                
-            </div>
-        </div>
-    </footer>
+
 
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script src="https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.js"></script>
     <script src="src/script.js"></script>
 
-
-
-</body>
-
-</html>
