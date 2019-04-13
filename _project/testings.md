@@ -1,6 +1,7 @@
 ---
 layout: experience
 permalink: /testings/
+title: Testings
 ---
 
 <!DOCTYPE html>
