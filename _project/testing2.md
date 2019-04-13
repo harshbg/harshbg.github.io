@@ -42,21 +42,7 @@ title: Testing 2
    <!-- Header
    ================================================== -->
    <header id="home">
-      <nav id="nav-wrap">
 
-         <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
-	      <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
-
-         <ul id="nav" class="nav">
-            <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
-            <li><a class="smoothscroll" href="#about">About</a></li>
-	         <li><a class="smoothscroll" href="#resume">Resume</a></li>
-            <li><a class="smoothscroll" href="#portfolio">Portfolio</a></li>
-            <li><a href="https://medium.com/@valentinerutto" target="_blank">Blog</a></li>
-            <li><a class="smoothscroll" href="#contact">Contact</a></li>
-         </ul> <!-- end #nav -->
-
-      </nav> <!-- end #nav-wrap -->
                                                 
       <div class="row banner">
 <!--         <div id="large-header" class="large-header">-->
