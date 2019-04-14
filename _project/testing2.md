@@ -45,51 +45,51 @@ title: Testing 2
    ================================================== -->
    <section id="resume">
 
-      <!-- Education
-      ----------------------------------------------- -->
-      <div class="row education">
+		  <!-- Education
+		  ----------------------------------------------- -->
+		  <div class="row education">
 
-         <div class="three columns header-col">
-            <h1><span>Education</span></h1>
-         </div>
+			 <div class="three columns header-col">
+				<h1><span>Education</span></h1>
+			 </div>
 
-         <div class="nine columns main-col">
+			 <div class="nine columns main-col">
 
-            <div class="row item">
+				<div class="row item">
 
-               <div class="twelve columns">
+				   <div class="twelve columns">
 
-                  <h3><a href="moringaschool.com">Moringa School Of Coding</a></h3>
-                  <p class="info">Web and Mobile Development <span>&bull;</span> <em class="date">june-october 2015</em></p>
+					  <h3><a href="moringaschool.com">Moringa School Of Coding</a></h3>
+					  <p class="info">Web and Mobile Development <span>&bull;</span> <em class="date">june-october 2015</em></p>
 
-                  <p>
-Moringa school is an intensive 4 month coding bootcamp, where high potential and proactive students learn to be worldclass mobile and web developers.
+					  <p>
+	Moringa school is an intensive 4 month coding bootcamp, where high potential and proactive students learn to be worldclass mobile and web developers.
 
 
-                  </p>
+					  </p>
 
-               </div>
+				   </div>
 
-            </div> <!-- item end -->
+				</div> <!-- item end -->
 
-            <div class="row item">
+				<div class="row item">
 
-               <div class="twelve columns">
+				   <div class="twelve columns">
 
-                 <h3><a href="http://www.dkut.ac.ke/">Dedan Kimathi University of Science and Technology</a></h3>
-                  <p class="info">BSc. Computer Science <span>&bull;</span> <em class="date">2013-2017</em></p>
+					 <h3><a href="http://www.dkut.ac.ke/">Dedan Kimathi University of Science and Technology</a></h3>
+					  <p class="info">BSc. Computer Science <span>&bull;</span> <em class="date">2013-2017</em></p>
 
-                  <p>
-                I graduated with an undergraduate degree in computer science majoring in Software engineering. I picked SWE as my major because it is amazing having the power to create anything within your imagination changing your reality.
-                  </p>
+					  <p>
+					I graduated with an undergraduate degree in computer science majoring in Software engineering. I picked SWE as my major because it is amazing having the power to create anything within your imagination changing your reality.
+					  </p>
 
-               </div>
+				   </div>
 
-            </div> <!-- item end -->
+				</div> <!-- item end -->
 
-         </div> <!-- main-col end -->
+			 </div> <!-- main-col end -->
 
-      </div> <!-- End Education -->
+		  </div> <!-- End Education -->
 
 
       <!-- Work
@@ -295,6 +295,27 @@ information to use in the android application.
 
 
 
+
+
+
+   <!-- Java Script
+   ================================================== -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+
+   <script src="js/jquery.flexslider.js"></script>
+   <script src="js/waypoints.js"></script>
+   <script src="js/jquery.fittext.js"></script>
+   <script src="js/magnific-popup.js"></script>
+   <script src="js/init.js"></script>
+    
+    <!--animated header scripts-->
+        <script src="js/TweenLite.min.js"></script>
+        <script src="js/EasePack.min.js"></script>
+        <script src="js/rAF.js"></script>
+        <script src="js/demo-3.js"></script>
+<!--animated header end-->
 
 </body>
 
