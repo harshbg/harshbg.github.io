@@ -16,16 +16,16 @@ title: Testings
 /* Create two unequal columns that floats next to each other */
 .column {
   float: left;
-  padding: 10px;
-  height: 140px; /* Should be removed. Only for demonstration */
+  padding: 30px;
+  height: 130px; /* Should be removed. Only for demonstration */
 }
 
 .left {
-  width: 33%;
+  width: 35%;
 }
 
 .right {
-  width: 67%;
+  width: 65%;
 }
 
 /* Clear floats after the columns */
@@ -39,7 +39,7 @@ title: Testings
  
   font-size: 25px;
   color: #bd5d38;
-  line-height: 0.7;
+  line-height: 1;
   font-weight: bold;
 }
 
@@ -55,7 +55,7 @@ title: Testings
   text-align: center;
   
   font-size: 45px;
-  line-height: 1.7
+  line-height: 1.7;
 }
 
 .expd {
@@ -74,6 +74,7 @@ title: Testings
 .horizontal-line div.top {
     margin-bottom: 3px;
     width: 44px;
+    
 }
 
 
@@ -87,6 +88,10 @@ title: Testings
                 <div class="top"></div>
                 	<div class="bottom"></div>
 </div>               
+
+<p>
+
+</p>
 
 <div class="row">
   <div class="column left" style="background-color:#00000;">
@@ -103,7 +108,7 @@ tuning with grid search and cross validation, resulting in time reduction by 88%
   </div>
   
   <div class="column left" style="background-color:#00000;">
-    <p class="exp">MarketsandMarkets</p>
+    <p class="exp">Statistics Without Borders</p>
     <p class="expd">Pune, India</p>
     <p class="expd">August 2013 - July 2017</p>
   </div>
