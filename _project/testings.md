@@ -4,7 +4,6 @@ permalink: /testings/
 title: Testings
 ---
 
-
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +71,7 @@ body {
 
   <div class="column">
     <div class="card">
-      <h2><i class="fa fa-check"></i></h1>
+      <h2><i class="fa fa-check"></i></h2>
       <h3>55+</h3>
       <p>Projects</p>
     </div>
