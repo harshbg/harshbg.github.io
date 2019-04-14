@@ -4,6 +4,7 @@ permalink: /testings/
 title: Testings
 ---
 
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +17,7 @@ title: Testings
 .column {
   float: left;
   padding: 10px;
-  height: 150px; /* Should be removed. Only for demonstration */
+  height: 140px; /* Should be removed. Only for demonstration */
 }
 
 .left {
@@ -38,6 +39,7 @@ title: Testings
  
   font-size: 25px;
   color: #bd5d38;
+  line-height: 0.7
 }
 
 .expt {
@@ -62,19 +64,19 @@ title: Testings
     <p>June-August 2018</p>
   </div>
   <div class="column right" style="background-color:#00000;">
-    <p class="exp">Data Transformation Intern</h2>
+    <p class="exp">Data Transformation Intern</p>
     <p>Built machine learning models in Python to automate manual data parsing process,
 achieved >96% accuracy rate by using random forest, MLP, DNN, hyper parameter
 tuning with grid search and cross validation, resulting in time reduction by 88%
 </p>
   </div>
   
-  <div class="column left" style="background-color:#aaa;">
+  <div class="column left" style="background-color:#00000;">
     <p class="exp">MarketsandMarkets</p>
     <p>August 2013-July 2017</p>
   </div>
   
-  <div class="column right" style="background-color:#bbb;">
+  <div class="column right" style="background-color:#00000;">
     <p class="exp">Research Analyst</p>
     <p>Estimated and forecasted the sales revenues and growth rates of global MICRO and
 MACRO technology markets</p>
