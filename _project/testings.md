@@ -52,56 +52,54 @@ body {
 }
 
 
-div.a {
-  font-size: 15px;
+p.a {
+  font-size: 20px;
 }
 
-div.b {
-  font-size: large;
+p.b {
+  font-size: 20px;
 }
 
 div.c {
-  font-size: 150%;
+  font-size: 200%;
 }
 
 </style>
 </head>
 <body>
 
-<h2>Responsive Section Counter</h2>
-<p>Resize the browser window to see the effect.</p>
 <br>
 
 <div class="row">
   <div class="column">
     <div class="card">
-      <h1><i class="fa fa-trophy"></i></h1>
-      <h2>11+</h2>
-      <h2>Partners</h2>
+      <div class="c"><i class="fa fa-coffee"></i></div>
+      <p class="b">55+</p>
+      <p class="a">This is some text.</p>
     </div>
   </div>
 
   <div class="column">
     <div class="card">
-      <h2><i class="fa fa-check"></i></h2>
-      <h3>55+</h3>
-      <div class="a">This is some text.</div>
-    </div>
-  </div>
-  
-  <div class="column">
-    <div class="card">
-      <p><i class="fa fa-smile-o"></i></p>
-      <h3>100+</h3>
-      <p>Happy Clients</p>
+      <div class="c"><i class="fa fa-coffee"></i></div>
+      <p class="b">55+</p>
+      <p class="a">This is some text.</p>
     </div>
   </div>
   
   <div class="column">
     <div class="card">
       <div class="c"><i class="fa fa-coffee"></i></div>
-      <h3>100+</h3>
-      <p>Meetings</p>
+      <p class="b">55+</p>
+      <p class="a">This is some text.</p>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      <div class="c"><i class="fa fa-coffee"></i></div>
+      <p class="b">55+</p>
+      <p class="a">This is some text.</p>
     </div>
   </div>
 </div>
