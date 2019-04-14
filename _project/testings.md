@@ -4,7 +4,7 @@ permalink: /testings/
 title: Testings
 ---
 
-
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,15 +17,15 @@ title: Testings
 .column {
   float: left;
   padding: 10px;
-  height: 130px; /* Should be removed. Only for demonstration */
+  height: 150px; /* Should be removed. Only for demonstration */
 }
 
 .left {
-  width: 32%;
+  width: 35%;
 }
 
 .right {
-  width: 68%;
+  width: 65%;
 }
 
 /* Clear floats after the columns */
@@ -48,6 +48,7 @@ title: Testings
   font-size: 25px;
   color: #bd5d38;
   line-height: 0.7;
+  font-family:sans-serif;
   
 }
 .expt {
@@ -79,7 +80,8 @@ title: Testings
 
 
 </style>
-
+</head>
+<body>
 
 <div>
 <div class="expt">Experiences</div>
