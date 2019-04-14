@@ -110,7 +110,7 @@ tuning with grid search and cross validation, resulting in time reduction by 88%
   </div>
   
   <div class="column left" style="background-color:#00000;">
-    <p class="exp">Statistics Without Borders</p>
+    <p class="exp">MarketsandMarkets</p>
     <p class="expd">Pune, India</p>
     <p class="expd">August 2013 - July 2017</p>
   </div>
