@@ -16,16 +16,16 @@ title: Testings
 /* Create two unequal columns that floats next to each other */
 .column {
   float: left;
-  padding: 30px;
+  padding: 10px;
   height: 130px; /* Should be removed. Only for demonstration */
 }
 
 .left {
-  width: 35%;
+  width: 32%;
 }
 
 .right {
-  width: 65%;
+  width: 68%;
 }
 
 /* Clear floats after the columns */
@@ -79,8 +79,7 @@ title: Testings
 
 
 </style>
-</head>
-<body>
+
 
 <div>
 <div class="expt">Experiences</div>
