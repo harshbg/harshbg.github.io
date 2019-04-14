@@ -112,7 +112,6 @@ tuning with grid search and cross validation, resulting in time reduction by 88%
 
 
 
-<div class="row">
   <div class="column left" style="background-color:#00000;">
     <p class="exp">IHS Markit</p>
     <p class="expd">Houston, Texas</p>
