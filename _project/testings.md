@@ -5,7 +5,6 @@ title: Testings
 ---
 
 
-<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,8 +21,8 @@ body {
 /* Float four columns side by side */
 .column {
   float: left;
-  width: 25%;
-  padding: 0 5px;
+  width: 20%;
+  padding: 1 5px;
 }
 
 .row {margin: 0 -5px;}
@@ -47,13 +46,13 @@ body {
 /* Style the counter cards */
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
+  padding: 14px;
   text-align: center;
   background-color: #444;
   color: white;
 }
 
-.fa {font-size:50px;}
+.fa {font-size:20px;}
 </style>
 </head>
 <body>
