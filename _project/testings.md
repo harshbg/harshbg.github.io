@@ -4,7 +4,7 @@ permalink: /testings/
 title: Testings
 ---
 
-
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,16 +39,31 @@ title: Testings
  
   font-size: 25px;
   color: #bd5d38;
-  line-height: 0.7
+  line-height: 0.7;
+  font-weight: bold;
 }
 
+.exps {
+ 
+  font-size: 25px;
+  color: #bd5d38;
+  line-height: 0.7;
+  
+}
 .expt {
   
   text-align: center;
   
   font-size: 45px;
+  line-height: 1.7
 }
 
+.expd {
+
+  font-size: 15px;
+  
+  line-height: 0.7;
+}
 
 
 </style>
@@ -60,11 +75,11 @@ title: Testings
 <div class="row">
   <div class="column left" style="background-color:#00000;">
     <p class="exp">IHS Markit</p>
-    <p>Houston, Texas</p>
-    <p>June-August 2018</p>
+    <p class="expd">Houston, Texas</p>
+    <p class="expd">June-August 2018</p>
   </div>
   <div class="column right" style="background-color:#00000;">
-    <p class="exp">Data Transformation Intern</p>
+    <p class="exps">Data Transformation Intern</p>
     <p>Built machine learning models in Python to automate manual data parsing process,
 achieved >96% accuracy rate by using random forest, MLP, DNN, hyper parameter
 tuning with grid search and cross validation, resulting in time reduction by 88%
@@ -77,7 +92,7 @@ tuning with grid search and cross validation, resulting in time reduction by 88%
   </div>
   
   <div class="column right" style="background-color:#00000;">
-    <p class="exp">Research Analyst</p>
+    <p class="exps">Research Analyst</p>
     <p>Estimated and forecasted the sales revenues and growth rates of global MICRO and
 MACRO technology markets</p>
   </div>
