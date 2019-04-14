@@ -3,7 +3,6 @@ layout: page
 permalink: /testings/
 title: Testings
 ---
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,6 +40,7 @@ title: Testings
   color: #bd5d38;
   line-height: 1;
   font-weight: bold;
+  font-family: "Roboto Condensed",  sans-serif;
 }
 
 .exps {
@@ -48,7 +48,7 @@ title: Testings
   font-size: 25px;
   color: #bd5d38;
   line-height: 0.7;
-  font-family:sans-serif;
+  font-family: "Roboto Condensed", Arial, sans-serif;
   
 }
 .expt {
