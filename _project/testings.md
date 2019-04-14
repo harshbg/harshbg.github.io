@@ -4,7 +4,6 @@ permalink: /testings/
 title: Testings
 ---
 
-<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +16,7 @@ title: Testings
 .column {
   float: left;
   padding: 10px;
-  height: 200px; /* Should be removed. Only for demonstration */
+  height: 150px; /* Should be removed. Only for demonstration */
 }
 
 .left {
@@ -34,19 +33,36 @@ title: Testings
   display: table;
   clear: both;
 }
+
+.exp {
+ 
+  font-size: 25px;
+  color: #bd5d38;
+}
+
+.expt {
+  
+  text-align: center;
+  
+  font-size: 45px;
+}
+
+
+
 </style>
 </head>
 <body>
 
-<h2>Experience</h2>
+<div class="expt">Experiences</div>
 
 <div class="row">
   <div class="column left" style="background-color:#00000;">
-    <h2>IHS Markit</h2>
-    <h3>June-August 2018</h3>
+    <p class="exp">IHS Markit</p>
+    <p>Houston, Texas</p>
+    <p>June-August 2018</p>
   </div>
   <div class="column right" style="background-color:#00000;">
-    <h2>Data Transformation Intern</h2>
+    <p class="exp">Data Transformation Intern</h2>
     <p>Built machine learning models in Python to automate manual data parsing process,
 achieved >96% accuracy rate by using random forest, MLP, DNN, hyper parameter
 tuning with grid search and cross validation, resulting in time reduction by 88%
@@ -54,13 +70,14 @@ tuning with grid search and cross validation, resulting in time reduction by 88%
   </div>
   
   <div class="column left" style="background-color:#aaa;">
-    <h2>MarketsandMarkets</h2>
+    <p class="exp">MarketsandMarkets</p>
     <p>August 2013-July 2017</p>
   </div>
   
   <div class="column right" style="background-color:#bbb;">
-    <h2>Column 2</h2>
-    <p>Some text..</p>
+    <p class="exp">Research Analyst</p>
+    <p>Estimated and forecasted the sales revenues and growth rates of global MICRO and
+MACRO technology markets</p>
   </div>
 </div>
 
