@@ -4,7 +4,7 @@ permalink: /testings/
 title: Testings
 ---
 
-
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,13 +15,13 @@ title: Testings
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  
 }
 
 /* Float four columns side by side */
 .column {
   float: left;
-  width: 20%;
+  width: 25%;
   padding: 1 5px;
 }
 
