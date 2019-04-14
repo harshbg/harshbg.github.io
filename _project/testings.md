@@ -4,27 +4,29 @@ permalink: /testings/
 title: Testings
 ---
 
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 * {
   box-sizing: border-box;
 }
 
-body {
-  
-}
-
-/* Float four columns side by side */
+/* Create two unequal columns that floats next to each other */
 .column {
   float: left;
-  width: 25%;
-  padding: 0 5px;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
 }
 
-.row {margin: 0 5px;}
+.left {
+  width: 25%;
+}
+
+.right {
+  width: 75%;
+}
 
 /* Clear floats after the columns */
 .row:after {
@@ -32,75 +34,20 @@ body {
   display: table;
   clear: both;
 }
-
-/* Responsive columns */
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 15px;
-  }
-}
-
-/* Style the counter cards */
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 14px;
-  text-align: center;
-  background-color: #444;
-  color: white;
-}
-
-
-p.a {
-  font-size: 20px;
-}
-
-p.b {
-  font-size: 20px;
-}
-
-p.c {
-  font-size: 200%;
-}
-
 </style>
 </head>
 <body>
 
-<br>
+<h2>Two Unequal Columns</h2>
 
 <div class="row">
-  <div class="column">
-    <div class="card">
-      <p class="c"><i class="fa fa-coffee"></i></p>
-      <p class="b">55+</p>
-      <p class="a">This is some text.</p>
-    </div>
+  <div class="column left" style="background-color:#aaa;">
+    <h2>Column 1</h2>
+    <p>Some text..</p>
   </div>
-
-  <div class="column">
-    <div class="card">
-      <p class="c"><i class="fa fa-coffee"></i></p>
-      <p class="b">55+</p>
-      <p class="a">This is some text.</p>
-    </div>
-  </div>
-  
-  <div class="column">
-    <div class="card">
-      <p class="c"><i class="fa fa-coffee"></i></p>
-      <p class="b">55+</p>
-      <p class="a">This is some text.</p>
-    </div>
-  </div>
-  
-  <div class="column">
-    <div class="card">
-      <p class="c"><i class="fa fa-coffee"></i></p>
-      <p class="b">55+</p>
-      <p class="a">This is some text.</p>
-    </div>
+  <div class="column right" style="background-color:#bbb;">
+    <h2>Column 2</h2>
+    <p>Some text..</p>
   </div>
 </div>
 
