@@ -60,7 +60,7 @@ p.b {
   font-size: 20px;
 }
 
-div.c {
+p.c {
   font-size: 200%;
 }
 
@@ -73,7 +73,7 @@ div.c {
 <div class="row">
   <div class="column">
     <div class="card">
-      <div class="c"><i class="fa fa-coffee"></i></div>
+      <p class="c"><i class="fa fa-coffee"></i></p>
       <p class="b">55+</p>
       <p class="a">This is some text.</p>
     </div>
@@ -81,7 +81,7 @@ div.c {
 
   <div class="column">
     <div class="card">
-      <div class="c"><i class="fa fa-coffee"></i></div>
+      <p class="c"><i class="fa fa-coffee"></i></p>
       <p class="b">55+</p>
       <p class="a">This is some text.</p>
     </div>
@@ -89,7 +89,7 @@ div.c {
   
   <div class="column">
     <div class="card">
-      <div class="c"><i class="fa fa-coffee"></i></div>
+      <p class="c"><i class="fa fa-coffee"></i></p>
       <p class="b">55+</p>
       <p class="a">This is some text.</p>
     </div>
@@ -97,7 +97,7 @@ div.c {
   
   <div class="column">
     <div class="card">
-      <div class="c"><i class="fa fa-coffee"></i></div>
+      <p class="c"><i class="fa fa-coffee"></i></p>
       <p class="b">55+</p>
       <p class="a">This is some text.</p>
     </div>
