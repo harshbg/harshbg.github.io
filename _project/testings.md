@@ -3,7 +3,7 @@ layout: page
 permalink: /testings/
 title: Testings
 ---
-<!DOCTYPE html>
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,7 +48,7 @@ title: Testings
   font-size: 25px;
   color: #bd5d38;
   line-height: 0.7;
-  font-family: "Roboto Condensed", Arial, sans-serif;
+  font-family: Helvetica, sans-serif;
   
 }
 .expt {
@@ -121,5 +121,4 @@ MACRO technology markets</p>
   </div>
 </div>
 
-</body>
-</html>
+
