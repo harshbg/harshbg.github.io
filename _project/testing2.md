@@ -296,36 +296,7 @@ information to use in the android application.
 
 
 
-   <!-- footer
-   ================================================== -->
-   <footer>
 
-      <div class="row">
-
-         <div class="twelve columns">
-
-            <ul class="social-links">
- <li><a href="http://www.github.com/valentinerutto"><i class="fa fa-github"></i></a></li>
-
-               <li><a href="https://plus.google.com/u/0/+valentinerutto/posts"><i class="fa fa-google-plus"></i></a></li>
-               <li><a href="https://www.linkedin.com/profile/preview?locale=en_US&trk=prof-0-sb-preview-primary-button"><i class="fa fa-linkedin"></i></a></li>
-               <li><a href="#"><i class="fa fa-skype"></i></a></li>
-            </ul>
-
-            <ul class="copyright">
-               <li>&copy; Copyright 2018 ValentineRutto</li>
-                
-            </ul>
-             
-
-         </div>
-
-         <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
-
-      </div>
-
- 
-   </footer> <!-- Footer End-->
 
    <!-- Java Script
    ================================================== -->
