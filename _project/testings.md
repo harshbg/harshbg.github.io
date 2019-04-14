@@ -4,7 +4,8 @@ permalink: /testings/
 title: Testings
 ---
 
-<!DOCTYPE html>
+
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,7 +40,7 @@ body {
   .column {
     width: 100%;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 }
 
@@ -52,7 +53,7 @@ body {
   color: white;
 }
 
-.fa {font-size:20px;}
+.fa 
 </style>
 </head>
 <body>
