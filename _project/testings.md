@@ -5,7 +5,6 @@ title: Testings
 ---
 
 
-
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,10 +22,10 @@ body {
 .column {
   float: left;
   width: 25%;
-  padding: 1 5px;
+  padding: 0 5px;
 }
 
-.row {margin: 0 -5px;}
+.row {margin: 0 5px;}
 
 /* Clear floats after the columns */
 .row:after {
@@ -65,15 +64,15 @@ body {
 <div class="row">
   <div class="column">
     <div class="card">
-      <p><i class="fa fa-user"></i></p>
-      <h3>11+</h3>
-      <p>Partners</p>
+      <h1><i class="fa fa-trophy"></i></h1>
+      <h2>11+</h2>
+      <h2>Partners</h2>
     </div>
   </div>
 
   <div class="column">
     <div class="card">
-      <p><i class="fa fa-check"></i></p>
+      <h2><i class="fa fa-check"></i></h1>
       <h3>55+</h3>
       <p>Projects</p>
     </div>
