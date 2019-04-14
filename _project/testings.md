@@ -3,6 +3,7 @@ layout: page
 permalink: /testings/
 title: Testings
 ---
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +86,7 @@ title: Testings
 <body>
 
 <div>
-<div class="expt">Experiences</div>
+<div class="expt">Experience</div>
 	<div class="horizontal-line">
                 <div class="top"></div>
                 	<div class="bottom"></div>
@@ -95,6 +96,22 @@ title: Testings
 
 </p>
 
+
+<div class="row">
+  <div class="column left" style="background-color:#00000;">
+    <p class="exp">Statistics Without Borders</p>
+    <p class="expd">Dallas, Texas</p>
+    <p class="expd">March 2019 - Present</p>
+  </div>
+  <div class="column right" style="background-color:#00000;">
+    <p class="exps">Data Consultant</p>
+    <p>Built machine learning models in Python to automate manual data parsing process,
+achieved >96% accuracy rate by using random forest, MLP, DNN, hyper parameter
+tuning with grid search and cross validation, resulting in time reduction by 88%</p>
+  </div>
+
+
+
 <div class="row">
   <div class="column left" style="background-color:#00000;">
     <p class="exp">IHS Markit</p>
@@ -102,11 +119,10 @@ title: Testings
     <p class="expd">June 2018 - August 2018</p>
   </div>
   <div class="column right" style="background-color:#00000;">
-    <p class="exps">Data Transformation Intern</p>
+    <p class="exps">Data Science Intern</p>
     <p>Built machine learning models in Python to automate manual data parsing process,
 achieved >96% accuracy rate by using random forest, MLP, DNN, hyper parameter
-tuning with grid search and cross validation, resulting in time reduction by 88%
-</p>
+tuning with grid search and cross validation, resulting in time reduction by 88%</p>
   </div>
   
   <div class="column left" style="background-color:#00000;">
@@ -121,6 +137,49 @@ tuning with grid search and cross validation, resulting in time reduction by 88%
 MACRO technology markets</p>
   </div>
 </div>
+
+
+<div>
+<div class="expt">Education</div>
+	<div class="horizontal-line">
+                <div class="top"></div>
+                	<div class="bottom"></div>
+</div>               
+
+<p>
+
+</p>
+
+
+
+
+<div class="row">
+  <div class="column left" style="background-color:#00000;">
+    <p class="exp">The University of Texas at Dallas</p>
+    <p class="expd">Dallas, Texas</p>
+    <p class="expd">June 2018 - August 2018</p>
+  </div>
+  <div class="column right" style="background-color:#00000;">
+    <p class="exps">Business Analytics</p>
+    <p>Built machine learning models in Python to automate manual data parsing process,
+achieved >96% accuracy rate by using random forest, MLP, DNN, hyper parameter
+tuning with grid search and cross validation, resulting in time reduction by 88%</p>
+  </div>
+  
+  <div class="column left" style="background-color:#00000;">
+    <p class="exp">The University of Pune</p>
+    <p class="expd">Pune, India</p>
+    <p class="expd">August 2013 - July 2017</p>
+  </div>
+  
+  <div class="column right" style="background-color:#00000;">
+    <p class="exps">Electronics and Telecommunication</p>
+    <p>Estimated and forecasted the sales revenues and growth rates of global MICRO and
+MACRO technology markets</p>
+  </div>
+</div>
+
+
 
 </body>
 </html>
