@@ -296,27 +296,6 @@ information to use in the android application.
 
 
 
-
-
-   <!-- Java Script
-   ================================================== -->
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-   <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
-   <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-
-   <script src="js/jquery.flexslider.js"></script>
-   <script src="js/waypoints.js"></script>
-   <script src="js/jquery.fittext.js"></script>
-   <script src="js/magnific-popup.js"></script>
-   <script src="js/init.js"></script>
-    
-    <!--animated header scripts-->
-        <script src="js/TweenLite.min.js"></script>
-        <script src="js/EasePack.min.js"></script>
-        <script src="js/rAF.js"></script>
-        <script src="js/demo-3.js"></script>
-<!--animated header end-->
-
 </body>
 
 </html>
