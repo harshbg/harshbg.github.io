@@ -35,6 +35,8 @@ Email: <a href="mailto:{{site.email}}?Subject=From Blog Site:">{{site.email}}</a
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+
+
 * {
   box-sizing: border-box;
 }
@@ -105,11 +107,14 @@ Email: <a href="mailto:{{site.email}}?Subject=From Blog Site:">{{site.email}}</a
     width: 44px;
     
 }
-
+}
 
 </style>
 </head>
 <body>
+
+
+
 
 <div>
 <div class="expt">Experience</div>
@@ -205,8 +210,6 @@ MACRO technology markets</p>
 </div>
 
 
-</body>
-</html>
 
 
 
@@ -217,6 +220,8 @@ MACRO technology markets</p>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+
+
 * {
   box-sizing: border-box;
 }
@@ -226,7 +231,7 @@ body {
 }
 
 /* Float four columns side by side */
-.column {
+.ram {
   float: left;
   width: 25%;
   padding: 0 5px;
@@ -260,6 +265,7 @@ body {
 }
 
 
+
 p.a {
   font-size: 20px;
 }
@@ -278,40 +284,41 @@ p.c {
 
 <br>
 
-<div class="row">
-  <div class="column">
-    <div class="card">
-      <p class="c"><i class="fa fa-coffee"></i></p>
-      <p class="b">55+</p>
-      <p class="a">This is some text.</p>
+
+  <div class="row">
+    <div class="ram">
+      <div class="card">
+        <p class="c"><i class="fa fa-coffee"></i></p>
+        <p class="b">55+</p>
+        <p class="a">This is some text.</p>
+      </div>
+    </div>
+
+    <div class="ram">
+      <div class="card">
+        <p class="c"><i class="fa fa-coffee"></i></p>
+        <p class="b">55+</p>
+        <p class="a">This is some text.</p>
+      </div>
+    </div>
+
+    <div class="ram">
+      <div class="card">
+        <p class="c"><i class="fa fa-coffee"></i></p>
+        <p class="b">55+</p>
+        <p class="a">This is some text.</p>
+      </div>
+    </div>
+
+    <div class="ram">
+      <div class="card">
+        <p class="c"><i class="fa fa-coffee"></i></p>
+        <p class="b">55+</p>
+        <p class="a">This is some text.</p>
+      </div>
     </div>
   </div>
 
-  <div class="column">
-    <div class="card">
-      <p class="c"><i class="fa fa-coffee"></i></p>
-      <p class="b">55+</p>
-      <p class="a">This is some text.</p>
-    </div>
-  </div>
-  
-  <div class="column">
-    <div class="card">
-      <p class="c"><i class="fa fa-coffee"></i></p>
-      <p class="b">55+</p>
-      <p class="a">This is some text.</p>
-    </div>
-  </div>
-  
-  <div class="column">
-    <div class="card">
-      <p class="c"><i class="fa fa-coffee"></i></p>
-      <p class="b">55+</p>
-      <p class="a">This is some text.</p>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
-
