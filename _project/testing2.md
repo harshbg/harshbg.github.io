@@ -30,30 +30,27 @@ title: Testing 2
     <!-- modernizr js -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
+<style>
+div.bg-color-1 {
+	background: #f5f5f5 none repeat scroll 0 0;
+}	
+
+
+.container{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}@media (min-width:768px){.container{width:750px}}@media (min-width:992px){.container{width:970px}}@media (min-width:1200px){.container{width:1170px}}.container-fluid{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}.row{margin-left:-15px;margin-right:-15px}
+.container>.navbar-header,.container-fluid>.navbar-header,.container>.navbar-collapse,.container-fluid>.navbar-collapse{margin-right:-15px;margin-left:-15px}@media (min-width:768px){.container>.navbar-header,.container-fluid>.navbar-header,.container>.navbar-collapse,.container-fluid>.navbar-collapse{margin-right:0;margin-left:0}}
+
+.container{max-width:100%}@media screen and (min-width:768px){.jumbotron{padding-top:48px;padding-bottom:48px}.container
+
+</style>
+
   </head>
 
   <body>
-    <!--[if lt IE 8]>
-              <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-          <![endif]-->
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-          <![endif]-->
 
-    <!-- Loading Bar Start -->
-    <div id="loading">
-      <div id="loading-center">
-        <div id="loading-center-absolute">
-          <img src="img/dark-logo.png" alt="Mim" />
-          <div class="object" id="object_three"></div>
-        </div>
-      </div>
-    </div>
-    <!-- Loading Bar End -->
+
+
     <div id="home"></div>
+
 
 
 
@@ -72,6 +69,8 @@ title: Testing 2
             </div>
           </div>
         </div>
+		
+		
         <div class="row text-center">
           <div class="mobile-mb-30 col-xs-12 col-sm-6 col-md-3">
             <div class="single-service pt-50 pb-60 plr-20">
