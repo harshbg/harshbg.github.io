@@ -222,7 +222,7 @@ MACRO technology markets</p>
 <style>
 
 
-* {
+*{
   box-sizing: border-box;
 }
 
@@ -237,7 +237,7 @@ body {
   padding: 0 5px;
 }
 
-.row {margin: 1 5px;}
+.row {margin: 0 5px;}
 
 /* Clear floats after the columns */
 .row:after {
@@ -296,8 +296,8 @@ p.c {
 
     <div class="ram">
       <div class="card">
-        <p class="c"><i class="fa fa-atom"></i></p>
-        <p class="b">10+</p>
+        <p class="c"><i class="fa fa-code"></i></p>
+        <p class="b">12</p>
         <p class="a">Projects</p>
       </div>
     </div>
