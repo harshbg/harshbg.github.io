@@ -5,7 +5,7 @@ title: Testing 2
 ---
 
 
-<!doctype html>
+
 <html class="no-js" lang="en">
 
   <head>
@@ -40,6 +40,38 @@ div.bg-color-1 {
 .container>.navbar-header,.container-fluid>.navbar-header,.container>.navbar-collapse,.container-fluid>.navbar-collapse{margin-right:-15px;margin-left:-15px}@media (min-width:768px){.container>.navbar-header,.container-fluid>.navbar-header,.container>.navbar-collapse,.container-fluid>.navbar-collapse{margin-right:0;margin-left:0}}
 
 .container{max-width:100%}@media screen and (min-width:768px){.jumbotron{padding-top:48px;padding-bottom:48px}.container
+
+.container .row,
+.container-fluid .row {
+    margin-bottom: 0;
+}
+
+.container .row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.row .col {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
+
+.col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{position:relative;min-height:1px;padding-left:15px;padding-right:15px}
+
+.col-xs-12{float:left}.col-xs-12{width:100%}
+
+.section-title h2 {
+  color: #494949;
+}
+.contact-area .section-title p {
+    color: #777777;
+}
+
+.dark-version .contact-area .section-title p {
+	color: #9b9b9b;
+}
 
 </style>
 
@@ -250,22 +282,8 @@ div.bg-color-1 {
     <!-- main JS -->
     <script src="js/main.js"></script>
     <!-- Google Analytics -->
-    <script>
-      (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-          (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-          m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-      ga('create', 'UA-96110124-1', 'auto');
-      ga('send', 'pageview');
-    </script>
   </body>
 
 </html>
+
