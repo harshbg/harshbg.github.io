@@ -36,6 +36,8 @@ title: Testings
 	
 <style>
 
+<!-- 
+
 div.bg-color-1 {
 	background: #f5f5f5 none repeat scroll 0 0;
 }	
@@ -303,7 +305,7 @@ zmdi-tap-and-play:before{content:'\f3e6'}
 
 }
 
-
+-->
 
 </style>
 
