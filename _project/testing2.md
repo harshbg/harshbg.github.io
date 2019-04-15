@@ -190,19 +190,7 @@ div.bg-color-1 {
             </div>
           </div>
 
-          <div class="mobile-mb-30 col-xs-12 col-sm-6 col-md-3">
-            <div class="single-service pt-50 pb-60 plr-20">
-              <i class="zmdi zmdi-book"></i>
-              <h5 class="montserrat weight-medium no-margin"><strong>Learning</strong></h5>
-              <hr class="mtb-15" />
-              <p>Besides academics in school, I love to learn more about the world on my own and from others. I regularily listen to podcast, read books, and go to conferences.</p>
-              <ul class="awards interest-area">
-                <li><a href="https://slite.com/api/s/PDw79cnNLeX7kVazdpt8p3/Courses" target="_blank">Courses I took</a></li>
-                <li><a href="https://slite.com/api/s/1KQQ7VC1yFtKLBT2tmgdmF/Simon's%20Reading%20Lists" target="_blank">My reading and podcast list</a></li>
-                <li><a href="https://slite.com/api/s/TAjXjkLErR8txjJza4wxwy/Conference%20List" target="_blank">Conferences attended</a></li>
-              </ul>
-            </div>
-          </div>
+
 
           <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="single-service pt-50 pb-60 plr-20">

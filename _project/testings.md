@@ -65,17 +65,13 @@ div.bg-color-1 {
 
 
 .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12{float:left}
-
-
 .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12{float:left}
-
-<!-- 
 
 
 col-md-3{width:25%}
-
 col-sm-6{width:50%}
 
+<!-- 
 
 .section-title h2 {
   color: #494949;
