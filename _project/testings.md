@@ -24,14 +24,14 @@ title: Testings
     <link rel="stylesheet" href="css/main.css">
 
     <!-- font awesome -->
-    <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="{{ site.url }}/static/exp/font-awesome.css" />
 
     <!-- modernizr js -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
 	
 	    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ site.url }}/static/css/material-design-iconic-font.css">
+    <link rel="stylesheet" href="{{ site.url }}/static/exp/main.css">
 
 	
 <style>
