@@ -41,20 +41,6 @@ div.bg-color-1 {
 
 .container{max-width:100%}@media screen and (min-width:768px){.jumbotron{padding-top:48px;padding-bottom:48px}.container
 
-.container .row,
-.container-fluid .row {
-    margin-bottom: 0;
-}
-
-.container .row {
-    margin-right: -15px;
-    margin-left: -15px;
-}
-
-.row .col {
-    padding-right: 15px;
-    padding-left: 15px;
-}
 
 
 
