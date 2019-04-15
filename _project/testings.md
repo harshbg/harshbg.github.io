@@ -20,8 +20,8 @@ title: Testings
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 
-    <!-- main css, import other css -->
-    <link rel="stylesheet" href="css/main.css">
+    <!-- main css, import other css 
+    <link rel="stylesheet" href="css/main.css"> -->
 
     <!-- font awesome -->
     <link rel="stylesheet" href="{{ site.url }}/static/exp/font-awesome.css" />
