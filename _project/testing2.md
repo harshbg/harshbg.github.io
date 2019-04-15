@@ -110,21 +110,9 @@ div.bg-color-1 {
               <span class="badge">Agile Scrum</span>
             </div>
           </div>
-          <div class="mobile-mb-30 col-xs-12 col-sm-6 col-md-3">
-            <div class="single-service pt-50 pb-60 plr-20">
-              <i class="zmdi zmdi-tap-and-play"></i>
-              <h5 class="montserrat weight-medium no-margin"><strong>Interactive Technology</strong></h5>
-              <hr class="mtb-15" />
-              <p>The interaction between devices and humans fascinates me and I love developing new expereinces that enhance human ability and relationship with robotics.</p>
-              <hr>
-              <h5 class="montserrat weight-medium no-margin"><strong>Interest Areas</strong></h5>
-              <br>
-              <span class="badge">Wearables</span>
-              <span class="badge">VR/AR/XR</span>
-              <span class="badge">Smart Home Systems</span>
-              <span class="badge">Brain-Computer Interface</span>
-            </div>
-          </div>
+
+		  
+		  
           <div class="mobile-mb-30 col-xs-12 col-sm-6 col-md-3">
             <div class="single-service pt-50 pb-60 plr-20">
               <i class="zmdi zmdi-memory"></i>
