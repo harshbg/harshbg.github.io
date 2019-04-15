@@ -237,7 +237,7 @@ body {
   padding: 0 5px;
 }
 
-.row {margin: 0 5px;}
+.row {margin: 1 5px;}
 
 /* Clear floats after the columns */
 .row:after {
@@ -288,33 +288,33 @@ p.c {
   <div class="row">
     <div class="ram">
       <div class="card">
-        <p class="c"><i class="fa fa-coffee"></i></p>
-        <p class="b">55+</p>
-        <p class="a">This is some text.</p>
+        <p class="c"><i class="fa fa-briefcase"></i></p>
+        <p class="b">4+</p>
+        <p class="a">Experience</p>
       </div>
     </div>
 
     <div class="ram">
       <div class="card">
-        <p class="c"><i class="fa fa-coffee"></i></p>
-        <p class="b">55+</p>
-        <p class="a">This is some text.</p>
+        <p class="c"><i class="fa fa-atom"></i></p>
+        <p class="b">10+</p>
+        <p class="a">Projects</p>
       </div>
     </div>
 
     <div class="ram">
       <div class="card">
-        <p class="c"><i class="fa fa-coffee"></i></p>
-        <p class="b">55+</p>
-        <p class="a">This is some text.</p>
+        <p class="c"><i class="fa fa-trophy"></i></p>
+        <p class="b">5</p>
+        <p class="a">Awards</p>
       </div>
     </div>
 
     <div class="ram">
       <div class="card">
-        <p class="c"><i class="fa fa-coffee"></i></p>
-        <p class="b">55+</p>
-        <p class="a">This is some text.</p>
+        <p class="c"><i class="fa fa-copy"></i></p>
+        <p class="b">15+</p>
+        <p class="a">Publications</p>
       </div>
     </div>
   </div>
