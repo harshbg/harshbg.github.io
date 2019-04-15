@@ -38,7 +38,6 @@ div.bg-color-1 {
 
 .container{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}@media (min-width:768px){.container{width:750px}}@media (min-width:992px){.container{width:970px}}@media (min-width:1200px){.container{width:1170px}}.container-fluid{margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px}.row{margin-left:-15px;margin-right:-15px}
 .container>.navbar-header,.container-fluid>.navbar-header,.container>.navbar-collapse,.container-fluid>.navbar-collapse{margin-right:-15px;margin-left:-15px}@media (min-width:768px){.container>.navbar-header,.container-fluid>.navbar-header,.container>.navbar-collapse,.container-fluid>.navbar-collapse{margin-right:0;margin-left:0}}
-
 .container{max-width:100%}@media screen and (min-width:768px){.jumbotron{padding-top:48px;padding-bottom:48px}.container
 
 .container .row,
@@ -67,19 +66,16 @@ div.bg-color-1 {
 <!--
 .col-xs-12{width:33%}
 -->
- 
+
+
+
 .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12{float:left}
-
-
 .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12{float:left}
-
-
-
-
 col-md-3{width:25%}
-
 col-sm-6{width:50%}
 
+
+<!--
 
 .section-title h2 {
   color: #494949;
@@ -230,15 +226,12 @@ text-center{text-align:center}
 .zmdi{display:inline-block;font:normal normal normal 14px/1 'Material-Design-Iconic-Font';font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 
 
-
 .zmdi-edit:before{content:'\f158'}
-
 .zmdi-edit:before{content:'\f158'}
 
 .weight-medium {
     font-weight: 500;
 }
-
 
 
 .no-margin {
@@ -249,11 +242,9 @@ text-center{text-align:center}
     margin: 15px auto;
 }
 
-
 .mtb-15 {
 		margin: 10px auto;
 }
-
 
 .awards i{
 	padding-right: 10px;
@@ -302,9 +293,10 @@ text-center{text-align:center}
 
 .badge{display:inline-block;min-width:10px;padding:3px 7px;font-size:12px;font-weight:bold;color:#fff;line-height:1;vertical-align:middle;white-space:nowrap;text-align:center;background-color:#777;border-radius:10px}
 
-zmdi-tap-and-play:before{content:'\f3e6'}  
+zmdi-tap-and-play:before{content:'\f3e6'}   --> 
 
 }
+
 </style>
 
   </head>
