@@ -16,7 +16,7 @@ title: Testing 2
     <meta name="keywords" content="Hacker, Innovation, Innovator, Simon Guo, Entrepreneur, Portfolio, Internship">
     <meta name="author" content="Simon Zirui Guo">
 
-    <title>Simon Zirui Guo | 郭子睿</title>
+    
 
     <!-- favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
@@ -55,124 +55,7 @@ title: Testing 2
     <!-- Loading Bar End -->
     <div id="home"></div>
 
-    <!-- Header Section Start -->
-    <header class="header-style-1 bg-color-1">
-      <div class="top clearfix">
-        <div class="header-top active-sticky ptb-50">
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-4 col-sm-4">
-                <div class="left">
-                  <div class="logo">
-                    <a href="index.html"><img src="img/dark-logo.png" alt="Mim" /></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-8 col-sm-8">
-                <div class="right">
-                  <div class="expand-menu-open floatright">
-                    <i class="zmdi zmdi-menu"></i>
-                  </div>
-                  <nav class="mainmenu onepage-nev floatright">
-                    <ul class="clearfix">
-                      <li><a href="#home">Home</a></li>
-                      <li><a href="#about">About</a></li>
-                      <li><a href="#portfolio">Portfolio</a></li>
-                      <li><a href="#service">Interests</a></li>
-                      <li><a href="#recognitions">Recognitions</a></li>
-                      <li><a href="#blog">Blog</a></li>
-                      <li><a href="#contact">Contact</a></li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="mainmenu-expand bg-color-3">
-          <div class="close-menu">
-            <i class="zmdi zmdi-close-circle-o"></i>
-          </div>
-          <div class="menu-logo">
-            <a href="index.html"><img src="img/dark-logo.png" alt="Mim" /></a>
-          </div>
-          <nav class="mainmenu-box onepage-nev">
-            <ul class="clearfix">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#portfolio">Portfolio</a></li>
-              <li><a href="#service">Interests</a></li>
-              <li><a href="#recognitions">Recognitions</a></li>
-              <li><a href="#blog">Blog</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-      <div class="bottom">
-        <div class="container intro-page ">
-          <div class="row relative">
-            <div class="col-xs-12 col-sm-6 static">
-              <div class="slider-text percent-50 intro-page-vertical-center">
-                <h5 class="mb-11">Hello, my name is</h5>
-                <h1 class="mb-30">Simon Zirui Guo</h1>
-                <p class="font-16 line-height-28">
-                  Student Maker, Inventor, Researcher
-                </p>
-                <!-- <div class="slider-button smooth-scroll mt-40">
-                  <a class="btn lg-btn" href="http://preview.mailerlite.com/a6q0o2" target="_blank">Updates From Me</a>
-                  <a class="btn" href="http://eepurl.com/dmOHCP" target="_blank"><i class="fa fa-bell"></i></a>
-                </div> -->
-              </div>
-            </div>
-            <!-- <div class="col-xs-12 col-sm-6">
-              <div class="slider-img text-right">
-                <img src="img/slider/layer1.png" alt="Picture of Simon Zirui Guo" />
-              </div>
-            </div> -->
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- Header Section End -->
-    <!-- About Section Start -->
-    <section class="about-area section-padding light-bg" id="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="section-title text-center mb-60">
-              <h2 class="mb-20">About Me</h2>
-              <div class="horizontal-line">
-                <div class="top"></div>
-                <div class="bottom"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-6">
-            <div class="left mr-40">
-              <h3 class="font-22 capitalize">Hi there!</h3>
-              <p class="font-16 line-height-28">
-                 I am a high school senior studying in Toronto, Canada. I'm passionate about robotics, Internet of Things, consumer hardware, and neurotechnology. I've created many projects that focus on solving real-life issues with combinations of hardware and software, at hackathons, and as personal side projects.
-              </p>
-              <br>
-              <p class="font-16 line-height-28">
-                <!-- <strong>Please feel free to reach out. I am open to any collaboration and opportunities in technology and research.</strong> -->
-                <strong>I am currently looking for internship and research opportunities for the summer of 2019. Please feel free to contact me!</strong>
-              </p>
-              <div class="about-button mt-30">
-                <a class="btn" href="doc/Simon_Zirui_Guo.pdf" target="_blank"> <i class="fa fa-download" style="padding-right: 12px;"></i>Download my resume</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-push-1 col-md-5">
-            <img src="img/headshot-l.jpg" alt="Picture of Simon Zirui Guo" />
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- About Section End -->
+
 
 
     <!-- Service Section Start -->
