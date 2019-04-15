@@ -5,6 +5,7 @@ title: Testings
 ---
 
 
+
 <html class="no-js" lang="en">
 
   <head>
@@ -179,9 +180,123 @@ text-center{text-align:center}
 	color: #979797;
 }
 
+.dark-version .single-service {
+	background: #252525 none repeat scroll 0 0;
+}
+
+.single-service a{
+	color: #9b9b9b;
+}
+
+.pt-50 {
+    padding-top: 50px;
+}
+
+@media screen and (max-width: 768px) {
+	.pt-50 {
+		padding-top: 30px;
+	}
+
+.pb-60 {
+    padding-bottom: 60px;
+}
+
+.plr-20{
+	padding-left:10px;
+	padding-right:10px;
+}
+
+
+	.plr-20{
+		padding-left:5px;
+		padding-right:5px;
+	}
+
+.plr-20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 
 
+.zmdi{display:inline-block;font:normal normal normal 14px/1 'Material-Design-Iconic-Font';font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+
+
+.zmdi-edit:before{content:'\f158'}
+
+.zmdi-edit:before{content:'\f158'}
+
+.weight-medium {
+    font-weight: 500;
+}
+
+
+
+.no-margin {
+    margin: 0;
+}
+
+.mtb-15 {
+    margin: 15px auto;
+}
+
+
+.mtb-15 {
+		margin: 10px auto;
+}
+
+
+.awards i{
+	padding-right: 10px;
+}
+.awards li{
+	list-style-type: disc;
+	color: #767676;
+	margin-left: 22.5px;
+}
+
+.awards a{
+	color: #767676;
+	text-transform: none;
+}
+
+.interest-area li{
+	text-align: left;
+}
+
+
+@font-face {
+    font-family: 'montserratlight';
+    src: url('../fonts/montserrat-light-webfont.eot');
+    src: url('../fonts/montserrat-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/montserrat-light-webfont.woff2') format('woff2'),
+         url('../fonts/montserrat-light-webfont.woff') format('woff'),
+         url('../fonts/montserrat-light-webfont.svg#montserratlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'montserratsemibold';
+    src: url('../fonts/montserrat-semibold-webfont.eot');
+    src: url('../fonts/montserrat-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/montserrat-semibold-webfont.woff2') format('woff2'),
+         url('../fonts/montserrat-semibold-webfont.woff') format('woff'),
+         url('../fonts/montserrat-semibold-webfont.svg#montserratsemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.btn-default .badge{color:#fff;background-color:#333}
+
+.badge{display:inline-block;min-width:10px;padding:3px 7px;font-size:12px;font-weight:bold;color:#fff;line-height:1;vertical-align:middle;white-space:nowrap;text-align:center;background-color:#777;border-radius:10px}
+
+zmdi-tap-and-play:before{content:'\f3e6'}
+
+}
 </style>
 
   </head>
@@ -395,4 +510,6 @@ text-center{text-align:center}
   </body>
 
 </html>
+
+
 
