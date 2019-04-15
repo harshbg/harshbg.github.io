@@ -29,6 +29,11 @@ title: Testings
     <!-- modernizr js -->
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
+	
+	    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ site.url }}/static/css/material-design-iconic-font.css">
+
+	
 <style>
 
 div.bg-color-1 {
