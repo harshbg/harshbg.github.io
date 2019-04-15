@@ -297,13 +297,13 @@ text-center{text-align:center}
 
 }
 
-<!-- 
+<!-- try --> 
 
 .btn-default .badge{color:#fff;background-color:#333}
 
 .badge{display:inline-block;min-width:10px;padding:3px 7px;font-size:12px;font-weight:bold;color:#fff;line-height:1;vertical-align:middle;white-space:nowrap;text-align:center;background-color:#777;border-radius:10px}
 
-zmdi-tap-and-play:before{content:'\f3e6'}  --> 
+zmdi-tap-and-play:before{content:'\f3e6'}  
 
 }
 </style>
