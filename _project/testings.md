@@ -339,7 +339,7 @@ zmdi-tap-and-play:before{content:'\f3e6'}
         <div class="row text-center">
           <div class="mobile-mb-30 col-xs-12 col-sm-6 col-md-3">
             <div class="single-service pt-50 pb-60 plr-20">
-              
+              <i class="zmdi zmdi-edit"></i>
               <h5 class="montserrat weight-medium no-margin"><strong>Design and Project Management</strong></h5>
               <hr class="mtb-15" />
               <p>I like to design products and I have attended many university-level hackathons to practice my prototyping skills in team settings.</p>
