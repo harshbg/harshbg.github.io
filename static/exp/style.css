@@ -103,7 +103,7 @@ textarea:focus {
 	outline: 0px;
 }
 */
-/* installed fonts
+/* installed fonts*/
 ---------------- 
 
 @font-face {
@@ -129,7 +129,7 @@ textarea:focus {
     font-style: normal;
 
 }
-*/
+
 /* Link style
 ============== 
 a {
@@ -661,7 +661,7 @@ h6 {
 }
 
 /* Default Button Style
------------------------- */
+------------------------ 
 .btn {
 	background-color: #393939;
 	border: 0 none;
@@ -701,7 +701,7 @@ h6 {
 .btn:focus,
 button:focus {
     outline: none !important;
-}
+}*/
 
 /*Screen Support
 --------------------*/
@@ -714,7 +714,7 @@ button:focus {
 }
 
 /* Customize Form style
-======================== */
+======================== 
 .form-control {
     border-radius: 0;
 }
@@ -733,7 +733,7 @@ button:focus {
 .input-field label.active {
     font-size: 12px;
 }
-
+*/
 /*Flat Icon Setup
 ==========================*/
 i[class^="flaticon-"] {
