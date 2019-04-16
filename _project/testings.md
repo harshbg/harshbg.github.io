@@ -33,6 +33,7 @@ title: Testings
 	    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ site.url }}/static/exp/main.css">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 	
 <style>
 
