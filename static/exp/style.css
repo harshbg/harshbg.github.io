@@ -104,7 +104,7 @@ textarea:focus {
 }
 */
 /* installed fonts
----------------- */
+---------------- 
 
 @font-face {
     font-family: 'montserratlight';
@@ -129,9 +129,9 @@ textarea:focus {
     font-style: normal;
 
 }
-
+*/
 /* Link style
-============== */
+============== 
 a {
     color: #ffffff;
 	font-family: 'montserratsemibold';
@@ -150,15 +150,15 @@ a:hover {
     outline: none;
     text-decoration: none;
 }
-
+*/
 /* Transition
-=============== */
+=============== 
 a,
 .navbar a,
 .form-control {
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
-}
+}*/
 
 /*
 [ 2. Typography ]
@@ -205,7 +205,7 @@ h6 {
 
 /*
 [ 3. Global Classes ]
-=================== */
+=================== 
 .no-margin {
     margin: 0;
 }
@@ -251,7 +251,7 @@ h6 {
 }
 .dark-version .light-color{
 	color: #f1f1f1!important;
-}
+}*/
 
 /* percentage
 --------------*/
