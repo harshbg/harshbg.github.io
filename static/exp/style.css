@@ -514,7 +514,7 @@ h6 {
 
 
 /*Font Size
--------------*/
+-------------
 .font-16 {
     font-size: 16px
 }
@@ -536,9 +536,9 @@ h6 {
 .font-30 {
     font-size: 30px
 }
-
+*/
 /*font size in screen support
------------------------------------*/
+-----------------------------------
 @media screen and (max-width: 767px) {
 
     .font-30 {
@@ -550,7 +550,7 @@ h6 {
         font-size: 30px
     }
 }
-
+*/
 /*Line Height
 --------------*/
 .line-height-28 {
@@ -577,7 +577,7 @@ h6 {
 }
 
 /*font weight
---------------*/
+--------------
 .weight-light {
     font-weight: 300;
 }
@@ -592,10 +592,10 @@ h6 {
 }
 .weight-extrabold {
     font-weight: 900;
-}
+}*/
 
 /* background color
-===============================*/
+===============================
 
 .light-bg {
 	background: #ffffff none repeat scroll 0 0;
@@ -611,13 +611,13 @@ h6 {
 }
 .bg-color-3 {
 	background: #2b2b2b none repeat scroll 0 0;
-}
+}*/
 
 /* background image
 ==================================*/
 
 /* background overlay
-===================================*/
+===================================
 .overlay{
 	position:relative;
 }
@@ -633,7 +633,7 @@ h6 {
 .overlay .container{
 	position:relative;
 	z-index:2;
-}
+}*/
 
 /* dark overlay
 ================================*/
