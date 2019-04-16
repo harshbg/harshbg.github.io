@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /testings/
+title: Testings
 ---
 
 
@@ -32,7 +33,6 @@ permalink: /testings/
 	    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ site.url }}/static/exp/main.css">
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 <style>
 
@@ -339,7 +339,7 @@ zmdi-tap-and-play:before{content:'\f3e6'}
         <div class="row text-center">
           <div class="mobile-mb-30 col-xs-12 col-sm-6 col-md-3">
             <div class="single-service pt-50 pb-60 plr-20">
-              <i class=""fa fa-coffee""></i>
+              
               <h5 class="montserrat weight-medium no-margin"><strong>Design and Project Management</strong></h5>
               <hr class="mtb-15" />
               <p>I like to design products and I have attended many university-level hackathons to practice my prototyping skills in team settings.</p>
