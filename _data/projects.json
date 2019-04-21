@@ -62,7 +62,7 @@
 		"description": "Texas Instruments Challenge – Intern Survey Prediction – 3rd Prize. Analysis of intern survey of interns at Texas Instruments",
 		"date": "December 2017",
 		"tags": ["R","Tableau","Excel"]
-	}
+	},
 	{
 		"name": "Energy Efficiency Optimization	using Neural Networks",
 		"image": "eopt.png",
