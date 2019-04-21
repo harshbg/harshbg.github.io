@@ -3,39 +3,34 @@
 		"name": "Sign Language Interpreter using Deep Learning",
 		"image": "sign.png",
 		"url": "http://bit.ly/2I9D4Nm",
-		"description": "A sign language interpreter using live video feed from the camera.",
+		"description": "UNT Hackathon 2019 : Winner. Implemented a sign language interpreter to help deaf people with their daily communication needs using Deep Learning.",
 		"date": "April 2019",
 		"tags": ["Python","Machine Learning","Neural Networks", "Deep Learning"]
-	},
-	{
-		"name": "US Consumer Time Spend Analysis",
-		"image": "consumer.jpg",
-		"url": "http://bit.ly/2YPoxeM",
-		"description": "An analysis of the time spending habbits of American consumers. The project was done as part of Round 1 of Intelligence Analytics Challenge 3.0 at the University of Texas at Dallas.",
-		"date": "March 2018",
-		"tags": ["R","Tableau","Excel"]
 	},
 	{
 		"slug": "etrucking-soft",
 		"name": "Shaving Blade Analysis",
 		"image": "blades.jpg",
 		"url": "http://bit.ly/2FWDnHR",
+		"description": "An analysis of the shaving blades market in the United States using SAS.",
 		"date": "April 2018",
 		"tags": ["SAS", "Excel"]
 	},
 	{
-		"name": "US Housing Price Analysis",
-		"image": "hp2.png",
-		"date": "February 2018",
-		"url": "http://bit.ly/2WLD8WL",
+		"name": "US Consumer Time Spend Analysis",
+		"image": "consumer.jpg",
+		"url": "http://bit.ly/2YPoxeM",
+		"description": "Intelligence Analytics Challenge 3.0: 2nd Prize. An analysis of the time spending habbits of American consumers.",
+		"date": "March 2018",
 		"tags": ["R","Tableau","Excel"]
 	},
+
 	{
-		"name": "Energy Efficiency Optimization	using Neural Networks",
-		"image": "eopt.png",
-		"date": "May 2018",
-		"url": "http://bit.ly/2OTpn5w",
-		"tags": ["Python","Machine Learning"]
+		"name": "Pier 1 - Home Decor Product Analysis",
+		"image": "pier1.png",
+		"date": "March 2019",
+		"description": "UTA-Pier-1 Analytics Competition : Winner. Analyzed customer reviews of products 37k+ Pier-1 Imports home décor products ",
+		"tags": ["Python","Tableau","NLP"]
 	},
 	{
 		"name": "PUBG Game Data Analysis",
@@ -46,19 +41,36 @@
 		"tags": ["Hive","Spark"]
 	},
 	{
+		"name": "US Housing Price Analysis",
+		"image": "hp2.png",
+		"date": "February 2018",
+		"description": "Intelligence Analytics Challenge 3.0: 2nd Prize. An analysis of the housing and rent prices in the United States before and after the 2008 Housing Bubble. ",
+		"url": "http://bit.ly/2WLD8WL",
+		"tags": ["R","Tableau","Excel"]
+	},
+	{
 		"name": "Cardiac Arrhythmia Multi-Class Classification",
 		"image": "ca.jpg",
 		"date": "March 2018",
+		"description": "Multiclass Classification of Cardiac Arrhythmia Using feature selection.",
 		"url": "http://bit.ly/2VomNqF",
 		"tags": ["Python","Machine Learning"]
 	},
 	{
-		"slug": "Machine Learning",
-		"name": "100 Days of Machine Learning",
-		"image": "ml101.jpg",
-		"url": "http://bit.ly/2VvANiJ",
-		"date": "September 2018",
-		"tags": ["R", "Python", "SQL", "Machine Learning"]
+		"name": "Texas Instruments Intern Survey Prediction System",
+		"image": "TI.PNG",
+		"url": "http://www.gupta-harsh.com/TIchallange/",
+		"description": "Texas Instruments Challenge – Intern Survey Prediction – 3rd Prize. Analysis of intern survey of interns at Texas Instruments",
+		"date": "December 2017",
+		"tags": ["R","Tableau","Excel"]
+	}
+	{
+		"name": "Energy Efficiency Optimization	using Neural Networks",
+		"image": "eopt.png",
+		"date": "May 2018",
+		"description": "Assessing the heating load and cooling load requirements of buildings (that is, energy efficiency) as a function of building parameters using Machine Learning.",
+		"url": "http://bit.ly/2OTpn5w",
+		"tags": ["Python","Machine Learning"]
 	},
 	{
 		"name": "Twitter Sentiment Analysis - Karnatka State Elections 2018(India)",
@@ -69,10 +81,11 @@
 		"tags": ["R","Excel"]
 	},
 	{
-		"name": "Texas Instruments Intern Survey Prediction System",
-		"image": "TI.PNG",
-		"url": "http://www.gupta-harsh.com/TIchallange/",
-		"date": "December 2017",
-		"tags": ["R","Tableau","Excel"]
+		"slug": "Machine Learning",
+		"name": "100 Days of Machine Learning",
+		"image": "ml101.jpg",
+		"url": "http://bit.ly/2VvANiJ",
+		"date": "September 2018",
+		"tags": ["R", "Python", "SQL", "Machine Learning"]
 	}
 ]
