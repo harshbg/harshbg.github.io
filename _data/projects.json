@@ -48,6 +48,13 @@
 		"tags": ["R","Tableau","Excel"]
 	},
 	{
+		"name": "Restaurant Inspection Data Analysis",
+		"image": "informac.png",
+		"date": "April 2019",
+		"description": "INFORMS Analytics Challenge : Winner. An analysis of the health inspection and voilation data of restaurants in Los Angeles. ",
+		"tags": ["Python","Tableau","Machine Learning"]
+	},
+	{
 		"name": "Cardiac Arrhythmia Multi-Class Classification",
 		"image": "ca.jpg",
 		"date": "March 2018",
