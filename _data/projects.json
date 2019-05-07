@@ -85,13 +85,6 @@
 		"description": "An analysis of Sentiments on Election Day in Karnataka State Elections (India) 2018 using R",
 		"url": "http://bit.ly/2Vr8X6S",
 		"tags": ["R","Excel"]
-	},
-	{
-		"slug": "Machine Learning",
-		"name": "100 Days of Machine Learning",
-		"image": "ml101.jpg",
-		"url": "http://bit.ly/2VvANiJ",
-		"date": "September 2018",
-		"tags": ["R", "Python", "SQL", "Machine Learning"]
 	}
+
 ]
