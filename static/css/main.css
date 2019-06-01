@@ -191,7 +191,7 @@ div.col-sm-3 img.profile-avatar {
   text-align: center;
 } 
 .header-content {
-  background-image: url('../img/header_bg1.jpg');
+  background-image: url('../img/header_bg2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center;
@@ -200,7 +200,7 @@ div.col-sm-3 img.profile-avatar {
 }
 
 .header-content .header-content__message {
-  color: #fff;
+  color: #333538;
   position: relative;
   top: 250px;
   font-size: 1.8em;
