@@ -5,7 +5,7 @@
 		"url": "http://bit.ly/2I9D4Nm",
 		"description": "UNT Hackathon 2019 : Winner. Implemented a sign language interpreter to help deaf people with their daily communication needs using Deep Learning.",
 		"date": "April 2019",
-		"tags": ["Python","Machine Learning","Neural Networks", "Deep Learning"]
+		"tags": ["Python","Machine Learning", "Deep Learning"]
 	},
 	{
 		"slug": "etrucking-soft",
@@ -29,7 +29,9 @@
 		"image": "pier1.png",
 		"date": "March 2019",
 		"description": "UTA-Pier-1 Analytics Competition : Winner. Analyzed customer reviews of products 37k+ Pier-1 Imports home décor products ",
+		"url": "http://bit.ly/2WBZvSa",
 		"tags": ["Python","Tableau","NLP"]
+		
 	},
 	{
 		"name": "PUBG Game Data Analysis",
@@ -52,7 +54,9 @@
 		"image": "informac.png",
 		"date": "April 2019",
 		"description": "INFORMS Analytics Challenge : Winner. An analysis of the health inspection and voilation data of restaurants in Los Angeles. ",
+		"url": "http://bit.ly/2WAZoGC",
 		"tags": ["Python","Tableau","Machine Learning"]
+		
 	},
 	{
 		"name": "Cardiac Arrhythmia Multi-Class Classification",
