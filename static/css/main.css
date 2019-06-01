@@ -202,8 +202,9 @@ div.col-sm-3 img.profile-avatar {
 .header-content .header-content__message {
   color: #333538;
   position: relative;
-  top: 250px;
+  top: 200px;
   font-size: 1.8em;
+  font-weight: bold;
   text-align: center;
   display: block;
   text-decoration: underline;
