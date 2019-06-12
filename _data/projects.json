@@ -1,7 +1,7 @@
 [
 	{
 		"name": "Sign Language Interpreter using Deep Learning",
-		"image": "sign.png",
+		"image": "sign.jpg",
 		"url": "http://bit.ly/2I9D4Nm",
 		"description": "UNT Hackathon 2019 : Winner. Implemented a sign language interpreter to help deaf people with their daily communication needs using Deep Learning.",
 		"date": "April 2019",
@@ -18,7 +18,7 @@
 	},
 	{
 		"name": "US Consumer Time Spend Analysis",
-		"image": "consumer.jpg",
+		"image": "consumer1.jpg",
 		"url": "http://bit.ly/2YPoxeM",
 		"description": "Intelligence Analytics Challenge 3.0: 2nd Prize. An analysis of the time spending habbits of American consumers.",
 		"date": "March 2018",
@@ -26,7 +26,7 @@
 	},
 	{
 		"name": "Pier 1 - Home Decor Product Analysis",
-		"image": "pier1.png",
+		"image": "pier1.jpg",
 		"date": "March 2019",
 		"description": "UTA-Pier-1 Analytics Competition : Winner. Analyzed customer reviews of products 37k+ Pier-1 Imports home décor products ",
 		"url": "http://bit.ly/2WBZvSa",
@@ -43,7 +43,7 @@
 	},
 	{
 		"name": "US Housing Price Analysis",
-		"image": "hp2.png",
+		"image": "hp2.jpg",
 		"date": "February 2018",
 		"description": "Intelligence Analytics Challenge 3.0: 2nd Prize. An analysis of the housing and rent prices in the United States before and after the 2008 Housing Bubble. ",
 		"url": "http://bit.ly/2WLD8WL",
@@ -51,7 +51,7 @@
 	},
 	{
 		"name": "Restaurant Inspection Data Analysis",
-		"image": "informac.png",
+		"image": "informac.jpg",
 		"date": "April 2019",
 		"description": "INFORMS Analytics Challenge : Winner. An analysis of the health inspection and voilation data of restaurants in Los Angeles. ",
 		"url": "http://bit.ly/2WAZoGC",
@@ -68,7 +68,7 @@
 	},
 	{
 		"name": "Texas Instruments Intern Survey Prediction System",
-		"image": "TI.PNG",
+		"image": "TI.jpg",
 		"url": "http://www.gupta-harsh.com/TIchallange/",
 		"description": "Texas Instruments Challenge – Intern Survey Prediction – 3rd Prize. Analysis of intern survey of interns at Texas Instruments",
 		"date": "December 2017",
@@ -76,7 +76,7 @@
 	},
 	{
 		"name": "Energy Efficiency Optimization	using Neural Networks",
-		"image": "eopt.png",
+		"image": "eopt.jpg",
 		"date": "May 2018",
 		"description": "Assessing the heating load and cooling load requirements of buildings (that is, energy efficiency) as a function of building parameters using Machine Learning.",
 		"url": "http://bit.ly/2OTpn5w",
