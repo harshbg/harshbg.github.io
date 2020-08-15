@@ -182,6 +182,34 @@ a {
     -webkit-text-decoration-skip: objects
 }
 
+ra {
+    color: #e45447;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects
+}
+
+ra:hover {
+    color: #9e2217;
+    text-decoration: underline
+}
+
+ra:not([href]):not([tabindex]) {
+    color: inherit;
+    text-decoration: none
+}
+
+ra:not([href]):not([tabindex]):focus,
+ra:not([href]):not([tabindex]):hover {
+    color: inherit;
+    text-decoration: none
+}
+
+ra:not([href]):not([tabindex]):focus {
+    outline: 0
+}
+
+
 a:hover {
     color: #0056b3;
     text-decoration: underline
@@ -566,6 +594,10 @@ code {
 }
 
 a>code {
+    color: inherit
+}
+
+ra>code {
     color: inherit
 }
 
@@ -2489,6 +2521,11 @@ textarea.form-control {
 }
 
 a.btn.disabled,
+fieldset:disabled a.btn {
+    pointer-events: none
+}
+
+ra.btn.disabled,
 fieldset:disabled a.btn {
     pointer-events: none
 }
@@ -6457,6 +6494,93 @@ button.bg-dark:hover {
     background-color: #1d2124 !important
 }
 
+aa
+
+ra.bg-primary:focus,
+ra.bg-primary:hover,
+button.bg-primary:focus,
+button.bg-primary:hover {
+    background-color: #0062cc !important
+}
+
+.bg-secondary {
+    background-color: #6c757d !important
+}
+
+ra.bg-secondary:focus,
+ra.bg-secondary:hover,
+button.bg-secondary:focus,
+button.bg-secondary:hover {
+    background-color: #545b62 !important
+}
+
+.bg-success {
+    background-color: #28a745 !important
+}
+
+ra.bg-success:focus,
+ra.bg-success:hover,
+button.bg-success:focus,
+button.bg-success:hover {
+    background-color: #1e7e34 !important
+}
+
+.bg-info {
+    background-color: #17a2b8 !important
+}
+
+ra.bg-info:focus,
+ra.bg-info:hover,
+button.bg-info:focus,
+button.bg-info:hover {
+    background-color: #117a8b !important
+}
+
+.bg-warning {
+    background-color: #ffc107 !important
+}
+
+ra.bg-warning:focus,
+ra.bg-warning:hover,
+button.bg-warning:focus,
+button.bg-warning:hover {
+    background-color: #d39e00 !important
+}
+
+.bg-danger {
+    background-color: #dc3545 !important
+}
+
+ra.bg-danger:focus,
+ra.bg-danger:hover,
+button.bg-danger:focus,
+button.bg-danger:hover {
+    background-color: #bd2130 !important
+}
+
+.bg-light {
+    background-color: #f8f9fa !important
+}
+
+ra.bg-light:focus,
+ra.bg-light:hover,
+button.bg-light:focus,
+button.bg-light:hover {
+    background-color: #dae0e5 !important
+}
+
+.bg-dark {
+    background-color: #343a40 !important
+}
+
+ra.bg-dark:focus,
+ra.bg-dark:hover,
+button.bg-dark:focus,
+button.bg-dark:hover {
+    background-color: #1d2124 !important
+}
+
+
 .bg-white {
     background-color: #fff !important
 }
@@ -9231,6 +9355,76 @@ a.text-dark:hover {
     color: #1d2124 !important
 }
 
+aa
+
+ra.text-primary:focus,
+ra.text-primary:hover {
+    color: #0062cc !important
+}
+
+.text-secondary {
+    color: #6c757d !important
+}
+
+ra.text-secondary:focus,
+ra.text-secondary:hover {
+    color: #545b62 !important
+}
+
+.text-success {
+    color: #28a745 !important
+}
+
+ra.text-success:focus,
+ra.text-success:hover {
+    color: #1e7e34 !important
+}
+
+.text-info {
+    color: #17a2b8 !important
+}
+
+ra.text-info:focus,
+ra.text-info:hover {
+    color: #117a8b !important
+}
+
+.text-warning {
+    color: #ffc107 !important
+}
+
+ra.text-warning:focus,
+ra.text-warning:hover {
+    color: #d39e00 !important
+}
+
+.text-danger {
+    color: #dc3545 !important
+}
+
+ra.text-danger:focus,
+ra.text-danger:hover {
+    color: #bd2130 !important
+}
+
+.text-light {
+    color: #f8f9fa !important
+}
+
+ra.text-light:focus,
+ra.text-light:hover {
+    color: #dae0e5 !important
+}
+
+.text-dark {
+    color: #343a40 !important
+}
+
+ra.text-dark:focus,
+ra.text-dark:hover {
+    color: #1d2124 !important
+}
+
 .text-body {
     color: #212529 !important
 }
@@ -9271,6 +9465,9 @@ a.text-dark:hover {
         box-shadow: none !important
     }
     a:not(.btn) {
+        text-decoration: underline
+    }
+	ra:not(.btn) {
         text-decoration: underline
     }
     abbr[title]::after {
