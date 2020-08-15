@@ -209,6 +209,14 @@ ra {
     -webkit-text-decoration-skip: objects
 }
 
+
+ha {
+	margin: 0;
+    color: #e45447;
+    text-align: left;
+}
+
+
 ra:hover {
     color: #9e2217;
     text-decoration: underline
