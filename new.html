@@ -254,6 +254,266 @@ rollOverOutlineColor : "#666666"
 
 
 
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/ammap.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/maps/js/indiaLow.js"></script>
+<script>
+
+@import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,700");
+body {
+  font-family: "Maven Pro", sans-serif;
+  padding-top: 70px;
+}
+
+.full-screen {
+  padding: 8rem 0;
+}
+
+.small-text {
+  color: #5b5b5b;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 50px;
+  letter-spacing: 0.2px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style: none;
+}
+
+a {
+  font-weight: normal;
+  text-decoration: none !important;
+  transition: all 0.4s ease;
+}
+a:hover {
+  color: #ffc200 !important;
+}
+
+.navbar-brand .uil {
+  font-size: 40px;
+}
+
+p {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #5b5b5b;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+hh {
+  color: #212121;
+  font-size: 2.8em;
+  margin: 24px 0;
+}
+
+h2 {
+  color: #353535;
+  font-size: 2.4em;
+  font-weight: bold;
+}
+
+h3 {
+  color: #484848;
+}
+
+
+
+</script>
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("map",{
+					"type": "map",
+					"pathToImages": "http://www.amcharts.com/lib/3/images/",
+					"addClassNames": true,
+					"fontSize": 15,
+					"color": "#000000",
+					"projection": "mercator",
+					"backgroundAlpha": 1,
+					"backgroundColor": "rgba(238,238,238,1)",
+					"dataProvider": {
+						"map": "indiaLow",
+						"getAreasFromMap": true,
+						"images": [
+							{
+								"selectable": true,
+								"longitude": 73.9971,
+								"latitude": 18.8341,
+								"label": "Home",
+								"labelPosition": "right",
+								"labelColor": "rgba(246,248,248,0.8)",
+								"labelRollOverColor": "#ffffff",
+								"labelFontSize": 16
+							}
+						],
+						"areas": [
+							{
+								"id": "IN-AP",
+								"title": "Andhra Pradesh",
+								"color": "rgba(129,129,129,1)"
+							},
+							{
+								"id": "IN-AR",
+								"title": "Odisha",
+								"color": "rgba(129,129,129,1)"
+							},
+							{
+								"id": "IN-AS",
+								"title": "Assam",
+								"color": "rgba(129,129,129,1)"
+							},
+							{
+								"id": "IN-DL",
+								"title": "Delhi",
+								"color": "rgba(253,187,45,1)"
+							},
+							{
+								"id": "IN-DN",
+								"title": "Dadra and Nagar Haveli",
+								"color": "rgba(253,187,45,1)"
+							},
+							{
+								"id": "IN-GA",
+								"title": "Goa",
+								"color": "rgba(253,187,45,1)"
+							},
+							{
+								"id": "IN-JK",
+								"title": "Jammu and Kashmir",
+								"color": "rgba(129,129,129,1)"
+							},
+							{
+								"id": "IN-KA",
+								"title": "Karnataka",
+								"color": "rgba(129,129,129,1)"
+							},
+							{
+								"id": "IN-KL",
+								"title": "Kerala",
+								"color": "rgba(253,187,45,1)"
+							},
+							{
+								"id": "IN-MH",
+								"title": "Maharashtra",
+								"color": "rgba(253,187,45,1)"
+							},
+							{
+								"id": "IN-MP",
+								"title": "Madhya Pradesh",
+								"color": "rgba(253,187,45,1)"
+							},
+							{
+								"id": "IN-OR",
+								"title": "Uttar Pradesh",
+								"color": "rgba(129,129,129,1)"
+							},
+							{
+								"id": "IN-RJ",
+								"title": "Karnataka",
+								"color": "rgba(129,129,129,1)"
+							},
+							{
+								"id": "IN-TG",
+								"title": "Telangana",
+								"color": "rgba(129,129,129,1)"
+							},
+							{
+								"id": "IN-TN",
+								"title": "Tamil Nadu",
+								"color": "rgba(253,187,45,1)"
+							},
+							{
+								"id": "IN-UP",
+								"title": "Uttar Pradesh",
+								"color": "rgba(129,129,129,1)"
+							},
+							{
+								"id": "IN-UT",
+								"title": "Uttarakhand",
+								"color": "rgba(253,187,45,1)"
+							}
+						]
+					},
+					"balloon": {
+						"horizontalPadding": 15,
+						"borderAlpha": 0,
+						"borderThickness": 1,
+						"verticalPadding": 15
+					},
+					"areasSettings": {
+						"color": "rgba(128,128,128,1)",
+						"outlineColor": "rgba(238,238,238,1)",
+						"rollOverOutlineColor": "rgba(238,238,238,1)",
+						"rollOverBrightness": 20,
+						"selectedBrightness": 20,
+						"selectable": true,
+						"unlistedAreasAlpha": 0,
+						"unlistedAreasOutlineAlpha": 0
+					},
+					"imagesSettings": {
+						"alpha": 1,
+						"color": "rgba(128,128,128,1)",
+						"outlineAlpha": 0,
+						"rollOverOutlineAlpha": 0,
+						"outlineColor": "rgba(238,238,238,1)",
+						"rollOverBrightness": 20,
+						"selectedBrightness": 20,
+						"selectable": true
+					},
+					"linesSettings": {
+						"color": "rgba(128,128,128,1)",
+						"selectable": true,
+						"rollOverBrightness": 20,
+						"selectedBrightness": 20
+					},
+					"zoomControl": {
+						"zoomControlEnabled": true,
+						"homeButtonEnabled": false,
+						"panControlEnabled": false,
+						"right": 38,
+						"bottom": 30,
+						"minZoomLevel": 0.25,
+						"gridHeight": 100,
+						"gridAlpha": 0.1,
+						"gridBackgroundAlpha": 0,
+						"gridColor": "#FFFFFF",
+						"draggerAlpha": 1,
+						"buttonCornerRadius": 2
+					}
+				});
+		</script>
+
+
+
+
+
+<div id="map" style="width: 100%; height: 900px;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<!-- Start Button -->
 	<section class="button-area">
 		<div class="container border-top-generic">
