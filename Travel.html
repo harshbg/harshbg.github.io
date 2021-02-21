@@ -104,21 +104,129 @@
 	<!-- Start Sample Area -->
 	<section class="sample-text-area">
 		<div class="container">
-			<h3 class="text-heading">Text Sample</h3>
-			<p class="sample-text">
-				Every avid independent filmmaker has <b>Bold</b> about making that <i>Italic</i> interest documentary, or short film
-				to show off their creative prowess. Many have great ideas and want to “wow” the<sup>Superscript</sup> scene, or video
-				renters with their big project. But once you have the<sub>Subscript</sub> “in the can” (no easy feat), how do you move
-				from a <del>Strike</del> through of master DVDs with the <u>“Underline”</u> marked hand-written title inside a secondhand
-				CD case, to a pile of cardboard boxes full of shiny new, retail-ready DVDs, with UPC barcodes and polywrap sitting on
-				your doorstep? You need to create eye-popping artwork and have your project replicated. Using a reputable full service
-				DVD Replication company like PacificDisc, Inc. to partner with is certainly a helpful option to ensure a professional
-				end result, but to help with your DVD replication project, here are 4 easy steps to follow for good DVD replication results:
+			<h3 class="text-heading">States Visited in the US (12)</h3>
 
-			</p>
+		<div class="row">
+					<div class="col-md-4 typo-sec">
+						<ul class="unordered-list">
+						<li>Texas</li>
+						<li>Florida</li>
+						<li>Tennessee</li>
+						<li>Utah</li>
+						</ul>
+					</div>
+					
+					<div class="col-md-4 mt-sm-30 typo-sec">
+				
+
+							<ul class="unordered-list">
+								<li>Illinois</li>
+								<li>Alabama</li>
+								<li>Arkansas</li>
+								<li>Nevada</li>
+								
+
+							</ul>
+
+					</div>
+					
+					<div class="col-md-4 mt-sm-30 typo-sec">
+								<ol class="unordered-list">
+								<li>Louisiana</li>
+								<li>Colorado</li>
+								<li>Oklahoma</li>
+								<li>Arizona</li>
+							</ol>
+						
+					</div>
+				</div>
+
+
 		</div>
 	</section>
 	<!-- End Sample Area -->
+
+
+
+
+
+
+	<div class="container">
+
+<script src="https://www.amcharts.com/lib/3/ammap.js" type="text/javascript"></script>
+<script src="https://www.amcharts.com/lib/3/maps/js/usaHigh.js" type="text/javascript"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js" type="text/javascript"></script>
+<div id="mapdiv" style="width: 850px; height: 450px;"></div>
+
+
+
+<script type="text/javascript">
+var map = AmCharts.makeChart("mapdiv",{
+type: "map",
+theme: "light",
+panEventsEnabled : true,
+backgroundColor : "#FFFFFF",
+backgroundAlpha : 1,
+zoomControl: {
+zoomControlEnabled : true
+},
+dataProvider : {
+map : "usaHigh",
+getAreasFromMap : true,
+areas :
+[
+	{
+		"id": "US-LA",
+		"showAsSelected": true
+	},
+	{
+		"id": "US-NM",
+		"showAsSelected": true
+	},
+	{
+		"id": "US-OK",
+		"showAsSelected": true
+	},
+	{
+		"id": "US-TX",
+		"showAsSelected": true
+	},
+	
+	{
+		"id": "US-UT",
+		"showAsSelected": true
+	},
+	
+	
+	
+	{
+		"id": "US-CO",
+		"showAsSelected": true
+	}
+	
+]
+},
+areasSettings : {
+autoZoom : true,
+color : "#B4B4B7",
+colorSolid : "#84ADE9",
+selectedColor : "#84ADE9",
+outlineColor : "#666666",
+rollOverColor : "#9EC2F7",
+rollOverOutlineColor : "#666666"
+}
+});
+</script>
+
+<br> </br>
+	</div>
+
+
+
+
+
+
+
 
 	<!-- Start Button -->
 	<section class="button-area">
