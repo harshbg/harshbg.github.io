@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>California Adventures | Harsh Gupta</title>
+  <link rel="shortcut icon" href="img/purplogo.png">
+  <meta name="description" content="Harsh and Osheen's California parks bucket list — state parks, national parks, and library pass tracker.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42822568-2"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-42822568-2');</script>
+
+  <style>
+    :root {
+      --forest:      #2d6a4f;
+      --forest-dark: #1b4332;
+      --sage:        #52b788;
+      --mint:        #d8f3dc;
+      --cream:       #f4f1eb;
+      --white:       #ffffff;
+      --text:        #1b2d1e;
+      --text-muted:  #6b8c75;
+      --border:      #cde3d2;
+      --sky:         #0077b6;
+      --sky-light:   #caf0f8;
+      --gold:        #e9c46a;
+      --gold-light:  #fff8e1;
+      --shadow:      rgba(27,67,50,0.10);
+      --header-h:    52px;
+      --sidebar-w:   256px;
+      --radius:      12px;
+      --radius-sm:   8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); line-height: 1.5; }
+
+    /* ─── Header ─────────────────────────────────────── */
+    .site-header {
+      background: var(--forest-dark);
+      height: var(--header-h);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 300;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    }
+    .header-logo img { height: 28px; filter: brightness(0) invert(1); opacity: .85; }
+    .header-nav { display: flex; gap: 20px; }
+    .header-nav a { color: rgba(255,255,255,.7); text-decoration: none; font-size: 13px; font-weight: 500; transition: color .2s; }
+    .header-nav a:hover { color: var(--sage); }
+
+    /* ─── Hero (slim) ─────────────────────────────────── */
+    .hero {
+      background: linear-gradient(130deg, var(--forest-dark) 0%, var(--forest) 60%, #40916c 100%);
+      color: white; padding: 28px 32px 32px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 28px;
+      background: var(--cream); clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; opacity: .65; margin-bottom: 6px; }
+    .hero h1 { font-size: clamp(22px, 3.5vw, 36px); font-weight: 700; letter-spacing: -1px; line-height: 1.15; }
+    .hero-sub { margin-top: 6px; font-size: 14px; font-weight: 300; opacity: .75; }
+
+    /* ─── App Layout ──────────────────────────────────── */
+    .app-layout {
+      display: flex;
+      align-items: flex-start;
+      min-height: calc(100vh - var(--header-h));
+    }
+
+    /* ─── Sidebar ─────────────────────────────────────── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: sticky;
+      top: var(--header-h);
+      height: calc(100vh - var(--header-h));
+      overflow-y: auto;
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      padding: 18px 14px 24px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* sidebar sections */
+    .sb-section { margin-bottom: 18px; }
+    .sb-section + .sb-section { padding-top: 16px; border-top: 1px solid var(--border); }
+    .sb-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    /* progress */
+    .progress-nums { display: flex; align-items: baseline; gap: 6px; margin-bottom: 8px; }
+    .prog-big { font-size: 28px; font-weight: 700; color: var(--forest-dark); line-height: 1; }
+    .prog-of  { font-size: 13px; color: var(--text-muted); }
+    .prog-sub { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+    .progress-track { background: var(--mint); border-radius: 100px; height: 7px; overflow: hidden; }
+    .progress-fill  { background: var(--forest); border-radius: 100px; height: 7px; transition: width .6s ease; }
+    .progress-pct { font-size: 11px; color: var(--text-muted); margin-top: 4px; text-align: right; }
+    .pass-stat { margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+    .pass-stat strong { color: var(--forest); }
+
+    /* sidebar buttons */
+    .sb-btn-row { display: flex; flex-wrap: wrap; gap: 5px; }
+    .sbtn {
+      padding: 5px 11px; border-radius: 100px; border: 1.5px solid var(--border);
+      background: white; font-size: 12px; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all .15s; color: var(--text); font-weight: 500;
+      white-space: nowrap;
+    }
+    .sbtn:hover { border-color: var(--sage); color: var(--forest); }
+    .sbtn.active { background: var(--forest); border-color: var(--forest); color: white; }
+    .sbtn.pass-btn { width: 100%; text-align: center; justify-content: center; }
+    .sbtn.pass-btn.active { background: var(--gold); border-color: #c9a227; color: var(--forest-dark); }
+
+    /* search */
+    .sb-search {
+      width: 100%; padding: 7px 12px; border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border); font-size: 12px; font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color .2s; color: var(--text); background: var(--cream);
+    }
+    .sb-search:focus { border-color: var(--sage); background: white; }
+
+    /* sort select */
+    .sb-select {
+      width: 100%; padding: 7px 10px; border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border); font-size: 12px; font-family: 'Inter', sans-serif;
+      background: var(--cream); cursor: pointer; outline: none; color: var(--text);
+    }
+
+    /* mobile toggle */
+    .sidebar-toggle {
+      display: none; width: 100%; padding: 10px 16px; background: var(--white);
+      border: none; border-bottom: 1px solid var(--border); font-size: 13px;
+      font-family: 'Inter', sans-serif; font-weight: 600; color: var(--forest);
+      cursor: pointer; text-align: left; position: sticky; top: var(--header-h); z-index: 100;
+    }
+
+    /* ─── Main Content ────────────────────────────────── */
+    .main-content { flex: 1; min-width: 0; }
+
+    /* Map */
+    #map { width: 100%; height: 46vh; min-height: 280px; max-height: 520px; }
+    .map-wrap { position: relative; }
+    .map-legend {
+      position: absolute; bottom: 44px; right: 10px;
+      background: rgba(255,255,255,.95); border-radius: var(--radius);
+      padding: 9px 12px; font-size: 11px; z-index: 400;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12); pointer-events: none;
+    }
+    .legend-row { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; line-height: 1.2; }
+    .legend-row:last-child { margin-bottom: 0; }
+    .ldot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,.3); flex-shrink: 0; }
+
+    /* Custom markers */
+    .mk { width: 13px; height: 13px; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,.35); cursor: pointer; }
+    .mk-sp { background: var(--sage); }
+    .mk-np { background: var(--sky); }
+    .mk-vis { background: var(--forest); border-color: var(--gold) !important; border-width: 2.5px !important; }
+    .leaflet-popup-content-wrapper { border-radius: var(--radius) !important; font-family: 'Inter', sans-serif !important; box-shadow: 0 4px 16px rgba(0,0,0,.15) !important; }
+    .leaflet-popup-content { margin: 12px 14px !important; font-size: 13px; }
+    .popup-name { font-weight: 700; color: var(--forest-dark); margin-bottom: 3px; }
+    .popup-meta { color: var(--text-muted); font-size: 11px; }
+    .popup-vis { display: inline-block; margin-top: 5px; background: var(--mint); color: var(--forest); border-radius: 100px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+
+    /* Results bar */
+    .results-bar {
+      padding: 8px 16px; background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--text-muted);
+    }
+
+    /* ─── Parks Grid ──────────────────────────────────── */
+    .parks-section { padding: 16px; }
+    .parks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+
+    /* ─── Park Card ───────────────────────────────────── */
+    .park-card {
+      background: white; border-radius: var(--radius); padding: 15px;
+      box-shadow: 0 1px 3px var(--shadow); border: 1.5px solid var(--border);
+      transition: box-shadow .2s, transform .2s; cursor: pointer;
+      display: flex; flex-direction: column;
+    }
+    .park-card:hover { box-shadow: 0 6px 20px var(--shadow); transform: translateY(-2px); }
+    .park-card.visited { border-top: 3px solid var(--forest); }
+    .park-card.highlighted { box-shadow: 0 0 0 2.5px var(--sage), 0 6px 20px var(--shadow) !important; }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+    .card-badges { display: flex; flex-wrap: wrap; gap: 4px; }
+    .badge { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 100px; white-space: nowrap; }
+    .badge-sp  { background: var(--mint); color: var(--forest); }
+    .badge-np  { background: var(--sky-light); color: #005a8e; }
+    .badge-sb  { background: #e0f2fe; color: #0369a1; }
+    .badge-snr { background: #fef9c3; color: #854d0e; }
+    .badge-sra { background: #ede9fe; color: #5b21b6; }
+    .badge-shp { background: #fee2e2; color: #991b1b; }
+    .badge-pass { background: var(--gold-light); color: #78350f; }
+    .vis-check { background: var(--forest); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+    .card-name { font-size: 14px; font-weight: 700; color: var(--forest-dark); line-height: 1.3; margin-bottom: 3px; }
+    .card-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+    .card-activities { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+    .act-tag { font-size: 11px; background: var(--cream); border: 1px solid var(--border); padding: 2px 7px; border-radius: 100px; color: var(--text-muted); }
+    .card-note { font-size: 11px; color: var(--text-muted); font-style: italic; border-left: 2px solid var(--mint); padding-left: 7px; margin-bottom: 10px; }
+
+    /* Weather */
+    .weather-strip { border-top: 1px solid var(--border); padding-top: 10px; margin-top: auto; }
+    .weather-title { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 7px; }
+    .weather-loading { font-size: 11px; color: var(--text-muted); text-align: center; padding: 6px 0; }
+    .weather-days { display: flex; gap: 2px; }
+    .wday { flex: 1; text-align: center; }
+    .wday-name { font-size: 10px; color: var(--text-muted); font-weight: 500; }
+    .wday-icon { font-size: 15px; line-height: 1.4; }
+    .wday-hi { font-size: 11px; font-weight: 600; color: var(--text); }
+    .wday-lo { font-size: 10px; color: var(--text-muted); }
+    .weather-error { font-size: 10px; color: var(--text-muted); text-align: center; padding: 6px 0; }
+
+    /* Card footer */
+    .card-footer { display: flex; gap: 6px; margin-top: 12px; }
+    .cbtn {
+      flex: 1; padding: 6px 10px; border-radius: var(--radius-sm); border: 1.5px solid var(--border);
+      font-size: 11px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer;
+      text-align: center; text-decoration: none; color: var(--text); background: white; transition: all .18s;
+    }
+    .cbtn:hover { background: var(--cream); }
+    .cbtn.primary { background: var(--forest); color: white; border-color: var(--forest); }
+    .cbtn.primary:hover { background: var(--forest-dark); }
+
+    /* Empty */
+    .empty-state { text-align: center; padding: 64px 24px; color: var(--text-muted); grid-column: 1/-1; }
+    .empty-icon { font-size: 48px; margin-bottom: 12px; }
+    .empty-state h3 { font-size: 18px; color: var(--text); margin-bottom: 6px; }
+
+    /* Footer */
+    .site-footer { background: var(--forest-dark); color: rgba(255,255,255,.6); text-align: center; padding: 24px; font-size: 12px; }
+    .site-footer a { color: var(--sage); text-decoration: none; }
+
+    /* ─── Mobile ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .app-layout { flex-direction: column; }
+      .sidebar {
+        width: 100%; position: static; height: auto;
+        border-right: none; border-bottom: 1px solid var(--border);
+        display: none; /* hidden by default on mobile */
+        padding: 16px;
+      }
+      .sidebar.open { display: block; }
+      .sidebar-toggle { display: block; }
+      #map { height: 42vh; }
+      .parks-grid { grid-template-columns: 1fr; }
+      .parks-section { padding: 12px; }
+      .hero { padding: 22px 16px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <a class="header-logo" href="https://www.harshgupta.com/">
+    <img src="img/logonog_1.png" alt="Harsh Gupta">
+  </a>
+  <nav class="header-nav">
+    <a href="https://www.harshgupta.com/">Home</a>
+    <a href="https://www.harshgupta.com/#projects">Projects</a>
+    <a href="https://www.harshgupta.com/impossible-list">Impossible List</a>
+  </nav>
+</header>
+
+<!-- Slim Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">🌲 Harsh and Osheen's Bucket List</div>
+  <h1>California Adventures</h1>
+  <p class="hero-sub">Tracking every state park, national park, and wild place across the Golden State.</p>
+</section>
+
+<!-- Mobile filter toggle -->
+<button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">
+  ☰ &nbsp;Stats &amp; Filters
+</button>
+
+<!-- App Layout -->
+<div class="app-layout">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+
+    <!-- Progress -->
+    <div class="sb-section">
+      <div class="sb-label">📊 Progress</div>
+      <div class="progress-nums">
+        <span class="prog-big" id="stat-visited">0</span>
+        <span class="prog-of">/ <span id="stat-total">0</span> visited</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="progress-pct" id="progress-pct">0%</div>
+      <div class="pass-stat">🎫 <strong id="stat-pass">0</strong> Library Pass parks</div>
+    </div>
+
+    <!-- Search -->
+    <div class="sb-section">
+      <div class="sb-label">🔍 Search</div>
+      <input class="sb-search" id="search" type="text" placeholder="Park name or region…">
+    </div>
+
+    <!-- Library Pass -->
+    <div class="sb-section">
+      <div class="sb-label">🎫 Library Pass</div>
+      <button class="sbtn pass-btn" id="btn-pass" onclick="togglePass()">Show Library Pass Parks Only</button>
+    </div>
+
+    <!-- Type -->
+    <div class="sb-section">
+      <div class="sb-label">🏕 Type</div>
+      <div class="sb-btn-row" id="type-filters">
+        <button class="sbtn active" data-type="all"  onclick="setType('all')">All</button>
+        <button class="sbtn"        data-type="sp"   onclick="setType('sp')">State Park</button>
+        <button class="sbtn"        data-type="np"   onclick="setType('np')">National Park</button>
+        <button class="sbtn"        data-type="sb"   onclick="setType('sb')">Beach</button>
+        <button class="sbtn"        data-type="snr"  onclick="setType('snr')">Reserve</button>
+      </div>
+    </div>
+
+    <!-- Show -->
+    <div class="sb-section">
+      <div class="sb-label">👁 Show</div>
+      <div class="sb-btn-row" id="vis-filters">
+        <button class="sbtn active" data-vis="all"       onclick="setVis('all')">All</button>
+        <button class="sbtn"        data-vis="visited"   onclick="setVis('visited')">✓ Visited</button>
+        <button class="sbtn"        data-vis="unvisited" onclick="setVis('unvisited')">Not Yet</button>
+      </div>
+    </div>
+
+    <!-- Sort -->
+    <div class="sb-section">
+      <div class="sb-label">↕ Sort By</div>
+      <select class="sb-select" id="sort-sel" onchange="setSort(this.value)">
+        <option value="distance">Nearest First</option>
+        <option value="name">A → Z</option>
+        <option value="visited">Visited First</option>
+      </select>
+    </div>
+
+    <!-- Info -->
+    <div class="sb-section" style="font-size:11px;color:var(--text-muted);line-height:1.6;">
+      <div class="sb-label">ℹ️ About</div>
+      Edit <code style="background:var(--cream);padding:1px 4px;border-radius:3px;">VISITED_IDS</code> at the top of this page's source to mark parks as visited.
+      <br><br>
+      <a href="https://www.library.ca.gov/services/to-libraries/parks-pass/" target="_blank" style="color:var(--forest)">Library Pass info →</a>
+    </div>
+
+  </aside>
+
+  <!-- ── Main Content ── -->
+  <main class="main-content">
+
+    <!-- Map -->
+    <div class="map-wrap">
+      <div id="map"></div>
+      <div class="map-legend">
+        <div class="legend-row"><div class="ldot" style="background:var(--forest);border-color:var(--gold)"></div> Visited</div>
+        <div class="legend-row"><div class="ldot" style="background:var(--sage)"></div> State Park</div>
+        <div class="legend-row"><div class="ldot" style="background:var(--sky)"></div> National Park</div>
+      </div>
+    </div>
+
+    <!-- Results bar -->
+    <div class="results-bar">
+      <span id="results-label">Loading…</span>
+      <span id="results-hint"></span>
+    </div>
+
+    <!-- Parks Grid -->
+    <section class="parks-section">
+      <div class="parks-grid" id="parks-grid">
+        <div class="empty-state"><div class="empty-icon">🌲</div><h3>Loading parks…</h3></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <p>California Adventures · <a href="https://www.harshgupta.com/">harshgupta.com</a></p>
+  <p style="margin-top:5px;opacity:.5">Weather: <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a> &nbsp;·&nbsp; Maps: <a href="https://www.esri.com/" target="_blank">Esri</a></p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ============================================================
+// ✏️  EDIT THIS LIST TO MARK PARKS AS VISITED
+// ============================================================
+const VISITED_IDS = [
+  "yosemite",
+  "death-valley",
+];
+
+// ============================================================
+// HOME BASE  (Milpitas, CA 95035)
+// ============================================================
+const HOME = { lat: 37.4323, lon: -121.8996 };
+
+// ============================================================
+// ACTIVITY LABELS
+// ============================================================
+const ACT = {
+  'hiking':'🥾 Hiking','backpacking':'🎒 Backpacking','camping':'⛺ Camping',
+  'car-camping':'🚐 Car Camping','swimming':'🏊 Swimming','surfing':'🏄 Surfing',
+  'fishing':'🎣 Fishing','wildlife':'🦌 Wildlife','birdwatching':'🦜 Birding',
+  'rock-climbing':'🧗 Climbing','kayaking':'🛶 Kayaking','biking':'🚴 Biking',
+  'mtb':'🚵 MTB','stargazing':'✨ Stars','tide-pools':'🦀 Tide Pools',
+  'wildflowers':'🌸 Wildflowers','historic':'🏛️ Historic','diving':'🤿 Diving',
+  'hot-springs':'♨️ Hot Springs','snowshoeing':'❄️ Snow','whale-watching':'🐋 Whales',
+  'waterfalls':'💧 Waterfalls','boating':'⛵ Boating','horses':'🐴 Horses',
+  'redwoods':'🌲 Redwoods','photography':'📷 Photography','scenic-drive':'🗺️ Scenic Drive',
+  'giant-trees':'🌳 Giant Trees','caving':'🦇 Caving','island':'🏝️ Island',
+  'gold-panning':'⛏️ Gold Panning','lava-tubes':'🌋 Lava Tubes',
+};
+
+// ============================================================
+// PARK DATA
+// ============================================================
+const PARKS = [
+  // BAY AREA
+  { id:'henry-coe',       name:'Henry W. Coe State Park',           type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.2195, lon:-121.3890, libraryPass:true,  activities:['hiking','backpacking','camping','car-camping','wildlife','mtb','fishing'],       notes:'Largest state park in northern CA — 89,000 acres of backcountry',                                     website:'https://www.parks.ca.gov/?page_id=567' },
+  { id:'mount-diablo',    name:'Mount Diablo State Park',            type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.8817, lon:-121.9142, libraryPass:true,  activities:['hiking','camping','car-camping','rock-climbing','wildlife','wildflowers'],      notes:'On a clear day you can see farther than from almost any other peak in the world',                     website:'https://www.parks.ca.gov/?page_id=517' },
+  { id:'big-basin',       name:'Big Basin Redwoods State Park',      type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.1744, lon:-122.2247, libraryPass:true,  activities:['hiking','camping','car-camping','redwoods','wildlife','waterfalls'],           notes:"California's oldest state park (1902); recovering from the 2020 CZU Lightning Complex fire",          website:'https://www.parks.ca.gov/?page_id=540' },
+  { id:'castle-rock',     name:'Castle Rock State Park',             type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.2307, lon:-122.0964, libraryPass:true,  activities:['hiking','backpacking','rock-climbing','wildlife'],                             website:'https://www.parks.ca.gov/?page_id=538' },
+  { id:'portola-redwoods',name:'Portola Redwoods State Park',        type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.2468, lon:-122.1954, libraryPass:true,  activities:['hiking','camping','car-camping','redwoods','wildlife'],                        website:'https://www.parks.ca.gov/?page_id=539' },
+  { id:'butano',          name:'Butano State Park',                  type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.1723, lon:-122.3312, libraryPass:true,  activities:['hiking','camping','car-camping','redwoods','wildlife'],                        website:'https://www.parks.ca.gov/?page_id=536' },
+  { id:'ano-nuevo',       name:'Año Nuevo State Park',               type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.1265, lon:-122.3265, libraryPass:true,  activities:['wildlife','hiking','photography'],                                             notes:'Elephant seal rookery — guided tours required Dec–Mar',                                               website:'https://www.parks.ca.gov/?page_id=523' },
+  { id:'half-moon-bay',   name:'Half Moon Bay State Beach',          type:'sb', typeLabel:'State Beach',       region:'Bay Area',      lat:37.4828, lon:-122.4486, libraryPass:true,  activities:['swimming','surfing','camping','car-camping','fishing'],                        website:'https://www.parks.ca.gov/?page_id=531' },
+  { id:'mount-tamalpais', name:'Mount Tamalpais State Park',         type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.9235, lon:-122.5965, libraryPass:true,  activities:['hiking','camping','car-camping','wildlife','scenic-drive','photography'],      website:'https://www.parks.ca.gov/?page_id=471' },
+  { id:'china-camp',      name:'China Camp State Park',              type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.9928, lon:-122.4863, libraryPass:true,  activities:['hiking','mtb','kayaking','swimming','wildlife','camping','car-camping'],       website:'https://www.parks.ca.gov/?page_id=466' },
+  { id:'samuel-taylor',   name:'Samuel P. Taylor State Park',        type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:38.0103, lon:-122.7278, libraryPass:true,  activities:['hiking','camping','car-camping','biking','redwoods','swimming','fishing'],     website:'https://www.parks.ca.gov/?page_id=469' },
+  { id:'tomales-bay',     name:'Tomales Bay State Park',             type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:38.1203, lon:-122.8870, libraryPass:true,  activities:['swimming','kayaking','hiking','birdwatching'],                                 website:'https://www.parks.ca.gov/?page_id=470' },
+  { id:'henry-cowell',    name:'Henry Cowell Redwoods State Park',   type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.0501, lon:-122.0580, libraryPass:true,  activities:['hiking','camping','car-camping','redwoods','wildlife','swimming','fishing'],   website:'https://www.parks.ca.gov/?page_id=546' },
+  { id:'nisene-marks',    name:'Forest of Nisene Marks State Park',  type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:37.0079, lon:-121.8735, libraryPass:true,  activities:['hiking','mtb','wildlife','fishing'],                                           website:'https://www.parks.ca.gov/?page_id=548' },
+  { id:'fremont-peak',    name:'Fremont Peak State Park',            type:'sp', typeLabel:'State Park',        region:'Bay Area',      lat:36.7560, lon:-121.5010, libraryPass:true,  activities:['hiking','camping','car-camping','stargazing','scenic-drive'],                   notes:'Dark sky site with an on-site observatory open on weekends',                                         website:'https://www.parks.ca.gov/?page_id=559' },
+  // WINE COUNTRY
+  { id:'sugarloaf-ridge', name:'Sugarloaf Ridge State Park',         type:'sp', typeLabel:'State Park',        region:'Wine Country',  lat:38.4449, lon:-122.5022, libraryPass:true,  activities:['hiking','camping','car-camping','stargazing','wildlife'],                      notes:'Robert Ferguson Observatory on site — excellent dark skies',                                         website:'https://www.parks.ca.gov/?page_id=481' },
+  { id:'trione-annadel',  name:'Trione-Annadel State Park',          type:'sp', typeLabel:'State Park',        region:'Wine Country',  lat:38.4406, lon:-122.5750, libraryPass:true,  activities:['hiking','mtb','horses','wildlife','fishing'],                                  website:'https://www.parks.ca.gov/?page_id=480' },
+  { id:'bothe-napa',      name:'Bothe-Napa Valley State Park',       type:'sp', typeLabel:'State Park',        region:'Wine Country',  lat:38.5510, lon:-122.5160, libraryPass:true,  activities:['hiking','camping','car-camping','swimming','wildlife','redwoods'],             website:'https://www.parks.ca.gov/?page_id=477' },
+  { id:'jack-london',     name:'Jack London State Historic Park',    type:'sp', typeLabel:'State Historic Park',region:'Wine Country',  lat:38.3556, lon:-122.5430, libraryPass:true,  activities:['hiking','historic','wildlife'],                                                notes:'Former home of Jack London; winery ruins and museum on site',                                        website:'https://www.parks.ca.gov/?page_id=478' },
+  // NORTH COAST
+  { id:'armstrong-redwoods',name:'Armstrong Redwoods State Natural Reserve',type:'snr',typeLabel:'State Natural Reserve',region:'North Coast',lat:38.5380,lon:-123.0100,libraryPass:true,  activities:['hiking','redwoods','wildlife','photography'],                                website:'https://www.parks.ca.gov/?page_id=450' },
+  { id:'salt-point',      name:'Salt Point State Park',              type:'sp', typeLabel:'State Park',        region:'North Coast',   lat:38.5752, lon:-123.3130, libraryPass:true,  activities:['hiking','camping','car-camping','diving','tide-pools','wildflowers'],          website:'https://www.parks.ca.gov/?page_id=452' },
+  { id:'sonoma-coast',    name:'Sonoma Coast State Park',            type:'sp', typeLabel:'State Park',        region:'North Coast',   lat:38.4147, lon:-123.1213, libraryPass:true,  activities:['hiking','camping','car-camping','whale-watching','wildlife','fishing'],        website:'https://www.parks.ca.gov/?page_id=451' },
+  { id:'fort-ross',       name:'Fort Ross State Historic Park',      type:'sp', typeLabel:'State Historic Park',region:'North Coast',   lat:38.5163, lon:-123.2411, libraryPass:true,  activities:['historic','hiking','wildlife','photography'],                                  notes:'Russian colonial fort (1812); stunning coastal bluff setting',                                       website:'https://www.parks.ca.gov/?page_id=449' },
+  { id:'van-damme',       name:'Van Damme State Park',               type:'sp', typeLabel:'State Park',        region:'North Coast',   lat:39.2740, lon:-123.7916, libraryPass:true,  activities:['camping','car-camping','hiking','kayaking','diving','tide-pools'],             notes:'Features a unique pygmy forest with centuries-old miniature trees',                                  website:'https://www.parks.ca.gov/?page_id=437' },
+  { id:'russian-gulch',   name:'Russian Gulch State Park',           type:'sp', typeLabel:'State Park',        region:'North Coast',   lat:39.3296, lon:-123.8027, libraryPass:true,  activities:['camping','car-camping','hiking','biking','diving','tide-pools','waterfalls'],  website:'https://www.parks.ca.gov/?page_id=436' },
+  { id:'mackerricher',    name:'MacKerricher State Park',            type:'sp', typeLabel:'State Park',        region:'North Coast',   lat:39.5014, lon:-123.7714, libraryPass:true,  activities:['camping','car-camping','hiking','biking','whale-watching','tide-pools'],       notes:'Harbor seal haul-out at Lake Cleone; Ten Mile Beach',                                                website:'https://www.parks.ca.gov/?page_id=435' },
+  { id:'humboldt-redwoods',name:'Humboldt Redwoods State Park',      type:'sp', typeLabel:'State Park',        region:'North Coast',   lat:40.3225, lon:-123.9928, libraryPass:true,  activities:['hiking','camping','car-camping','redwoods','wildlife','swimming','scenic-drive'],notes:'Home of the Avenue of the Giants — the world\'s largest coast redwood grove',                    website:'https://www.parks.ca.gov/?page_id=425' },
+  { id:'richardson-grove', name:'Richardson Grove State Park',       type:'sp', typeLabel:'State Park',        region:'North Coast',   lat:40.0196, lon:-123.7928, libraryPass:true,  activities:['hiking','camping','car-camping','swimming','fishing','redwoods','wildlife'],   website:'https://www.parks.ca.gov/?page_id=422' },
+  { id:'prairie-creek',   name:'Prairie Creek Redwoods State Park',  type:'sp', typeLabel:'State Park',        region:'North Coast',   lat:41.4071, lon:-124.0203, libraryPass:true,  activities:['hiking','camping','car-camping','wildlife','redwoods','photography'],          notes:'Fern Canyon — vertical walls of ferns; Roosevelt elk herd',                                         website:'https://www.parks.ca.gov/?page_id=413' },
+  { id:'jedediah-smith',  name:'Jedediah Smith Redwoods State Park', type:'sp', typeLabel:'State Park',        region:'North Coast',   lat:41.7815, lon:-124.1020, libraryPass:true,  activities:['hiking','camping','car-camping','swimming','fishing','wildlife','redwoods'],   notes:'Stout Grove — among the most impressive old-growth redwood groves',                                  website:'https://www.parks.ca.gov/?page_id=413' },
+  // CENTRAL COAST
+  { id:'garrapata',       name:'Garrapata State Park',               type:'snr',typeLabel:'State Natural Reserve',region:'Central Coast',lat:36.4683,lon:-121.9060, libraryPass:true,  activities:['hiking','tide-pools','whale-watching','wildflowers','photography'],            notes:'No day-use fee; Calla lily valley in spring; stunning headlands',                                    website:'https://www.parks.ca.gov/?page_id=577' },
+  { id:'point-lobos',     name:'Point Lobos State Natural Reserve',  type:'snr',typeLabel:'State Natural Reserve',region:'Central Coast',lat:36.5165,lon:-121.9508, libraryPass:true,  activities:['hiking','wildlife','diving','tide-pools','whale-watching','photography'],       notes:'Called the "crown jewel" of the state park system — timed entry often required',                    website:'https://www.parks.ca.gov/?page_id=571' },
+  { id:'pfeiffer-big-sur',name:'Pfeiffer Big Sur State Park',        type:'sp', typeLabel:'State Park',        region:'Central Coast', lat:36.2476, lon:-121.7817, libraryPass:true,  activities:['hiking','camping','car-camping','swimming','wildlife','birdwatching'],          website:'https://www.parks.ca.gov/?page_id=570' },
+  { id:'julia-pfeiffer-burns',name:'Julia Pfeiffer Burns State Park',type:'sp', typeLabel:'State Park',        region:'Central Coast', lat:36.1692, lon:-121.6715, libraryPass:true,  activities:['hiking','waterfalls','whale-watching','photography'],                           notes:'McWay Falls — iconic 80-ft waterfall dropping directly into the Pacific',                            website:'https://www.parks.ca.gov/?page_id=578' },
+  { id:'andrew-molera',   name:'Andrew Molera State Park',           type:'sp', typeLabel:'State Park',        region:'Central Coast', lat:36.2833, lon:-121.8344, libraryPass:true,  activities:['hiking','surfing','horses','wildlife','photography'],                           website:'https://www.parks.ca.gov/?page_id=582' },
+  { id:'montana-de-oro',  name:'Montaña de Oro State Park',          type:'sp', typeLabel:'State Park',        region:'Central Coast', lat:35.2765, lon:-120.8942, libraryPass:true,  activities:['hiking','camping','car-camping','mtb','tide-pools','surfing','wildlife'],       website:'https://www.parks.ca.gov/?page_id=592' },
+  { id:'morro-bay',       name:'Morro Bay State Park',               type:'sp', typeLabel:'State Park',        region:'Central Coast', lat:35.3581, lon:-120.8343, libraryPass:true,  activities:['hiking','camping','car-camping','kayaking','birdwatching'],                    website:'https://www.parks.ca.gov/?page_id=594' },
+  // SIERRA NEVADA
+  { id:'calaveras-big-trees',name:'Calaveras Big Trees State Park',  type:'sp', typeLabel:'State Park',        region:'Sierra Nevada', lat:38.2719, lon:-120.2867, libraryPass:true,  activities:['hiking','camping','car-camping','giant-trees','swimming','wildlife'],           notes:'Two groves of giant sequoias; North Grove has the Discovery Tree stump',                             website:'https://www.parks.ca.gov/?page_id=551' },
+  { id:'emerald-bay',     name:'Emerald Bay State Park',             type:'sp', typeLabel:'State Park',        region:'Sierra Nevada', lat:38.9530, lon:-120.1124, libraryPass:true,  activities:['hiking','camping','car-camping','kayaking','historic','swimming','photography'],notes:'Vikingsholm Castle; one of the most photographed spots in California',                               website:'https://www.parks.ca.gov/?page_id=506' },
+  { id:'dl-bliss',        name:'D.L. Bliss State Park',              type:'sp', typeLabel:'State Park',        region:'Sierra Nevada', lat:38.9821, lon:-120.0960, libraryPass:true,  activities:['swimming','camping','car-camping','hiking','kayaking'],                         notes:'Some of the clearest, most beautiful lake swimming in the Sierra',                                   website:'https://www.parks.ca.gov/?page_id=507' },
+  { id:'sugar-pine-point',name:"Ed Z'berg Sugar Pine Point State Park",type:'sp',typeLabel:'State Park',       region:'Sierra Nevada', lat:39.0700, lon:-120.1222, libraryPass:true,  activities:['camping','car-camping','hiking','snowshoeing','swimming','wildlife'],           notes:'Year-round camping; excellent cross-country skiing and snowshoeing in winter',                       website:'https://www.parks.ca.gov/?page_id=508' },
+  { id:'donner-memorial', name:'Donner Memorial State Park',         type:'sp', typeLabel:'State Park',        region:'Sierra Nevada', lat:39.3189, lon:-120.2365, libraryPass:true,  activities:['camping','car-camping','hiking','historic','swimming','fishing'],               notes:'Emigrant Trail Museum; Donner Lake beach — great summer swimming',                                   website:'https://www.parks.ca.gov/?page_id=503' },
+  { id:'grover-hot-springs',name:'Grover Hot Springs State Park',    type:'sp', typeLabel:'State Park',        region:'Sierra Nevada', lat:38.6960, lon:-119.8439, libraryPass:true,  activities:['hot-springs','camping','car-camping','hiking','fishing','wildlife'],            notes:'Natural geothermal hot springs pool (102°F) open year-round',                                       website:'https://www.parks.ca.gov/?page_id=508' },
+  { id:'mono-lake',       name:'Mono Lake Tufa State Natural Reserve',type:'snr',typeLabel:'State Natural Reserve',region:'Eastern Sierra',lat:37.9405,lon:-119.0347,libraryPass:true, activities:['wildlife','birdwatching','photography','hiking','kayaking'],                    notes:'Ancient saline lake with otherworldly tufa towers; 80+ bird species',                               website:'https://www.parks.ca.gov/?page_id=514' },
+  { id:'plumas-eureka',   name:'Plumas-Eureka State Park',           type:'sp', typeLabel:'State Park',        region:'Sierra Nevada', lat:39.7540, lon:-120.6980, libraryPass:true,  activities:['hiking','camping','car-camping','fishing','wildlife','historic'],               website:'https://www.parks.ca.gov/?page_id=500' },
+  // NORTHERN CA
+  { id:'mcarthur-burney-falls',name:'McArthur-Burney Falls Memorial State Park',type:'sp',typeLabel:'State Park',region:'Northern CA', lat:41.0072, lon:-121.6524, libraryPass:true,  activities:['hiking','camping','car-camping','waterfalls','swimming','fishing','kayaking'],  notes:'Burney Falls — 129-ft waterfall; Theodore Roosevelt called it the "8th wonder of the world"',       website:'https://www.parks.ca.gov/?page_id=458' },
+  { id:'castle-crags',    name:'Castle Crags State Park',            type:'sp', typeLabel:'State Park',        region:'Northern CA',   lat:41.1543, lon:-122.3174, libraryPass:true,  activities:['hiking','camping','car-camping','rock-climbing','wildlife'],                    notes:'PCT passes through; dramatic granite spires rising above the Sacramento River',                     website:'https://www.parks.ca.gov/?page_id=459' },
+  // GOLD COUNTRY
+  { id:'columbia-shp',    name:'Columbia State Historic Park',       type:'sp', typeLabel:'State Historic Park',region:'Gold Country',  lat:38.0327, lon:-120.3985, libraryPass:true,  activities:['historic','gold-panning'],                                                     notes:'Best-preserved Gold Rush town in California; living history museum',                                 website:'https://www.parks.ca.gov/?page_id=553' },
+  { id:'indian-grinding-rock',name:'Indian Grinding Rock State Historic Park',type:'sp',typeLabel:'State Historic Park',region:'Gold Country',lat:38.4249,lon:-120.6427,libraryPass:true,activities:['historic','camping','car-camping','hiking','wildlife'],                        notes:'Largest known bedrock mortar site in North America',                                                 website:'https://www.parks.ca.gov/?page_id=554' },
+  // SOUTHERN CA
+  { id:'crystal-cove',    name:'Crystal Cove State Park',            type:'sb', typeLabel:'State Beach',       region:'Southern CA',   lat:33.5701, lon:-117.8756, libraryPass:true,  activities:['swimming','diving','tide-pools','hiking','camping','car-camping','biking'],     notes:'Historic beach cottages available to rent; 3.2 miles of undeveloped coastline',                     website:'https://www.parks.ca.gov/?page_id=644' },
+  { id:'malibu-creek',    name:'Malibu Creek State Park',            type:'sp', typeLabel:'State Park',        region:'Southern CA',   lat:34.1007, lon:-118.7111, libraryPass:true,  activities:['hiking','camping','car-camping','rock-climbing','swimming','wildlife','biking'], notes:'Former M*A*S*H filming location; Century Lake and volcanic rock formations',                         website:'https://www.parks.ca.gov/?page_id=614' },
+  { id:'leo-carrillo',    name:'Leo Carrillo State Park',            type:'sb', typeLabel:'State Beach',       region:'Southern CA',   lat:34.0459, lon:-118.9366, libraryPass:true,  activities:['camping','car-camping','swimming','surfing','tide-pools','hiking','wildlife'],  website:'https://www.parks.ca.gov/?page_id=616' },
+  { id:'point-mugu',      name:'Point Mugu State Park',              type:'sp', typeLabel:'State Park',        region:'Southern CA',   lat:34.1000, lon:-119.0000, libraryPass:true,  activities:['hiking','camping','car-camping','surfing','swimming','wildlife','wildflowers'],  website:'https://www.parks.ca.gov/?page_id=617' },
+  { id:'torrey-pines',    name:'Torrey Pines State Natural Reserve', type:'snr',typeLabel:'State Natural Reserve',region:'Southern CA', lat:32.9217, lon:-117.2535, libraryPass:true,  activities:['hiking','wildlife','birdwatching','photography','tide-pools'],                  notes:'Rarest pine tree in North America; timed entry often required on weekends',                         website:'https://www.parks.ca.gov/?page_id=657' },
+  { id:'anza-borrego',    name:'Anza-Borrego Desert State Park',     type:'sp', typeLabel:'State Park',        region:'Desert',        lat:33.1015, lon:-116.3015, libraryPass:true,  activities:['camping','car-camping','hiking','wildflowers','stargazing','wildlife','photography'],notes:'Largest state park in CA (660,000 acres); superbloom wildflowers in spring',                    website:'https://www.parks.ca.gov/?page_id=638' },
+  { id:'cuyamaca-rancho', name:'Cuyamaca Rancho State Park',         type:'sp', typeLabel:'State Park',        region:'Southern CA',   lat:32.9359, lon:-116.5625, libraryPass:true,  activities:['hiking','camping','car-camping','horses','mtb','wildlife','fishing'],           website:'https://www.parks.ca.gov/?page_id=645' },
+  { id:'mount-san-jacinto',name:'Mount San Jacinto State Park',      type:'sp', typeLabel:'State Park',        region:'Southern CA',   lat:33.8103, lon:-116.6759, libraryPass:true,  activities:['hiking','backpacking','camping','car-camping','snowshoeing','wildlife'],        notes:'Palm Springs Aerial Tramway takes you to wilderness trailheads at 8,516 ft',                       website:'https://www.parks.ca.gov/?page_id=636' },
+  { id:'red-rock-canyon', name:'Red Rock Canyon State Park',         type:'sp', typeLabel:'State Park',        region:'Desert',        lat:35.3608, lon:-117.9803, libraryPass:true,  activities:['camping','car-camping','hiking','wildlife','photography','wildflowers'],        notes:'Colorful desert rock formations; classic Western movie filming location',                           website:'https://www.parks.ca.gov/?page_id=631' },
+  { id:'chino-hills',     name:'Chino Hills State Park',             type:'sp', typeLabel:'State Park',        region:'Southern CA',   lat:33.9300, lon:-117.7231, libraryPass:true,  activities:['hiking','mtb','horses','wildlife','wildflowers'],                              website:'https://www.parks.ca.gov/?page_id=648' },
+  // NATIONAL PARKS
+  { id:'yosemite',        name:'Yosemite National Park',             type:'np', typeLabel:'National Park',     region:'Sierra Nevada', lat:37.8651, lon:-119.5383, libraryPass:false, activities:['hiking','camping','car-camping','rock-climbing','wildlife','waterfalls','photography'], notes:'Half Dome, El Capitan, Yosemite Falls — timed entry reservation required in summer',          website:'https://www.nps.gov/yose/' },
+  { id:'sequoia',         name:'Sequoia National Park',              type:'np', typeLabel:'National Park',     region:'Sierra Nevada', lat:36.4864, lon:-118.5658, libraryPass:false, activities:['hiking','camping','car-camping','giant-trees','wildlife','snowshoeing'],          notes:'General Sherman Tree — the largest tree on Earth by volume',                                        website:'https://www.nps.gov/seki/' },
+  { id:'kings-canyon',    name:'Kings Canyon National Park',         type:'np', typeLabel:'National Park',     region:'Sierra Nevada', lat:36.8879, lon:-118.5551, libraryPass:false, activities:['hiking','camping','car-camping','backpacking','wildlife','scenic-drive'],         website:'https://www.nps.gov/seki/' },
+  { id:'joshua-tree',     name:'Joshua Tree National Park',          type:'np', typeLabel:'National Park',     region:'Desert',        lat:33.8734, lon:-115.9010, libraryPass:false, activities:['hiking','camping','car-camping','rock-climbing','stargazing','wildlife','photography'], notes:'Where the Mojave and Sonoran deserts meet — legendary for stargazing and climbing',          website:'https://www.nps.gov/jotr/' },
+  { id:'death-valley',    name:'Death Valley National Park',         type:'np', typeLabel:'National Park',     region:'Desert',        lat:36.5054, lon:-117.0794, libraryPass:false, activities:['hiking','camping','car-camping','scenic-drive','stargazing','wildlife','photography'], notes:'Hottest, driest, lowest national park; Badwater Basin at −282 ft',                         website:'https://www.nps.gov/deva/' },
+  { id:'pinnacles',       name:'Pinnacles National Park',            type:'np', typeLabel:'National Park',     region:'Central Coast', lat:36.4908, lon:-121.1809, libraryPass:false, activities:['hiking','camping','car-camping','rock-climbing','wildlife','caving'],             notes:'California condors soar overhead; talus caves to explore',                                          website:'https://www.nps.gov/pinn/' },
+  { id:'channel-islands', name:'Channel Islands National Park',      type:'np', typeLabel:'National Park',     region:'Southern CA',   lat:33.9980, lon:-119.7729, libraryPass:false, activities:['hiking','camping','kayaking','diving','wildlife','island'],                       notes:'Boat-access only; incredible snorkeling, sea caves, and endemic wildlife',                          website:'https://www.nps.gov/chis/' },
+  { id:'redwood-np',      name:'Redwood National and State Parks',   type:'np', typeLabel:'National Park',     region:'North Coast',   lat:41.2132, lon:-124.0046, libraryPass:false, activities:['hiking','camping','car-camping','wildlife','redwoods','photography'],             notes:'Tallest trees on Earth; Tall Trees Grove requires a permit',                                        website:'https://www.nps.gov/redw/' },
+  { id:'lassen-volcanic', name:'Lassen Volcanic National Park',      type:'np', typeLabel:'National Park',     region:'Northern CA',   lat:40.4977, lon:-121.4207, libraryPass:false, activities:['hiking','camping','car-camping','wildlife','snowshoeing','photography'],          notes:'Active volcanic park; Bumpass Hell hydrothermal area',                                              website:'https://www.nps.gov/lavo/' },
+  { id:'point-reyes',     name:'Point Reyes National Seashore',      type:'np', typeLabel:'National Seashore', region:'Bay Area',      lat:38.0723, lon:-122.8817, libraryPass:false, activities:['hiking','camping','wildlife','birdwatching','historic','tide-pools'],             notes:'Tule elk, elephant seals, 490+ bird species; Point Reyes Lighthouse',                              website:'https://www.nps.gov/pore/' },
+  { id:'golden-gate',     name:'Golden Gate National Recreation Area',type:'np',typeLabel:'National Recreation Area',region:'Bay Area',lat:37.8324,lon:-122.4795,  libraryPass:false, activities:['hiking','biking','swimming','historic','wildlife','photography'],                  notes:'Muir Woods, Tennessee Valley, Marin Headlands, and Baker Beach',                                   website:'https://www.nps.gov/goga/' },
+  { id:'muir-woods',      name:'Muir Woods National Monument',       type:'np', typeLabel:'National Monument',  region:'Bay Area',      lat:37.8989, lon:-122.5705, libraryPass:false, activities:['hiking','redwoods','wildlife','photography'],                                    notes:'Shuttle reservation required; no private vehicle access',                                           website:'https://www.nps.gov/muwo/' },
+  { id:'whiskeytown',     name:'Whiskeytown National Recreation Area',type:'np',typeLabel:'National Recreation Area',region:'Northern CA',lat:40.6100,lon:-122.5800, libraryPass:false, activities:['swimming','boating','hiking','camping','car-camping','waterfalls','fishing'],     notes:'Brandy Creek Beach — one of the best swimming holes in Northern CA',                               website:'https://www.nps.gov/whis/' },
+  { id:'devils-postpile',  name:'Devils Postpile National Monument',  type:'np', typeLabel:'National Monument',  region:'Sierra Nevada', lat:37.6315, lon:-119.0847, libraryPass:false, activities:['hiking','fishing','photography'],                                               notes:'Rare columnar basalt; shuttle required from Mammoth Mountain in summer',                            website:'https://www.nps.gov/depo/' },
+  { id:'lava-beds',       name:'Lava Beds National Monument',        type:'np', typeLabel:'National Monument',  region:'Northern CA',   lat:41.7143, lon:-121.5094, libraryPass:false, activities:['caving','hiking','camping','car-camping','wildlife','birdwatching'],             notes:'800+ lava tube caves; bring a headlamp — some require crawling',                                    website:'https://www.nps.gov/labe/' },
+  { id:'mojave-preserve', name:'Mojave National Preserve',           type:'np', typeLabel:'National Preserve',  region:'Desert',        lat:35.0110, lon:-115.4734, libraryPass:false, activities:['hiking','camping','car-camping','stargazing','wildlife','photography'],          notes:'Kelso Dunes, Cima Dome — one of the least crowded NPS units',                                      website:'https://www.nps.gov/moja/' },
+  { id:'santa-monica-mts',name:'Santa Monica Mountains NRA',         type:'np', typeLabel:'National Recreation Area',region:'Southern CA',lat:34.0966,lon:-118.7065,libraryPass:false, activities:['hiking','biking','horses','wildlife','swimming'],                                notes:'Backbone Trail runs 67 miles above LA; Malibu Creek area',                                          website:'https://www.nps.gov/samo/' },
+  { id:'cabrillo',        name:'Cabrillo National Monument',         type:'np', typeLabel:'National Monument',  region:'Southern CA',   lat:32.6734, lon:-117.2417, libraryPass:false, activities:['tide-pools','whale-watching','hiking','historic','photography'],                 notes:'Best tide pools in Southern CA; dramatic views of San Diego Bay',                                  website:'https://www.nps.gov/cabr/' },
+  { id:'john-muir-nhs',   name:'John Muir National Historic Site',   type:'np', typeLabel:'National Historic Site',region:'Bay Area',    lat:37.9851, lon:-122.1320, libraryPass:false, activities:['historic'],                                                                    notes:'Home of John Muir in Martinez; guided tours of the Victorian house',                                website:'https://www.nps.gov/jomu/' },
+  { id:'manzanar',        name:'Manzanar National Historic Site',    type:'np', typeLabel:'National Historic Site',region:'Eastern Sierra',lat:36.7280,lon:-118.1535,libraryPass:false, activities:['historic'],                                                                    notes:'WWII Japanese American incarceration site; moving and important history',                           website:'https://www.nps.gov/manz/' },
+];
+
+// ============================================================
+// HELPERS
+// ============================================================
+function distMiles(lat1,lon1,lat2,lon2){const R=3958.8,d=Math.PI/180,dLa=(lat2-lat1)*d,dLo=(lon2-lon1)*d,a=Math.sin(dLa/2)**2+Math.cos(lat1*d)*Math.cos(lat2*d)*Math.sin(dLo/2)**2;return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));}
+function cloudIcon(p){return p<=15?'☀️':p<=35?'🌤️':p<=60?'⛅':p<=80?'🌥️':'☁️';}
+function cToF(c){return Math.round(c*9/5+32);}
+const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function dayName(s){return DAYS[new Date(s+'T12:00:00').getDay()];}
+function typeBadge(p){const m={sp:'badge-sp',np:'badge-np',sb:'badge-sb',snr:'badge-snr',sra:'badge-sra',shp:'badge-shp'};return`<span class="badge ${m[p.type]||'badge-sp'}">${p.typeLabel}</span>`;}
+
+// ============================================================
+// STATE
+// ============================================================
+let state = { passOnly:false, typeFilter:'all', visFilter:'all', sort:'distance', search:'' };
+const weatherCache={}, markerMap={};
+
+PARKS.forEach(p=>{ p.visited=VISITED_IDS.includes(p.id); p.distance=Math.round(distMiles(HOME.lat,HOME.lon,p.lat,p.lon)); });
+
+// ============================================================
+// STATS
+// ============================================================
+function updateStats(){
+  const total=PARKS.length, vis=PARKS.filter(p=>p.visited).length, pass=PARKS.filter(p=>p.libraryPass).length;
+  document.getElementById('stat-visited').textContent=vis;
+  document.getElementById('stat-total').textContent=total;
+  document.getElementById('stat-pass').textContent=pass;
+  const pct=total?Math.round(vis/total*100):0;
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-pct').textContent=pct+'% complete';
+}
+
+// ============================================================
+// MAP
+// ============================================================
+const map=L.map('map',{zoomControl:true}).setView([37.5,-120.0],6);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles &copy; Esri',maxZoom:18}).addTo(map);
+
+function mkIcon(p){const cls=p.visited?'mk mk-vis':(p.type==='np'?'mk mk-np':'mk mk-sp');return L.divIcon({className:'',html:`<div class="${cls}"></div>`,iconSize:[13,13],iconAnchor:[6,6]});}
+
+PARKS.forEach(p=>{
+  const m=L.marker([p.lat,p.lon],{icon:mkIcon(p)})
+    .bindPopup(`<div class="popup-name">${p.name}</div><div class="popup-meta">${p.region} · ${p.distance} mi away</div>${p.visited?'<span class="popup-vis">✓ Visited</span>':''}`)
+    .addTo(map);
+  m.on('click',()=>{
+    const card=document.getElementById('card-'+p.id);
+    if(card){card.scrollIntoView({behavior:'smooth',block:'center'});card.classList.add('highlighted');setTimeout(()=>card.classList.remove('highlighted'),2000);}
+  });
+  markerMap[p.id]=m;
+});
+
+// ============================================================
+// WEATHER
+// ============================================================
+async function fetchWeather(park){
+  if(weatherCache[park.id])return weatherCache[park.id];
+  try{
+    const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${park.lat}&longitude=${park.lon}&daily=temperature_2m_max,temperature_2m_min,cloud_cover_mean&timezone=auto&forecast_days=7`);
+    const d=await r.json(); weatherCache[park.id]=d.daily; return d.daily;
+  }catch(e){return null;}
+}
+
+function renderWeather(daily,el){
+  if(!daily){el.innerHTML='<div class="weather-error">Weather unavailable</div>';return;}
+  const days=daily.time.map((d,i)=>`<div class="wday"><div class="wday-name">${dayName(d)}</div><div class="wday-icon">${cloudIcon(daily.cloud_cover_mean[i])}</div><div class="wday-hi">${cToF(daily.temperature_2m_max[i])}°</div><div class="wday-lo">${cToF(daily.temperature_2m_min[i])}°</div></div>`).join('');
+  el.innerHTML=`<div class="weather-title">Next 7 days</div><div class="weather-days">${days}</div>`;
+}
+
+const wObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const card=e.target, id=card.dataset.parkId, wEl=card.querySelector('.weather-strip');
+    if(!wEl||wEl.dataset.loaded)return;
+    wEl.dataset.loaded='1'; wObs.unobserve(card);
+    const p=PARKS.find(p=>p.id===id);
+    if(p)fetchWeather(p).then(d=>renderWeather(d,wEl));
+  });
+},{rootMargin:'100px'});
+
+// ============================================================
+// CARDS
+// ============================================================
+function actTags(acts){return acts.slice(0,6).map(a=>`<span class="act-tag">${ACT[a]||a}</span>`).join('');}
+
+function buildCard(p){
+  const div=document.createElement('div');
+  div.className='park-card'+(p.visited?' visited':'');
+  div.id='card-'+p.id; div.dataset.parkId=p.id;
+  div.innerHTML=`
+    <div class="card-top">
+      <div class="card-badges">${typeBadge(p)}${p.libraryPass?'<span class="badge badge-pass">🎫 Library Pass</span>':''}</div>
+      ${p.visited?'<div class="vis-check">✓</div>':''}
+    </div>
+    <div class="card-name">${p.name}</div>
+    <div class="card-meta">${p.region} &nbsp;·&nbsp; ${p.distance} mi from you</div>
+    <div class="card-activities">${actTags(p.activities)}</div>
+    ${p.notes?`<div class="card-note">${p.notes}</div>`:''}
+    <div class="weather-strip"><div class="weather-loading">Loading weather…</div></div>
+    <div class="card-footer">
+      <a class="cbtn" href="${p.website}" target="_blank" rel="noopener">🌐 Info</a>
+      <button class="cbtn primary" onclick="flyTo('${p.id}')">📍 Map</button>
+    </div>`;
+  div.addEventListener('click',e=>{if(e.target.closest('a')||e.target.closest('button'))return;flyTo(p.id);});
+  return div;
+}
+
+function flyTo(id){
+  const p=PARKS.find(p=>p.id===id); if(!p)return;
+  map.flyTo([p.lat,p.lon],12,{duration:1.2}); markerMap[id]?.openPopup();
+}
+
+// ============================================================
+// FILTER + RENDER
+// ============================================================
+function filteredParks(){
+  let list=PARKS.filter(p=>{
+    if(state.passOnly&&!p.libraryPass)return false;
+    if(state.typeFilter!=='all'&&p.type!==state.typeFilter)return false;
+    if(state.visFilter==='visited'&&!p.visited)return false;
+    if(state.visFilter==='unvisited'&&p.visited)return false;
+    if(state.search){const q=state.search.toLowerCase();if(!p.name.toLowerCase().includes(q)&&!p.region.toLowerCase().includes(q))return false;}
+    return true;
+  });
+  if(state.sort==='distance')list.sort((a,b)=>a.distance-b.distance);
+  else if(state.sort==='name')list.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(state.sort==='visited')list.sort((a,b)=>(b.visited?1:0)-(a.visited?1:0));
+  return list;
+}
+
+function render(){
+  const list=filteredParks(), grid=document.getElementById('parks-grid');
+  grid.innerHTML='';
+  PARKS.forEach(p=>{const m=markerMap[p.id];if(!m)return;const vis=list.some(fp=>fp.id===p.id);if(vis){m.addTo(map);m.setIcon(mkIcon(p));}else m.remove();});
+  if(list.length===0){grid.innerHTML=`<div class="empty-state"><div class="empty-icon">🌿</div><h3>No parks match</h3><p>Try adjusting your filters.</p></div>`;document.getElementById('results-label').textContent='0 parks';return;}
+  const frag=document.createDocumentFragment();
+  list.forEach(p=>{const card=buildCard(p);frag.appendChild(card);wObs.observe(card);});
+  grid.appendChild(frag);
+  const v=list.filter(p=>p.visited).length;
+  document.getElementById('results-label').textContent=`${list.length} park${list.length!==1?'s':''} shown`;
+  document.getElementById('results-hint').textContent=v>0?`${v} visited`:'';
+}
+
+// ============================================================
+// FILTER CONTROLS
+// ============================================================
+function togglePass(){state.passOnly=!state.passOnly;document.getElementById('btn-pass').classList.toggle('active',state.passOnly);render();}
+function setType(t){state.typeFilter=t;document.querySelectorAll('#type-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.type===t));render();}
+function setVis(v){state.visFilter=v;document.querySelectorAll('#vis-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.vis===v));render();}
+function setSort(v){state.sort=v;render();}
+document.getElementById('search').addEventListener('input',e=>{state.search=e.target.value.trim();render();});
+
+// ============================================================
+// INIT
+// ============================================================
+updateStats();
+render();
+</script>
+</body>
+</html>
