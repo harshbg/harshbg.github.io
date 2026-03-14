@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="img/purplogo.png">
+  <meta name="author" content="Harsh Gupta">
+  <meta charset="UTF-8">
+  <title>I'm Possible List | Harsh Gupta</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42822568-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-42822568-2');
+  </script>
+
+  <style>
+    /* ── TOKENS ───────────────────────────────────── */
+    :root {
+      --bg:       #f5f3ee;
+      --card:     #ffffff;
+      --border:   #e5e1d8;
+      --text:     #1c1b18;
+      --muted:    #6b6760;
+      --light:    #9b9790;
+      --accent:   #1c1b18;
+
+      --done-c:   #1a5c35;
+      --done-bg:  #f2faf5;
+      --prog-c:   #7a4a00;
+      --prog-bg:  #fdf8f0;
+
+      --r:   10px;
+      --rsm:  6px;
+      --sh:   0 1px 2px rgba(0,0,0,.04), 0 3px 8px rgba(0,0,0,.04);
+      --t:    .15s ease;
+
+      --header-h:  70px;
+      --sidebar-w: 210px;
+      --filter-h:  52px;
+    }
+
+    /* ── BASE ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .il-hero {
+      background: #181816;
+      padding: 80px 24px 56px;
+      text-align: center;
+    }
+
+    .il-hero-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .il-eyebrow {
+      display: inline-block;
+      color: #888;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 6px;
+    }
+
+    .il-hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 700;
+      color: #f0ede6;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .il-hero h1 em {
+      font-style: italic;
+      color: #c8c4bb;
+      font-weight: 300;
+    }
+
+    .il-hero p {
+      color: #7a7770;
+      font-size: .95rem;
+      font-weight: 400;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.75;
+    }
+
+    /* Stats row */
+    .il-stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 36px;
+      border: 1px solid #2e2d2a;
+      border-radius: var(--r);
+      overflow: hidden;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .il-stat {
+      flex: 1;
+      padding: 16px 12px;
+      text-align: center;
+      border-right: 1px solid #2e2d2a;
+    }
+    .il-stat:last-child { border-right: none; }
+
+    .il-stat-n {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #f0ede6;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .il-stat.s-done  .il-stat-n { color: #5ea87a; }
+    .il-stat.s-prog  .il-stat-n { color: #c49a50; }
+    .il-stat.s-pend  .il-stat-n { color: #888; }
+
+    .il-stat-l {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    /* Hero quote */
+    .il-hero-quote {
+      border-top: 1px solid #2e2d2a;
+      padding-top: 24px;
+      font-style: italic;
+      color: #666;
+      font-size: .875rem;
+      line-height: 1.7;
+    }
+
+    .il-hero-quote cite {
+      display: block;
+      margin-top: 6px;
+      font-style: normal;
+      font-size: .78rem;
+      color: #555;
+    }
+
+    /* ── FILTER BAR ───────────────────────────────── */
+    .il-filters {
+      position: sticky;
+      top: var(--header-h);
+      z-index: 200;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+
+    .il-filters-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .il-filters-inner::-webkit-scrollbar { display: none; }
+
+    .fdivider {
+      width: 1px;
+      height: 18px;
+      background: var(--border);
+      flex-shrink: 0;
+      margin: 0 4px;
+    }
+
+    .fbtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: var(--rsm);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--t);
+    }
+
+    .fbtn:hover { background: #f0ede6; color: var(--text); border-color: #d5d0c6; }
+    .fbtn.active { background: var(--text); color: #fff; border-color: var(--text); }
+
+    .fbtn.f-done.active  { background: var(--done-c); border-color: var(--done-c); }
+    .fbtn.f-prog.active  { background: var(--prog-c); border-color: var(--prog-c); }
+    .fbtn.f-pend.active  { background: #555; border-color: #555; }
+
+    /* ── PAGE LAYOUT ──────────────────────────────── */
+    .il-page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 24px 48px;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* ── SIDEBAR ──────────────────────────────────── */
+    .il-sidebar {
+      position: sticky;
+      top: calc(var(--header-h) + var(--filter-h) + 14px);
+      background: var(--card);
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      box-shadow: var(--sh);
+      overflow: hidden;
+    }
+
+    .sb-head {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--light);
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sb-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 16px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: var(--t);
+      border-left: 2px solid transparent;
+    }
+
+    .sb-link:hover { color: var(--text); background: var(--bg); }
+    .sb-link.active { color: var(--text); background: var(--bg); border-left-color: var(--text); font-weight: 600; }
+
+    .sb-ico {
+      width: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--light);
+      flex-shrink: 0;
+    }
+
+    .sb-pct {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--light);
+    }
+
+    /* ── MAIN ─────────────────────────────────────── */
+    .il-main { display: flex; flex-direction: column; gap: 16px; }
+
+    /* ── CATEGORY SECTION ─────────────────────────── */
+    .cat-sec {
+      background: var(--card);
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      box-shadow: var(--sh);
+      overflow: hidden;
+    }
+
+    .cat-sec.sec-hidden { display: none; }
+
+    .cat-hd {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+      transition: background var(--t);
+    }
+
+    .cat-hd:hover { background: #faf9f6; }
+
+    .cat-ico {
+      width: 32px; height: 32px;
+      border-radius: var(--rsm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .cat-tw { flex: 1; }
+
+    .cat-name {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 1px;
+    }
+
+    .cat-sub {
+      font-size: 11.5px;
+      color: var(--light);
+    }
+
+    .cat-chip {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 3px 9px;
+      border-radius: var(--rsm);
+    }
+
+    .cat-chev {
+      color: var(--light);
+      font-size: 11px;
+      transition: transform .2s;
+    }
+
+    .cat-sec.collapsed .cat-chev { transform: rotate(-90deg); }
+    .cat-sec.collapsed .cat-body { display: none; }
+
+    /* thin progress bar under header */
+    .cat-prog-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #faf9f6;
+    }
+
+    .cat-prog-bar {
+      flex: 1;
+      height: 3px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .cat-prog-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: var(--text);
+      transition: width .6s ease;
+    }
+
+    .cat-prog-txt {
+      font-size: 11px;
+      color: var(--light);
+      white-space: nowrap;
+    }
+
+    .cat-body { padding: 4px 0 8px; }
+
+    /* ── GOAL ITEMS ───────────────────────────────── */
+    .goal {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 20px;
+      transition: background var(--t);
+    }
+
+    .goal:hover { background: #faf9f6; }
+    .goal.sub  { padding-left: 50px; }
+    .goal.sub2 { padding-left: 78px; }
+
+    .g-ico {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 3px;
+      font-size: 9px;
+    }
+
+    .g-ico.done { background: var(--done-bg); color: var(--done-c); border: 1px solid #b8dfc9; }
+    .g-ico.prog { background: var(--prog-bg); color: var(--prog-c); border: 1px solid #e2c98a; }
+    .g-ico.pend { border: 1.5px solid var(--border); }
+
+    .g-body { flex: 1; min-width: 0; }
+
+    .g-txt {
+      font-size: 13.5px;
+      font-weight: 450;
+      color: var(--text);
+      line-height: 1.5;
+      display: block;
+    }
+
+    .g-txt.done { text-decoration: line-through; color: var(--light); }
+
+    .g-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 3px;
+    }
+
+    .bd {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .bd-date  { color: var(--done-c); background: var(--done-bg); }
+    .bd-proof { color: var(--muted); background: var(--bg); border: 1px solid var(--border); transition: var(--t); }
+    .bd-proof:hover { background: var(--text); color: #fff; border-color: var(--text); }
+    .bd-prog  { color: var(--prog-c); background: var(--prog-bg); }
+    .bd-plain { color: var(--muted); background: var(--bg); }
+
+    /* inline progress bar */
+    .g-prog {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 5px;
+    }
+
+    .g-pbar {
+      flex: 1;
+      max-width: 160px;
+      height: 3px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .g-pfill {
+      height: 100%;
+      border-radius: 100px;
+      background: var(--prog-c);
+    }
+
+    .g-pnum {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--prog-c);
+    }
+
+    /* divider labels */
+    .g-divider {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px 3px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+
+    .g-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── RECENT WINS ──────────────────────────────── */
+    .recent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      padding: 16px 20px;
+    }
+
+    .rc-card {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      border-radius: var(--rsm);
+      padding: 14px;
+    }
+
+    .rc-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--done-c);
+      margin-bottom: 6px;
+    }
+
+    .rc-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+
+    .rc-meta { display: flex; gap: 5px; flex-wrap: wrap; }
+
+    /* ── CLOSING QUOTE ────────────────────────────── */
+    .il-closing {
+      background: #181816;
+      border-radius: var(--r);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .il-closing blockquote {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #888;
+      margin-bottom: 10px;
+      border: none;
+      background: none;
+      padding: 0;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .il-closing cite {
+      font-size: .8rem;
+      color: #555;
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: .5px;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 860px) {
+      .il-page { grid-template-columns: 1fr; }
+      .il-sidebar { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .il-hero { padding: 60px 16px 40px; }
+      .il-stats { max-width: 100%; }
+      .recent-grid { grid-template-columns: 1fr 1fr; }
+      .il-page { padding: 16px 12px 40px; }
+    }
+
+    /* ── UTILITY ──────────────────────────────────── */
+    .gone { display: none !important; }
+  </style>
+</head>
+
+<body>
+
+<!-- ── HEADER ──────────────────────────────────────── -->
+<header id="header" class="dark">
+  <div class="container main-menu">
+    <div class="row align-items-center d-flex">
+      <div id="logo">
+        <a href="https://www.harshgupta.com/"><img src="img/logonw_1.png" alt="" /></a>
+      </div>
+      <nav id="nav-menu-container" class="ml-auto">
+        <ul class="nav-menu white">
+          <li><a href="https://www.harshgupta.com/">Home</a></li>
+          <li><a href="https://www.harshgupta.com/#projects">Projects</a></li>
+          <li><a href="https://www.harshgupta.com/dashboard" target="_blank">Dashboards</a></li>
+          <li><a href="https://www.harshgupta.com/resume/" target="_blank">Resume</a></li>
+          <li class="menu-has-children">
+            <a class="active" href="#">Other</a>
+            <ul class="dark">
+              <li><a href="https://harshgupta.com/#experience">Experience</a></li>
+              <li><a href="https://harshgupta.com/impossible-list" target="_blank">My Impossible List</a></li>
+              <li><a href="https://www.harshgupta.com/#contact">Contact</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ───────────────────────────────────────── -->
+<section class="il-hero">
+  <div class="il-hero-inner">
+    <div class="il-eyebrow">Personal Goals &amp; Milestones</div>
+    <h1>My <em>I'm Possible</em> List</h1>
+    <p>An ever-evolving collection of experiences that build upon each other — goals that are impossible without actually trying.</p>
+
+    <div class="il-stats" style="margin-bottom:36px;">
+      <div class="il-stat">
+        <span class="il-stat-n" id="stat-total">—</span>
+        <span class="il-stat-l">Goals</span>
+      </div>
+      <div class="il-stat s-done">
+        <span class="il-stat-n" id="stat-done">—</span>
+        <span class="il-stat-l">Done</span>
+      </div>
+      <div class="il-stat s-prog">
+        <span class="il-stat-n" id="stat-prog">—</span>
+        <span class="il-stat-l">Active</span>
+      </div>
+      <div class="il-stat s-pend">
+        <span class="il-stat-n" id="stat-pend">—</span>
+        <span class="il-stat-l">Left</span>
+      </div>
+    </div>
+
+    <div class="il-hero-quote">
+      "Put simply, the impossible list is an ever-evolving list of experiences that build upon each other, help others as well as yourself, and implore you to take action."
+      <cite>— Thomas Frank, College Info Geek</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ── FILTER BAR ──────────────────────────────────── -->
+<div class="il-filters">
+  <div class="il-filters-inner">
+    <button class="fbtn active" data-filter="all">All</button>
+    <button class="fbtn f-done" data-filter="done">&#10003; Completed</button>
+    <button class="fbtn f-prog" data-filter="prog">&#8635; In Progress</button>
+    <button class="fbtn f-pend" data-filter="pend">&#9675; Remaining</button>
+
+    <div class="fdivider"></div>
+
+    <button class="fbtn" data-cat="fitness">Fitness</button>
+    <button class="fbtn" data-cat="professional">Professional</button>
+    <button class="fbtn" data-cat="habits">Habits</button>
+    <button class="fbtn" data-cat="events">Events</button>
+    <button class="fbtn" data-cat="travel">Travel</button>
+    <button class="fbtn" data-cat="fun">Fun</button>
+    <button class="fbtn" data-cat="skills">Skills</button>
+    <button class="fbtn" data-cat="lifestyle">Lifestyle</button>
+  </div>
+</div>
+
+<!-- ── PAGE ────────────────────────────────────────── -->
+<div class="il-page">
+
+  <!-- ── SIDEBAR ──────────────────────────── -->
+  <aside class="il-sidebar">
+    <div class="sb-head">Navigate</div>
+
+    <a class="sb-link" href="#cat-recent">
+      <span class="sb-ico"><i class="fa fa-trophy"></i></span>
+      Recent Wins
+    </a>
+    <a class="sb-link" href="#cat-fitness">
+      <span class="sb-ico"><i class="fa fa-heartbeat"></i></span>
+      Fitness
+      <span class="sb-pct" id="sb-fitness">—</span>
+    </a>
+    <a class="sb-link" href="#cat-professional">
+      <span class="sb-ico"><i class="fa fa-briefcase"></i></span>
+      Professional
+      <span class="sb-pct" id="sb-professional">—</span>
+    </a>
+    <a class="sb-link" href="#cat-habits">
+      <span class="sb-ico"><i class="fa fa-calendar-check-o"></i></span>
+      Habits
+      <span class="sb-pct" id="sb-habits">—</span>
+    </a>
+    <a class="sb-link" href="#cat-events">
+      <span class="sb-ico"><i class="fa fa-ticket"></i></span>
+      Events
+      <span class="sb-pct" id="sb-events">—</span>
+    </a>
+    <a class="sb-link" href="#cat-travel">
+      <span class="sb-ico"><i class="fa fa-globe"></i></span>
+      Travel
+      <span class="sb-pct" id="sb-travel">—</span>
+    </a>
+    <a class="sb-link" href="#cat-fun">
+      <span class="sb-ico"><i class="fa fa-rocket"></i></span>
+      Fun &amp; Insane
+      <span class="sb-pct" id="sb-fun">—</span>
+    </a>
+    <a class="sb-link" href="#cat-skills">
+      <span class="sb-ico"><i class="fa fa-code"></i></span>
+      Skills
+      <span class="sb-pct" id="sb-skills">—</span>
+    </a>
+    <a class="sb-link" href="#cat-lifestyle">
+      <span class="sb-ico"><i class="fa fa-leaf"></i></span>
+      Lifestyle
+      <span class="sb-pct" id="sb-lifestyle">—</span>
+    </a>
+  </aside>
+
+  <!-- ── MAIN CONTENT ──────────────────────── -->
+  <main class="il-main">
+
+    <!-- ══ RECENT WINS ═══════════════════════════ -->
+    <section class="cat-sec" id="cat-recent">
+      <div class="cat-hd" onclick="toggleCat(this)">
+        <div class="cat-ico">&#127942;</div>
+        <div class="cat-tw">
+          <div class="cat-name">Recent Wins</div>
+          <div class="cat-sub">Last 5 completed goals</div>
+        </div>
+        <i class="fa fa-chevron-down cat-chev"></i>
+      </div>
+      <div class="cat-body">
+        <div class="recent-grid">
+          <div class="rc-card">
+            <div class="rc-num">&#10003; Completed</div>
+            <div class="rc-title">Attend a concert at Red Rocks Amphitheatre</div>
+            <div class="rc-meta">
+              <span class="bd bd-date">Oct 2021</span>
+              <a class="bd bd-proof" href="https://rebrand.ly/9fv" target="_blank"><i class="fa fa-external-link"></i> View</a>
+            </div>
+          </div>
+          <div class="rc-card">
+            <div class="rc-num">&#10003; Completed</div>
+            <div class="rc-title">Get 100 YouTube Subscribers</div>
+            <div class="rc-meta">
+              <span class="bd bd-date">Aug 2021</span>
+              <a class="bd bd-proof" href="https://rebrand.ly/l1r9isq" target="_blank"><i class="fa fa-external-link"></i> Channel</a>
+            </div>
+          </div>
+          <div class="rc-card">
+            <div class="rc-num">&#10003; Completed</div>
+            <div class="rc-title">Don't miss a workout for 1 month</div>
+            <div class="rc-meta">
+              <span class="bd bd-date">Feb 2021</span>
+            </div>
+          </div>
+          <div class="rc-card">
+            <div class="rc-num">&#10003; Completed</div>
+            <div class="rc-title">Visited 7 new National Parks in 2021</div>
+            <div class="rc-meta">
+              <span class="bd bd-date">2021</span>
+            </div>
+          </div>
+          <div class="rc-card">
+            <div class="rc-num">&#10003; Completed</div>
+            <div class="rc-title">Visited 3 new US states in 2021</div>
+            <div class="rc-meta">
+              <span class="bd bd-date">2021</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ FITNESS ═══════════════════════════════ -->
+    <section class="cat-sec" id="cat-fitness" data-category="fitness">
+      <div class="cat-hd" onclick="toggleCat(this)">
+        <div class="cat-ico">&#128170;</div>
+        <div class="cat-tw">
+          <div class="cat-name">Fitness Goals</div>
+          <div class="cat-sub">Strength, endurance &amp; physical challenges</div>
+        </div>
+        <div class="cat-chip" id="chip-fitness">—</div>
+        <i class="fa fa-chevron-down cat-chev"></i>
+      </div>
+      <div class="cat-prog-wrap">
+        <div class="cat-prog-bar"><div class="cat-prog-fill" id="pb-fitness" style="width:0%"></div></div>
+        <span class="cat-prog-txt" id="pt-fitness">—</span>
+      </div>
+      <div class="cat-body">
+
+        <div class="g-divider">Completed</div>
+
+        <div class="goal" data-status="done" data-cat="fitness">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Run a 3K</span>
+            <div class="g-meta">
+              <span class="bd bd-date">Dec 2016</span>
+              <a class="bd bd-proof" href="https://harshgupta.com/images/3K-Marathon/" target="_blank"><i class="fa fa-camera"></i> Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal sub" data-status="done" data-cat="fitness">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Run a 5K</span>
+            <div class="g-meta">
+              <span class="bd bd-date">Nov 2018</span>
+              <a class="bd bd-proof" href="https://harshgupta.com/images/5K-Marathon/" target="_blank"><i class="fa fa-camera"></i> Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="done" data-cat="fitness">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Don't miss a workout for 1 month</span>
+            <div class="g-meta">
+              <span class="bd bd-date">Feb 2021</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="g-divider">Remaining</div>
+
+        <div class="goal sub" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Run a 10K</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Do 50 push-ups in a single set</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Do 15 pull-ups in a single set</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Do 15 chin-ups in a single set</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Bench 200 lbs</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Squat 200 lbs</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Deadlift 200 lbs</span></div>
+        </div>
+
+        <div class="goal sub" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Don't miss a workout for 3 months</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Conduct a three-day fast</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Cycle 50 miles in a day</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Learn wall flips</span></div>
+        </div>
+
+        <div class="goal sub" data-status="pend" data-cat="fitness">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Learn standing backflips</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ PROFESSIONAL ══════════════════════════ -->
+    <section class="cat-sec" id="cat-professional" data-category="professional">
+      <div class="cat-hd" onclick="toggleCat(this)">
+        <div class="cat-ico">&#128188;</div>
+        <div class="cat-tw">
+          <div class="cat-name">Professional Goals</div>
+          <div class="cat-sub">Career, impact &amp; creative work</div>
+        </div>
+        <div class="cat-chip" id="chip-professional">—</div>
+        <i class="fa fa-chevron-down cat-chev"></i>
+      </div>
+      <div class="cat-prog-wrap">
+        <div class="cat-prog-bar"><div class="cat-prog-fill" id="pb-professional" style="width:0%"></div></div>
+        <span class="cat-prog-txt" id="pt-professional">—</span>
+      </div>
+      <div class="cat-body">
+
+        <div class="g-divider">Completed</div>
+
+        <div class="goal" data-status="done" data-cat="professional">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Graduate college with a 3.50+ GPA</span>
+            <div class="g-meta">
+              <span class="bd bd-date">3.73 GPA — May 2019</span>
+              <a class="bd bd-proof" href="https://harshgupta.com/images/Graduation/" target="_blank"><i class="fa fa-camera"></i> Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="done" data-cat="professional">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Publish a personal website</span>
+            <div class="g-meta">
+              <span class="bd bd-date">January 2019</span>
+              <a class="bd bd-proof" href="https://harshgupta.com/" target="_blank"><i class="fa fa-external-link"></i> Visit</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="g-divider">Remaining</div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Publish a blog</span></div>
+        </div>
+
+        <div class="goal sub" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Get 10,000 blog visits (all-time)</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Start a newsletter</span></div>
+        </div>
+
+        <div class="goal sub" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Grow the newsletter to 100 subscribers</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Write a free e-book</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Write a traditionally published book</span></div>
+        </div>
+
+        <div class="goal sub" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Walk into a bookstore and photograph a book I wrote on the shelf</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Create an online course</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Launch a product that creates over $15,000 in revenue within one month</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Give a talk for more than 50 people</span></div>
+        </div>
+
+        <div class="goal sub" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Give a talk for more than 200 people</span></div>
+        </div>
+
+        <div class="goal sub" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Give a talk: at a meetup · at a conference · at TEDx</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Start a nonprofit organization</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Teach a graduate-level course</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Get a patent</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Start a company</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="professional">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Do stand-up comedy</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ HABITS ════════════════════════════════ -->
+    <section class="cat-sec" id="cat-habits" data-category="habits">
+      <div class="cat-hd" onclick="toggleCat(this)">
+        <div class="cat-ico">&#129467;</div>
+        <div class="cat-tw">
+          <div class="cat-name">Habit Goals</div>
+          <div class="cat-sub">Consistency, mindfulness &amp; daily practice</div>
+        </div>
+        <div class="cat-chip" id="chip-habits">—</div>
+        <i class="fa fa-chevron-down cat-chev"></i>
+      </div>
+      <div class="cat-prog-wrap">
+        <div class="cat-prog-bar"><div class="cat-prog-fill" id="pb-habits" style="width:0%"></div></div>
+        <span class="cat-prog-txt" id="pt-habits">—</span>
+      </div>
+      <div class="cat-body">
+
+        <div class="g-divider">Completed</div>
+
+        <div class="goal" data-status="done" data-cat="habits">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Meditate for at least 10 minutes — 30 days in a row</span>
+            <div class="g-meta">
+              <span class="bd bd-date">August 2020</span>
+              <a class="bd bd-proof" href="https://harshgupta.com/images/Headspace-30days/" target="_blank"><i class="fa fa-camera"></i> Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="g-divider">Remaining</div>
+
+        <div class="goal" data-status="pend" data-cat="habits">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Start and maintain morning routine for 30 days straight</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="habits">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Journal daily for 30 days straight</span></div>
+        </div>
+
+        <div class="goal sub" data-status="pend" data-cat="habits">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Meditate for 100 days in a row</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="habits">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Read 25 pages a day for 30 days straight</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="habits">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Write 500 words — 100 days in a row</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ EVENTS ════════════════════════════════ -->
+    <section class="cat-sec" id="cat-events" data-category="events">
+      <div class="cat-hd" onclick="toggleCat(this)">
+        <div class="cat-ico">&#127914;</div>
+        <div class="cat-tw">
+          <div class="cat-name">Events</div>
+          <div class="cat-sub">Festivals, concerts &amp; once-in-a-lifetime gatherings</div>
+        </div>
+        <div class="cat-chip" id="chip-events">—</div>
+        <i class="fa fa-chevron-down cat-chev"></i>
+      </div>
+      <div class="cat-prog-wrap">
+        <div class="cat-prog-bar"><div class="cat-prog-fill" id="pb-events" style="width:0%"></div></div>
+        <span class="cat-prog-txt" id="pt-events">—</span>
+      </div>
+      <div class="cat-body">
+
+        <div class="g-divider">Completed</div>
+
+        <div class="goal" data-status="done" data-cat="events">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Attend a concert at Red Rocks Amphitheatre</span>
+            <div class="g-meta">
+              <span class="bd bd-date">Oct 2021</span>
+              <a class="bd bd-proof" href="https://rebrand.ly/9fv" target="_blank"><i class="fa fa-camera"></i> Photos</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="done" data-cat="events">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Watch WWE Live</span>
+          </div>
+        </div>
+
+        <div class="goal sub" data-status="done" data-cat="events">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body"><span class="g-txt done">Odesza</span></div>
+        </div>
+
+        <div class="goal sub" data-status="done" data-cat="events">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body"><span class="g-txt done">A. R. Rahman</span></div>
+        </div>
+
+        <div class="goal sub" data-status="done" data-cat="events">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Coldplay</span>
+            <div class="g-meta">
+              <span class="bd bd-date">May 2022</span>
+              <a class="bd bd-proof" href="https://www.instagram.com/reel/CdTqu-cKKEV/" target="_blank"><i class="fa fa-instagram"></i> Reel</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal sub" data-status="done" data-cat="events">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Above &amp; Beyond</span>
+            <div class="g-meta">
+              <span class="bd bd-date">Oct 2021</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="g-divider">Remaining</div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">CES</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">SXSW</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">ComicCon</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Kumbh Mela</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">The Olympics</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Cricket World Cup</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Burning Man</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Coachella</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Mardi Gras</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Oktoberfest in Munich</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Carnival in Rio de Janeiro</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Watch a Broadway show in New York</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">New Year's Eve at Times Square · London · Sydney · Rio</span></div>
+        </div>
+
+        <div class="goal sub" data-status="pend" data-cat="events">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Eric Prytz</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ TRAVEL ════════════════════════════════ -->
+    <section class="cat-sec" id="cat-travel" data-category="travel">
+      <div class="cat-hd" onclick="toggleCat(this)">
+        <div class="cat-ico">&#9992;&#65039;</div>
+        <div class="cat-tw">
+          <div class="cat-name">Travel Goals</div>
+          <div class="cat-sub">Countries, continents, parks &amp; wonders</div>
+        </div>
+        <div class="cat-chip" id="chip-travel">—</div>
+        <i class="fa fa-chevron-down cat-chev"></i>
+      </div>
+      <div class="cat-prog-wrap">
+        <div class="cat-prog-bar"><div class="cat-prog-fill" id="pb-travel" style="width:0%"></div></div>
+        <span class="cat-prog-txt" id="pt-travel">—</span>
+      </div>
+      <div class="cat-body">
+
+        <div class="g-divider">Completed</div>
+
+        <div class="goal" data-status="done" data-cat="travel">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Visit a foreign country</span>
+            <div class="g-meta">
+              <span class="bd bd-date">July 2017</span>
+              <a class="bd bd-proof" href="https://harshgupta.com/travels" target="_blank"><i class="fa fa-map-marker"></i> Travels</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="g-divider">In Progress</div>
+
+        <div class="goal" data-status="prog" data-cat="travel">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Step foot on every continent</span>
+            <div class="g-prog">
+              <div class="g-pbar"><div class="g-pfill" style="width:28.6%"></div></div>
+              <span class="g-pnum">2 / 7</span>
+            </div>
+            <div class="g-meta">
+              <span class="bd bd-prog">N. America</span>
+              <span class="bd bd-prog">Asia</span>
+              <span class="bd bd-plain">S. America</span>
+              <span class="bd bd-plain">Europe</span>
+              <span class="bd bd-plain">Africa</span>
+              <span class="bd bd-plain">Australia</span>
+              <span class="bd bd-plain">Antarctica</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="prog" data-cat="travel">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Visit all 50 US States</span>
+            <div class="g-prog">
+              <div class="g-pbar"><div class="g-pfill" style="width:30%"></div></div>
+              <span class="g-pnum">15 / 50</span>
+            </div>
+            <div class="g-meta">
+              <a class="bd bd-proof" href="https://harshgupta.com/travels#US" target="_blank"><i class="fa fa-map-marker"></i> See Map</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="prog" data-cat="travel">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Visit all 63 National Parks</span>
+            <div class="g-prog">
+              <div class="g-pbar"><div class="g-pfill" style="width:31.7%"></div></div>
+              <span class="g-pnum">20 / 63</span>
+            </div>
+            <div class="g-meta">
+              <a class="bd bd-proof" href="https://harshgupta.com/travels#NP" target="_blank"><i class="fa fa-map-marker"></i> See Map</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="prog" data-cat="travel">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Visit all 28 states in India</span>
+            <div class="g-prog">
+              <div class="g-pbar"><div class="g-pfill" style="width:35.7%"></div></div>
+              <span class="g-pnum">10 / 28</span>
+            </div>
+            <div class="g-meta">
+              <a class="bd bd-proof" href="https://harshgupta.com/travels/#India" target="_blank"><i class="fa fa-map-marker"></i> See Map</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="prog" data-cat="travel">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Visit all 12 Jyotirlinga in India</span>
+            <div class="g-prog">
+              <div class="g-pbar"><div class="g-pfill" style="width:33.3%"></div></div>
+              <span class="g-pnum">4 / 12</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="prog" data-cat="travel">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">See the 7 Wonders of the World</span>
+            <div class="g-prog">
+              <div class="g-pbar"><div class="g-pfill" style="width:14.3%"></div></div>
+              <span class="g-pnum">1 / 7</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="prog" data-cat="travel">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Go swimming in every ocean</span>
+            <div class="g-prog">
+              <div class="g-pbar"><div class="g-pfill" style="width:40%"></div></div>
+              <span class="g-pnum">2 / 5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal sub" data-status="prog" data-cat="travel">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Visit 5 countries</span>
+            <div class="g-prog">
+              <div class="g-pbar"><div class="g-pfill" style="width:20%"></div></div>
+              <span class="g-pnum">1 / 5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="g-divider">Remaining</div>
+
+        <div class="goal" data-status="pend" data-cat="travel">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">See the Northern Lights</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="travel">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Visit the Salt Flats of Bolivia</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="travel">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Scuba dive in the Great Barrier Reef</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="travel">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Visit the Great Pyramids of Giza</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="travel">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Visit an Active Volcano</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ FUN & INSANE ══════════════════════════ -->
+    <section class="cat-sec" id="cat-fun" data-category="fun">
+      <div class="cat-hd" onclick="toggleCat(this)">
+        <div class="cat-ico">&#128640;</div>
+        <div class="cat-tw">
+          <div class="cat-name">Fun &amp; "Insane" Goals</div>
+          <div class="cat-sub">Adventures, thrills &amp; bucket list moments</div>
+        </div>
+        <div class="cat-chip" id="chip-fun">—</div>
+        <i class="fa fa-chevron-down cat-chev"></i>
+      </div>
+      <div class="cat-prog-wrap">
+        <div class="cat-prog-bar"><div class="cat-prog-fill" id="pb-fun" style="width:0%"></div></div>
+        <span class="cat-prog-txt" id="pt-fun">—</span>
+      </div>
+      <div class="cat-body">
+
+        <div class="g-divider">Completed</div>
+
+        <div class="goal" data-status="done" data-cat="fun">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Go Snorkeling</span>
+            <div class="g-meta">
+              <span class="bd bd-date">Feb 2020</span>
+              <a class="bd bd-proof" href="https://youtu.be/ZQEFGJfNUq0" target="_blank"><i class="fa fa-youtube-play"></i> Video</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="g-divider">Remaining</div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Skydive</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Bungee Jump</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Wingsuit fly</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Zero-G flight</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Go surfing</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Ride in a Helicopter</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Ride in a Hot Air Balloon</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Be on TV</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Fly a Flyboard Water Hoverboard</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Go paragliding</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Be an extra in a movie</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Get something named after me</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Be in a submarine</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="fun">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Everest Base Camp</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ SKILLS ════════════════════════════════ -->
+    <section class="cat-sec" id="cat-skills" data-category="skills">
+      <div class="cat-hd" onclick="toggleCat(this)">
+        <div class="cat-ico">&#127919;</div>
+        <div class="cat-tw">
+          <div class="cat-name">Skill Goals</div>
+          <div class="cat-sub">Learning, creating &amp; leveling up</div>
+        </div>
+        <div class="cat-chip" id="chip-skills">—</div>
+        <i class="fa fa-chevron-down cat-chev"></i>
+      </div>
+      <div class="cat-prog-wrap">
+        <div class="cat-prog-bar"><div class="cat-prog-fill" id="pb-skills" style="width:0%"></div></div>
+        <span class="cat-prog-txt" id="pt-skills">—</span>
+      </div>
+      <div class="cat-body">
+
+        <div class="g-divider">Completed</div>
+
+        <div class="goal" data-status="done" data-cat="skills">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Film, edit and publish a YouTube video</span>
+            <div class="g-meta">
+              <span class="bd bd-date">Nov 2019</span>
+              <a class="bd bd-proof" href="https://youtu.be/TMbWxOfTqqk" target="_blank"><i class="fa fa-youtube-play"></i> Watch</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal sub" data-status="done" data-cat="skills">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Publish 5 videos</span>
+            <div class="g-meta">
+              <span class="bd bd-date">Feb 2021</span>
+              <a class="bd bd-proof" href="https://rebrand.ly/l1r9isq" target="_blank"><i class="fa fa-youtube-play"></i> Channel</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal sub" data-status="done" data-cat="skills">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Get 100 Subscribers</span>
+            <div class="g-meta">
+              <span class="bd bd-date">Aug 2021</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="g-divider">In Progress</div>
+
+        <div class="goal" data-status="prog" data-cat="skills">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Learn Python</span>
+            <div class="g-meta"><span class="bd bd-prog">In Progress</span></div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="prog" data-cat="skills">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Gain 100% fluency in Spanish (Duolingo)</span>
+            <div class="g-meta"><span class="bd bd-prog">In Progress</span></div>
+          </div>
+        </div>
+
+        <div class="g-divider">Remaining</div>
+
+        <div class="goal sub2" data-status="pend" data-cat="skills">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Publish 30 videos</span></div>
+        </div>
+
+        <div class="goal sub2" data-status="pend" data-cat="skills">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Get 300 Subscribers</span></div>
+        </div>
+
+        <div class="goal sub" data-status="pend" data-cat="skills">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Get 100K Views</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="skills">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Learn how to make electronic music</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="skills">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Learn how to play any song by ear on the piano</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="skills">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Become a competent skateboarder</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ LIFESTYLE ═════════════════════════════ -->
+    <section class="cat-sec" id="cat-lifestyle" data-category="lifestyle">
+      <div class="cat-hd" onclick="toggleCat(this)">
+        <div class="cat-ico">&#127807;</div>
+        <div class="cat-tw">
+          <div class="cat-name">Lifestyle Goals</div>
+          <div class="cat-sub">Impact, environment &amp; the life I want to live</div>
+        </div>
+        <div class="cat-chip" id="chip-lifestyle">—</div>
+        <i class="fa fa-chevron-down cat-chev"></i>
+      </div>
+      <div class="cat-prog-wrap">
+        <div class="cat-prog-bar"><div class="cat-prog-fill" id="pb-lifestyle" style="width:0%"></div></div>
+        <span class="cat-prog-txt" id="pt-lifestyle">—</span>
+      </div>
+      <div class="cat-body">
+
+        <div class="g-divider">Completed</div>
+
+        <div class="goal" data-status="done" data-cat="lifestyle">
+          <div class="g-ico done"><i class="fa fa-check"></i></div>
+          <div class="g-body">
+            <span class="g-txt done">Own a self-driving car</span>
+          </div>
+        </div>
+
+        <div class="g-divider">In Progress</div>
+
+        <div class="goal" data-status="prog" data-cat="lifestyle">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Plant 1,000 trees</span>
+            <div class="g-prog">
+              <div class="g-pbar"><div class="g-pfill" style="width:0.5%"></div></div>
+              <span class="g-pnum">5 / 1,000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="goal" data-status="prog" data-cat="lifestyle">
+          <div class="g-ico prog"><i class="fa fa-refresh"></i></div>
+          <div class="g-body">
+            <span class="g-txt">Sponsor an entire year of mid-day meals for 100 students</span>
+            <div class="g-prog">
+              <div class="g-pbar"><div class="g-pfill" style="width:1%"></div></div>
+              <span class="g-pnum">1 / 100</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="g-divider">Remaining</div>
+
+        <div class="goal" data-status="pend" data-cat="lifestyle">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Adopt a dog</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="lifestyle">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Own a residential solar power system</span></div>
+        </div>
+
+        <div class="goal" data-status="pend" data-cat="lifestyle">
+          <div class="g-ico pend"></div>
+          <div class="g-body"><span class="g-txt">Own a condo · single-family house · vacation home · greenhouse</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ CLOSING ════════════════════════════════ -->
+    <div class="il-closing">
+      <blockquote>"It always seems impossible until it's done."</blockquote>
+      <cite>— Nelson Mandela</cite>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── DISQUS ───��──────────────────────────────────── -->
+<div style="max-width:820px;margin:40px auto;padding:0 24px;">
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://harshgupta.com/impossible-list';
+      this.page.identifier = 'impossible-list';
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://harshbg.disqus.com/embed.js';
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+<div style="max-width:1120px;margin:0 auto;padding:0 24px;"><hr style="border-color:var(--border);"></div>
+
+<!-- ── FOOTER ──────────────────────────────────────── -->
+<footer class="footer-area">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="footer-top flex-column">
+          <div class="footer-logo">
+            <a href="#"><img src="img/logonog_1.png" alt=""></a>
+            <h4>Follow Me</h4>
+          </div>
+          <div class="footer-social">
+            <a href="https://link.harshgupta.com/linkedin" target="_blank"><i class="fa fa-linkedin"></i></a>
+            <a href="https://link.harshgupta.com/github" target="_blank"><i class="fa fa-github"></i></a>
+            <a href="https://link.harshgupta.com/medium" target="_blank"><i class="fa fa-medium"></i></a>
+            <a href="https://link.harshgupta.com/goodreads" target="_blank"><i class="fa fa-book"></i></a>
+            <a href="https://link.harshgupta.com/facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://link.harshgupta.com/twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://link.harshgupta.com/instagram" target="_blank"><i class="fa fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row footer-bottom justify-content-center">
+      <p class="col-lg-8 col-sm-12 footer-text">
+        &copy;<script>document.write(new Date().getFullYear());</script> Harsh Gupta. You're cute <i class="fa fa-heart-o"></i>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ─────────────────────────────────────── -->
+<script src="js/vendor/jquery-2.2.4.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/easing.min.js"></script>
+<script src="js/hoverIntent.js"></script>
+<script src="js/superfish.min.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+(function () {
+  // ── STATS ─────────────────────────────────────────
+  var allGoals = document.querySelectorAll('.goal[data-status]');
+  var total = allGoals.length;
+  var done  = document.querySelectorAll('.goal[data-status="done"]').length;
+  var prog  = document.querySelectorAll('.goal[data-status="prog"]').length;
+  var pend  = total - done - prog;
+
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-done').textContent  = done;
+  document.getElementById('stat-prog').textContent  = prog;
+  document.getElementById('stat-pend').textContent  = pend;
+
+  // ── PER-CATEGORY STATS ─────────────────────────────
+  var cats = ['fitness','professional','habits','events','travel','fun','skills','lifestyle'];
+
+  cats.forEach(function(cat) {
+    var cTotal = document.querySelectorAll('.goal[data-cat="' + cat + '"]').length;
+    var cDone  = document.querySelectorAll('.goal[data-cat="' + cat + '"][data-status="done"]').length;
+    var pct    = cTotal ? Math.round(cDone / cTotal * 100) : 0;
+
+    var chip = document.getElementById('chip-' + cat);
+    if (chip) chip.textContent = cDone + ' / ' + cTotal + ' done';
+
+    var pb = document.getElementById('pb-' + cat);
+    if (pb) pb.style.width = pct + '%';
+
+    var pt = document.getElementById('pt-' + cat);
+    if (pt) pt.textContent = cDone + ' of ' + cTotal + ' completed';
+
+    var sb = document.getElementById('sb-' + cat);
+    if (sb) sb.textContent = cDone + '/' + cTotal;
+  });
+
+  // ── COLLAPSE TOGGLE ────────────────────────────────
+  window.toggleCat = function(hd) {
+    hd.closest('.cat-sec').classList.toggle('collapsed');
+  };
+
+  // ── FILTERING ──────────────────────────────────────
+  var activeStatus = 'all';
+  var activeCat    = null;
+
+  function applyFilters() {
+    allGoals.forEach(function(g) {
+      var statusMatch = activeStatus === 'all' || g.dataset.status === activeStatus;
+      var catMatch    = activeCat === null   || g.dataset.cat === activeCat;
+      g.classList.toggle('gone', !(statusMatch && catMatch));
+    });
+
+    document.querySelectorAll('.cat-sec[data-category]').forEach(function(sec) {
+      var cat = sec.dataset.category;
+      if (activeCat !== null && cat !== activeCat) {
+        sec.classList.add('sec-hidden'); return;
+      }
+      var hasVisible = Array.from(sec.querySelectorAll('.goal')).some(function(g) {
+        return !g.classList.contains('gone');
+      });
+      sec.classList.toggle('sec-hidden', !hasVisible);
+
+      sec.querySelectorAll('.g-divider').forEach(function(div) {
+        var next = div.nextElementSibling;
+        var hasItems = false;
+        while (next && !next.classList.contains('g-divider')) {
+          if (next.classList.contains('goal') && !next.classList.contains('gone')) {
+            hasItems = true; break;
+          }
+          next = next.nextElementSibling;
+        }
+        div.classList.toggle('gone', !hasItems);
+      });
+    });
+  }
+
+  // Status filter buttons
+  document.querySelectorAll('.fbtn[data-filter]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.fbtn[data-filter]').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeStatus = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  // Category filter buttons (toggle on/off)
+  document.querySelectorAll('.fbtn[data-cat]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var newCat = btn.dataset.cat;
+      if (activeCat === newCat) {
+        activeCat = null;
+        document.querySelectorAll('.fbtn[data-cat]').forEach(function(b) { b.classList.remove('active'); });
+      } else {
+        activeCat = newCat;
+        document.querySelectorAll('.fbtn[data-cat]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var target = document.getElementById('cat-' + newCat);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      applyFilters();
+    });
+  });
+
+  // ── SIDEBAR ACTIVE ON SCROLL ───────────────────────
+  var sbLinks = document.querySelectorAll('.sb-link[href^="#"]');
+
+  function updateSidebar() {
+    var scrollY = window.scrollY + 160;
+    var current = '';
+    document.querySelectorAll('.cat-sec[id]').forEach(function(sec) {
+      if (sec.offsetTop <= scrollY) current = sec.id;
+    });
+    sbLinks.forEach(function(l) {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', updateSidebar, { passive: true });
+  updateSidebar();
+
+  sbLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
