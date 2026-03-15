@@ -2508,7 +2508,6 @@ const PARK_DETAILS = {
       { name: 'California Condor', note: 'Possible in the broader Big Sur region if you are lucky' },
       { name: 'Black-tailed Deer', note: 'More likely in lower, quieter meadow and canyon sections' }
     ]
-  }
   },
   'candlestick-point': {
     highlight: 'California\'s first urban state recreation area transforms a former industrial shoreline into a peaceful Bay Area oasis with restored wetlands, fishing piers, paved trails, and sweeping views of the San Francisco skyline and Bay Bridge.',
@@ -4127,6 +4126,532 @@ const PARK_DETAILS = {
       {name:'Foothill Yellow-legged Frog',note:'Noted in the reserve brochure along the streamside habitat'},
       {name:'Banana Slug',note:'Frequently found on the trail in the morning — the park\'s unofficial mascot'},
       {name:'Western Screech-Owl',note:'Their trilling calls are often heard in the late afternoon'}
+    ]
+  },
+
+  'king-range': {
+    highlight: 'The heart of the Lost Coast, where mountains drop straight into the Pacific and California still feels genuinely roadless and wild.',
+    bestSeason: 'May – October', bestMonths: [5,6,7,8,9,10],
+    entranceFee: 'Free',
+    carCamping: { available: true, cost: 'Varies', sites: 0, note: 'Remote campground and primitive options exist depending on access area' },
+    tentCamping: { available: true, cost: 'Varies', sites: 0, note: 'Great for backpacking and simple coastal camping' },
+    parkingTip: 'Roads are slow, weather matters, and tides can control route options on the coast.',
+    nearbyFood: 'Shelter Cove, Garberville, and Fortuna are the practical support towns depending on approach.',
+    elevation: 'Sea level to 4,000+ ft',
+    things: ['Backpack or day hike sections of the Lost Coast','Visit for raw coastal scale rather than developed infrastructure','Allow extra travel time because roads are much slower than map distance suggests'],
+    hikes: [
+      { name: 'Lost Coast Trail Section', distance: '6.0 mi+', difficulty: 'Hard', note: 'Tide-dependent coastal hiking with huge payoff' },
+      { name: 'King Crest Trail Segment', distance: '5.0 mi', difficulty: 'Hard', note: 'Big ridge-country perspective above the coast' },
+      { name: 'Black Sands Beach Walk', distance: '2.0 mi', difficulty: 'Easy', note: 'Accessible taste of the Lost Coast feel' }
+    ],
+    photoSpots: [
+      { name: 'Black Sands Beach', note: 'Best for moody surf and dramatic shoreline contrast' },
+      { name: 'High Ridge Overlooks', note: 'Great when the marine layer opens up to reveal coast-meets-mountain scale' }
+    ],
+    wildlife: [
+      { name: 'Whale', note: 'Seasonal sightings are possible from exposed bluff viewpoints' },
+      { name: 'Raptor', note: 'Open wind and ridge habitat make sightings fairly common' }
+    ]
+  },
+  'alabama-hills': {
+    highlight: 'One of the most photogenic landscapes in California, with sculpted boulders and desert arches set beneath the eastern wall of the Sierra Nevada.',
+    bestSeason: 'October – April', bestMonths: [10,11,12,1,2,3,4],
+    entranceFee: 'Free',
+    carCamping: { available: true, cost: 'Primitive dispersed camping', sites: 0, note: 'Excellent basecamp destination for self-contained car campers' },
+    tentCamping: { available: true, cost: 'Primitive', sites: 0, note: 'Best for self-sufficient campers prepared for wind and cold nights' },
+    parkingTip: 'Wind, dust, and sun matter more than crowding here. Sunrise and sunset are the key windows.',
+    nearbyFood: 'Lone Pine is the obvious base for food, coffee, and gear needs.',
+    elevation: '4,500–6,000 ft',
+    things: ['Photograph arches and boulders with the Sierra wall behind them','Use it as an Eastern Sierra basecamp destination','Stay through sunrise or sunset because light completely changes the landscape'],
+    hikes: [
+      { name: 'Mobius Arch Loop', distance: '0.6 mi', difficulty: 'Easy', note: 'Classic quick-payoff loop and iconic first stop' },
+      { name: 'Heart Arch Exploration', distance: '1.5 mi', difficulty: 'Easy', note: 'Fun wandering route through granite formations' },
+      { name: 'Movie Road Wandering', distance: '2.0 mi', difficulty: 'Easy', note: 'Flexible desert exploration with many pull-off photo stops' }
+    ],
+    photoSpots: [
+      { name: 'Mobius Arch', note: 'Most iconic composition, especially with Mount Whitney behind it' },
+      { name: 'Movie Road', note: 'Best for broad desert-to-Sierra landscape framing' }
+    ],
+    wildlife: [
+      { name: 'Desert Cottontail', note: 'Possible around scrub and quieter camping areas' },
+      { name: 'Raven', note: 'Very common and photogenic in the open desert light' }
+    ]
+  },
+  'carrizo-plain': {
+    highlight: 'A huge interior California landscape of grassland, fault-line geology, and wildflower potential, best visited when the weather is cool and the plain still has color.',
+    bestSeason: 'February – April', bestMonths: [2,3,4],
+    entranceFee: 'Free',
+    carCamping: { available: true, cost: 'Primitive', sites: 0, note: 'Simple camping exists, but road conditions and weather matter a lot' },
+    tentCamping: { available: true, cost: 'Primitive', sites: 0, note: 'Best for self-sufficient visitors comfortable with exposure and wind' },
+    parkingTip: 'Roads can be rough, summer is harsh, and spring bloom conditions vary dramatically year to year.',
+    nearbyFood: 'Bring most of what you need; services are limited and spread out.',
+    elevation: '2,000–3,000+ ft',
+    things: ['Visit during bloom season if conditions line up','See the San Andreas Fault trace and broad plain geography','Go for open-space silence and wildlife rather than park-style amenities'],
+    hikes: [
+      { name: 'Soda Lake Boardwalk', distance: '0.5 mi', difficulty: 'Easy', note: 'Best quick introduction to the plain’s core landscape' },
+      { name: 'Panorama Overlook', distance: '1.0 mi', difficulty: 'Easy', note: 'Short climb to a better sense of scale' },
+      { name: 'Caliente Ridge Exploration', distance: '4.0 mi', difficulty: 'Moderate', note: 'Great in flower years for elevated views over the plain' }
+    ],
+    photoSpots: [
+      { name: 'Soda Lake', note: 'Best in spring or after wetter periods when the basin has more texture' },
+      { name: 'Caliente Ridge', note: 'Excellent for wide bloom or grassland panoramas' }
+    ],
+    wildlife: [
+      { name: 'Pronghorn', note: 'One of the most distinctive wildlife draws of the plain' },
+      { name: 'Elk', note: 'Possible in the broader grassland landscape depending on area and season' }
+    ]
+  },
+  'berryessa-snow-mountain': {
+    highlight: 'A large inland Northern California monument of oak ridges, chaparral, and remote trailheads that feels more like a choose-your-own wild landscape than a single destination.',
+    bestSeason: 'March – May', bestMonths: [3,4,5],
+    entranceFee: 'Free',
+    carCamping: { available: true, cost: 'Varies', sites: 0, note: 'Camping exists in parts of the broader monument footprint depending on access zone' },
+    tentCamping: { available: true, cost: 'Varies', sites: 0, note: 'Best for people comfortable with dispersed and less-structured planning' },
+    parkingTip: 'The monument is huge and fragmented, so pick one access area before you go rather than trying to sample everything in one day.',
+    nearbyFood: 'Winters, Lake County towns, and nearby foothill communities are the practical supply bases.',
+    elevation: 'Low valleys to high ridges',
+    things: ['Go for spring green hills and wildflowers','Use it for quieter inland hiking and camping','Treat it as a broad landscape category with multiple gateways'],
+    hikes: [
+      { name: 'Cache Creek Area Hike', distance: '4.0 mi', difficulty: 'Moderate', note: 'One of several gateway-style ways to experience the monument' },
+      { name: 'Snow Mountain Approach', distance: '8.0 mi', difficulty: 'Hard', note: 'Longer summit-style option in the higher terrain' }
+    ],
+    photoSpots: [
+      { name: 'Spring Ridge Views', note: 'Best during the green season before summer browning sets in' }
+    ],
+    wildlife: [
+      { name: 'Black-tailed Deer', note: 'Likely in quieter foothill and ridge habitat' },
+      { name: 'Raptor', note: 'Open country makes hawk sightings fairly common' }
+    ]
+  },
+  'san-gabriel-mountains-nm': {
+    highlight: 'A huge mountain escape above Los Angeles where waterfalls, chaparral canyons, pine forest, and occasional snow make the city feel surprisingly far away.',
+    bestSeason: 'October – May', bestMonths: [10,11,12,1,2,3,4,5],
+    entranceFee: 'Mostly free; some trailheads and recreation areas vary',
+    carCamping: { available: true, cost: 'Varies', sites: 0, note: 'Many front-country camping options depending on the access corridor' },
+    tentCamping: { available: true, cost: 'Varies', sites: 0, note: 'Backpacking and campground camping are both possible' },
+    parkingTip: 'Fire closures, heat, and canyon access conditions change often. Check your exact area before driving.',
+    nearbyFood: 'La Canada, Pasadena, Azusa, and mountain communities vary by which access corridor you choose.',
+    elevation: '2,000–10,000+ ft',
+    things: ['Escape LA for real mountain terrain in under a day','Choose waterfalls, summit hikes, or higher-forest routes depending on season','Check fire and heat conditions as part of the planning process'],
+    hikes: [
+      { name: 'Switzer Falls', distance: '4.5 mi', difficulty: 'Moderate', note: 'Popular lower-elevation waterfall hike' },
+      { name: 'Mount Baden-Powell', distance: '8.0 mi', difficulty: 'Hard', note: 'Classic high-country summit objective' },
+      { name: 'Bridge to Nowhere', distance: '10.0 mi', difficulty: 'Hard', note: 'Big canyon hike and local classic' }
+    ],
+    photoSpots: [
+      { name: 'High Ridge Views', note: 'Best after storms when visibility is especially crisp' },
+      { name: 'Waterfall Canyons', note: 'Strongest in cooler months when flow is higher' }
+    ],
+    wildlife: [
+      { name: 'Bighorn Sheep', note: 'Possible in some steeper canyon and mountain areas' },
+      { name: 'Steller’s Jay', note: 'Common in higher pine-forest zones' }
+    ]
+  },
+  'sand-to-snow-nm': {
+    highlight: 'A dramatic Southern California monument linking low desert with high forested mountains, best for shoulder-season hiking and broad ecological contrast.',
+    bestSeason: 'October – April', bestMonths: [10,11,12,1,2,3,4],
+    entranceFee: 'Free',
+    carCamping: { available: true, cost: 'Varies', sites: 0, note: 'Camping options depend on the specific corridor you target' },
+    tentCamping: { available: true, cost: 'Varies', sites: 0, note: 'Good for self-directed desert-to-mountain trips' },
+    parkingTip: 'Decide ahead of time whether you want lower desert canyons or higher-elevation access because the monument covers a broad range.',
+    nearbyFood: 'Palm Springs, Yucca Valley, and mountain towns are the main launch points depending on route.',
+    elevation: '1,000–10,000+ ft',
+    things: ['Experience sharp climate and elevation contrast in one monument','Visit in cooler months for more comfortable hiking','Use it as a complement to Joshua Tree or San Jacinto region trips'],
+    hikes: [
+      { name: 'Desert Foothill Route', distance: '4.0 mi', difficulty: 'Moderate', note: 'Best for a lower-elevation monument taste in winter' },
+      { name: 'Mountain Access Hike', distance: '6.0 mi', difficulty: 'Moderate', note: 'Higher terrain option depending on road and season' }
+    ],
+    photoSpots: [
+      { name: 'Transition Zone Overlooks', note: 'Best for showing desert foreground and mountain backdrop together' }
+    ],
+    wildlife: [
+      { name: 'Desert Birdlife', note: 'Most noticeable in lower scrub and wash habitats' },
+      { name: 'Mule Deer', note: 'Possible in cooler, higher-elevation sections' }
+    ]
+  },
+  'santa-rosa-san-jacinto-nm': {
+    highlight: 'A top-tier Southern California desert mountain landscape with palm oases, long ridges, and some of the best cool-season hiking in the state.',
+    bestSeason: 'November – April', bestMonths: [11,12,1,2,3,4],
+    entranceFee: 'Mostly free; area-specific access may vary',
+    carCamping: { available: true, cost: 'Varies', sites: 0, note: 'Camping is available in the broader monument region' },
+    tentCamping: { available: true, cost: 'Varies', sites: 0, note: 'Great for both campground and backpack-style trips' },
+    parkingTip: 'Palm Springs area trailheads can be hot and busy; start early and carry more water than you think you need.',
+    nearbyFood: 'Palm Springs, Palm Desert, and surrounding Coachella Valley towns are the easiest support bases.',
+    elevation: 'Below 1,000 ft to 10,000+ ft',
+    things: ['Hike palm oases and desert canyons in winter or spring','Use it for classic Coachella Valley mountain scenery','Pair lower desert trails with cooler higher-elevation escapes'],
+    hikes: [
+      { name: 'Palm Canyon Trail', distance: '4.0 mi', difficulty: 'Moderate', note: 'Classic palm oasis desert route' },
+      { name: 'Art Smith Trail', distance: '7.5 mi', difficulty: 'Hard', note: 'Big climb with sweeping valley views' },
+      { name: 'Higher Ridge Hike', distance: '5.0 mi', difficulty: 'Moderate', note: 'Varies by chosen access point and season' }
+    ],
+    photoSpots: [
+      { name: 'Palm Oasis Canyons', note: 'Best in angled morning or late-day light' },
+      { name: 'Coachella Valley Overlooks', note: 'Excellent after winter storms for crisp visibility' }
+    ],
+    wildlife: [
+      { name: 'Bighorn Sheep', note: 'One of the region’s signature wildlife sightings' },
+      { name: 'Roadrunner', note: 'Possible on lower-elevation desert trails' }
+    ]
+  },
+  'california-coastal-nm': {
+    highlight: 'Less a single stop than a coastal layer of protected offshore rocks and shoreline units that rewards combining with specific places like Point Arena-Stornetta or other BLM coast access.',
+    bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee: 'Free',
+    carCamping: { available: false, cost: '', sites: 0, note: 'Depends on the specific shoreline unit or partner site' },
+    tentCamping: { available: false, cost: '', sites: 0, note: 'Not a single-campground monument experience' },
+    parkingTip: 'Plan around a specific unit rather than trying to interpret this as one centralized destination.',
+    nearbyFood: 'Varies completely by the shoreline unit you choose to visit.',
+    elevation: 'Sea level and offshore formations',
+    things: ['Use it as a discovery frame for BLM-protected coastal units','Combine it with a concrete stop like Point Arena-Stornetta','Visit for wildlife, geology, and the idea of a protected working coastline'],
+    hikes: [
+      { name: 'Unit-Specific Bluff Walk', distance: '1.0 mi+', difficulty: 'Easy', note: 'Most monument experiences are tied to individual shoreline units' }
+    ],
+    photoSpots: [
+      { name: 'Offshore Sea Stacks', note: 'Best in dramatic coastal weather or whale-season light' }
+    ],
+    wildlife: [
+      { name: 'Seabird', note: 'A major reason these offshore rocks are protected' },
+      { name: 'Whale', note: 'Look in migration seasons from the right coastal unit' }
+    ]
+  },
+  'point-arena-stornetta': {
+    highlight: 'One of the most dramatic public bluff walks on the Mendocino coast, with huge surf, sea arches, and excellent whale-season energy.',
+    bestSeason: 'September – May', bestMonths: [9,10,11,12,1,2,3,4,5],
+    entranceFee: 'Free',
+    carCamping: { available: false, cost: '', sites: 0, note: 'Day-use coastal walking area' },
+    tentCamping: { available: false, cost: '', sites: 0, note: 'No camping on the bluffs' },
+    parkingTip: 'Wind and weather are part of the experience; bring layers even on mild-looking days.',
+    nearbyFood: 'Point Arena is the easy food and coffee base before or after a walk.',
+    elevation: 'Low coastal bluffs',
+    things: ['Walk the bluffs for huge ocean views','Visit during whale migration if possible','Treat it as one of the best short high-payoff North Coast stops'],
+    hikes: [
+      { name: 'Main Bluff Walk', distance: '3.0 mi', difficulty: 'Easy', note: 'Flat to gently rolling coastal walking with nonstop views' },
+      { name: 'Sea Arch Out-and-Back', distance: '1.5 mi', difficulty: 'Easy', note: 'Shorter version focused on key coastal features' }
+    ],
+    photoSpots: [
+      { name: 'Sea Arch and Cliffs', note: 'Strongest when surf is active and light is angled' },
+      { name: 'Wide Bluff Panorama', note: 'Great for showing the scale of the exposed coast' }
+    ],
+    wildlife: [
+      { name: 'Gray Whale', note: 'A top reason to visit in migration season' },
+      { name: 'Pelican', note: 'Often visible surfing the bluff wind line' }
+    ]
+  },
+  'cotoni-coast-dairies': {
+    highlight: 'A newer public coast unit north of Santa Cruz with ranch-history landscape, ocean-facing ridges, and the feeling of a place still opening up over time.',
+    bestSeason: 'October – May', bestMonths: [10,11,12,1,2,3,4,5],
+    entranceFee: 'Free',
+    carCamping: { available: false, cost: '', sites: 0, note: 'Currently more of a day-use trail destination' },
+    tentCamping: { available: false, cost: '', sites: 0, note: 'No developed camping' },
+    parkingTip: 'Trail access and management can evolve, so treat current rules and open areas as something to check before going.',
+    nearbyFood: 'Davenport and Santa Cruz are the easiest places to eat before or after a walk.',
+    elevation: 'Coastal terrace to low ridges',
+    things: ['Explore a newer public coast landscape before it feels fully discovered','Walk ranch-country trails with ocean views','Pair it with Highway 1 beaches and Davenport stops'],
+    hikes: [
+      { name: 'Ridgeline Trail Walk', distance: '4.0 mi', difficulty: 'Moderate', note: 'Best for combining old ranch feel with ocean perspective' },
+      { name: 'Short Coastal Access Walk', distance: '2.0 mi', difficulty: 'Easy', note: 'Lower-commitment option depending on the open trail network' }
+    ],
+    photoSpots: [
+      { name: 'Ranch-to-Ocean Viewpoints', note: 'Best in clear weather when the coastline is sharply visible' }
+    ],
+    wildlife: [
+      { name: 'Raptor', note: 'Open ranch ridges are good hawk country' },
+      { name: 'Black-tailed Deer', note: 'Possible in quieter edge habitat and evening hours' }
+    ]
+  },
+  'elkhorn-slough-reserve': {
+    highlight: 'One of the best easy-access estuary nature destinations in California, especially if you care about birding, otters, or a calm nature walk over a strenuous hike.',
+    bestSeason: 'September – April', bestMonths: [9,10,11,12,1,2,3,4],
+    entranceFee: 'Free or low-cost depending on area/program',
+    carCamping: { available: false, cost: '', sites: 0, note: 'Reserve is a day-use nature destination' },
+    tentCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
+    parkingTip: 'Birding is best earlier in the day, and tides/weather can shape how active the slough feels.',
+    nearbyFood: 'Moss Landing is the obvious nearby stop for seafood or a quick meal.',
+    elevation: 'Sea level marsh and low bluffs',
+    things: ['Look for otters and estuary birdlife','Do an easy interpretive walk rather than a hard hike','Pair it with Moss Landing or Monterey Bay coastal stops'],
+    hikes: [
+      { name: 'Reserve Trail Loop', distance: '1.5 mi', difficulty: 'Easy', note: 'Best low-effort overview of slough habitat' },
+      { name: 'Estuary View Walk', distance: '2.0 mi', difficulty: 'Easy', note: 'Gentle extension for more birding and wider marsh views' }
+    ],
+    photoSpots: [
+      { name: 'Slough Overlook', note: 'Best for marsh geometry, tidal water, and wildlife scanning' },
+      { name: 'Trail and Boardwalk Edges', note: 'Useful for closer habitat and bird photography' }
+    ],
+    wildlife: [
+      { name: 'Sea Otter', note: 'One of the signature reasons to visit the slough' },
+      { name: 'Great Egret', note: 'Very common in the estuary environment' }
+    ]
+  },
+
+  /* -------- Batch 7 · North Coast finish + Central Coast -------- */
+
+  'navarro-river':{
+    highlight:'An 11-mile "redwood tunnel" along Highway 128 where the road itself becomes part of the experience, culminating where the Navarro River meets the Pacific. Paul M. Dimmick Campground offers riverside camping under towering trees in a quiet inland canyon.',
+    googleRating:4.8, googleReviews:'715',
+    bestSeason:'May – October', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free',
+    carCamping:{available:true,cost:'$35/night',sites:25,note:'Paul M. Dimmick Campground with developed sites, toilets, fire grills; campers up to 30 ft'},
+    tentCamping:{available:true,cost:'$35/night',sites:25,note:'Shaded riverside sites plus 10 primitive sites at Navarro Beach'},
+    parkingTip:'For beach access, use the sandy lot at the Navarro River mouth. For forest, use small turnouts along Highway 128. Watch for log trucks when pulling in/out.',
+    nearbyFood:'Philo Apple Farm (10 min) for fresh-pressed cider; Lauren\'s in Boonville (15 min) for hearty comfort food; Lemons Philo Market (10 min) for deli sandwiches',
+    elevation:'350 ft',
+    things:['Kayak the Navarro River estuary at high tide','Explore massive driftwood piles at the river mouth','Fish for steelhead in the river (seasonal)','Drive the scenic "Redwood Tunnel" of Highway 128','Camp riverside at Paul M. Dimmick under the canopy'],
+    hikes:[
+      {name:'Navarro Beach Walk',distance:'1.5 mi round trip',gain:'30 ft',difficulty:'Easy',note:'Flat stroll along the wide sandy beach where the river meets the sea'},
+      {name:'Dimmick Memorial Grove',distance:'0.6 mi round trip',gain:'13 ft',difficulty:'Easy',note:'Best formal short redwood walk in the park corridor'},
+      {name:'Redwood Forest Path',distance:'0.8 mi round trip',gain:'50 ft',difficulty:'Easy',note:'Informal walk near the campground through lush ferns and second-growth trees'}
+    ],
+    photoSpots:[
+      {name:'The Redwood Tunnel',note:'Capture light rays piercing the canopy along Highway 128 in early morning'},
+      {name:'Navarro Beach Sunset',note:'Driftwood logs provide excellent foreground interest against the setting sun'}
+    ],
+    wildlife:[
+      {name:'River Otter',note:'Often seen swimming in the calm estuary waters near the bridge'},
+      {name:'Osprey',note:'Diving into the river for fish during summer months'},
+      {name:'Belted Kingfisher',note:'Highlighted in the park brochure along the Navarro River corridor'}
+    ]
+  },
+
+  'reynolds-wc':{
+    highlight:'Despite the historic campground name, Reynolds is now a small wayside stop preserving 38 acres of old-growth coast redwoods and Douglas-fir. A steep trail drops to the South Fork Eel River — best as a quick, crowd-free forest break on Highway 101.',
+    googleRating:4.5, googleReviews:'40',
+    bestSeason:'May – October', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Campground eliminated in 1976 when Highway 101 was constructed'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'Functions as a wayside park now, not an overnight campground'},
+    parkingTip:'Limited and informal parking. Works best as a quick stop — the river access is via a steep trail through the grove.',
+    nearbyFood:'The Peg House in Leggett (10 min) for locally-sourced burgers; Drive-Thru Tree Park (8 min) for snacks; Woodrose Cafe in Garberville (15 min) for vegetarian-friendly meals',
+    elevation:'700 ft',
+    things:['Walk beneath old-growth coast redwoods','Take the steep footpath toward the South Fork Eel River','Use as a quiet Highway 101 break','Photograph redwood trunks without crowds','Pair with nearby Standish-Hickey or Smithe Redwoods'],
+    hikes:[
+      {name:'Grove Access Trail',distance:'0.4 mi round trip',gain:'120 ft',difficulty:'Easy',note:'Shortest walk through the old-growth grove from the pullout area'},
+      {name:'River Access Trail',distance:'0.8 mi round trip',gain:'220 ft',difficulty:'Moderate',note:'Steeper drop toward the South Fork Eel River, best when dry'},
+      {name:'Reynolds Grove Ramble',distance:'0.6 mi round trip',gain:'150 ft',difficulty:'Easy',note:'Quick old-growth stretch-and-look stop'}
+    ],
+    photoSpots:[
+      {name:'Upper Grove Pullout',note:'Best in overcast or early light when the redwood bark color is richest'},
+      {name:'Highway 101 Entrance Sign',note:'Rustic wooden park sign framed by redwoods — classic road trip photo'}
+    ],
+    wildlife:[
+      {name:'Steller\'s Jay',note:'Bright blue and quite vocal throughout the grove'},
+      {name:'Black-tailed Deer',note:'Most likely at dawn or dusk on the quieter edges'},
+      {name:'Banana Slug',note:'Look for them on damp logs after morning fog'}
+    ]
+  },
+
+  'schooner-gulch':{
+    highlight:'Home to the world-famous "Bowling Ball Beach" where perfectly spherical stone concretions appear in neat rows at low tide like a giant\'s bowling alley. Even when the tide is wrong, the bluff, beach, and surf make it one of the most atmospheric quick stops on Highway 1.',
+    googleRating:4.7, googleReviews:'450',
+    bestSeason:'Year-round (tide dependent)', bestMonths:[1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Day-use beach only'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'Day-use only to protect sensitive coastal bluffs'},
+    parkingTip:'Small dirt pull-out on the west side of Highway 1 near Mile Marker 11.41 — easy to miss. Check tide charts first; arrive early for low-tide visits.',
+    nearbyFood:'Franny\'s Cup & Saucer (10 min) for incredible pastries; Pier Chowder House & Tap Room in Point Arena (5 min) for casual seafood; Rollerville Cafe (5 min) for breakfast',
+    elevation:'150 ft',
+    things:['Photograph the "Bowling Balls" at low tide (check tide charts!)','Search for sea glass in the gravelly patches','Watch the sunset from the high coastal bluffs','Explore the secluded Schooner Gulch cove','Beachcomb for driftwood and agates'],
+    hikes:[
+      {name:'Schooner Gulch & Bowling Ball Beach',distance:'1.5 mi round trip',gain:'144 ft',difficulty:'Moderate',note:'Classic route down to the beach and north toward the bowling-ball concretions at low tide'},
+      {name:'Bowling Ball Beach Trail',distance:'1.0 mi round trip',gain:'100 ft',difficulty:'Moderate',note:'Short but sometimes muddy descent down the bluffs via a steep staircase'},
+      {name:'Northern Bluff Spur',distance:'0.8 mi round trip',gain:'80 ft',difficulty:'Easy',note:'Shorter headland option for views if the tide is too high for the full beach walk'}
+    ],
+    photoSpots:[
+      {name:'Bowling Ball Rocks',note:'Must be shot during a low tide of 1.0 or less; side light makes the concretions stand out'},
+      {name:'Bluff Overlook',note:'Sweeping view of the Mendocino coastline — best at sunset'}
+    ],
+    wildlife:[
+      {name:'Peregrine Falcon',note:'Often seen nesting or hunting along the steep coastal cliffs'},
+      {name:'Harbor Seal',note:'Look for them on the flat rocks further out in the surf'},
+      {name:'Brown Pelican',note:'Glide effortlessly along the wave breaks in large groups'}
+    ]
+  },
+
+  'smithe-redwoods':{
+    highlight:'A quiet roadside redwood reserve with a stunning 60-foot waterfall and pristine swimming holes on the South Fork Eel River. A lush, verdant pocket of old-growth that feels like a private oasis — one of the best "small stop, big payoff" parks on the North Coast.',
+    googleRating:4.7, googleReviews:'180',
+    bestSeason:'May – October', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Day-use reserve; camp at nearby Standish-Hickey SRA'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'Day-use only to preserve the delicate riparian habitat'},
+    parkingTip:'Paved lot on the west side of Highway 101 with a short tunnel leading under the highway to the river area. About 4 miles north of Leggett.',
+    nearbyFood:'The Peg House (2 min) for locally-sourced food; Drive-Thru Tree Park (5 min) for snacks; Woodrose Cafe in Garberville (15 min) for vegetarian-friendly meals',
+    elevation:'700 ft',
+    things:['Swim in the deep emerald pools of the South Fork Eel River','Hike to the base of Frank and Bess Smithe Falls','Picnic in the "Cathedral Grove" of old-growth trees','Fish for salmon in season','Experience a less-visited redwood grove in peaceful solitude'],
+    hikes:[
+      {name:'Waterfall Trail',distance:'1.2 mi round trip',gain:'200 ft',difficulty:'Moderate',note:'Lush, fern-lined trail leading to the scenic 60-foot waterfall'},
+      {name:'Frank and Bess Smithe Grove',distance:'0.5 mi round trip',gain:'19 ft',difficulty:'Easy',note:'The reserve\'s main short walk through the old-growth grove'},
+      {name:'River Access Path',distance:'0.6 mi round trip',gain:'30 ft',difficulty:'Easy',note:'Quick stroll from the parking lot down to the swimming holes'}
+    ],
+    photoSpots:[
+      {name:'Frank and Bess Smithe Falls',note:'Best in early spring when the water flow is at its peak'},
+      {name:'Eel River Pools',note:'Emerald green water against the redwood backdrop is incredibly photogenic'}
+    ],
+    wildlife:[
+      {name:'American Dipper',note:'Small bird seen "dipping" and diving into the fast-flowing creek water'},
+      {name:'River Otter',note:'Occasionally spotted in the deeper swimming pools in early morning'},
+      {name:'Belted Kingfisher',note:'Often perched on branches overhanging the river'}
+    ]
+  },
+
+  'standish-hickey':{
+    highlight:'Known as the "Gateway to the Redwoods," this park offers the first major redwood groves heading north on Highway 101. Features the massive 225-foot Miles Standish Tree, excellent South Fork Eel River swimming, and a year-round campground that\'s perfect for families.',
+    googleRating:4.6, googleReviews:'880',
+    bestSeason:'May – October', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'$8/vehicle',
+    carCamping:{available:true,cost:'$35/night',sites:81,note:'Three campgrounds (Rock Creek, Redwood, Hickey) with varying shade and river access; open year-round'},
+    tentCamping:{available:true,cost:'$35/night',sites:81,note:'Hike-in sites also available for more seclusion away from car traffic'},
+    parkingTip:'Main day-use lot near the river is large. In summer, arrive before 11 AM to secure a spot near the best swimming holes.',
+    nearbyFood:'The Peg House (1 min) right across the street for vegetarian burgers and salads; Woodrose Cafe in Garberville (20 min) for organic meals; Redwoods River Resort for supplies',
+    elevation:'900 ft',
+    things:['Marvel at the 225-foot Miles Standish Tree','Jump into the "Blue Hole" swimming spot on the Eel River','Hike the varied terrain of the Mill Creek Loop','Join a ranger-led campfire program in summer','Sunbathe on the large river rocks'],
+    hikes:[
+      {name:'Big Tree Loop',distance:'2.0 mi round trip',gain:'300 ft',difficulty:'Easy',note:'Leads directly to the park\'s most famous massive old-growth redwoods'},
+      {name:'Mill Creek Loop',distance:'6.0 mi round trip',gain:'1,200 ft',difficulty:'Hard',note:'Strenuous but rewarding climb high above the river for great views'},
+      {name:'Taber Nature Trail',distance:'1.6 mi round trip',gain:'147 ft',difficulty:'Easy',note:'Self-guided interpretive trail explaining the local ecology'}
+    ],
+    photoSpots:[
+      {name:'The Blue Hole',note:'Deep blue/green river water best captured in midday sun'},
+      {name:'Miles Standish Tree',note:'Use a wide-angle lens to capture the full scale of this giant'}
+    ],
+    wildlife:[
+      {name:'Gray Fox',note:'Often seen darting through the campgrounds at twilight'},
+      {name:'Western Pond Turtle',note:'Frequently found basking on logs in quieter river sections'},
+      {name:'Black Bear',note:'Known to visit campgrounds — use the provided bear-proof lockers'}
+    ]
+  },
+
+  'westport-landing':{
+    highlight:'Dramatic bluff-top camping on open grasslands overlooking the Pacific Ocean — fall asleep to crashing waves and enjoy some of the most spectacular unobstructed stargazing on the Mendocino coast. Raw, wind-swept, and unforgettable.',
+    googleRating:4.6, googleReviews:'320',
+    bestSeason:'April – October', bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'$8/vehicle',
+    carCamping:{available:true,cost:'$35/night',sites:86,note:'Three campgrounds on open bluffs with ocean views; very little shade or wind protection'},
+    tentCamping:{available:true,cost:'$35/night',sites:86,note:'Primitive camping with chemical toilets, tables, fire rings; first-come first-served, cash/check only'},
+    parkingTip:'Parking at or near campsites. Day-use visitors use small gravel pull-outs along the highway. Wind and exposure matter more than lot congestion.',
+    nearbyFood:'Westport Hotel & Sequoia Restaurant (5 min) for local delicacies; North Coast Brewing Co. in Fort Bragg (25 min) for award-winning beer and pub food; Howard\'s Grotto in Fort Bragg (20 min) for casual dining',
+    elevation:'150 ft',
+    things:['Watch the sunset from your bluff-side campsite','Explore hidden pocket beaches at the base of the cliffs','Go stargazing far from city light pollution','Search for sea glass in the intertidal zones','Walk the rugged coastline and overlook points'],
+    hikes:[
+      {name:'Bluff Top Trail',distance:'2.0 mi round trip',gain:'80 ft',difficulty:'Easy',note:'Flat, breezy walk along the cliff edge connecting the camping areas'},
+      {name:'Beach Access Path',distance:'0.3 mi round trip',gain:'100 ft',difficulty:'Moderate',note:'Steep and sometimes slippery descent to the rocky shoreline'},
+      {name:'South Bluff Out-and-Back',distance:'2.6 mi round trip',gain:'160 ft',difficulty:'Easy',note:'Longer walk without leaving the bluff system — great for sunset'}
+    ],
+    photoSpots:[
+      {name:'The Sea Stacks',note:'Large offshore rocks catch the golden hour light beautifully'},
+      {name:'Night Sky',note:'On a clear night the Milky Way is often visible directly over the ocean'}
+    ],
+    wildlife:[
+      {name:'Gray Whale',note:'Visible from the bluffs during winter/spring migration'},
+      {name:'Cormorant',note:'Large colonies nest on the inaccessible offshore rocks'},
+      {name:'Harbor Seal',note:'Often spotted on rocks below the bluffs year-round'}
+    ]
+  },
+
+  'garrapata':{
+    highlight:'A hidden gem of the Big Sur coast with no entrance gate — featuring dramatic headlands, pounding surf, a spring Calla Lily Valley with thousands of white lilies, and redwood canyons. The scenery changes fast: a short coastal loop or a longer canyon climb delivers completely different experiences.',
+    googleRating:4.8, googleReviews:'1.7K',
+    bestSeason:'February – June', bestMonths:[2,3,4,5,6],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Day-use only; no camping allowed'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'Day-use only'},
+    parkingTip:'No large central lot — parking is along numbered dirt turnouts on Highway 1. Turnout 19 for Calla Lily Valley, Turnout 8 for Soberanes Point. Go early; fills fast.',
+    nearbyFood:'Rocky Point Restaurant (5 min) for stunning cliffside views; Big Sur River Inn (15 min) for "feet-in-the-river" seating; Rio Grill in Carmel (15 min) for reliable casual dining',
+    elevation:'2,370 ft',
+    things:['Walk through the wild Calla Lily Valley in late winter/spring','Hike to the whale-watching benches at Soberanes Point','Explore the dramatic surf at Garrapata Beach','Photograph vibrant wildflowers on the bluff trails','Climb the steep Soberanes Canyon for Santa Lucia Mountain views'],
+    hikes:[
+      {name:'Soberanes Point & Whale Peak',distance:'1.6 mi round trip',gain:'275 ft',difficulty:'Easy',note:'Short, high-payoff coastal loop with broad bluff views and whale-watching benches'},
+      {name:'Calla Lily Valley Path',distance:'0.8 mi round trip',gain:'85 ft',difficulty:'Easy',note:'Best spring flower walk — thousands of white calla lilies leading to a sandy beach'},
+      {name:'Soberanes Canyon Trail',distance:'2.9 mi round trip',gain:'505 ft',difficulty:'Moderate',note:'Heads inland through a beautiful redwood canyon following a clear creek'}
+    ],
+    photoSpots:[
+      {name:'Calla Lily Valley',note:'Best late February–early March; shoot from the beach looking back toward the valley'},
+      {name:'Whale Peak',note:'Highest point on the coastal side with 360-degree views of the Big Sur coastline'}
+    ],
+    wildlife:[
+      {name:'Sea Otter',note:'Frequently spotted floating in the kelp beds just offshore at Soberanes Point'},
+      {name:'Gray Whale',note:'Peak viewing January through March as they migrate close to shore'},
+      {name:'Red-tailed Hawk',note:'Frequently soaring over the coastal scrub hunting for rodents'}
+    ]
+  },
+
+  'point-lobos':{
+    highlight:'The "Crown Jewel" of the California State Park system — unbelievably clear coves, twisted ancient Monterey Cypress, sea lions, otters, and some of the most beautiful short trails in California. Almost every walk ends at a view that feels world-class.',
+    googleRating:4.9, googleReviews:'10.4K',
+    bestSeason:'Year-round', bestMonths:[1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee:'$10/vehicle',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Day-use only; highly protected natural reserve'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'No camping; park often reaches capacity by 10 AM'},
+    parkingTip:'Arrive right at opening. Weekend timed-entry parking reservations required via ReserveCalifornia. You can park on Highway 1 and walk in for free, but it adds significant distance.',
+    nearbyFood:'Stationæry in Carmel (15 min) for gourmet coffee and brunch; La Bicyclette (15 min) for a high-quality town stop; Mission Ranch Restaurant (10 min) for a classic relaxed meal',
+    elevation:'350 ft',
+    things:['Spot sea otters in the turquoise waters of China Cove','Walk the Cypress Grove trail to see 1,000-year-old trees','Visit the Whalers Cabin Museum for 19th-century history','Scuba dive or snorkel in the protected kelp forests (permit required)','Watch sunset from Sea Lion Point'],
+    hikes:[
+      {name:'Point Lobos Loop',distance:'6.3 mi round trip',gain:'708 ft',difficulty:'Moderate',note:'Complete sampler of the reserve\'s coves, forests, and wildlife viewpoints'},
+      {name:'Cypress Grove Trail',distance:'0.9 mi round trip',gain:'65 ft',difficulty:'Easy',note:'World-famous loop through ancient Monterey Cypresses clinging to the cliffs'},
+      {name:'Bird Island Trail',distance:'0.8 mi round trip',gain:'88 ft',difficulty:'Easy',note:'Views of China Cove\'s turquoise water and thousands of nesting birds'}
+    ],
+    photoSpots:[
+      {name:'China Cove',note:'Best at midday when the sun is directly overhead, highlighting the emerald water'},
+      {name:'Old Veteran Cypress',note:'Lone ancient tree on the Cypress Grove trail — an icon of the California coast'}
+    ],
+    wildlife:[
+      {name:'Sea Otter',note:'Very common in Whaler\'s Cove and China Cove; often wrap themselves in kelp'},
+      {name:'California Sea Lion',note:'You can hear them barking from far away; congregate on offshore rocks'},
+      {name:'Black-crowned Night Heron',note:'Often seen standing perfectly still in the tide pools near Weston Beach'}
+    ]
+  },
+
+  'pfeiffer-big-sur':{
+    highlight:'The classic Big Sur campground park — called "Mini Yosemite" — with the Big Sur River winding through groves of towering coast redwoods. Serves as the main hub for Big Sur with a mix of mountain hiking, river swimming, and lush forested camping.',
+    googleRating:4.7, googleReviews:'3.8K',
+    bestSeason:'April – October', bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'$10/vehicle',
+    carCamping:{available:true,cost:'$50/night',sites:189,note:'One of the most popular campgrounds in California; reservations required 6 months in advance'},
+    tentCamping:{available:true,cost:'$50/night',sites:189,note:'Tent sites along the river are one of the best ways to enjoy the redwood setting'},
+    parkingTip:'Main lots near the Lodge fill fast in summer — arrive before 10 AM or after 3 PM. If camping, the campground is large with multiple loops spread across the valley.',
+    nearbyFood:'Big Sur Bakery (5 min) for world-class pastries and wood-fired dinner; Nepenthe (10 min) for famous views and the Ambrosia burger; Fernwood Resort (2 min) for casual pizza and beer',
+    elevation:'1,000 ft',
+    things:['Swim in the Big Sur River at the "Big Sur Gorge"','Hike to the 60-foot Pfeiffer Falls','Camp under ancient redwoods in the valley','Climb to Buzzard\'s Roost for panoramic views','Relax in a chair in the river at Big Sur River Inn'],
+    hikes:[
+      {name:'Pfeiffer Falls Trail',distance:'1.7 mi round trip',gain:'511 ft',difficulty:'Moderate',note:'Most popular forest hike with bridge crossings and a 60-foot waterfall'},
+      {name:'Buzzard\'s Roost Trail',distance:'2.5 mi round trip',gain:'780 ft',difficulty:'Moderate',note:'Steady climb through redwoods to a ridge with ocean views over Big Sur Valley'},
+      {name:'Valley View Trail',distance:'2.0 mi round trip',gain:'450 ft',difficulty:'Moderate',note:'Clear view across the Big Sur River valley to the ocean'}
+    ],
+    photoSpots:[
+      {name:'Big Sur River Gorge',note:'Sun filtering through the trees onto the river rocks creates a magical atmosphere'},
+      {name:'Valley View Overlook',note:'Best in late afternoon when the canyon opens up below you'}
+    ],
+    wildlife:[
+      {name:'California Condor',note:'Often seen soaring high above the ridges — look for their massive wingspan'},
+      {name:'Black-tailed Deer',note:'Very habituated to humans; often walk through the campgrounds'},
+      {name:'Steller\'s Jay',note:'Bold birds that will try to steal your picnic — keep food secured'}
+    ]
+  },
+
+  'julia-pfeiffer-burns':{
+    highlight:'Home to McWay Falls — a stunning 80-foot waterfall that drops directly onto a pristine beach or into the ocean at high tide. Widely considered one of the most photographed spots on the entire planet, with steep canyons and 3,000-foot ridges beyond the postcard view.',
+    googleRating:4.8, googleReviews:'4.2K',
+    bestSeason:'Year-round', bestMonths:[1,2,3,4,5,9,10,11,12],
+    entranceFee:'$10/vehicle',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'No drive-in campground; only two extremely sought-after hike-in environmental sites'},
+    tentCamping:{available:true,cost:'$30/night',sites:2,note:'Hike-in environmental sites with world-class views — hardest campsites to book in California'},
+    parkingTip:'The main McWay Falls lot is small and often has a long wait. Go early or later in the day. The beach itself is closed to public access.',
+    nearbyFood:'Nepenthe (15 min north) for the most iconic Big Sur dining experience; Cafe Kevah (15 min) for quicker meals with panoramic seating; Deetjen\'s Restaurant (10 min) for classic Big Sur ambiance',
+    elevation:'3,000 ft',
+    things:['Photograph McWay Falls from the overlook trail','Hike the strenuous Ewoldsen Trail for panoramic ocean views','Explore the Partington Cove historic tunnel and rocky cove','Tackle the Tanbark Trail to the Tin House ruins','Whale watch from the coastal bluffs'],
+    hikes:[
+      {name:'McWay Falls Overlook',distance:'0.6 mi round trip',gain:'50 ft',difficulty:'Easy',note:'Iconic flat path to the view of the waterfall dropping into the turquoise cove'},
+      {name:'Partington Cove Trail',distance:'1.2 mi round trip',gain:'334 ft',difficulty:'Moderate',note:'Short but memorable route down to a historic tunnel and rocky cove'},
+      {name:'Ewoldsen Trail',distance:'4.5 mi round trip',gain:'1,400 ft',difficulty:'Hard',note:'Strenuous climb through deep redwoods to panoramic coastal overlooks'}
+    ],
+    photoSpots:[
+      {name:'McWay Falls',note:'Best in late afternoon for golden light on the falls and the cove'},
+      {name:'Partington Cove Tunnel',note:'Best in softer light when the water color and cliff texture separate clearly'}
+    ],
+    wildlife:[
+      {name:'California Condor',note:'Primary release site — look for them perched on high redwood snags'},
+      {name:'Gray Whale',note:'Excellent viewing from the McWay Falls overlook during winter months'},
+      {name:'Bobcat',note:'Occasionally seen on quieter upland trails like Ewoldsen in early morning'}
     ]
   }
 };
