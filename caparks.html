@@ -254,6 +254,12 @@
     .badge-smp  { background: #d1fae5; color: #065f46; }
     .badge-wc   { background: #f3e8ff; color: #6b21a8; }
     .badge-poi  { background: #fce7f3; color: #9d174d; }
+    .badge-wilderness { background: #dcfce7; color: #166534; }
+    .badge-nm   { background: #fee2e2; color: #b91c1c; }
+    .badge-nhs  { background: #ede9fe; color: #6d28d9; }
+    .badge-nca  { background: #e0f2fe; color: #075985; }
+    .badge-nsa  { background: #fef3c7; color: #a16207; }
+    .badge-reserve { background: #ecfccb; color: #3f6212; }
     .badge-pass { background: var(--gold-light); color: #78350f; }
     .card-name { font-size: 14px; font-weight: 700; color: var(--forest-dark); line-height: 1.3; margin-bottom: 3px; }
     .card-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
@@ -520,13 +526,15 @@
 
     <!-- Type -->
     <div class="sb-section">
-      <div class="sb-label">🏕 Type</div>
+      <div class="sb-label">🏕 Popular Types</div>
       <div class="sb-btn-row" id="type-filters">
         <button class="sbtn active" data-type="all"  onclick="setType('all')">All</button>
         <button class="sbtn"        data-type="sp"   onclick="setType('sp')">State Park</button>
         <button class="sbtn"        data-type="np"   onclick="setType('np')">National Park</button>
+        <button class="sbtn"        data-type="wilderness" onclick="setType('wilderness')">Wilderness</button>
+        <button class="sbtn"        data-type="nm"   onclick="setType('nm')">Monument</button>
         <button class="sbtn"        data-type="sb"   onclick="setType('sb')">Beach</button>
-        <button class="sbtn"        data-type="snr"  onclick="setType('snr')">Reserve</button>
+        <button class="sbtn"        data-type="snr"  onclick="setType('snr')">Nature Reserve</button>
       </div>
     </div>
 
@@ -1022,6 +1030,38 @@ const PARKS = [
   { id:'corona-del-mar',  name:'Corona del Mar State Beach',         type:'sb', typeLabel:'State Beach',        region:'Southern CA',  lat:33.5955, lon:-117.8747, libraryPass:false, activities:['swimming','diving','tide-pools','fishing','photography'],                       notes:'Sheltered cove adjacent to Crystal Cove; excellent snorkeling',                                      website:'https://www.parks.ca.gov/?page_id=644' },
   { id:'leucadia-sb',     name:'Leucadia State Beach',               type:'sb', typeLabel:'State Beach',        region:'Southern CA',  lat:33.0826, lon:-117.3044, libraryPass:false, activities:['swimming','surfing','fishing'],                                                notes:'Coastal access beach in Encinitas',                                                                   website:'https://www.parks.ca.gov/' },
   { id:'moonlight-sb',    name:'Moonlight State Beach',              type:'sb', typeLabel:'State Beach',        region:'Southern CA',  lat:33.0488, lon:-117.2878, libraryPass:false, activities:['swimming','surfing','volleyball','fishing'],                                    notes:'Popular Encinitas beach with volleyball courts and equipment rentals',                               website:'https://www.parks.ca.gov/' },
+  // CALIFORNIA OUTDOOR ADDITIONS
+  { id:'old-sacramento-shp',name:'Old Sacramento State Historic Park',type:'shp',typeLabel:'State Historic Park',region:'Gold Country',lat:38.5816,lon:-121.5055,libraryPass:false,activities:['historic','photography'],                                                  notes:'Boardwalk-lined Gold Rush district on the Sacramento waterfront with museums and riverfront views', website:'https://www.parks.ca.gov/?page_id=485' },
+  { id:'state-capitol-museum',name:'California State Capitol Museum',type:'shp',typeLabel:'State Historic Park',region:'Gold Country',lat:38.5767,lon:-121.4934,libraryPass:false,activities:['historic'],                                                             notes:'Restored capitol rooms and exhibits in downtown Sacramento surrounded by monumental parkland',      website:'https://capitolmuseum.ca.gov/' },
+  { id:'dos-rios',        name:'Dos Rios State Park',               type:'sp', typeLabel:'State Park',        region:'Central Valley',lat:37.3135,lon:-120.9190,libraryPass:true,activities:['hiking','birdwatching','wildlife','photography'],                                notes:'New riverside state park at the Tuolumne-San Joaquin confluence with restored floodplain habitat',  website:'https://www.parks.ca.gov/?page_id=32988' },
+  { id:'ishxenta',        name:'Ishxenta State Park',               type:'sp', typeLabel:'State Park',        region:'Northern CA',  lat:41.8075,lon:-123.9800,libraryPass:false,activities:['hiking','wildlife','photography','historic'],                                         notes:'New tribal-coastal landscape at the mouth of the Klamath with major cultural significance',          website:'https://www.parks.ca.gov/' },
+  { id:'old-town-san-diego',name:'Old Town San Diego State Historic Park',type:'shp',typeLabel:'State Historic Park',region:'Southern CA',lat:32.7540,lon:-117.1974,libraryPass:false,activities:['historic','photography'],                                              notes:'Walkable preserved district of early San Diego with adobe buildings, museums, and plazas',          website:'https://www.parks.ca.gov/?page_id=663' },
+  { id:'alcatraz-island', name:'Alcatraz Island',                   type:'nhs',typeLabel:'National Historic Site',region:'Bay Area',  lat:37.8267,lon:-122.4230,libraryPass:false,activities:['historic','photography','wildlife'],                                                    notes:'Boat-only island visit with prison history, seabirds, and unique bay views',                        website:'https://www.nps.gov/alca/' },
+  { id:'fort-point-nhs',  name:'Fort Point National Historic Site', type:'nhs',typeLabel:'National Historic Site',region:'Bay Area',  lat:37.8106,lon:-122.4770,libraryPass:false,activities:['historic','photography','wildlife'],                                                    notes:'Civil War-era fort tucked directly beneath the Golden Gate Bridge with unbeatable photo angles',    website:'https://www.nps.gov/fopo/' },
+  { id:'presidio-sf',     name:'Presidio of San Francisco',         type:'nhs',typeLabel:'National Historic Site',region:'Bay Area',  lat:37.7989,lon:-122.4662,libraryPass:false,activities:['hiking','historic','photography','wildlife','biking'],                                 notes:'Massive urban national park landscape with trails, beaches, overlooks, and military history',       website:'https://www.nps.gov/prsf/' },
+  { id:'rosie-riveter',   name:'Rosie the Riveter WWII Home Front National Historical Park',type:'nhs',typeLabel:'National Historical Park',region:'Bay Area',lat:37.9193,lon:-122.3602,libraryPass:false,activities:['historic'],                                              notes:'Richmond waterfront site preserving the shipyard and home-front stories of WWII California',         website:'https://www.nps.gov/rori/' },
+  { id:'sf-maritime',     name:'San Francisco Maritime National Historical Park',type:'nhs',typeLabel:'National Historical Park',region:'Bay Area',lat:37.8067,lon:-122.4251,libraryPass:false,activities:['historic','photography'],                                           notes:'Hyde Street Pier, Aquatic Park, and maritime museum all in one walkable waterfront park',            website:'https://www.nps.gov/safr/' },
+  { id:'eugene-oneill',   name:"Eugene O'Neill National Historic Site",type:'nhs',typeLabel:'National Historic Site',region:'Bay Area',lat:37.8327,lon:-121.9875,libraryPass:false,activities:['historic','hiking','photography'],                                          notes:'Playwright retreat above Danville with rolling East Bay views and a peaceful hillside setting',      website:'https://www.nps.gov/euon/' },
+  { id:'tule-lake-nm',    name:'Tule Lake National Monument',       type:'nm', typeLabel:'National Monument', region:'Northern CA',  lat:41.8871,lon:-121.3748,libraryPass:false,activities:['historic','wildlife','birdwatching'],                                                  notes:'Remote WWII incarceration history site near lava country and Klamath Basin bird habitat',           website:'https://www.nps.gov/tule/' },
+  { id:'castle-mountains',name:'Castle Mountains National Monument',type:'nm',typeLabel:'National Monument', region:'Southern CA',  lat:35.3064,lon:-115.0999,libraryPass:false,activities:['hiking','camping','wildlife','photography','wildflowers'],                      notes:'Remote Mojave mountain block with Joshua trees, spring blooms, and desert solitude',                website:'https://www.nps.gov/camo/' },
+  { id:'cesar-chavez-nm', name:'Cesar E. Chavez National Monument', type:'nm', typeLabel:'National Monument', region:'Southern CA',  lat:35.2274,lon:-118.5610,libraryPass:false,activities:['historic'],                                                               notes:'Nuestra Senora Reina de la Paz preserves the Chavez home, gravesite, and farmworker movement history', website:'https://www.nps.gov/cech/' },
+  { id:'desolation-wilderness',name:'Desolation Wilderness',        type:'wilderness',typeLabel:'Wilderness Area',region:'Sierra Nevada',lat:38.9392,lon:-120.1324,libraryPass:false,activities:['hiking','backpacking','camping','swimming','photography','snowshoeing'],           notes:'Premier granite-and-lake Sierra backpacking zone with strict permits in peak season',               website:'https://www.fs.usda.gov/eldorado/' },
+  { id:'ansel-adams-wilderness',name:'Ansel Adams Wilderness',      type:'wilderness',typeLabel:'Wilderness Area',region:'Sierra Nevada',lat:37.6260,lon:-119.1780,libraryPass:false,activities:['hiking','backpacking','camping','fishing','photography','wildflowers'],         notes:'Huge High Sierra wilderness linking Mammoth, Reds Meadow, and the Minarets',                        website:'https://www.fs.usda.gov/inyo/' },
+  { id:'hoover-wilderness',name:'Hoover Wilderness',                type:'wilderness',typeLabel:'Wilderness Area',region:'Sierra Nevada',lat:38.1042,lon:-119.3606,libraryPass:false,activities:['hiking','backpacking','camping','fishing','wildlife','photography'],              notes:'Eastern Sierra backpacking favorite with easy access from Virginia Lakes and Green Creek',          website:'https://www.fs.usda.gov/stanislaus/' },
+  { id:'emigrant-wilderness',name:'Emigrant Wilderness',            type:'wilderness',typeLabel:'Wilderness Area',region:'Sierra Nevada',lat:38.1921,lon:-119.8121,libraryPass:false,activities:['hiking','backpacking','camping','fishing','wildflowers','photography'],        notes:'Granite basins and alpine lakes just north of Yosemite with lighter crowds than the park',          website:'https://www.fs.usda.gov/stanislaus/' },
+  { id:'trinity-alps',    name:'Trinity Alps Wilderness',           type:'wilderness',typeLabel:'Wilderness Area',region:'Northern CA',lat:40.9502,lon:-122.9824,libraryPass:false,activities:['hiking','backpacking','camping','fishing','photography','wildlife'],         notes:'Jagged granite wilderness in far Northern California with some of the state’s best lake backpacking', website:'https://www.fs.usda.gov/stnf/' },
+  { id:'ventana-wilderness',name:'Ventana Wilderness',              type:'wilderness',typeLabel:'Wilderness Area',region:'Central Coast',lat:36.2500,lon:-121.5700,libraryPass:false,activities:['hiking','backpacking','camping','wildlife','photography','hot-springs'],      notes:'Big Sur backcountry with rugged ridges, redwood canyons, and classic backpacking routes',          website:'https://www.fs.usda.gov/lpnf/' },
+  { id:'king-range',      name:'King Range National Conservation Area',type:'nca',typeLabel:'National Conservation Area',region:'North Coast',lat:40.0388,lon:-124.0731,libraryPass:false,activities:['hiking','backpacking','camping','wildlife','photography','beach'],     notes:'The Lost Coast centerpiece with steep mountains dropping directly into a wild, roadless shoreline', website:'https://www.blm.gov/visit/king-range-national-conservation-area' },
+  { id:'alabama-hills',   name:'Alabama Hills National Scenic Area',type:'nsa',typeLabel:'National Scenic Area',region:'Desert',      lat:36.6068,lon:-118.1228,libraryPass:false,activities:['hiking','camping','car-camping','photography','rock-climbing','stargazing'],               notes:'Movie-famous Eastern Sierra desert landscape below Whitney with arches, domes, and huge views',    website:'https://www.blm.gov/visit/alabama-hills' },
+  { id:'carrizo-plain',   name:'Carrizo Plain National Monument',   type:'nm', typeLabel:'National Monument', region:'Desert',       lat:35.1771,lon:-119.8631,libraryPass:false,activities:['hiking','wildflowers','wildlife','photography','stargazing'],                            notes:'Best known for spring superblooms, pronghorn, and the dramatic San Andreas Fault escarpment',       website:'https://www.blm.gov/programs/national-conservation-lands/california/carrizo-plain-national-monument' },
+  { id:'berryessa-snow-mountain',name:'Berryessa Snow Mountain National Monument',type:'nm',typeLabel:'National Monument',region:'Bay Area',lat:38.8738,lon:-122.3255,libraryPass:false,activities:['hiking','camping','wildlife','wildflowers','photography'],               notes:'Huge inland monument of oak ridges, chaparral, and remote trailheads north of Napa and Solano',     website:'https://www.blm.gov/programs/national-conservation-lands/california/berryessa-snow-mountain-national-monument' },
+  { id:'san-gabriel-mountains-nm',name:'San Gabriel Mountains National Monument',type:'nm',typeLabel:'National Monument',region:'Southern CA',lat:34.3270,lon:-117.8890,libraryPass:false,activities:['hiking','camping','backpacking','wildlife','photography','snowshoeing'],   notes:'Huge mountain playground above LA with peaks, waterfalls, and quick access to alpine terrain',      website:'https://www.fs.usda.gov/angeles/' },
+  { id:'sand-to-snow-nm', name:'Sand to Snow National Monument',    type:'nm', typeLabel:'National Monument', region:'Southern CA',  lat:34.0488,lon:-116.6755,libraryPass:false,activities:['hiking','camping','wildlife','photography','backpacking'],                           notes:'Dramatic elevation change from Sonoran Desert to alpine forest with excellent fall-to-spring hiking', website:'https://www.blm.gov/programs/national-conservation-lands/california/sand-to-snow' },
+  { id:'santa-rosa-san-jacinto-nm',name:'Santa Rosa and San Jacinto Mountains National Monument',type:'nm',typeLabel:'National Monument',region:'Desert',lat:33.7860,lon:-116.5500,libraryPass:false,activities:['hiking','camping','wildlife','photography','backpacking'],      notes:'Palm oasis canyons and high peaks above Palm Springs with some of Southern California’s best desert hiking', website:'https://www.blm.gov/programs/national-conservation-lands/california/santa-rosa-and-san-jacinto-mountains-national-monument' },
+  { id:'california-coastal-nm',name:'California Coastal National Monument',type:'nm',typeLabel:'National Monument',region:'North Coast',lat:38.9179,lon:-123.7128,libraryPass:false,activities:['wildlife','photography','birdwatching','hiking'],                             notes:'Protected offshore rocks and shoreline units up and down the coast, best treated as a coastal discovery layer', website:'https://www.blm.gov/programs/national-conservation-lands/california/california-coastal' },
+  { id:'point-arena-stornetta',name:'Point Arena-Stornetta Unit',   type:'nm', typeLabel:'National Monument Unit',region:'North Coast',lat:38.9158,lon:-123.7087,libraryPass:false,activities:['hiking','wildlife','birdwatching','photography','whale-watching'],            notes:'One of the most dramatic public bluff walks on the Mendocino coast, especially during whale season', website:'https://www.blm.gov/visit/point-arena-stornetta-public-lands' },
+  { id:'cotoni-coast-dairies',name:'Cotoni-Coast Dairies Unit',     type:'nm', typeLabel:'National Monument Unit',region:'Central Coast',lat:37.0030,lon:-122.1894,libraryPass:false,activities:['hiking','biking','wildlife','birdwatching','photography'],                notes:'Expansive new public coastal unit north of Santa Cruz with trails, ranch history, and ocean views', website:'https://www.blm.gov/visit/cotoni-coast-dairies' },
+  { id:'elkhorn-slough-reserve',name:'Elkhorn Slough Reserve',      type:'reserve',typeLabel:'Reserve',       region:'Central Coast',lat:36.8162,lon:-121.7425,libraryPass:false,activities:['birdwatching','wildlife','hiking','photography','kayaking'],                   notes:'One of California’s best estuaries for otters, birding, and easy shoreline nature walks',           website:'https://elkhornslough.org/' },
 ];
 
 // ============================================================
@@ -1034,7 +1074,7 @@ const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function dayName(s){return DAYS[new Date(s+'T12:00:00').getDay()];}
 function dayLabel(s){const dt=new Date(s+'T12:00:00');return`${DAYS[dt.getDay()]}<br>${MONTHS[dt.getMonth()]} ${dt.getDate()}`;}
-function typeBadge(p){const m={sp:'badge-sp',np:'badge-np',sb:'badge-sb',snr:'badge-snr',sra:'badge-sra',shp:'badge-shp',smr:'badge-smr',svra:'badge-svra',smp:'badge-smp',wc:'badge-wc',poi:'badge-poi'};return`<span class="badge ${m[p.type]||'badge-sp'}">${p.typeLabel}</span>`;}
+function typeBadge(p){const m={sp:'badge-sp',np:'badge-np',sb:'badge-sb',snr:'badge-snr',sra:'badge-sra',shp:'badge-shp',smr:'badge-smr',svra:'badge-svra',smp:'badge-smp',wc:'badge-wc',poi:'badge-poi',wilderness:'badge-wilderness',nm:'badge-nm',nhs:'badge-nhs',nca:'badge-nca',nsa:'badge-nsa',reserve:'badge-reserve'};return`<span class="badge ${m[p.type]||'badge-sp'}">${p.typeLabel}</span>`;}
 
 // ============================================================
 // STATE
@@ -1234,8 +1274,11 @@ function filteredParks(){
     return a.distance-b.distance; // default: distance
   };
   list.sort((a,b)=>{
-    const vd=(a.visited?1:0)-(b.visited?1:0); // visited last
-    return vd!==0?vd:subSort(a,b);
+    if(state.sort==='visited'){
+      const vd=(b.visited?1:0)-(a.visited?1:0);
+      return vd!==0?vd:(a.distance-b.distance);
+    }
+    return subSort(a,b);
   });
   return list;
 }
@@ -3039,6 +3082,599 @@ const PARK_DETAILS = {
       { name: 'Great Blue Heron', note: 'Stalking fish in the shallow river edges' },
       { name: 'Western Pond Turtle', note: 'Basking on rocks and logs during warm summer afternoons' },
       { name: 'Salmon & Steelhead', note: 'Seasonal in the river — fall/winter runs' }
+    ]
+  },
+  'fort-humboldt': {
+    highlight: 'A bluff-top historic site overlooking Humboldt Bay where a young Ulysses S. Grant was stationed in 1853–1854. Features reconstructed buildings, impressive steam-powered logging equipment exhibits, and panoramic bay views — a compact, free stop perfect for history buffs.',
+    googleRating: 4.4, googleReviews: '510',
+    bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee: 'Free',
+    carCamping: { available: false, cost: '', sites: 0, note: 'No camping — day-use historic site' },
+    tentCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
+    parkingTip: 'Main lot off Highland Avenue / Fort Avenue. Small but rarely fills — easy urban stop.',
+    nearbyFood: 'Eureka (5 min) — Lost Coast Brewery & Cafe, Brick & Fire Bistro, Café Nooner.',
+    elevation: '50 ft (blufftop)',
+    things: [
+      'Tour the 1853 hospital building with military and medical exhibits',
+      'Inspect the massive historic "Steam Donkey" logging equipment',
+      'Walk the bluff edge for panoramic Humboldt Bay views',
+      'Picnic on the expansive grassy parade grounds',
+      'Attend occasional living history days with logging demonstrations'
+    ],
+    hikes: [
+      { name: 'Historic Exhibits Trail', distance: '0.5 mi', difficulty: 'Easy', note: 'Flat paved loop through fort structures and logging equipment' }
+    ],
+    photoSpots: [
+      { name: 'Steam Donkeys', note: 'Late afternoon sun highlights the rusted iron textures' },
+      { name: 'Bluff Overlook', note: 'Sweeping Humboldt Bay views — best at high tide' }
+    ],
+    wildlife: [
+      { name: 'Black-tailed Deer', note: 'Often grazing on the parade grounds in early morning' },
+      { name: 'Peregrine Falcon', note: 'Occasionally spotted hunting along the bluff edge' },
+      { name: 'Bay Birds', note: 'Gulls, herons, and shorebirds visible from the overlook' }
+    ]
+  },
+  'grizzly-creek': {
+    highlight: 'A smaller, quieter redwood park with old-growth groves along the Van Duzen River — including Cheatham Grove, the filming location for the Endor speeder bike chase in Return of the Jedi. Pristine swimming holes, shaded camping, and far fewer crowds than the marquee redwood parks.',
+    googleRating: 4.8, googleReviews: '615',
+    bestSeason: 'May – October', bestMonths: [5,6,7,8,9,10],
+    entranceFee: '$8 per vehicle (Free with Library Pass)',
+    carCamping: { available: true, cost: '$35/night', sites: 28, note: 'Grizzly Creek Campground — shaded sites near the river, max trailer 24 ft' },
+    tentCamping: { available: true, cost: '$35/night', sites: 28, note: 'Same campground plus 1 hike/bike site' },
+    parkingTip: 'Day-use lot near visitor center is small but usually has spots. Cheatham Grove has a separate pull-off 3 miles west that fills by midday in summer.',
+    nearbyFood: 'Fortuna (20 min) — Eel River Brewing Company, Redwood Café. Carlotta (5 min) for basic supplies.',
+    elevation: '400 ft',
+    things: [
+      'Swim in clear emerald pools of the Van Duzen River in summer',
+      'Walk Cheatham Grove — the Star Wars Endor forest filming location',
+      'Camp in a quiet redwood grove away from the crowds',
+      'Fish for catch-and-release salmon and steelhead (check seasonal regs)',
+      'Join seasonal campfire programs at the amphitheater'
+    ],
+    hikes: [
+      { name: 'Cheatham Grove Trail', distance: '0.7 mi', difficulty: 'Easy', note: 'Flat spectacular loop through dense old-growth — the Endor forest' },
+      { name: 'Nature Trail', distance: '0.5 mi', difficulty: 'Easy', note: 'Short interpretive loop about redwood ecology' },
+      { name: 'Hikers Trail', distance: '1.5 mi', difficulty: 'Moderate', note: 'Climbs into upland forest for a quieter experience' },
+      { name: 'Memorial Trail', distance: '1.3 mi', difficulty: 'Moderate', note: 'Loop with redwoods and gentle elevation through the grove' }
+    ],
+    photoSpots: [
+      { name: 'Cheatham Grove', note: 'Early morning sunbeams piercing the redwood canopy — magical' },
+      { name: 'Van Duzen River Bend', note: 'Late afternoon for beautiful water reflections against redwoods' }
+    ],
+    wildlife: [
+      { name: 'River Otter', note: 'Occasionally seen in slower pools of the Van Duzen' },
+      { name: 'Belted Kingfisher', note: 'Diving into the river to catch small fish' },
+      { name: 'Black Bear', note: 'Present in deep woods — use bear lockers at campground' },
+      { name: 'Banana Slug', note: 'Common on damp forest trails' }
+    ]
+  },
+  'harry-merlo': {
+    highlight: 'A quiet, undeveloped coastal recreation area on the shores of Big Lagoon — perfect for kayaking protected waters, fishing, and birdwatching without crowds. Works well as a calmer side stop between Sue-meg and Humboldt Lagoons.',
+    googleRating: 4.3, googleReviews: '45',
+    bestSeason: 'May – September', bestMonths: [5,6,7,8,9],
+    entranceFee: 'Free (Big Lagoon County Park access may have $5 day-use fee)',
+    carCamping: { available: false, cost: '', sites: 0, note: 'No camping in the SRA. Nearby Big Lagoon County Park has 25 sites ($30/night, first-come)' },
+    tentCamping: { available: false, cost: '', sites: 0, note: 'No camping in the SRA' },
+    parkingTip: 'Informal pullouts along the lagoon edge. Use Big Lagoon County Park for easier access and boat launching.',
+    nearbyFood: 'Trinidad (15 min) — Trinidad Bay Eatery & Gallery, Lighthouse Grill, Seascape Restaurant.',
+    elevation: '10 ft (lagoon level)',
+    things: [
+      'Launch a kayak or canoe into the calm waters of Big Lagoon',
+      'Fish the lagoon for cutthroat trout',
+      'Birdwatch the marshy shoreline — ospreys, herons, and waterfowl',
+      'Stand-up paddleboard along the sheltered eastern edge',
+      'Enjoy a quiet pack-in picnic overlooking the lagoon'
+    ],
+    hikes: [
+      { name: 'Lagoon Shoreline Walk', distance: '1.0 mi', difficulty: 'Easy', note: 'Informal paths along the water\'s edge — no formal trails' },
+      { name: 'Sand Spit Walk', distance: '2.0 mi', difficulty: 'Easy', note: 'Walk the narrow strip between lagoon and ocean' }
+    ],
+    photoSpots: [
+      { name: 'Lagoon Sunrise', note: 'Morning mist over the water creates moody atmospheric shots' },
+      { name: 'Wooded Shoreline', note: 'Best at golden hour as sun sets west over the ocean' }
+    ],
+    wildlife: [
+      { name: 'Roosevelt Elk', note: 'Occasionally seen grazing in meadows surrounding the lagoon' },
+      { name: 'Osprey', note: 'Frequently spotted diving into the lagoon for fish' },
+      { name: 'Great Blue Heron', note: 'Stalking prey in the shallow reeds year-round' }
+    ]
+  },
+  'humboldt-lagoon': {
+    highlight: 'Part of the largest lagoon system in the US — Big Lagoon, Stone Lagoon, and Dry Lagoon create a stunning mix of marshland, coastal dunes, and dense forest. A paradise for paddlers and birders, with magical boat-in camping at Stone Lagoon\'s remote Ryan\'s Cove.',
+    googleRating: 4.8, googleReviews: '360',
+    bestSeason: 'May – October', bestMonths: [5,6,7,8,9,10],
+    entranceFee: 'Free day use',
+    carCamping: { available: false, cost: '', sites: 0, note: 'No car camping — boat-in or hike-in only' },
+    tentCamping: { available: true, cost: '$20/night', sites: 6, note: 'Primitive boat-in/hike-in sites at Stone Lagoon / Ryan\'s Cove' },
+    parkingTip: 'Stone Lagoon Visitor Center lot for rentals and info. Dry Lagoon parking for trail access. Can fill on prime summer boating days.',
+    nearbyFood: 'Trinidad (20 min) — Trinidad Bay Eatery & Gallery, Lighthouse Grill. Arcata (30 min) — Renata\'s Creperie.',
+    elevation: '10 ft (lagoon level)',
+    things: [
+      'Kayak or paddleboard across Stone Lagoon\'s glassy morning water',
+      'Paddle into the secluded boat-in campground for a wilderness overnight',
+      'Comb the sandy beaches at Dry Lagoon for ocean-tumbled driftwood',
+      'Watch gray whales from the high dunes separating lagoon from ocean',
+      'Birdwatch for 200+ species across the marshes and lagoons'
+    ],
+    hikes: [
+      { name: 'Dry Lagoon to Stone Lagoon', distance: '4.0 mi', difficulty: 'Moderate', note: 'Sandy coastal walk connecting the two water bodies' },
+      { name: 'Ryan\'s Cove Trail', distance: '3.0 mi', difficulty: 'Moderate', note: 'Overland hike to access remote Stone Lagoon campsites' },
+      { name: 'Stagecoach Hill & Azalea Nature Trail', distance: '1.9 mi', difficulty: 'Easy', note: 'Best spring-bloom short hike with lagoon views' },
+      { name: 'California Coastal Trail (sand spit)', distance: '5.6 mi', difficulty: 'Moderate', note: 'Ocean on one side, lagoon on the other — check tides' }
+    ],
+    photoSpots: [
+      { name: 'The Sand Spit', note: 'Striking contrast of calm lagoon and violent Pacific — both sides visible' },
+      { name: 'Stone Lagoon Boat Launch', note: 'Excellent reflections of forested hills at sunrise' }
+    ],
+    wildlife: [
+      { name: 'River Otter', note: 'Very active in Stone Lagoon, especially early mornings' },
+      { name: 'Brown Pelican', note: 'Dive-bombing for fish in deeper lagoon waters' },
+      { name: 'Gray Whale', note: 'Visible from beachside dunes during spring/fall migrations' },
+      { name: 'Roosevelt Elk', note: 'Near highway and meadow edges' }
+    ]
+  },
+  'dewitt-redwoods': {
+    highlight: 'A small, quiet reserve protecting three isolated old-growth redwood groves near Redway. Completely undeveloped and nearly unknown — offering profound forest silence and the feeling of stumbling on a forgotten pocket of wilderness.',
+    googleRating: 4.5, googleReviews: '25',
+    bestSeason: 'May – October', bestMonths: [5,6,7,8,9,10],
+    entranceFee: 'Free',
+    carCamping: { available: false, cost: '', sites: 0, note: 'No camping — undeveloped reserve' },
+    tentCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
+    parkingTip: 'No formal lots — carefully pull off onto dirt shoulders along the road. Very limited, treat as a brief roadside stop.',
+    nearbyFood: 'Redway (1 mi) — local cafes. Garberville (5 min) — Calico\'s Cafe, Eel River Café.',
+    elevation: '300 ft',
+    things: [
+      'Walk a short old-growth grove path in near-total solitude',
+      'Photograph towering trunks, ferns, and filtered light',
+      'Experience the profound silence of an unmaintained redwood forest',
+      'Practice macro photography on mosses and ferns covering the forest floor',
+      'Use as a brief, peaceful stretch stop on a North Coast drive'
+    ],
+    hikes: [
+      { name: 'Holbrook Grove Trail', distance: '0.8 mi', difficulty: 'Easy', note: 'Best-known short route through old-growth redwoods and to Eel River' }
+    ],
+    photoSpots: [
+      { name: 'Holbrook Grove', note: 'Soft morning or overcast light — raw, untamed redwood atmosphere' },
+      { name: 'Mossy Logs', note: 'Get low to capture vibrant green mosses in this damp microclimate' }
+    ],
+    wildlife: [
+      { name: 'Banana Slug', note: 'Easily spotted on damp foliage after rain or fog' },
+      { name: 'Varied Thrush', note: 'Listen for their haunting whistling calls in the dense canopy' },
+      { name: 'Black-tailed Deer', note: 'Possible at quieter reserve edges' }
+    ]
+  },
+  'little-river-sb': {
+    highlight: 'A broad, wind-swept beach backed by impressive sand dunes at the mouth of Little River. A less-crowded alternative to nearby beaches — perfect for solitary sunset walks, sand dollar collecting, and watching the river meet the Pacific.',
+    googleRating: 4.5, googleReviews: '110',
+    bestSeason: 'June – October', bestMonths: [6,7,8,9,10],
+    entranceFee: 'Free',
+    carCamping: { available: false, cost: '', sites: 0, note: 'No camping. Adjacent Clam Beach County Park offers camping.' },
+    tentCamping: { available: false, cost: '', sites: 0, note: 'No camping at the state beach' },
+    parkingTip: 'Paved lot off Scenic Drive — rarely fills. Easy access to trails through the dunes.',
+    nearbyFood: 'McKinleyville (10 min) — Carmela\'s Mexican Restaurant. Trinidad (15 min) — Beachcomber Cafe.',
+    elevation: '10 ft',
+    things: [
+      'Stroll the wide sandy expanse at low tide collecting sand dollars',
+      'Walk the rugged dune trails inland from the surf',
+      'Watch horseback riders trotting along the shoreline',
+      'Fish from the shore where Little River meets the ocean',
+      'Enjoy a quiet, uncrowded beach picnic in the dunes'
+    ],
+    hikes: [
+      { name: 'Dune Trail to River Mouth', distance: '2.0 mi', difficulty: 'Easy', note: 'Sandy trek through dunes to the mouth of Little River' },
+      { name: 'Clam Beach to Little River', distance: '5.0 mi', difficulty: 'Easy', note: 'Long flat open-sand walk along the coast' }
+    ],
+    photoSpots: [
+      { name: 'River Mouth', note: 'Sweeping view toward Moonstone Beach at low tide' },
+      { name: 'Dune Crests', note: 'Golden hour highlights sand ripples and wild beach grasses' }
+    ],
+    wildlife: [
+      { name: 'Sanderling', note: 'Flocks darting in and out of retreating waves' },
+      { name: 'Harbor Seal', note: 'Often bobbing in the water near the river mouth' },
+      { name: 'Shorebirds', note: 'Common along the waterline and wrack zone' }
+    ]
+  },
+  'sinkyone-wilderness': {
+    highlight: 'California\'s most remote and rugged coastal wilderness — the Lost Coast. Black-sand beaches, steep forested ridges, wind-sculpted "Candelabra" redwoods, Roosevelt elk herds, and absolute solitude. A backpacking paradise that rewards commitment with dramatic, untamed scenery.',
+    googleRating: 4.8, googleReviews: '260',
+    bestSeason: 'May – October', bestMonths: [5,6,7,8,9,10],
+    entranceFee: '$6 per vehicle day use',
+    carCamping: { available: true, cost: '$35/night', sites: 15, note: 'Usal Beach — dispersed primitive sites, high-clearance/4WD recommended' },
+    tentCamping: { available: true, cost: '$35/night', sites: 15, note: 'Usal Beach (car-accessible) and Bear Harbor (hike-in only). Bear canisters mandatory.' },
+    parkingTip: 'Usal Beach requires parking in sand/dirt near your site — beware soft sand. Needle Rock Visitor Center has extremely limited spots. Allow much more drive time than maps suggest.',
+    nearbyFood: 'Shelter Cove (45 min via winding road) — Gyppo Ale Mill. Garberville (30+ min) for more options. Stock up before committing.',
+    elevation: '1,200 ft (coastal ridges)',
+    things: [
+      'Backpack a segment of the rugged Lost Coast Trail',
+      'Marvel at the "Candelabra" redwoods shaped by salty ocean winds',
+      'Watch Roosevelt elk herds roaming freely near Needle Rock',
+      'Beachcomb for sea glass and agates on remote black-sand shores',
+      'Camp at Usal Beach beneath dramatic coastal cliffs'
+    ],
+    hikes: [
+      { name: 'Lost Coast Trail (Sinkyone Section)', distance: '17.0 mi', difficulty: 'Hard', note: 'Relentlessly steep multi-day backpacking route — breathtaking' },
+      { name: 'Bear Harbor Trail', distance: '3.0 mi', difficulty: 'Moderate', note: 'Lush coastal hike to a secluded bay with primitive campsites' },
+      { name: 'Needle Rock to Wheeler Camp', distance: '9.4 mi', difficulty: 'Hard', note: 'Best-known Sinkyone day hike / overnight segment' },
+      { name: 'Peter Douglas Coastal Trail', distance: '5.8 mi', difficulty: 'Hard', note: 'Rugged coastal climbing with dramatic ocean views' }
+    ],
+    photoSpots: [
+      { name: 'Needle Rock', note: 'Dramatic ocean cliffs battered by waves — best in foggy mornings' },
+      { name: 'Candelabra Trees', note: 'Bizarrely shaped coastal redwoods make surreal, twisting silhouettes' }
+    ],
+    wildlife: [
+      { name: 'Roosevelt Elk', note: 'Huge herds frequent coastal prairies near Bear Harbor and Needle Rock' },
+      { name: 'Gray Whale', note: 'Easily spotted migrating offshore from high bluff trails' },
+      { name: 'Black Bear', note: 'Very common in the canyons — bear canisters mandatory' },
+      { name: 'Brown Pelican', note: 'Often seen offshore from the beach camps' }
+    ]
+  },
+  'sue-meg': {
+    highlight: 'Formerly Patrick\'s Point — dramatic headlands with explosive ocean surf, the reconstructed Sumêg Yurok Village, Agate Beach for gem hunting, tide pools at Palmer\'s Point, and the iconic Wedding Rock viewpoint. Packs an incredible variety of coastal wonders into one accessible park.',
+    googleRating: 4.8, googleReviews: '2.2K',
+    bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee: '$8 per vehicle (Free with Library Pass)',
+    carCamping: { available: true, cost: '$35/night', sites: 124, note: 'Agate, Abalone, and Penn Creek campgrounds — spacious forested sites, highly sought after' },
+    tentCamping: { available: true, cost: '$35/night', sites: 124, note: 'Penn Creek is tent-only — quiet, pristine sites in coastal pines' },
+    parkingTip: 'Agate Beach lot fills by 10 AM on summer weekends. Park at Visitor Center or Wedding Rock and use the Rim Trail to connect between sites.',
+    nearbyFood: 'Trinidad (10 min) — Trinidad Bay Eatery & Gallery, Lighthouse Grill, Beachcomber Cafe.',
+    elevation: '200 ft (headlands)',
+    things: [
+      'Hunt for polished semi-precious agates on the steep shores of Agate Beach',
+      'Walk through the Sumêg Village to learn about enduring Yurok culture',
+      'Climb the rugged stone steps of Wedding Rock for panoramic ocean views',
+      'Search for starfish and sea anemones in the tide pools at Palmer\'s Point',
+      'Walk the coastal Rim Trail for sweeping vistas of forest meeting Pacific'
+    ],
+    hikes: [
+      { name: 'Rim Trail', distance: '2.0 mi', difficulty: 'Easy', note: 'Spectacular bluff-hugging path — the park\'s best all-around walk' },
+      { name: 'Agate Beach Trail', distance: '0.8 mi', difficulty: 'Moderate', note: 'Short but steep descent to the gem-hunting rocky shoreline' },
+      { name: 'Ceremonial Rock Trail', distance: '0.5 mi', difficulty: 'Moderate', note: 'Quick climb up a massive sea stack for views' },
+      { name: 'Palmer\'s Point / Tide Pools Walk', distance: '0.6 mi', difficulty: 'Easy', note: 'Best for intertidal exploration at low tide' }
+    ],
+    photoSpots: [
+      { name: 'Wedding Rock', note: 'Outstanding at sunset — golden light hitting crashing surf below' },
+      { name: 'Sumêg Village', note: 'Traditional Yurok plank houses framed by forest — unique cultural shots' },
+      { name: 'Palmer\'s Point', note: 'Tide pools and rocky headland — best at lower tide with side light' }
+    ],
+    wildlife: [
+      { name: 'Harbor Seal', note: 'Often resting on offshore rocks near Palmer\'s Point' },
+      { name: 'Bald Eagle', note: 'Frequently soaring over the headlands searching for fish' },
+      { name: 'Raccoon', note: 'Very bold in the campgrounds — secure all food!' },
+      { name: 'Gray Whale', note: 'Visible during migration from headland viewpoints' }
+    ]
+  },
+  'trinidad-sb': {
+    highlight: 'A gorgeous cove beneath the charming town of Trinidad, punctuated by massive tree-topped sea stacks and a natural arch. Dramatic coastal wilderness meets easy accessibility — ideal for photography, sunset walks, tide pool exploration, and a quick College Cove side trip.',
+    googleRating: 4.8, googleReviews: '205',
+    bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee: 'Free',
+    carCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
+    tentCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
+    parkingTip: 'Main lot at end of Lighthouse Road is small — fills quickly on weekends. Second entrance off Stagecoach Road. Overflow requires parking in town and walking down.',
+    nearbyFood: 'Trinidad (5 min walk) — Beachcomber Cafe, Trinidad Bay Eatery & Gallery, Lighthouse Grill.',
+    elevation: '100 ft (bluffs)',
+    things: [
+      'Wander through the cove photographing massive sea stacks and natural arch',
+      'Explore tide pools at the base of Grandmother Rock at low tide',
+      'Hike to secluded College Cove for wildflowers and rock formations',
+      'Watch an unforgettable sunset over the Pacific horizon',
+      'Take family or portrait photos against the stunning sea stack backdrop'
+    ],
+    hikes: [
+      { name: 'College Cove Trail', distance: '1.0 mi', difficulty: 'Moderate', note: 'Fern-lined descent from bluffs to a secluded cove' },
+      { name: 'Elk Head Trail', distance: '1.5 mi', difficulty: 'Easy', note: 'Bluff-top walk with sweeping views of the entire beach and ocean' },
+      { name: 'Beach Access Trail', distance: '0.5 mi', difficulty: 'Moderate', note: 'Steep drop to the main sandy cove' }
+    ],
+    photoSpots: [
+      { name: 'Pewetole Island', note: 'Massive offshore rock perfectly divides the beach — stunning at sunset' },
+      { name: 'College Cove', note: 'Vibrant spring wildflowers against the blue ocean' }
+    ],
+    wildlife: [
+      { name: 'Sea Star', note: 'Look closely in tide pools at low tide' },
+      { name: 'Dolphin', note: 'Occasionally seen surfing the breaks just offshore' },
+      { name: 'Cormorant', note: 'Nesting atop the offshore sea stacks' }
+    ]
+  },
+  'admiral-standley': {
+    highlight: 'A tiny, nearly forgotten 45-acre old-growth redwood grove at 1,700 feet in the Coastal Range. No formal trails, no facilities, no crowds — just towering ancient trees and absolute forest solitude. One of California\'s most obscure state recreation areas.',
+    googleRating: 4.3, googleReviews: '30',
+    bestSeason: 'May – October', bestMonths: [5,6,7,8,9,10],
+    entranceFee: 'Free',
+    carCamping: { available: false, cost: '', sites: 0, note: 'No developed camping' },
+    tentCamping: { available: false, cost: '', sites: 0, note: 'No developed camping' },
+    parkingTip: 'No parking lots — carefully pull onto the dirt shoulder of Branscomb Road (narrow and winding). Brief roadside stop only.',
+    nearbyFood: 'Laytonville (15 min) — Chief\'s Burgers. Leggett for basic supplies. Garberville for fuller options.',
+    elevation: '1,700 ft',
+    things: [
+      'Walk among towering old-growth redwoods in near-total solitude',
+      'Experience one of the least-visited state recreation areas in California',
+      'Listen to the undisturbed sounds of a deep forest ecosystem',
+      'Photograph massive redwood trunks and dense understory ferns',
+      'Stop for a brief, magical forest pause on a North Coast drive'
+    ],
+    hikes: [
+      { name: 'Redwood Grove Walk', distance: '0.5 mi', difficulty: 'Easy', note: 'Informal path through the old-growth grove — no maintained trails' }
+    ],
+    photoSpots: [
+      { name: 'Branscomb Road Canopy', note: 'Road cutting through massive trees — great sense of scale' },
+      { name: 'Interior Grove', note: 'Wide-angle to capture towering, unmapped old-growth in soft light' }
+    ],
+    wildlife: [
+      { name: 'Black-tailed Deer', note: 'Present but easily spooked in the thick underbrush' },
+      { name: 'Woodpecker', note: 'Listen for echoing knocks high in the redwood canopy' },
+      { name: 'Banana Slug', note: 'Common in damp understory after rain' }
+    ]
+  },
+
+  /* -------- Batch 6 · Mendocino Coast -------- */
+
+  'caspar-headlands-sb':{
+    highlight:'A secluded crescent-shaped cove tucked between protective bluffs just north of Mendocino, offering peaceful beachcombing, whale watching, and sunset views without the crowds of nearby headline stops.',
+    googleRating:4.7, googleReviews:'170',
+    bestSeason:'May – October', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Day-use beach only; private Caspar Beach RV Park is adjacent'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'No tent camping on the beach'},
+    parkingTip:'Small lot at the end of Caspar Road fills quickly on sunny weekends — arrive by 10 AM or visit mid-week.',
+    nearbyFood:'Good Bones in Caspar (2 min) for local ingredients in a rustic roadhouse; Frankie\'s in Mendocino (10 min) for mushroom ice cream and pizza; MacCallum House Inn (10 min) for fine dining with ocean views',
+    elevation:'100 ft',
+    things:['Watch migrating gray whales from shore','Kayak the calm cove','Explore driftwood at the creek mouth','Stroll the bluff-top path for aerial views','Tide-pool at low tide for starfish and anemones'],
+    hikes:[
+      {name:'Headlands Bluff Trail',distance:'1.2 mi round trip',difficulty:'Easy',note:'Cliff-edge walk with sweeping ocean vistas and wildlife sightings'},
+      {name:'Beach Walk',distance:'0.5 mi round trip',difficulty:'Easy',note:'Simple stroll along the water\'s edge to the mouth of Caspar Creek'},
+      {name:'Caspar Creek Loop',distance:'0.8 mi round trip',difficulty:'Easy',note:'Follows the creek through coastal scrub back to the beach'}
+    ],
+    photoSpots:[
+      {name:'North Headlands',note:'Best at sunset to capture the orange glow on the sandstone cliffs'},
+      {name:'Caspar Creek Bridge',note:'Capture the historic bridge reflected in the creek at high tide'}
+    ],
+    wildlife:[
+      {name:'Gray Whale',note:'Spot from the bluffs December through April during migration'},
+      {name:'Harbor Seal',note:'Often seen bobbing in the kelp beds just offshore year-round'},
+      {name:'Brown Pelican',note:'Watch them dive-bombing for fish in the cove during summer'}
+    ]
+  },
+
+  'caspar-headlands-snr':{
+    highlight:'A rugged 25-acre reserve protecting spectacular sandstone cliffs, sculpted rock formations, and vibrant coastal prairie wildflowers right at the edge of the Pacific. Excellent view-to-effort ratio for a quick coastal walk.',
+    googleRating:4.8, googleReviews:'32',
+    bestSeason:'March – October', bestMonths:[3,4,5,6,7,8,9,10],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Small day-use reserve with no facilities'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'Camping prohibited to protect delicate coastal flora'},
+    parkingTip:'Very limited parking on the shoulder of Headlands Drive — be mindful of the residential community. Consider parking at the adjacent beach lot and walking.',
+    nearbyFood:'Good Bones in Caspar (2 min) for local fare; Goodlife Cafe & Bakery in Mendocino (10 min) for organic treats; Patterson\'s Pub (10 min) for a lively atmosphere',
+    elevation:'100 ft',
+    things:['Photograph "honeycomb" weathering on sandstone rocks','Spot rare coastal wildflowers like Mendocino paintbrush','Watch surf wrap around Caspar Anchorage Cove','View the dramatic blowhole effects during high surf','Scan for seals on offshore flat rocks'],
+    hikes:[
+      {name:'Reserve Loop',distance:'0.5 mi round trip',difficulty:'Easy',note:'Narrow cliff-edge path with constant ocean views'},
+      {name:'Bluff Overlook Path',distance:'0.8 mi round trip',difficulty:'Easy',note:'Short walk to dramatic ocean viewpoints'},
+      {name:'Connection to Beach',distance:'0.4 mi round trip',difficulty:'Easy',note:'Short descent toward the adjacent State Beach'}
+    ],
+    photoSpots:[
+      {name:'Sandstone Formations',note:'Use low-angle light to highlight intricate sea-carved rock textures'},
+      {name:'Wildflower Meadows',note:'Best in April when the fields turn vibrant yellow and purple'}
+    ],
+    wildlife:[
+      {name:'Harbor Seal',note:'Congregates on the flat offshore rock visible from the reserve'},
+      {name:'Black Oystercatcher',note:'Look for bright red beaks on the intertidal rocks'},
+      {name:'Osprey',note:'Often seen hovering or nesting on nearby inaccessible sea stacks'}
+    ]
+  },
+
+  'greenwood-sb':{
+    highlight:'A picturesque cove in the tiny town of Elk that was once a bustling lumber port, now scattered with massive driftwood and dramatic sea stacks. The visitor center tells the fascinating story of the area\'s pioneer past.',
+    googleRating:4.8, googleReviews:'380',
+    bestSeason:'April – October', bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Day-use only; several historic inns within walking distance in Elk'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'No camping on-site'},
+    parkingTip:'Park at the Visitor Center across from the Elk Store; the beach trailhead starts right there. Time your visit around low tide for best tide-pool access.',
+    nearbyFood:'Elk Store (1 min) for gourmet sandwiches and local wine; Queenie\'s Roadhouse (2 min) for legendary vegetarian-friendly breakfast; Harbor House Inn (3 min) for world-class fine dining',
+    elevation:'120 ft',
+    things:['Explore the lumber history museum in the Visitor Center','Beachcomb for driftwood and sea glass','Watch waves crash against the Gunderson sea stack','Tide-pool among the rocks at low tide','Kayak the protected cove (advanced paddlers)'],
+    hikes:[
+      {name:'Greenwood Creek Trail',distance:'1.0 mi round trip',difficulty:'Easy',note:'Gentle path from the village down to the cove beach'},
+      {name:'Greenwood Bluff Trail',distance:'1.5 mi round trip',difficulty:'Moderate',note:'Cliff walk with panoramic ocean views and sea-stack perspectives'},
+      {name:'Bluff Top Trail',distance:'0.5 mi round trip',difficulty:'Easy',note:'Short, flat walk along the headlands with views of the sea stacks'}
+    ],
+    photoSpots:[
+      {name:'The Sea Stacks',note:'Capture the dramatic rocks in the cove at low tide with golden-hour light'},
+      {name:'Historic Visitor Center',note:'Charming white building looks beautiful in the morning fog'}
+    ],
+    wildlife:[
+      {name:'Harbor Seal',note:'Frequent the cove and can often be seen resting on the rocks'},
+      {name:'Gray Whale',note:'Easily spotted from the high bluffs in winter'},
+      {name:'Cormorant',note:'Large colonies nest on the offshore rocks during spring'}
+    ]
+  },
+
+  'hendy-woods':{
+    highlight:'Home to two magnificent old-growth redwood groves — Big Hendy and Little Hendy — in the warm, sunny Anderson Valley. Famous for the "Hendy Hermit" who lived in a hollowed-out fallen redwood for over 20 years, and a perfect pairing with nearby wine tasting.',
+    googleRating:4.8, googleReviews:'754',
+    bestSeason:'April – October', bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'$8/vehicle',
+    carCamping:{available:true,cost:'$35/night',sites:92,note:'Azalea and Wildcat campgrounds with shaded sites among the trees'},
+    tentCamping:{available:true,cost:'$35/night',sites:92,note:'Well-maintained sites with fire rings, tables, and nearby showers'},
+    parkingTip:'Large paved lots near the day-use area and Big Hendy Grove trailhead. Summer weekends are busier but the park spreads people out well.',
+    nearbyFood:'Lemons Market in Philo (5 min) for picnic supplies; Wickson in Philo (5 min) for polished Italian-leaning cooking; Pennyroyal Farm (12 min) for incredible goat cheese and wine',
+    elevation:'300 ft',
+    things:['Walk through the cathedral-like Big Hendy Grove','Visit the Hermit Hut where the Russian hermit lived','Swim or tube in the Navarro River in summer','Go wine tasting in Anderson Valley','Explore the quieter Little Hendy Grove'],
+    hikes:[
+      {name:'Discovery Trail',distance:'1.4 mi round trip',difficulty:'Easy',note:'Wheelchair-accessible loop through the heart of Big Hendy Grove'},
+      {name:'Big Hendy Long Loop',distance:'4.3 mi round trip',difficulty:'Moderate',note:'Best single hike for full grove ambience and more mileage'},
+      {name:'Hermit Hut Trail',distance:'2.5 mi round trip',difficulty:'Moderate',note:'Leads to the historic site of the Russian hermit\'s redwood home'}
+    ],
+    photoSpots:[
+      {name:'Big Hendy Grove',note:'Early morning light filtering through the redwoods creates stunning "God rays"'},
+      {name:'Navarro River',note:'Late afternoon golden hour for beautiful river reflections'}
+    ],
+    wildlife:[
+      {name:'Black-tailed Deer',note:'Very common in the meadows and campgrounds at dawn'},
+      {name:'Pileated Woodpecker',note:'Listen for their loud drumming on old redwood snags'},
+      {name:'River Otter',note:'Occasionally seen in the Navarro River near the swimming holes'}
+    ]
+  },
+
+  'jug-handle':{
+    highlight:'Globally famous for its "Ecological Staircase" — five marine terraces spanning 500,000 years of geological history. As you climb, the soil changes, leading to a surreal pygmy forest where 100-year-old cypress and pine trees are only a few feet tall.',
+    googleRating:4.8, googleReviews:'396',
+    bestSeason:'March – October', bestMonths:[3,4,5,6,7,8,9,10],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Day-use only; nearby Jug Handle Creek Farm offers private lodging'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'No camping to preserve the unique soil composition'},
+    parkingTip:'Signed Highway 1 pullout with paved lot on west side for beach access, east side for Staircase Trail. Start early on clear weekends.',
+    nearbyFood:'Good Bones in Caspar (5 min) for rustic local fare; Noyo Fish Company in Fort Bragg (8 min) for casual seafood; Mendocino Chocolate Company (5 min) for a sweet stop',
+    elevation:'600 ft',
+    things:['Hike the full Ecological Staircase through all five terraces','Touch the miniature trees in the Pygmy Forest','Explore tide pools at Jug Handle Creek mouth','Walk under the massive Highway 1 bridge to the beach','Birdwatch in the lush riparian forest along the creek'],
+    hikes:[
+      {name:'Ecological Staircase Trail',distance:'5.0 mi round trip',difficulty:'Moderate',note:'The signature hike through all five terraces to the pygmy forest'},
+      {name:'Jug Handle Beach Trail',distance:'2.5 mi round trip',difficulty:'Easy',note:'Shorter version with both beach and terrace ecology'},
+      {name:'Headlands Loop',distance:'1.0 mi round trip',difficulty:'Easy',note:'Scenic walk along the ocean bluffs with great cove views'}
+    ],
+    photoSpots:[
+      {name:'The Pygmy Forest',note:'Overcast days reveal vivid green on the miniature twisted branches'},
+      {name:'Jug Handle Bridge',note:'Dramatic concrete arch bridge looks great from the beach below'}
+    ],
+    wildlife:[
+      {name:'Great Blue Heron',note:'Often stalks prey in the marshy areas of the creek'},
+      {name:'Douglas Squirrel',note:'Frequently seen in the redwood and pine sections of the trail'},
+      {name:'Banana Slug',note:'Look for them on the forest floor during damp foggy mornings'}
+    ]
+  },
+
+  'mailliard-redwoods':{
+    highlight:'One of the most remote and wild redwood reserves in California, deep in the Garcia River watershed. A rare chance to see old-growth redwoods in their natural, unmanaged state with no paved trails or visitor centers — just pure, silent forest.',
+    googleRating:4.4, googleReviews:'45',
+    bestSeason:'May – October', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Extremely remote; no facilities or campgrounds'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'Day-use only; steep terrain unsuitable for camping'},
+    parkingTip:'Only 3-4 small dirt pull-offs along Fish Rock Road; park carefully as the road is narrow. High-clearance vehicle recommended.',
+    nearbyFood:'Gualala Seafood Shack (30 min) for fresh baskets; Trinks Cafe in Gualala (30 min) for coffee and pastries; Surf Market (30 min) for organic groceries',
+    elevation:'1,200 ft',
+    things:['Experience deep-forest silence away from all city noise','Practice macro photography on lush ferns and mosses','Wade in the cool Garcia River tributary','Search for the massive "Mailliard Giant" tree','Photograph bark and creekside forest detail'],
+    hikes:[
+      {name:'Creek Walk',distance:'0.5 mi round trip',difficulty:'Moderate',note:'No formal trails; follow the creek bed to see the most impressive trees'},
+      {name:'Mailliard Grove Trail',distance:'1.0 mi round trip',difficulty:'Easy',note:'Flat path through the ancient redwoods'},
+      {name:'Creek Loop',distance:'0.8 mi round trip',difficulty:'Easy',note:'Follows the stream through fern understory'}
+    ],
+    photoSpots:[
+      {name:'Garcia River Tributary',note:'Clear water flowing over mossy stones beneath the redwoods'},
+      {name:'Redwood Canopy',note:'Point your camera straight up to capture the massive unlogged giants'}
+    ],
+    wildlife:[
+      {name:'Pacific Giant Salamander',note:'Often found near the damp creek banks in spring'},
+      {name:'Varied Thrush',note:'Listen for their haunting single-note whistle in the dense canopy'},
+      {name:'Black Bear',note:'Shy but known to inhabit this remote mountainous area'}
+    ]
+  },
+
+  'manchester-sp':{
+    highlight:'A wild 5-mile stretch of beach that is a treasure trove for driftwood and sea-polished agates. The San Andreas Fault runs right into the ocean here, creating a unique coastal landscape of dunes and marshes.',
+    googleRating:4.6, googleReviews:'278',
+    bestSeason:'April – October', bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'$8/vehicle',
+    carCamping:{available:true,cost:'$35/night',sites:40,note:'Grassy campground behind the dunes; very exposed to wind — bring windbreaks'},
+    tentCamping:{available:true,cost:'$35/night',sites:40,note:'Family sites accept tents with fire rings; first-come first-served in season'},
+    parkingTip:'Use the main lot at the end of Kinney Road; it is large and rarely fills to capacity. Wind is a bigger factor than crowding.',
+    nearbyFood:'Rollerville Cafe near Point Arena (10 min) for classic breakfast/lunch; Franny\'s Cup & Saucer (10 min) for incredible pastries; Pier Place at Point Arena Cove (10 min) for scenic oceanfront seafood',
+    elevation:'100 ft',
+    things:['Collect agates and sea glass on the shoreline','Walk the path of the San Andreas Fault','View Tundra Swans wintering in the park\'s lagoons','Explore massive bleached driftwood piles','Visit the nearby Point Arena Lighthouse'],
+    hikes:[
+      {name:'Beach Trail',distance:'5.0 mi round trip',difficulty:'Easy',note:'Long sandy walk along the shoreline to the mouth of Alder Creek'},
+      {name:'Davis Wetland Trail',distance:'1.2 mi round trip',difficulty:'Easy',note:'Flat walk through coastal prairie and marshland'},
+      {name:'Alder Creek Loop',distance:'2.0 mi round trip',difficulty:'Moderate',note:'Follows the creek through forest to the shore'}
+    ],
+    photoSpots:[
+      {name:'Driftwood Piles',note:'Massive white logs create a surreal skeletal landscape against the blue ocean'},
+      {name:'Alder Creek Mouth',note:'Great for sunset photos where the creek cuts through sand into the sea'}
+    ],
+    wildlife:[
+      {name:'Tundra Swan',note:'Visible in the coastal lagoons from November through March'},
+      {name:'Snowy Plover',note:'Threatened birds nest in the sand dunes — watch your step'},
+      {name:'Gray Whale',note:'Best offshore from December through April during migration'}
+    ]
+  },
+
+  'mendocino-headlands':{
+    highlight:'Surrounding the charming Victorian village of Mendocino on three sides, these headlands offer iconic cliffside views with 70-foot bluffs, hidden sea caves, and a massive "punchbowl" where the ocean surges through a collapsed sea cave. One of the best walk-from-town-into-wild-scenery parks in California.',
+    googleRating:4.9, googleReviews:'2.5K',
+    bestSeason:'March – November', bestMonths:[3,4,5,6,7,8,9,10,11],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'No camping; many visitors stay at adjacent Russian Gulch or Van Damme SP'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'Day-use only park'},
+    parkingTip:'Park along Main Street in Mendocino or at the Ford House Visitor Center lot. Walking from town is often better than driving between overlooks.',
+    nearbyFood:'Flow Restaurant & Lounge (2 min) for organic vegetarian with ocean views; Cafe Beaujolais (5 min) for fine French-American cuisine; Goodlife Cafe & Bakery (3 min) for dependable breakfast and lunch',
+    elevation:'150 ft',
+    things:['Walk the entire 3-mile bluff-top loop for endless ocean views','Peer into the churning "Punchbowl" during high surf','Visit Ford House Museum for local history','Paddle or bike Big River estuary','Watch whales from the cliff edge in winter'],
+    hikes:[
+      {name:'Headlands Loop Trail',distance:'4.8 mi round trip',difficulty:'Easy',note:'Complete bluff walk with repeated ocean overlooks around the peninsula'},
+      {name:'Big River Trail',distance:'2.0 mi round trip',difficulty:'Easy',note:'Flat estuary-side trail from the bluffs to the wide sandy beach'},
+      {name:'Portuguese Beach Path',distance:'0.4 mi round trip',difficulty:'Moderate',note:'Steep stairs leading down to a secluded cove'}
+    ],
+    photoSpots:[
+      {name:'The Blowhole/Punchbowl',note:'Best during high tide or big swells for dramatic water action'},
+      {name:'Main Street View',note:'Capture the historic water tower and church steeples against the blue ocean'}
+    ],
+    wildlife:[
+      {name:'Gray Whale',note:'One of the best shore-based whale watching spots in the state in winter'},
+      {name:'Osprey',note:'Often seen diving into the Big River estuary for fish'},
+      {name:'Harbor Seal',note:'Visible around the estuary mouth and offshore rocks'}
+    ]
+  },
+
+  'mendocino-woodlands':{
+    highlight:'A National Historic Landmark built by the CCC in the 1930s, tucked into a lush redwood canyon with rustic hand-built cabins and stone fireplaces. Unique for its group camping focus and part history lesson, part trail destination feel.',
+    googleRating:4.7, googleReviews:'240',
+    bestSeason:'March – November', bestMonths:[3,4,5,6,7,8,9,10,11],
+    entranceFee:'Free for day hiking',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Group cabin camps only — no individual car camping sites'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'Group use of camp areas with tent-cabin setups; not individual tent sites'},
+    parkingTip:'The drive in from Mendocino includes gravel-road sections after pavement ends. Park once near the historic buildings and explore on foot.',
+    nearbyFood:'Harvest Market in Fort Bragg (15 min) for high-quality groceries; North Coast Brewing Co. (15 min) for world-class beer and pub fare; Cowlick\'s Ice Cream (15 min)',
+    elevation:'1,000 ft',
+    things:['Admire 1930s WPA-era architecture and stone fireplaces','Hike along the North Fork of Big River','Explore the Old Growth trail to see ancient redwoods','Visit the beaver pond at the edge of camp','Attend dance or music camps held here'],
+    hikes:[
+      {name:'Marsh Creek & Cook House Loop',distance:'6.9 mi round trip',difficulty:'Hard',note:'Best full-length circuit with biggest elevation gain in the park'},
+      {name:'Forest History to Cook House Loop',distance:'3.5 mi round trip',difficulty:'Moderate',note:'Shorter interpretive loop through the historic forest setting'},
+      {name:'Beaver Pond Path',distance:'0.8 mi round trip',difficulty:'Easy',note:'Quick stroll to the marshy area where beavers are active'}
+    ],
+    photoSpots:[
+      {name:'Historic Cabins',note:'Hand-split redwood siding and stone chimneys are incredibly photogenic in morning light'},
+      {name:'Marsh Creek Corridor',note:'Best after rain or in spring when the understory is lushest'}
+    ],
+    wildlife:[
+      {name:'River Otter',note:'Often seen swimming in the river or beaver pond'},
+      {name:'Fox',note:'Listed among the park\'s natural amenities; spotted in clearings'},
+      {name:'Spotted Owl',note:'Protected habitat for these rare nocturnal birds'}
+    ]
+  },
+
+  'montgomery-woods':{
+    highlight:'Home to some of the tallest coast redwoods ever officially measured — including the 367.5-foot Montgomery Tree once thought to be the world\'s tallest. A remote canyon setting with a cathedral-like grove of giant ferns and towering timber that feels like a prehistoric lost world.',
+    googleRating:4.9, googleReviews:'424',
+    bestSeason:'April – October', bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:0,note:'Strictly day-use only; nearest camping is Orr Hot Springs (private)'},
+    tentCamping:{available:false,cost:'N/A',sites:0,note:'Camping prohibited to protect extremely shallow redwood roots'},
+    parkingTip:'Very small lot (about 12 cars) on a narrow winding road. Do not park on the road if full — too narrow for emergency vehicles. Arrive early.',
+    nearbyFood:'Patrona in Ukiah (25 min) for refined seasonal dining; Schat\'s Bakery in Ukiah (25 min) for legendary breads and sandwiches; Ukiah Brewing Company (25 min) for organic beer and food',
+    elevation:'1,800 ft',
+    things:['Hike to Kellieowen Grove for some of the park\'s largest trees','Stand in the center of a redwood "fairy ring"','Picnic beside crystal-clear Montgomery Creek','Photograph the massive head-high sword ferns','Experience incredible acoustic silence of the deep valley'],
+    hikes:[
+      {name:'Montgomery Loop Trail',distance:'2.0 mi round trip',difficulty:'Moderate',note:'Main trail climbing a steep hill before leveling into five spectacular groves'},
+      {name:'Montgomery Grove Trail',distance:'1.7 mi round trip',difficulty:'Easy',note:'Best-known route with giant redwoods and manageable climb'},
+      {name:'Creek Trail',distance:'0.5 mi round trip',difficulty:'Easy',note:'Short flat extension staying near the water in the first grove'}
+    ],
+    photoSpots:[
+      {name:'Grove 5 (The Tall Trees)',note:'Use a person for scale to show the mind-boggling height of these trees'},
+      {name:'Fern Forest',note:'The carpet of ferns in the third grove is perfect for lush green landscape shots'}
+    ],
+    wildlife:[
+      {name:'Foothill Yellow-legged Frog',note:'Noted in the reserve brochure along the streamside habitat'},
+      {name:'Banana Slug',note:'Frequently found on the trail in the morning — the park\'s unofficial mascot'},
+      {name:'Western Screech-Owl',note:'Their trilling calls are often heard in the late afternoon'}
     ]
   }
 };
