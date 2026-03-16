@@ -368,6 +368,17 @@
     .pm-photo-name { font-weight: 600; color: var(--forest-dark); }
     .pm-photo-note { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
+    .pm-sunset-card {
+      display: flex; gap: 10px; padding: 10px 12px; font-size: 13px; align-items: flex-start;
+      background: linear-gradient(135deg, #fff8f0 0%, #fff3e6 100%); border-radius: var(--radius-sm);
+      border: 1px solid #f5d5a8; margin-bottom: 6px;
+    }
+    .pm-sunset-card.pm-sunset-best { border-color: #e8b86d; background: linear-gradient(135deg, #fff5e6 0%, #ffedcc 100%); }
+    .pm-sunset-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .pm-sunset-name { font-weight: 600; color: #b8860b; }
+    .pm-sunset-best .pm-sunset-name::after { content: ' ⭐'; font-size: 11px; }
+    .pm-sunset-note { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
     .pm-wildlife-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .pm-wildlife-card {
       background: var(--cream); border-radius: var(--radius-sm); padding: 10px 12px;
@@ -466,7 +477,24 @@
       .parks-section { padding: 12px; }
       .hero { padding: 22px 16px 28px; }
     }
+    .is-exporting .pm-footer-btns,
+    .is-exporting .pm-close {
+      display: none !important;
+    }
+    .pm-watermark {
+      display: none;
+      text-align: center;
+      padding-top: 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .is-exporting .pm-watermark {
+      display: block;
+    }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -6858,7 +6886,1520 @@ const PARK_DETAILS = {
       {name:'Wild Turkey',note:'Year-round; large flocks are very common walking through campgrounds'},
       {name:'Osprey',note:'Summer; frequently seen diving into the lake to catch fish'}
     ]
+  },
+  'colusa-sacramento':{
+    highlight:"A quiet Sacramento River stop with shady campsites, fishing access, boat launches, and levee walks. The towering cottonwood and willow trees provide exceptional shade for summer picnics and lazy river days along the Pacific Flyway.",
+    bestSeason:"Spring–Fall",bestMonths:[3,4,5,6,9,10],
+    fee:'$10/vehicle',
+    camping:{car:true,carCost:'$35/night',carSites:'14',carNote:'Small, quiet riverfront campground with heavy shade from large cottonwood trees; good for tents and smaller RVs.',
+             tent:true,tentCost:'$35/night',tentSites:'14',tentNote:'Tents share sites with RVs; soft ground under the trees makes for comfortable pitching.'},
+    parking:"Paved lot near the boat launch rarely fills outside holiday weekends. Arrive earlier on fishing weekends when boaters draw crowds.",
+    nearbyFood:"Rocco's Bar & Grill (~5 min, Italian/American), Cielito Lindo (~5 min, Mexican), Don Habanero (~8 min, Mexican)",
+    elevation:'55 ft',
+    googleRating:4.4,googleReviews:'250',
+    top5:['Fish for salmon, steelhead, bass, and trout','Walk or bike the levee foot path','Birdwatch along the Pacific Flyway corridor','Launch a small boat on the Sacramento River','Picnic under the massive cottonwood trees'],
+    hikes:[
+      {name:'Levee Foot Path',distance:'6.9 mi round trip',gain:'29 ft',difficulty:'Easy',note:'Flat levee walk with river views and almost no shade'},
+      {name:'River Trail',distance:'1.0 mi round trip',gain:'10 ft',difficulty:'Easy',note:'Flat, easy walk along the edge of the Sacramento River'},
+      {name:'Campground Loop',distance:'0.8 mi loop',gain:'0 ft',difficulty:'Easy',note:'Stroll around the park facilities under the canopy of trees'}
+    ],
+    photos:[
+      {spot:'Sacramento River bank',tip:'Late afternoon for warm light through cottonwoods'},
+      {spot:'Top of the levee',tip:'Sunrise/sunset for open river and farmland skies'}
+    ],
+    wildlife:[
+      {name:'Great Blue Heron',note:'Year-round; frequently spotted hunting in the shallows'},
+      {name:'River Otter',note:'Summer; occasionally seen playing near the boat ramp'},
+      {name:'Red-shouldered Hawk',note:'Year-round; listen for loud calls in the upper branches'}
+    ]
+  },
+  'ahjumawi':{
+    highlight:"One of California's most unique and remote parks, accessible only by boat. Crystal-clear aqua springs bubble up through jagged black lava rock, offering a silent, prehistoric landscape of lava flows, tule marshes, and unparalleled solitude.",
+    bestSeason:"May–Oct",bestMonths:[5,6,7,8,9,10],
+    fee:'Free (boat access only)',
+    camping:{car:false,carCost:'N/A',carSites:'N/A',carNote:'Entirely roadless park; no vehicle access or car camping anywhere.',
+             tent:true,tentCost:'$15/night',tentSites:'9',tentNote:'Primitive boat-in environmental campsites at Crystal Springs and other locations; first-come, first-served.'},
+    parking:"Park at the 'Rat Farm' public boat launch on Big Lake and paddle across. Shallow access and dirt-road approach make large boats less practical. Mosquitoes can be intense.",
+    nearbyFood:"Crumbs Restaurant in McArthur (~30 min, breakfast/lunch), Anna's Country Kitchen (~30 min, classic diner), BlackBerry Cafe in Burney (~55 min, cafe/American)",
+    elevation:'3,300 ft',
+    googleRating:4.8,googleReviews:'80',
+    top5:['Kayak across Big Lake to reach the park','Explore the crystal-clear springs and lava tubes','Camp in total wilderness isolation','Birdwatch for bald eagles and osprey','Fish in the cold, clear spring waters'],
+    hikes:[
+      {name:'Spatter Cone Trail',distance:'1.5 mi round trip',gain:'100 ft',difficulty:'Moderate',note:'Rugged walk over sharp volcanic rock to unique geological formations'},
+      {name:'Crystal Springs Walk',distance:'2.0 mi round trip',gain:'50 ft',difficulty:'Easy',note:'Dirt path following the edge of incredibly clear spring water'},
+      {name:'Ja-She Creek Trail',distance:'3.0 mi round trip',gain:'80 ft',difficulty:'Easy',note:'Wanders through pine forests and past older lava flows'}
+    ],
+    photos:[
+      {spot:'Crystal/Ja-She Springs turquoise water',tip:'Midday for the clearest water color against black basalt'},
+      {spot:'Big Lake view from park shore',tip:'Sunset looking back across the water toward Mount Shasta'}
+    ],
+    wildlife:[
+      {name:'Bald Eagle',note:'Winter/spring; frequently seen perched in tall pines near the water'},
+      {name:'White Pelican',note:'Summer; large flocks congregate on the open waters of Big Lake'},
+      {name:'Mule Deer',note:'Year-round; often spotted grazing near the tree line at dawn'}
+    ]
+  },
+  'william-ide':{
+    highlight:"A compact historic site on the Sacramento River preserving the reconstructed 1850s adobe home of California's short-lived Bear Flag Republic president. Towering heritage oak trees, living history demonstrations, and scenic river picnicking make it a charming, low-key stop.",
+    bestSeason:"Spring–Fall",bestMonths:[3,4,5,9,10,11],
+    fee:'Free',
+    camping:{car:false,carCost:'N/A',carSites:'N/A',carNote:'Day-use only historic site; no camping.',
+             tent:false,tentCost:'N/A',tentSites:'N/A',tentNote:'No overnight stays permitted.'},
+    parking:"Small free paved lot on site usually has plenty of space. Morning visits are better for comfort and photos in summer.",
+    nearbyFood:"Los Amigos in Red Bluff (~10 min, Mexican), Krystyna's (~10 min, European/Polish cafe), The Green Barn Whiskey Kitchen (~10 min, steakhouse)",
+    elevation:'250 ft',
+    googleRating:4.6,googleReviews:'400',
+    top5:['Tour the historic 1850s adobe home and outbuildings','Picnic under the massive ancient oak trees','Walk down to the scenic Sacramento River banks','Attend pioneer living history demonstrations (when scheduled)','Visit the small museum and visitor center'],
+    hikes:[
+      {name:'River Trail',distance:'1.0 mi round trip',gain:'20 ft',difficulty:'Easy',note:'Shaded, flat walk along the bluffs above the Sacramento River'},
+      {name:'Oak Woodland Loop',distance:'0.5 mi loop',gain:'10 ft',difficulty:'Easy',note:'Short stroll through the historic property grounds'},
+      {name:'Homestead Walk',distance:'0.3 mi loop',gain:'0 ft',difficulty:'Easy',note:'Self-tour path linking the adobe, blacksmith shop, and corral'}
+    ],
+    photos:[
+      {spot:'Adobe house framed by oak branches',tip:'Morning for softer front light on the white historic building'},
+      {spot:'River overlook',tip:'Sunset for reflections on the Sacramento River'}
+    ],
+    wildlife:[
+      {name:'Acorn Woodpecker',note:'Year-round; easily found clinging to the large oak trees'},
+      {name:'Western Gray Squirrel',note:'Year-round; very active around the picnic areas'},
+      {name:'Black-tailed Deer',note:'Spring; occasionally seen grazing near the river edge'}
+    ]
+  },
+  'woodson-bridge':{
+    highlight:"Nestled between the Sacramento River and a lush riparian forest, this quiet park is famous for its dense canopy of valley oaks. A prime location for birdwatching, peaceful river fishing, and shaded family camping between Chico and Red Bluff.",
+    bestSeason:"Spring–Fall",bestMonths:[3,4,5,9,10,11],
+    fee:'$8/vehicle',
+    camping:{car:true,carCost:'$30/night',carSites:'37',carNote:'Heavily shaded campground pleasant even on warm days; fits tents and RVs. Mosquitoes can be present in early summer.',
+             tent:true,tentCost:'$30/night',tentSites:'37',tentNote:'Tent campers enjoy the soft, leaf-covered ground under mature oak trees.'},
+    parking:"Day-use parking is plentiful near the boat launch and picnic areas. Bring bug spray near dusk by the river.",
+    nearbyFood:"La Cocina de Maria (~15 min, Mexican), Olive Pit in Corning (~15 min, cafe/olive tastings), Iron Skillet (~10 min, American diner)",
+    elevation:'200 ft',
+    googleRating:4.4,googleReviews:'320',
+    top5:['Fish for salmon or steelhead in the Sacramento River','Launch a small boat or drift down the waterway','Camp under the massive canopy of oak and sycamore trees','Spot migratory birds along the Pacific Flyway','Walk the quiet trails in the adjacent nature preserve'],
+    hikes:[
+      {name:'Riverbank Trail',distance:'1.5 mi round trip',gain:'15 ft',difficulty:'Easy',note:'Flat dirt trail closely following the edge of the river'},
+      {name:'Oak Canopy Loop',distance:'2.0 mi loop',gain:'10 ft',difficulty:'Easy',note:'Winds through the dense, shady forest of the recreation area'},
+      {name:'Nature Preserve Walk',distance:'1.0 mi round trip',gain:'5 ft',difficulty:'Easy',note:'Walk into the unmanicured brushland south of the main park'}
+    ],
+    photos:[
+      {spot:'Boat ramp river bend',tip:'Early morning for mist and wide river shots'},
+      {spot:'Sycamore grove',tip:'Afternoon sunlight filtering through huge leaves makes great forest photography'}
+    ],
+    wildlife:[
+      {name:'Yellow-billed Magpie',note:'Year-round; these iconic California birds are noisy and common here'},
+      {name:'Osprey',note:'Summer; watch for them diving into the river for fish'},
+      {name:'Acorn Woodpecker',note:'Year-round in the oak woodland throughout the park'}
+    ]
+  },
+  'hatfield-sra':{
+    highlight:"Bordered by the Merced River, this small shaded park is a hidden gem in the Central Valley. Towering oak trees and sandy river beaches make it a perfect, tranquil spot for summer picnics, lazy swimming, and easy family camping.",
+    bestSeason:"Spring–Fall",bestMonths:[4,5,6,7,8,9,10],
+    fee:'$10/vehicle',
+    camping:{car:true,carCost:'$30/night',carSites:'21',carNote:'Simple, flat dirt sites beneath a dense canopy of large trees; first-come, first-served in quieter months.',
+             tent:true,tentCost:'$30/night',tentSites:'21',tentNote:'Dense tree cover provides excellent protection from the valley sun.'},
+    parking:"The park is rarely crowded; parking near picnic tables or river access is usually very easy.",
+    nearbyFood:"Lalo's Restaurant (~15 min, Mexican), Strings Italian Cafe (~20 min, Italian), Javi's Hilmar (~12 min, Mexican)",
+    elevation:'60 ft',
+    googleRating:4.5,googleReviews:'300',
+    top5:['Swim or wade in the cool, shallow Merced River','Enjoy a family picnic under the heritage oaks','Cast a line for bass or catfish','Catch frogs or look for river turtles with kids','Relax in a hammock strung between the massive trees'],
+    hikes:[
+      {name:'Merced River Trail',distance:'1.5 mi loop',gain:'10 ft',difficulty:'Easy',note:'Shaded walk looping around the edge of the park along the water'},
+      {name:'Picnic Grove Walk',distance:'0.8 mi loop',gain:'0 ft',difficulty:'Easy',note:'Flat stroll through the central park grounds and group areas'},
+      {name:'Fisherman\'s Path',distance:'1.0 mi round trip',gain:'10 ft',difficulty:'Easy',note:'Narrow use-trails following the steepest parts of the riverbank'}
+    ],
+    photos:[
+      {spot:'River beach with overhanging trees',tip:'Late afternoon for warm light on the wide, slow-moving river'},
+      {spot:'The Old Oak near park entrance',tip:'Wide-angle morning shots of the massive tree'}
+    ],
+    wildlife:[
+      {name:'Belted Kingfisher',note:'Spring/summer; watch them hovering over the river before diving'},
+      {name:'Western Pond Turtle',note:'Summer; often seen sunning on logs in slower-moving water'},
+      {name:'Ground Squirrel',note:'Year-round; extremely active in dry grassy patches'}
+    ]
+  },
+  'great-valley-grasslands':{
+    highlight:"One of the last remaining intact parcels of native Central Valley grassland and floodplain, protecting critical habitat for migrating birds and native grasses. Offers stark, quiet beauty with big skies and a much wilder feel than its name suggests.",
+    bestSeason:"Spring",bestMonths:[3,4,5],
+    fee:'Free',
+    camping:{car:false,carCost:'N/A',carSites:'N/A',carNote:'Completely undeveloped wildlife preserve with no facilities.',
+             tent:false,tentCost:'N/A',tentSites:'N/A',tentNote:'No overnight use allowed.'},
+    parking:"No paved lots; look for small dirt pullouts along Highway 140 near the river bridge. Do not block gates. Sun-exposed—go early and bring water.",
+    nearbyFood:"Pad Thai Restaurant in Merced (~20 min, Thai/curries), Eddie's Eatery (~20 min, sandwiches/salads), Taqueria El Agave (~20 min, Mexican)",
+    elevation:'70 ft',
+    googleRating:4.0,googleReviews:'60',
+    top5:['Walk the informal paths through native grasses during spring bloom','Birdwatch for rare migrating species and raptors','Fish the San Joaquin River from the muddy banks','Photograph sweeping, unobstructed valley sunsets','Launch a canoe at the highway bridge for a river float'],
+    hikes:[
+      {name:'San Joaquin River Levee',distance:'2.5 mi round trip',gain:'15 ft',difficulty:'Easy',note:'Elevated dirt path offering wider views over the flat grasslands'},
+      {name:'Great Valley Grasslands Trail',distance:'6.9 mi round trip',gain:'42 ft',difficulty:'Easy',note:'Long flat open-country walk with strong wildlife-viewing potential'},
+      {name:'Floodplain Walk',distance:'1.5 mi round trip',gain:'5 ft',difficulty:'Easy',note:'Informal cross-country stroll through the grass; watch for uneven ground and ticks'}
+    ],
+    photos:[
+      {spot:'Open prairie',tip:'Best in April when grass is bright green and dotted with wildflowers'},
+      {spot:'River bend',tip:'Golden hour for light reflecting off the San Joaquin River'}
+    ],
+    wildlife:[
+      {name:'Northern Harrier',note:'Year-round; frequently seen flying low over the grass hunting'},
+      {name:'Swainson\'s Hawk',note:'Spring/summer over open grassland'},
+      {name:'Coyote',note:'Winter/spring; often seen or heard howling at dusk across the open plains'}
+    ]
+  },
+  'mcconnell-sra':{
+    highlight:"A small, family-friendly oasis on the banks of the Merced River offering cool shade from massive cottonwood and sycamore trees in the hot Central Valley. A quiet local favorite for swimming, fishing, and relaxed camping.",
+    bestSeason:"Spring–Fall",bestMonths:[4,5,6,7,8,9,10],
+    fee:'$10/vehicle',
+    camping:{car:true,carCost:'$30/night',carSites:'17',carNote:'Small, peaceful campground, heavily shaded, ideal for trailers or RVs seeking a quiet night.',
+             tent:true,tentCost:'$30/night',tentSites:'17',tentNote:'Tent spots nestled among the trees with soft dirt pads and easy access to water spigots.'},
+    parking:"Day-use parking is abundant near the picnic areas and rarely fills up. Summer weekends are busiest due to swimming demand.",
+    nearbyFood:"Delhi Chaat (~15 min, Indian vegetarian street food), Mountain Mike's Pizza (~15 min, pizza), El Asadero (~15 min, Mexican)",
+    elevation:'65 ft',
+    googleRating:4.5,googleReviews:'350',
+    top5:['Float or wade in the calm sections of the Merced River','Camp under massive cottonwood and sycamore trees','Fish for catfish or bass from the riverbank','Enjoy a barbecue in the extensive day-use picnic areas','Skip rocks and relax on the sandy river beaches'],
+    hikes:[
+      {name:'River Loop Trail',distance:'1.2 mi loop',gain:'10 ft',difficulty:'Easy',note:'Flat, shaded walk tracing the perimeter of the small park'},
+      {name:'Bank Access Walk',distance:'0.8 mi round trip',gain:'15 ft',difficulty:'Easy',note:'Winds down slight embankments to reach different fishing holes'},
+      {name:'Campground Connector',distance:'0.5 mi round trip',gain:'0 ft',difficulty:'Easy',note:'Simple path connecting day-use area to camping loops'}
+    ],
+    photos:[
+      {spot:'River bend',tip:'Early morning when the water is calm and mist is rising'},
+      {spot:'Sycamore grove',tip:'The peeling white bark of giant sycamores makes striking photos'}
+    ],
+    wildlife:[
+      {name:'Red-tailed Hawk',note:'Year-round; frequently seen circling above the park'},
+      {name:'Common Merganser',note:'Spring; ducks often seen paddling against the river current'},
+      {name:'Striped Skunk',note:'Year-round; very common at night in campground—secure your food'}
+    ]
+  },
+  'pacheco-sp':{
+    highlight:"Overlooking the San Luis Reservoir, this vast windswept landscape of rolling hills and ancient oak trees is famous for spectacular spring wildflower displays and 30 miles of rugged equestrian and mountain biking trails with sweeping Central Valley views.",
+    bestSeason:"Spring–Fall",bestMonths:[3,4,5,10,11],
+    fee:'$10/vehicle',
+    camping:{car:false,carCost:'N/A',carSites:'N/A',carNote:'Day-use only park; no camping facilities.',
+             tent:false,tentCost:'N/A',tentSites:'N/A',tentNote:'Best visited as a hiking, riding, and wildflower day trip.'},
+    parking:"Large gravel lot at the entrance easily accommodates horse trailers and cars. Spring weekends are popular when flowers are peaking. Wind and heat can be major factors—start early.",
+    nearbyFood:"Casa de Fruta (~15 min, roadside stop with deli/fruit/baked goods), Pea Soup Andersen's in Santa Nella (~20 min, American), Taste of India in Santa Nella (~20 min, Indian)",
+    elevation:'1,500 ft',
+    googleRating:4.7,googleReviews:'430',
+    top5:['Hike the hills in March/April for incredible wildflower blooms','Ride a horse or mountain bike on extensive dirt trails','Climb to ridgetops for sweeping views of the Central Valley','Photograph the historic Line Camp cabin','View the massive wind turbines up close'],
+    hikes:[
+      {name:'Spikes Peak Trail',distance:'5.5 mi round trip',gain:'800 ft',difficulty:'Moderate',note:'Steady climb to the highest point for a 360-degree panorama'},
+      {name:'Dinosaur Lake Loop',distance:'3.0 mi loop',gain:'350 ft',difficulty:'Moderate',note:'Rolling trail dropping down toward a small scenic pond'},
+      {name:'Canyon Loop Trail',distance:'4.0 mi loop',gain:'500 ft',difficulty:'Moderate',note:'Winds through shaded oak canyons before climbing back to windy ridges'}
+    ],
+    photos:[
+      {spot:'Spikes Peak summit',tip:'Incredible views of San Luis Reservoir and distant Sierras on clear days'},
+      {spot:'Windmill Ridge',tip:'Juxtaposition of ancient oaks and modern wind turbines is visually striking'}
+    ],
+    wildlife:[
+      {name:'Tule Elk',note:'Year-round; a resident herd roams the hills and can be spotted in the distance'},
+      {name:'Golden Eagle',note:'Spring/fall; soaring on the strong thermal winds'},
+      {name:'Wild Boar',note:'Year-round; look for rooted-up soil even if you don\'t spot them directly'}
+    ]
+  },
+  'san-luis-reservoir':{
+    highlight:"A massive Central Valley reservoir renowned for steady, strong winds making it a hotspot for windsurfing and sailing. Also boasts some of the best striped bass fishing in California, with camping, swimming beaches, and panoramic grassland scenery.",
+    bestSeason:"Spring–Fall",bestMonths:[3,4,5,9,10,11],
+    fee:'$10/vehicle',
+    camping:{car:true,carCost:'$30–$40/night',carSites:'132',carNote:'San Luis Creek Campground offers full water and electric hookups; Basalt Campground (check status) is more tent-oriented but wind-exposed.',
+             tent:true,tentCost:'$30/night',tentSites:'132',tentNote:'Good tent options exist but wind exposure can be substantial. Basalt has been listed as closed—verify before planning.'},
+    parking:"Boat launch and day-use lots are massive and rarely reach full capacity. Wind picks up hard in afternoons—mornings are best for calmer water.",
+    nearbyFood:"Wool Growers Restaurant in Los Banos (~20 min, Basque dining), Pea Soup Andersen's (~15 min, American), In-N-Out Burger Santa Nella (~15 min, burgers)",
+    elevation:'540 ft',
+    googleRating:4.4,googleReviews:'2.2K',
+    top5:['Windsurf or kiteboard in the legendary afternoon winds','Fish for giant striped bass from boat or rocky shores','Visit the Romero Visitor Center for panoramic views','Camp with full RV hookups at O\'Neill Forebay','Hike the shoreline of the massive main reservoir'],
+    hikes:[
+      {name:'San Luis Creek Trail',distance:'4.0 mi round trip',gain:'100 ft',difficulty:'Easy',note:'Flat, paved multi-use trail along the edge of O\'Neill Forebay'},
+      {name:'Lone Oak Trail',distance:'2.5 mi round trip',gain:'200 ft',difficulty:'Moderate',note:'Hike up into golden hills for elevated views of the water'},
+      {name:'San Luis Reservoir Northwest Access Trail',distance:'1.2 mi round trip',gain:'52 ft',difficulty:'Easy',note:'Short reservoir-edge walk with good wildlife and water views'}
+    ],
+    photos:[
+      {spot:'Romero Overlook',tip:'Sunset for layered reservoir-and-hill views'},
+      {spot:'O\'Neill Forebay at sunset',tip:'Capture windsurfers silhouetted against the bright evening sky'}
+    ],
+    wildlife:[
+      {name:'Tule Elk',note:'Spring/fall; often seen grazing on golden hillsides surrounding the lake'},
+      {name:'Osprey',note:'Summer; highly active over the forebay diving for fish'},
+      {name:'Coyote',note:'Year-round; frequently heard howling around Basalt campground at night'}
+    ]
+  },
+  'caswell-memorial':{
+    highlight:"A rare, pristine remnant of the massive oak riparian forests that once blanketed the Central Valley. Walking the shaded trails feels like stepping back in time to a jungle-like California landscape, with the Stanislaus River offering swimming, tubing, and fishing.",
+    bestSeason:"Spring–Fall",bestMonths:[4,5,6,7,8,9,10],
+    fee:'$10/vehicle',
+    camping:{car:true,carCost:'$30/night',carSites:'64',carNote:'Campground completely immersed in dense oak and vine canopy providing excellent shade.',
+             tent:true,tentCost:'$30/night',tentSites:'64',tentNote:'Excellent tent camping due to soft ground and heavy shade; mosquito repellent is a must.'},
+    parking:"Day-use parking can fill quickly on hot summer weekends; arrive before 10 AM to ensure a spot near the river.",
+    nearbyFood:"Samosa Chat in Ripon (~15 min, Indian), Pizza Plus (~15 min, pizza), Ripon Roadhouse (~15 min, American)",
+    elevation:'50 ft',
+    googleRating:4.6,googleReviews:'1.5K',
+    top5:['Float or swim in the calm, cool Stanislaus River','Hike the dense, jungle-like nature trails under ancient oaks','Camp overnight and listen to the thriving local wildlife','Fish from the sandy riverbanks','Relax on the large, sandy river beaches'],
+    hikes:[
+      {name:'Oak Riparian Loop',distance:'1.5 mi loop',gain:'10 ft',difficulty:'Easy',note:'Deeply shaded, flat trail through massive vines and ancient trees'},
+      {name:'River Bend Trail',distance:'2.0 mi round trip',gain:'15 ft',difficulty:'Easy',note:'Follows the winding Stanislaus River with multiple beach access points'},
+      {name:'Wildlife Path',distance:'1.0 mi round trip',gain:'5 ft',difficulty:'Easy',note:'Quiet dirt path through the thickest part of the forest canopy'}
+    ],
+    photos:[
+      {spot:'Stanislaus River from sandy beaches',tip:'Shoot looking down the tree-lined waterway'},
+      {spot:'Massive native grapevines on oaks',tip:'The twisting vines create spooky, beautiful framing'}
+    ],
+    wildlife:[
+      {name:'Riparian Brush Rabbit',note:'Year-round; this highly endangered tiny rabbit can sometimes be spotted in dense brush'},
+      {name:'Wood Duck',note:'Spring/summer; beautifully colored ducks nesting in tree cavities along the river'},
+      {name:'Red-shouldered Hawk',note:'Year-round; listen for piercing calls echoing through the forest canopy'}
+    ]
+  },
+  'turlock-lake':{
+    highlight:"A foothill reservoir park known for boating, swimming, fishing, and broad shoreline views. Note: the park has been undergoing renovations and may have limited access—check current status before visiting.",
+    bestSeason:"Spring–Fall",bestMonths:[4,5,6,7,8,9,10],
+    fee:'$10/vehicle',
+    camping:{car:true,carCost:'$30/night',carSites:'62',carNote:'Shaded south-bank campground near the Tuolumne River, about a mile from the lake. Verify current reopening status before planning.',
+             tent:true,tentCost:'$30/night',tentSites:'62',tentNote:'Tent sites set back in oak woodlands; park has had closures—check status.'},
+    parking:"Check current status before leaving; closures have affected access. When open, summer weekends fill fastest near swim/beach areas.",
+    nearbyFood:"Gustoito's Mexican Grill (~20 min, Mexican), La Morenita (~25 min, Mexican), Pizza Plus (~25 min, pizza)",
+    elevation:'250 ft',
+    googleRating:4.1,googleReviews:'400',
+    top5:['Launch a boat for waterskiing or wakeboarding','Swim in the designated beach areas','Fish for trout, bass, and catfish','Picnic under shade trees overlooking the water','Camp close to the lakeshore'],
+    hikes:[
+      {name:'Lakeshore Trail',distance:'2.5 mi round trip',gain:'50 ft',difficulty:'Easy',note:'Flat, sun-exposed walk along the water\'s edge'},
+      {name:'Oak Woodland Walk',distance:'1.5 mi round trip',gain:'40 ft',difficulty:'Easy',note:'Dirt path through the trees slightly away from the lake edge'},
+      {name:'Picnic Area Loop',distance:'1.0 mi loop',gain:'20 ft',difficulty:'Easy',note:'Simple walk connecting the historic day-use facilities'}
+    ],
+    photos:[
+      {spot:'Boat launch',tip:'Sunset views looking out over the wide expanse of the reservoir'},
+      {spot:'The dam',tip:'Photograph the earthen structure holding back the massive lake'}
+    ],
+    wildlife:[
+      {name:'Great Egret',note:'Year-round; seen hunting in shallow waters along the edge'},
+      {name:'California Quail',note:'Spring; listen for their distinct "Chicago" call in the brush'},
+      {name:'Jackrabbit',note:'Year-round; often seen darting across dry grass near campsites'}
+    ]
+  },
+  'colonel-allensworth':{
+    highlight:"One of the most important African American historic sites in California, preserving the only town in the state founded, financed, and governed by African Americans. Exploring the restored buildings offers a powerful and inspiring look into an important chapter of California history.",
+    bestSeason:"Fall–Spring",bestMonths:[2,3,4,10,11],
+    fee:'$8/vehicle',
+    camping:{car:true,carCost:'$30/night',carSites:'15',carNote:'Open, flat campground offering easy RV pull-in under the vast valley sky. A few shade ramadas available.',
+             tent:true,tentCost:'$30/night',tentSites:'15',tentNote:'Tent camping available but very exposed to wind and sun. Incredibly dark, starry skies for night viewing.'},
+    parking:"Parking is easy and plentiful with a main visitor lot. Summer heat is intense—cooler months are much better for visits.",
+    nearbyFood:"Perico's Taqueria in Delano (~20 min, Mexican), Catrina's in Wasco (~30 min, Mexican), Cafe 101 in Wasco (~30 min, diner/American)",
+    elevation:'200 ft',
+    googleRating:4.6,googleReviews:'380',
+    top5:['Watch the orientation film at the visitor center','Take a self-guided walking tour of restored historic buildings','Visit the Colonel Allensworth residence and old schoolhouse','Attend the annual rededication or Juneteenth events','Camp under incredibly dark, starry skies'],
+    hikes:[
+      {name:'Historic Townsite Walk',distance:'1.5 mi loop',gain:'0 ft',difficulty:'Easy',note:'Flat walk connecting the school, church, library, and homes'},
+      {name:'Railroad Bed Trail',distance:'1.0 mi round trip',gain:'0 ft',difficulty:'Easy',note:'Follows the path of the old Santa Fe rail line that brought settlers here'},
+      {name:'Campground Loop',distance:'0.8 mi loop',gain:'0 ft',difficulty:'Easy',note:'Quick stroll around the perimeter of the flat camping area'}
+    ],
+    photos:[
+      {spot:'Historic schoolhouse',tip:'Bright white building looks stunning against deep blue sky'},
+      {spot:'Allensworth residence porch',tip:'Capture the architectural details of the town founder\'s home'}
+    ],
+    wildlife:[
+      {name:'Burrowing Owl',note:'Spring/summer; watch the ground carefully—these small owls live in holes on the prairie'},
+      {name:'Loggerhead Shrike',note:'Year-round; look for this predatory songbird perched on fences'},
+      {name:'Coyote',note:'Year-round; frequently heard howling across the flat plains at night'}
+    ]
+  },
+  'tule-elk-snr':{
+    highlight:"A specialized wildlife reserve protecting California's endemic tule elk, a species once hunted to the brink of extinction. Offers an almost guaranteed opportunity to view these magnificent animals up close from a viewing platform—strongest in cooler months or early/late in the day.",
+    bestSeason:"Fall–Spring",bestMonths:[1,2,3,4,9,10,11,12],
+    fee:'$8/vehicle',
+    camping:{car:false,carCost:'N/A',carSites:'N/A',carNote:'Small wildlife viewing reserve; no camping allowed.',
+             tent:false,tentCost:'N/A',tentSites:'N/A',tentNote:'Day-use only to avoid disturbing the elk herd.'},
+    parking:"Dedicated paved lot next to the viewing platform rarely fills. Bring binoculars—viewing distance can vary.",
+    nearbyFood:"Willow Ranch in Buttonwillow (~10 min, American/BBQ), Taste of India (~10 min, Indian), Subway (~10 min, sandwiches)",
+    elevation:'300 ft',
+    googleRating:4.5,googleReviews:'420',
+    top5:['View the massive tule elk herd from the raised platform','Bring binoculars or telephoto lens for wildlife photography','Picnic in the shaded grassy area near the visitor center','Visit in late summer/fall to hear male elk bugling during the rut','Read interpretive panels about the species\' near-extinction'],
+    hikes:[
+      {name:'Viewing Platform Walk',distance:'0.2 mi round trip',gain:'10 ft',difficulty:'Easy',note:'Very short paved walk from parking lot to the elevated observation deck'},
+      {name:'Perimeter Fence Walk',distance:'1.0 mi round trip',gain:'10 ft',difficulty:'Easy',note:'Informal walk along the outside boundary fence looking into the reserve'},
+      {name:'Picnic Area Stroll',distance:'0.4 mi loop',gain:'5 ft',difficulty:'Easy',note:'Brief walk around the fenced-in, manicured visitor area'}
+    ],
+    photos:[
+      {spot:'Viewing platform with telephoto lens',tip:'Early morning for animal activity and softer heat shimmer'},
+      {spot:'Visitor center antler exhibits',tip:'Photograph the massive shed antlers on display'}
+    ],
+    wildlife:[
+      {name:'Tule Elk',note:'Year-round; the main attraction, easily seen grazing in the fenced pasture'},
+      {name:'San Joaquin Kit Fox',note:'Occasional; rare endangered foxes sometimes roam reserve edges at dusk'},
+      {name:'Western Kingbird',note:'Spring/summer; frequently seen perched on fences looking for insects'}
+    ]
+  },
+  'mcarthur-burney-falls':{
+    highlight:"Home to the spectacular 129-foot Burney Falls, famously called the 'Eighth Wonder of the World' by Theodore Roosevelt. Crystal-clear water gushes from the mossy rock face itself, creating a lush, misty oasis surrounded by forest camping and Lake Britton recreation.",
+    bestSeason:"May–Oct",bestMonths:[4,5,6,7,8,9,10],
+    fee:'$10/vehicle',
+    camping:{car:true,carCost:'$35/night',carSites:'121',carNote:'Heavily forested and extremely popular campground; reservations must be made well in advance. Great base for falls and Lake Britton.',
+             tent:true,tentCost:'$35/night',tentSites:'121',tentNote:'Large, shaded tent sites under massive pines; bear lockers provided and must be used.'},
+    parking:"Main lot fills by 10 AM every summer weekend. Arrive early or stay overnight for lighter crowds. Dogs restricted on falls trails.",
+    nearbyFood:"Anna's Country Kitchen in Burney (~15 min, diner), BlackBerry Cafe (~10 min, cafe/American), Art's Outpost (~10 min, American)",
+    elevation:'3,000 ft',
+    googleRating:4.8,googleReviews:'5.2K',
+    top5:['Hike down to the base of the spectacular Burney Falls','Rent a boat or paddleboard on Lake Britton','Hike a segment of the Pacific Crest Trail through the park','Camp in the lush, pine-scented forest','Visit the park visitor center and general store'],
+    hikes:[
+      {name:'Falls Loop Trail',distance:'1.2 mi loop',gain:'150 ft',difficulty:'Easy',note:'Stunning loop crossing a bridge over rushing water and descending to the misty base of the falls'},
+      {name:'Pioneer Cemetery Trail',distance:'2.5 mi round trip',gain:'200 ft',difficulty:'Moderate',note:'Forested hike tracing the creek to a historic pioneer graveyard'},
+      {name:'Lake Britton Trail',distance:'3.0 mi round trip',gain:'300 ft',difficulty:'Moderate',note:'Trail from the main park down to the sandy shores of the lake'}
+    ],
+    photos:[
+      {spot:'Base of Burney Falls on the loop',tip:'Use slow shutter speed to capture silky cascades and weeping rock walls'},
+      {spot:'Overlook at the trailhead',tip:'Great for wide, top-down shot of the waterfall plunge pool'}
+    ],
+    wildlife:[
+      {name:'Black Bear',note:'Summer; occasionally seen in campground—strict food storage rules apply'},
+      {name:'Rainbow Trout',note:'Year-round; look into crystal-clear creek below falls to see them holding in the current'},
+      {name:'Steller\'s Jay',note:'Year-round; bold blue birds that will try to steal your picnic food'}
+    ]
+  },
+  'castle-crags':{
+    highlight:"Jaw-dropping glacier-polished granite spires rising 6,000 feet above the Sacramento River canyon, with world-class hiking to Castle Dome, ancient forests, and stunning Mount Shasta views. One of Northern California's most dramatic mountain parks.",
+    bestSeason:"May–Oct",bestMonths:[5,6,7,8,9,10],
+    fee:'$8/vehicle',
+    camping:{car:true,carCost:'$25/night',carSites:'76',carNote:'Dense, quiet forest campground near the river; excellent basecamp for exploring the area. Bear-safe food storage recommended.',
+             tent:true,tentCost:'$25/night',tentSites:'76 + 6 environmental',tentNote:'Great for hikers wanting an early start on park trails or the nearby PCT segment.'},
+    parking:"Park at Vista Point for best views without hiking. Crags Trailhead lot fills early on weekends—start early for cooler temps and clearer views.",
+    nearbyFood:"YAKS on the 5 in Dunsmuir (~10 min, burgers/American), Cafe Maddalena (~15 min, upscale Mediterranean), Dunsmuir Brewery Works (~15 min, brewpub)",
+    elevation:'2,000 ft',
+    googleRating:4.7,googleReviews:'950',
+    top5:['Hike the intense Crags Trail into the granite spires','Drive to Vista Point for incredible Mount Shasta and Crags views','Walk the river loop and fish in the upper Sacramento River','Picnic in the densely forested day-use areas','Hike a stretch of the Pacific Crest Trail through the park'],
+    hikes:[
+      {name:'Crags Trail to Castle Dome',distance:'5.6 mi round trip',gain:'2,200 ft',difficulty:'Hard',note:'Steep, strenuous climb into the heart of the granite spires with otherworldly views'},
+      {name:'Root Creek Trail via PCT',distance:'5.3 mi round trip',gain:'1,020 ft',difficulty:'Moderate',note:'Good moderate option with creek scenery and less exposure than Castle Dome'},
+      {name:'Vista Point Trail',distance:'0.5 mi round trip',gain:'50 ft',difficulty:'Easy',note:'Short paved walk to an incredible, unobstructed view of Mount Shasta'}
+    ],
+    photos:[
+      {spot:'Vista Point',tip:'Sunset when alpine glow lights up Mount Shasta and the granite crags simultaneously'},
+      {spot:'Castle Dome upper viewpoints',tip:'Clear mornings for best mountain visibility'}
+    ],
+    wildlife:[
+      {name:'Peregrine Falcon',note:'Spring/summer; scan the high granite cliffs with binoculars to see them nesting'},
+      {name:'Mule Deer',note:'Year-round; frequently seen grazing around campground perimeters'},
+      {name:'Black Bear',note:'Spring/summer; active in the park and occasionally near river trails'}
+    ]
+  },
+
+  /* -------- Batch 16 -------- */
+
+  'columbia-shp':{
+    highlight:'One of California\'s best-preserved Gold Rush towns — a living 1850s main street with saloons, stagecoach rides, costumed interpreters, and working blacksmith shops. Walk through an intact Gold Rush streetscape that feels more like time travel than a museum.',
+    googleRating:4.7,
+    googleReviews:4900,
+    bestSeason:'Spring, Fall',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use historic park. Nearby lodging in Columbia or Sonora; camping at nearby non-park campgrounds.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No public campground within the historic park.'},
+    parkingTip:'Use peripheral lots rather than trying to park near the main historic strip. Arrive early on weekends and event days.',
+    nearbyFood:'City Hotel Restaurant (~2 min walk, American/historic dining); St. Charles Saloon (~2 min walk, pub); Columbia Mercantile 1855 (~3 min walk, café)',
+    elevation:'2,100 ft',
+    things:[
+      'Walk the preserved Gold Rush main street',
+      'Take a stagecoach ride',
+      'Visit the museum and historic shops',
+      'Watch blacksmithing & crafts demonstrations',
+      'Explore the Karen Bakerville Smith Nature Trail'
+    ],
+    hikes:[
+      {name:'Karen Bakerville Smith Memorial Nature Trail',distance:'0.6 mi loop',gain:'62 ft',difficulty:'Easy',note:'The park\'s main nature trail through oak woodland — best non-street walk'},
+      {name:'Historic Main Street to Cemetery Walk',distance:'1.0 mi round trip',gain:'80 ft',difficulty:'Easy',note:'Self-guided historic route linking the town core to quieter edges'},
+      {name:'Columbia Main Street & Side Streets Loop',distance:'0.8 mi loop',gain:'40 ft',difficulty:'Easy',note:'Flat interpretive stroll through the heart of the Gold Rush town'}
+    ],
+    photoSpots:[
+      {name:'Main Street storefronts',note:'Morning for softer light and fewer parked cars'},
+      {name:'Stagecoach area & wooden boardwalks',note:'Late afternoon for warm Gold Rush atmosphere'}
+    ],
+    wildlife:[
+      {name:'Mule Deer',note:'Dawn/dusk on quieter edges near the trail and outskirts'},
+      {name:'Acorn Woodpecker',note:'In oak trees around the historic district'},
+      {name:'Western Bluebird',note:'Spring in open areas and along fence lines'}
+    ]
+  },
+
+  'indian-grinding-rock':{
+    highlight:'Home to the largest known collection of bedrock mortars (chaw\'se) in North America — over 1,185 mortar cups in a single limestone outcrop. A culturally significant Miwok gathering place set in a peaceful oak-studded foothill meadow.',
+    googleRating:4.7,
+    googleReviews:900,
+    bestSeason:'Spring, Fall',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'$8/vehicle',
+    carCamping:{available:true,cost:'$35/night',sites:'22',note:'Small developed campground with 22 family sites — quiet foothill setting with easy access to museum and trails.'},
+    tentCamping:{available:true,cost:'$35/night',sites:'22',note:'Same developed campsites; shaded and calm under oak canopy.'},
+    parkingTip:'Generally easy parking. Festival and Big Time event days can get notably busy — bring water for short walks as meadow/trail areas have sun exposure.',
+    nearbyFood:'Rosebud\'s Cafe in Jackson (~20 min, American); Stanley\'s Steakhouse at Jackson Rancheria (~20 min, steakhouse); Mel & Faye\'s Diner in Jackson (~18 min, classic diner)',
+    elevation:'2,400 ft',
+    things:[
+      'See the bedrock mortar outcrop (1,185+ mortar cups)',
+      'Visit the Chaw\'se Regional Indian Museum',
+      'Walk the South Nature Trail',
+      'Explore reconstructed Miwok village structures',
+      'Camp under the oaks'
+    ],
+    hikes:[
+      {name:'South Nature Trail',distance:'1.4 mi loop',gain:'219 ft',difficulty:'Moderate',note:'Main trail combining oak woodland, interpretive stops, and foothill views'},
+      {name:'Museum to Mortar Rock Walk',distance:'0.4 mi round trip',gain:'20 ft',difficulty:'Easy',note:'Short interpretive route focused on the cultural core of the park'},
+      {name:'Campground & Meadow Loop',distance:'0.7 mi loop',gain:'35 ft',difficulty:'Easy',note:'Relaxed walk linking camping area to main historic features'}
+    ],
+    photoSpots:[
+      {name:'Bedrock mortar outcrop',note:'Morning or late afternoon for texture and softer contrast on the limestone'},
+      {name:'Meadow & roundhouse area',note:'Golden hour for warm foothill light'}
+    ],
+    wildlife:[
+      {name:'Acorn Woodpecker',note:'Abundant in oak groves throughout the park'},
+      {name:'Mule Deer',note:'Early morning near meadow edges'},
+      {name:'Wild Turkey',note:'Sometimes in open meadow and roadside areas'}
+    ]
+  },
+
+  'crystal-cove':{
+    highlight:'One of Southern California\'s best beach-and-backcountry combos — 3.2 miles of coastline with tide pools, historic beach cottages, and 2,400 acres of rugged backcountry canyons. You can tide-pool in the morning and hike canyon trails in the afternoon.',
+    googleRating:4.8,
+    googleReviews:13000,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$15/vehicle',
+    carCamping:{available:true,cost:'$25–$75/night',sites:'58',note:'Moro Campground — coveted blufftop coastal camping. Reserve well in advance; one of the most popular campgrounds in Orange County.'},
+    tentCamping:{available:true,cost:'$25–$75/night',sites:'58 + backcountry hike-in',note:'Blufftop tent camping plus backcountry options connected to the trail network.'},
+    parkingTip:'Lots fill early on warm weekends, especially for beach/tide pool access. Use the right lot for your plan — beach, cottages, or Moro/backcountry — to avoid unnecessary uphill walking.',
+    nearbyFood:'Beachcomber Cafe (~3 min, coastal American in the Historic District); Bear Flag Fish Co. (~12 min, seafood); Zinc Cafe & Market Laguna Beach (~15 min, Californian)',
+    elevation:'0–1,000 ft',
+    things:[
+      'Explore tide pools and shoreline',
+      'Hike El Moro Canyon backcountry trails',
+      'See the 1930s–40s Historic District beach cottages',
+      'Camp at Moro Campground on the bluffs',
+      'Catch sunset from the bluff trails'
+    ],
+    hikes:[
+      {name:'El Moro Canyon Loop Trail',distance:'5.0 mi loop',gain:'810 ft',difficulty:'Moderate',note:'Best all-around intro hike — ocean views and canyon terrain'},
+      {name:'Crystal Cove & Pelican Point Loop',distance:'2.7 mi loop',gain:'157 ft',difficulty:'Easy',note:'Shorter coastal option with bluff and beach scenery'},
+      {name:'Crystal Cove Perimeter Loop',distance:'9.5 mi loop',gain:'1,600 ft',difficulty:'Hard',note:'Grand-tour backcountry route for stronger hikers'}
+    ],
+    photoSpots:[
+      {name:'Reef Point / bluff edge',note:'Sunset for coastal glow and layered cliff views'},
+      {name:'Historic District cottages & beach',note:'Early morning for clean light and fewer crowds'}
+    ],
+    sunsetSpots:[
+      {spot:'Reef Point bluff',note:'Elevated west-facing perch with panoramic ocean views — watch the sun sink below Catalina Island silhouette'},
+      {spot:'Historic District beach',note:'Sun sets over the water framed by vintage cottages and coastal bluffs'}
+    ],
+    wildlife:[
+      {name:'Dolphins',note:'Occasionally offshore — watch from bluff overlooks'},
+      {name:'Shorebirds & Herons',note:'Tide pool and beach areas near the coast'},
+      {name:'Mule Deer',note:'Backcountry trails at quieter hours'}
+    ]
+  },
+
+  'malibu-creek':{
+    highlight:'Volcanic rock landscapes, movie history (M*A*S*H filming site), oak groves, swimming holes, and some of the Santa Monica Mountains\' most accessible trails. One of the most versatile SoCal parks for families, climbers, and hikers who want varied scenery without a long drive.',
+    googleRating:4.7,
+    googleReviews:6800,
+    bestSeason:'Spring, Fall, Winter',
+    bestMonths:[2,3,4,5,10,11],
+    entranceFee:'$12/vehicle',
+    carCamping:{available:true,cost:'$45/night',sites:'63',note:'Well-located campground for trails and family camping. Sites are close together but good base for early Rock Pool hikes.'},
+    tentCamping:{available:true,cost:'$45/night',sites:'63',note:'Popular tent camping thanks to trail access; expect less privacy than more remote campgrounds.'},
+    parkingTip:'Day-use lot is best for Rock Pool/Century Lake hikes. Warm weekends get busy but usually more manageable than beach parks.',
+    nearbyFood:'Malibu Cafe at Calamigos Ranch (~10 min, American); Sagebrush Cantina Calabasas (~15 min, Mexican/American); King\'s Fish House Calabasas (~15 min, seafood)',
+    elevation:'800 ft',
+    things:[
+      'Hike to Rock Pool and Century Lake',
+      'Explore M*A*S*H filming locations',
+      'Go bouldering near volcanic formations',
+      'Camp in the main campground',
+      'Birdwatch in oak woodland and creek areas'
+    ],
+    hikes:[
+      {name:'Rock Pool via Crags Road Loop',distance:'4.0 mi loop',gain:'450 ft',difficulty:'Moderate',note:'Classic Malibu Creek outing to the park\'s best-known swimming hole and rock scenery'},
+      {name:'Cistern Trail to Lookout Trail',distance:'1.5 mi round trip',gain:'300 ft',difficulty:'Moderate',note:'Shorter option with scenic overlook above Malibu Lake and the Goat Buttes'},
+      {name:'Malibu Lake Trail',distance:'6.4 mi round trip',gain:'500 ft',difficulty:'Moderate',note:'Longer walk for varied terrain and lake/creek scenery'}
+    ],
+    photoSpots:[
+      {name:'Rock Pool',note:'Mid-morning for light on the water and rock walls'},
+      {name:'Lookout Trail overlook',note:'Late afternoon for wider canyon light over Malibu Lake'}
+    ],
+    wildlife:[
+      {name:'Red-tailed Hawk',note:'Open canyon skies and ridges'},
+      {name:'Mule Deer',note:'Early morning near creek and meadow edges'},
+      {name:'Western Fence Lizard',note:'Around streamside and rock pool zones'}
+    ]
+  },
+
+  'leo-carrillo':{
+    highlight:'A classic Malibu-area beach park with sea caves, tide pools, coastal reefs, and a surprisingly robust inland hiking network. Combine a beach morning with a canyon hike to Nicholas Flat in the same trip — one of the best two-for-one parks in SoCal.',
+    googleRating:4.7,
+    googleReviews:8000,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$12/vehicle',
+    carCamping:{available:true,cost:'$45/night',sites:'135',note:'Campground sits under sycamores — one of the best SoCal beach-park campgrounds for shade. A favorite for families, surfers, and coastal weekends.'},
+    tentCamping:{available:true,cost:'$45/night',sites:'135',note:'Tent camping is strong thanks to tree cover and beach proximity, though you\'re not directly on the sand.'},
+    parkingTip:'Beach lots fill fast on warm weekends around mid-morning. Check the tide chart before visiting for tide pools and arrive early.',
+    nearbyFood:'Neptune\'s Net (~5 min, seafood); Lily\'s Malibu (~15 min, Mexican); The Sunset Restaurant (~15 min, seafood/coastal American)',
+    elevation:'0–1,500 ft (inland trails)',
+    things:[
+      'Explore tide pools, sea caves, and reefs',
+      'Walk the beach and coastline',
+      'Camp beneath sycamores',
+      'Hike inland to Nicholas Flat',
+      'Surf, fish, or watch sunset from the coast'
+    ],
+    hikes:[
+      {name:'Willow Creek Trail to Nicholas Flat Loop',distance:'5.7 mi loop',gain:'1,000 ft',difficulty:'Moderate',note:'Best balanced inland hike for scenery and a secluded feel away from the beach'},
+      {name:'Nicholas Flat via Decker School Road',distance:'7.0 mi round trip',gain:'1,300 ft',difficulty:'Moderate',note:'Longer steady climb to one of the park\'s classic inland destinations'},
+      {name:'Leo Carrillo Beach Trail',distance:'1.5 mi round trip',gain:'100 ft',difficulty:'Easy',note:'Great for beach, bluff, and cave exploration without committing to a full backcountry hike'}
+    ],
+    photoSpots:[
+      {name:'Sea caves and rocks at low tide',note:'Golden hour or low tide for best texture and access'},
+      {name:'Nicholas Flat ridge area',note:'Clear late afternoon for inland ridge light'}
+    ],
+    wildlife:[
+      {name:'Pelicans & Shorebirds',note:'Along the beach and tide pool zones'},
+      {name:'Dolphins',note:'Occasionally visible offshore from bluffs'},
+      {name:'Mule Deer',note:'Inland trails, especially early morning or late evening'}
+    ]
+  },
+
+  'point-mugu':{
+    highlight:'One of the strongest all-around state parks in SoCal — long beaches, ocean panoramas, grassy valleys, rugged mountains, and 70+ miles of trails. Classic Santa Monica Mountains ridge hikes with Pacific views that rival anything in the range.',
+    googleRating:4.8,
+    googleReviews:10500,
+    bestSeason:'Spring, Fall, Winter',
+    bestMonths:[2,3,4,5,10,11],
+    entranceFee:'$12/vehicle',
+    carCamping:{available:true,cost:'$35–$45/night',sites:'190',note:'Two distinct experiences: beach-adjacent Thornhill Broome and inland Sycamore Canyon. Choose based on whether you want ocean or trail access with shelter.'},
+    tentCamping:{available:true,cost:'$35–$45/night',sites:'190',note:'Sycamore Canyon is best for tent campers who want trail access and a bit less wind exposure than beachfront.'},
+    parkingTip:'Ray Miller and Mugu Peak trailheads fill on weekends. Beach parking depends on weather. Early arrival matters more here than at most urban-adjacent parks.',
+    nearbyFood:'Neptune\'s Net (~10 min, seafood); Vintage Grocers Trancas (~20 min, café/market); Reel Inn Malibu (~25 min, seafood)',
+    elevation:'0–1,266 ft',
+    things:[
+      'Hike Mugu Peak or Ray Miller/Backbone trails',
+      'Camp at Thornhill Broome or Sycamore Canyon',
+      'Watch for whales from coastal overlooks (winter/spring)',
+      'Explore La Jolla Valley wildflowers in spring',
+      'Drive the coast for bluff and mountain viewpoints'
+    ],
+    hikes:[
+      {name:'Mugu Peak Trail',distance:'2.9 mi round trip',gain:'1,250 ft',difficulty:'Hard',note:'Short but steep classic with huge coastline payoff'},
+      {name:'Ray Miller Backbone Trail',distance:'5.5 mi round trip',gain:'1,350 ft',difficulty:'Hard',note:'One of the best ocean-view climbs in the Santa Monica Mountains'},
+      {name:'Scenic & Overlook Trails Loop',distance:'2.5 mi loop',gain:'400 ft',difficulty:'Moderate',note:'Good mid-length option with views without the hardest climbs'}
+    ],
+    photoSpots:[
+      {name:'Mugu Peak summit',note:'Clear morning or late afternoon for coastline depth'},
+      {name:'Thornhill Broome beach/bluffs',note:'Sunset for classic orange-glow coastal shots'}
+    ],
+    wildlife:[
+      {name:'Gray Whale',note:'Winter/spring migration visible from coastal overlooks'},
+      {name:'Red-tailed Hawk',note:'Ridges and updraft zones'},
+      {name:'Mule Deer',note:'Canyon bottoms and early-morning trail corridors'}
+    ]
+  },
+
+  'torrey-pines':{
+    highlight:'One of California\'s most scenic urban-edge reserves — rare Torrey pine habitat, ocean cliffs, sculpted sandstone formations, and outstanding short hikes. Delivers spectacular views almost immediately, even for non-hikers.',
+    googleRating:4.8,
+    googleReviews:25000,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$15–$25/vehicle',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use only. Stay in Del Mar, La Jolla, or San Diego.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No campground inside the reserve.'},
+    parkingTip:'One of the main challenges — the upper lot fills quickly and weekends may require overflow parking outside the reserve. Go early on weekdays for the best experience.',
+    nearbyFood:'The Cottage La Jolla (~12 min, breakfast/Californian); George\'s at the Cove (~15 min, Californian); Puesto La Jolla (~12 min, Mexican)',
+    elevation:'0–340 ft',
+    things:[
+      'Hike the bluff trails and beach connectors',
+      'See the rare Torrey pine habitat',
+      'Visit overlooks and the visitor center',
+      'Walk down to the beach below the cliffs',
+      'Watch sunset or coastal fog from the high points'
+    ],
+    hikes:[
+      {name:'Beach Trail Loop',distance:'2.3 mi loop',gain:'341 ft',difficulty:'Moderate',note:'Best all-around intro route — cliffs, beach, and reserve scenery'},
+      {name:'Beach & Broken Hill Loop',distance:'3.6 mi loop',gain:'400 ft',difficulty:'Moderate',note:'Slightly longer coastal loop with more variety'},
+      {name:'Razor Point & Guy Fleming Loop',distance:'2.0 mi loop',gain:'200 ft',difficulty:'Easy',note:'Family-friendly with classic cliff-edge ocean views'}
+    ],
+    photoSpots:[
+      {name:'Razor Point',note:'Late afternoon for dramatic side-light on sandstone cliffs'},
+      {name:'Beach below Broken Hill',note:'Sunset for layered cliffs and surf glow'}
+    ],
+    sunsetSpots:[
+      {spot:'Razor Point overlook',note:'West-facing cliff with unobstructed ocean horizon — the sandstone glows orange as the sun drops into the Pacific'},
+      {spot:'Guy Fleming Trail viewpoint',note:'Slightly more sheltered spot with panoramic coastal views and Torrey pine silhouettes'}
+    ],
+    wildlife:[
+      {name:'Dolphins',note:'Offshore — watch from cliff overlooks'},
+      {name:'Peregrine Falcon',note:'Cliff and updraft zones'},
+      {name:'Cottontail Rabbit',note:'Along brushy mesa trails'}
+    ]
+  },
+
+  'anza-borrego':{
+    highlight:'California\'s largest state park — over 600,000 acres of badlands, slot canyons, palm oases, wildflower superbloom potential, and dark night skies. The combination of scale, geology, solitude, and desert drama makes it unforgettable.',
+    googleRating:4.8,
+    googleReviews:8500,
+    bestSeason:'Winter, Spring, Fall',
+    bestMonths:[2,3,4,10,11,12],
+    entranceFee:'$10/vehicle at major fee areas',
+    carCamping:{available:true,cost:'$25–$35/night',sites:'Multiple campgrounds',note:'Borrego Palm Canyon, Tamarisk Grove, Bow Willow + widespread primitive camping. Check heat, road conditions, and water availability.'},
+    tentCamping:{available:true,cost:'$25–$35/night',sites:'Multiple + primitive',note:'Excellent in cooler months. Wind and temperature swings matter more here than in forest parks.'},
+    parkingTip:'Don\'t underestimate how large this park is — plan specific zones. Start early, carry extra water, and check dirt-road conditions before heading to remote trailheads.',
+    nearbyFood:'Carlee\'s Place in Borrego Springs (~15 min, American); Red Ocotillo (~15 min, Southwestern); Kendall\'s Cafe (~15 min, breakfast)',
+    elevation:'0–6,000+ ft across zones',
+    things:[
+      'Hike Borrego Palm Canyon or a slot canyon',
+      'See wildflowers in a superbloom year',
+      'Watch sunrise from Font\'s Point over the badlands',
+      'Stargaze under exceptionally dark skies',
+      'Explore palm groves, washes, and desert geology'
+    ],
+    hikes:[
+      {name:'Borrego Palm Canyon Loop',distance:'3.0 mi round trip',gain:'450 ft',difficulty:'Moderate',note:'Classic first hike to a palm oasis — chance of bighorn sheep sightings'},
+      {name:'The Slot',distance:'2.2 mi round trip',gain:'100 ft',difficulty:'Moderate',note:'One of the park\'s most popular short slot canyon adventures'},
+      {name:'Maidenhair Falls via Hellhole Canyon',distance:'5.6 mi round trip',gain:'600 ft',difficulty:'Moderate',note:'Best when water is flowing and temperatures are cool'}
+    ],
+    photoSpots:[
+      {name:'Font\'s Point',note:'Sunrise for dramatic badlands texture and long shadows'},
+      {name:'Borrego Badlands overlooks',note:'Blue hour and sunset for layered desert color'}
+    ],
+    wildlife:[
+      {name:'Peninsular Bighorn Sheep',note:'Early morning near rocky canyon areas'},
+      {name:'Greater Roadrunner',note:'Desert flats and campground roads'},
+      {name:'Jackrabbit',note:'Dawn and dusk across open desert areas'}
+    ]
+  },
+
+  'cuyamaca-rancho':{
+    highlight:'One of SoCal\'s best mountain parks — pine-oak forest, creeks, meadows, granite viewpoints, and 100+ miles of trails. A cooler, more forested counterpoint to San Diego\'s coast and desert. Stonewall Peak is one of the region\'s best effort-to-view-ratio hikes.',
+    googleRating:4.8,
+    googleReviews:4000,
+    bestSeason:'Spring, Summer, Fall',
+    bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'$10/vehicle',
+    carCamping:{available:true,cost:'$35/night',sites:'80+',note:'Two family campgrounds — Green Valley (creek/falls access) and Paso Picacho (summit hike access). One of the stronger camping parks in San Diego County.'},
+    tentCamping:{available:true,cost:'$35/night',sites:'80+',note:'Popular and comfortable thanks to elevation and tree cover; nights can get cold outside summer.'},
+    parkingTip:'Stonewall Peak trailhead fills on weekends. Arrive early for parking and cooler hiking temperatures.',
+    nearbyFood:'Julian Beer Co. in Julian (~25 min, American/pizza); Miner\'s Diner in Julian (~25 min, diner); Jeremy\'s on the Hill (~25 min, Californian)',
+    elevation:'4,600–6,512 ft',
+    things:[
+      'Hike Stonewall Peak',
+      'Hike or drive toward Cuyamaca Peak',
+      'Camp at Green Valley or Paso Picacho',
+      'Visit Green Valley Falls',
+      'Explore meadow, oak woodland, and conifer forest trails'
+    ],
+    hikes:[
+      {name:'Stonewall Peak Trail',distance:'3.8 mi round trip',gain:'813 ft',difficulty:'Moderate',note:'One of the best payoff hikes in SoCal for effort vs. view'},
+      {name:'Green Valley Falls',distance:'0.4 mi round trip',gain:'70 ft',difficulty:'Easy',note:'Short and family-friendly, especially good when water is running'},
+      {name:'Cuyamaca Peak via Azalea Glen Loop',distance:'7.7 mi round trip',gain:'1,800 ft',difficulty:'Hard',note:'Big-view summit hike with a real mountain feel'}
+    ],
+    photoSpots:[
+      {name:'Stonewall Peak summit',note:'Clear mornings or sunset glow on surrounding ridges'},
+      {name:'Green Valley Falls',note:'Spring or after rain for best water flow'}
+    ],
+    wildlife:[
+      {name:'Wild Turkey',note:'Campgrounds, meadows, and roadsides'},
+      {name:'Mule Deer',note:'Dawn/dusk in meadow and forest margins'},
+      {name:'Red-tailed Hawk',note:'Above ridges and open granite sections'}
+    ]
+  },
+
+  'mount-san-jacinto':{
+    highlight:'Southern California\'s premier alpine escape — high forest, granite ridges, and a 10,834 ft summit experience. The Palm Springs Aerial Tramway provides easy high-country access, while the Idyllwild side offers classic wilderness approaches.',
+    googleRating:4.9,
+    googleReviews:5500,
+    bestSeason:'Summer, Fall',
+    bestMonths:[6,7,8,9,10],
+    entranceFee:'Free at trailheads; Palm Springs Tramway fare required for tram-access hikes',
+    carCamping:{available:true,cost:'$25–$35/night',sites:'Two campgrounds near Idyllwild',note:'Two drive-in campgrounds near Idyllwild; rest is wilderness/backpacking country. Good lower-elevation base to avoid relying on the tram.'},
+    tentCamping:{available:true,cost:'$25–$35/night',sites:'Drive-in + backcountry permits',note:'Tent camping works well in developed campgrounds and in the wilderness for experienced backpackers.'},
+    parkingTip:'Reserve the tram for tram hikes and start early — summit routes are long. Idyllwild-side trailheads also fill on peak weekends.',
+    nearbyFood:'Cafe Aroma in Idyllwild (~15 min, Californian); Idyology (~15 min, American); Ferro (~15 min, Italian)',
+    elevation:'Up to 10,834 ft (San Jacinto Peak)',
+    things:[
+      'Hike San Jacinto Peak',
+      'Take the Palm Springs Aerial Tramway for high-country access',
+      'Camp near Idyllwild or backpack the wilderness',
+      'Explore Round Valley and Wellman Divide',
+      'Enjoy cooler summer temperatures and granite scenery'
+    ],
+    hikes:[
+      {name:'San Jacinto Peak from Tramway',distance:'10.3 mi round trip',gain:'2,400 ft',difficulty:'Hard',note:'The park\'s signature hike — most practical summit route for most visitors'},
+      {name:'Suicide Rock via Deer Springs Trail',distance:'6.5 mi round trip',gain:'1,700 ft',difficulty:'Hard',note:'Classic Idyllwild-side hike with strong granite scenery'},
+      {name:'Round Valley to Wellman Divide',distance:'5.5 mi round trip',gain:'1,000 ft',difficulty:'Moderate',note:'Substantial high-country hike without the full summit commitment'}
+    ],
+    photoSpots:[
+      {name:'San Jacinto Peak summit',note:'Clear mornings for long-range views into desert and mountains'},
+      {name:'Round Valley / tram high-country trails',note:'Late afternoon for forest light and granite glow'}
+    ],
+    wildlife:[
+      {name:'Mule Deer',note:'Meadow edges and quieter forested sections'},
+      {name:'Steller\'s Jay',note:'High forest areas near tram and campgrounds'},
+      {name:'Bighorn Sheep',note:'Occasionally on lower rocky slopes — more likely on surrounding steep terrain'}
+    ]
+  },
+
+  'red-rock-canyon':{
+    highlight:'A compact but visually striking desert park of colorful red, white, and brown cliffs where the southern Sierra meets the Mojave. Easy desert exploration and spectacular photography right off Highway 14.',
+    googleRating:4.7,
+    googleReviews:3600,
+    bestSeason:'Fall, Winter, Spring',
+    bestMonths:[2,3,4,10,11,12],
+    entranceFee:'$8/vehicle',
+    carCamping:{available:true,cost:'$25/night',sites:'50',note:'Ricardo Campground — first-come, first-served. Strong desert base for sunrise/sunset photography and short hikes.'},
+    tentCamping:{available:true,cost:'$25/night',sites:'50',note:'Popular for scenery and dark skies. Expect wind and little shade.'},
+    parkingTip:'Morning and late afternoon are far better for hiking and photography than midday. Carry extra water — almost no shade on any trail.',
+    nearbyFood:'Voyager Restaurant in Mojave (~25 min, American); The 58 Bar & Grill in Mojave (~25 min, American); Denny\'s Mojave (~25 min, diner)',
+    elevation:'2,500 ft',
+    things:[
+      'Hike among the red cliffs and buttes',
+      'Photograph formations at sunrise or sunset',
+      'Camp at Ricardo Campground',
+      'Explore Hagen Canyon and nature trails',
+      'Stargaze in dark desert skies'
+    ],
+    hikes:[
+      {name:'Hagen Canyon Nature Trail',distance:'1.2 mi round trip',gain:'150 ft',difficulty:'Easy',note:'Best short interpretive intro to the park\'s formations'},
+      {name:'Red Cliffs Trail',distance:'0.9 mi round trip',gain:'98 ft',difficulty:'Easy',note:'Short, scenic, and one of the park\'s best effort-to-payoff walks'},
+      {name:'Ricardo Camp South Loop Trail',distance:'1.4 mi loop',gain:'100 ft',difficulty:'Easy',note:'Good campground-adjacent walk for sunset or a quick stretch'}
+    ],
+    photoSpots:[
+      {name:'Red Cliffs area',note:'Sunrise or sunset for the strongest color on the formations'},
+      {name:'Hagen Canyon formations',note:'Golden hour for sculpted side light'}
+    ],
+    wildlife:[
+      {name:'Desert Cottontail',note:'Dawn and dusk near wash edges'},
+      {name:'Red-tailed Hawk',note:'Above cliffs and open desert'},
+      {name:'Lizards',note:'Warm sunny rock and trail edges throughout the day'}
+    ]
+  },
+
+  'chino-hills':{
+    highlight:'A huge band of rolling hills, oak woodland, and chaparral right against the urban edge of the LA/OC/Inland Empire metro. Spring green hills, wildflowers, and a surprising sense of open space close to the city. Over 60 miles of trails for hiking, biking, and riding.',
+    googleRating:4.7,
+    googleReviews:3300,
+    bestSeason:'Spring, Fall, Winter',
+    bestMonths:[2,3,4,5,10,11],
+    entranceFee:'$10/vehicle',
+    carCamping:{available:true,cost:'$25–$35/night',sites:'20',note:'Modest campground best suited to hikers, bikers, and equestrians wanting direct park access.'},
+    tentCamping:{available:true,cost:'$25–$35/night',sites:'20',note:'Tent campers do well in cooler months; the park is very exposed and warm weather can be punishing.'},
+    parkingTip:'The park is very sun-exposed — earlier starts matter more than usual. Pick the entrance closest to your intended trail because the park is larger than it appears.',
+    nearbyFood:'Bruxie in Chino Hills (~15 min, American/sandwiches); Los Serranos Country Club (~15 min, American); Noodle Street (~15 min, Asian)',
+    elevation:'650–1,781 ft',
+    things:[
+      'Hike Bane Canyon or Telegraph Canyon routes',
+      'Visit in spring for green rolling hills and wildflowers',
+      'Mountain bike or horseback ride the long trail network',
+      'Camp for an early-start trail weekend',
+      'Watch sunset from ridge overlook areas'
+    ],
+    hikes:[
+      {name:'Bane Canyon Loop Trail',distance:'5.1 mi loop',gain:'650 ft',difficulty:'Moderate',note:'Best all-around intro loop for rolling-hill scenery'},
+      {name:'Bane Canyon Short Loop',distance:'2.5 mi loop',gain:'350 ft',difficulty:'Moderate',note:'Shorter exposed hike with a good taste of the park'},
+      {name:'Telegraph Canyon Overlook',distance:'3.0 mi round trip',gain:'400 ft',difficulty:'Moderate',note:'Viewpoint-oriented route without the longest mileage'}
+    ],
+    photoSpots:[
+      {name:'Bane Canyon ridges',note:'Late afternoon for layered hill contours'},
+      {name:'Telegraph Canyon overlook',note:'Sunset for broad metro-edge landscape views'}
+    ],
+    wildlife:[
+      {name:'Coyote',note:'Dawn/dusk in open grassland'},
+      {name:'Red-tailed Hawk',note:'Soaring over ridges and canyons'},
+      {name:'Mule Deer',note:'Quieter canyon bottoms in mornings'}
+    ]
+  },
+
+  'antelope-valley-poppy':{
+    highlight:'In a strong bloom year, this reserve transforms into one of California\'s most spectacular spring wildflower displays — rolling hills covered in orange California poppies. A must-visit during peak poppy season (typically mid-March through mid-April).',
+    googleRating:4.7,
+    googleReviews:5200,
+    bestSeason:'Spring',
+    bestMonths:[3,4,5],
+    entranceFee:'$10/vehicle',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use reserve only — focused on walking trails and protecting flower fields.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No campground in the reserve.'},
+    parkingTip:'Bloom weekends can be extremely busy and wind is common. Mid-morning to early afternoon is often best for open poppy blooms; go early for parking.',
+    nearbyFood:'Crazy Otto\'s Diner in Lancaster (~25 min, diner); Lemon Leaf Cafe in Lancaster (~25 min, café); various Lancaster restaurants (~25 min)',
+    elevation:'2,600–3,000 ft',
+    things:[
+      'See poppy blooms in peak season',
+      'Walk the reserve loops and butte viewpoints',
+      'Photograph rolling flower-covered hills',
+      'Watch meadowlarks, hawks, and desert wildlife',
+      'Visit the visitor center for bloom updates'
+    ],
+    hikes:[
+      {name:'North Loop, Antelope Butte & Lightning Bolt Loop',distance:'3.0 mi loop',gain:'350 ft',difficulty:'Moderate',note:'Best overall reserve loop for views and flower coverage'},
+      {name:'Antelope Loop Trail',distance:'5.6 mi loop',gain:'500 ft',difficulty:'Moderate',note:'Longer walk linking main loops and viewpoints'},
+      {name:'Valley Vista Point / Accessible Loop',distance:'1.0 mi round trip',gain:'50 ft',difficulty:'Easy',note:'Best short option for easy flower viewing and photography'}
+    ],
+    photoSpots:[
+      {name:'Antelope Butte / high loops',note:'Mid-morning to afternoon when poppies are most open'},
+      {name:'Valley Vista Point',note:'Sunset for rolling-hill light (blooms may be less open late)'}
+    ],
+    wildlife:[
+      {name:'Western Meadowlark',note:'Along grassland trails and fence lines'},
+      {name:'Red-tailed Hawk',note:'Over open hills and thermals'},
+      {name:'Gopher Snake',note:'Warm trail edges, especially later in the day'}
+    ]
+  },
+
+  'kenneth-hahn':{
+    highlight:'An urban park with surprisingly good views and trail variety — city panoramas, lakes, gardens, and rolling-dirt-path loops. One of the best quick nature breaks in Los Angeles without driving far from the city center.',
+    googleRating:4.7,
+    googleReviews:9500,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$6/vehicle or $2/hr parking',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use urban recreation area.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No campground.'},
+    parkingTip:'Much easier than many LA parks, but events and weekends increase demand. Check current rules for dogs on trails before bringing pets.',
+    nearbyFood:'Alta Adams (~12 min, Southern/Californian); Post & Beam (~12 min, American); Harold & Belle\'s (~15 min, Creole)',
+    elevation:'500–700 ft',
+    things:[
+      'Walk the main recreation area loop',
+      'Visit Christine\'s Point for city panorama views',
+      'See the lakes and Japanese Garden',
+      'Picnic on lawns with skyline views',
+      'Pair with nearby Baldwin Hills Scenic Overlook'
+    ],
+    hikes:[
+      {name:'Kenneth Hahn Recreation Area Loop',distance:'2.9 mi loop',gain:'393 ft',difficulty:'Easy',note:'Best all-around loop for city views and park sampler'},
+      {name:'Moore Lake, Western Ridgeline & Christine\'s Point',distance:'2.2 mi loop',gain:'250 ft',difficulty:'Easy',note:'Scenic urban loop with lakeside and overlook components'},
+      {name:'Kenneth Hahn Loop from Norman O. Houston Park',distance:'1.9 mi loop',gain:'209 ft',difficulty:'Easy',note:'Quick workout with overlook access'}
+    ],
+    photoSpots:[
+      {name:'Christine\'s Point / view areas',note:'Clear late afternoon for skyline views'},
+      {name:'Lakes and lawns',note:'Morning for fewer people and softer light'}
+    ],
+    wildlife:[
+      {name:'Ducks & Geese',note:'Around the lakes'},
+      {name:'Red-tailed Hawk',note:'Over open hillsides'},
+      {name:'Cottontail Rabbit',note:'Sunny trail margins and grassy slopes'}
+    ]
+  },
+
+  'los-angeles-shp':{
+    highlight:'A rare 32-acre downtown-adjacent green space where LA skyline views, cultural programming, and history converge. Less about hiking and more about urban respite, events, and a unique perspective on Los Angeles identity. Close to Chinatown and Union Station.',
+    googleRating:4.7,
+    googleReviews:6400,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'Free; paid parking nearby',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use urban historic park.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No camping.'},
+    parkingTip:'Easiest approach is often transit or rideshare — close to Chinatown and Union Station. Event days fill paid parking quickly.',
+    nearbyFood:'Howlin\' Ray\'s Chinatown (~5 min, hot chicken); Philippe The Original (~5 min, classic French dip); Wax Paper Chinatown (~5 min, sandwiches/café)',
+    elevation:'300 ft',
+    things:[
+      'Walk the lawns and pathways with skyline views',
+      'Attend events, concerts, and cultural programming',
+      'Photograph downtown LA from the open field',
+      'Explore Chinatown and Union Station area nearby',
+      'Use as an urban running or walking loop'
+    ],
+    hikes:[
+      {name:'Los Angeles Historic Park Loop',distance:'1.3 mi loop',gain:'30 ft',difficulty:'Easy',note:'Simple walk around the park\'s open-space core'},
+      {name:'Portola Trail',distance:'2.1 mi out and back',gain:'50 ft',difficulty:'Easy',note:'Nearby urban greenway option for a longer walk'},
+      {name:'Perimeter Paths & Great Lawn Loop',distance:'0.8 mi loop',gain:'20 ft',difficulty:'Easy',note:'Short stroll mainly for skyline views'}
+    ],
+    photoSpots:[
+      {name:'Great Lawn facing downtown skyline',note:'Sunset/blue hour for the strongest city backdrop'},
+      {name:'Chinatown-facing park edge',note:'Late afternoon for a mix of skyline and park texture'}
+    ],
+    wildlife:[
+      {name:'Songbirds',note:'In planted areas and lawns'},
+      {name:'Red-tailed Hawk',note:'Occasionally overhead on urban thermals'},
+      {name:'Squirrels',note:'Quieter landscaped edges'}
+    ]
+  },
+
+  /* -------- Batch 17 -------- */
+
+  'malibu-lagoon':{
+    highlight:'Where Malibu Creek meets the Pacific — a premier surf break at Surfrider Beach, 22 acres of restored coastal wetlands for birding, and the historic Adamson House with its magnificent Malibu Potteries tilework. A quintessential Malibu stop blending surf culture, birdwatching, and local history.',
+    googleRating:4.6,
+    googleReviews:6000,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$12/vehicle',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use beach and lagoon park — no camping.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No public camping.'},
+    parkingTip:'Main lot fills fast on warm weekends. Arrive early for easier parking, fewer crowds, and calmer birding. Limited street parking on PCH.',
+    nearbyFood:'Malibu Farm Pier Cafe (~5 min walk, coastal American); Nobu Malibu (~3 min, Japanese); Broad Street Oyster Co. (~5 min, seafood)',
+    elevation:'Sea level',
+    things:[
+      'Surf or watch surfers at the iconic Surfrider Beach',
+      'Birdwatch from boardwalks through the restored lagoon wetlands',
+      'Tour the historic Adamson House and its Malibu Potteries tilework',
+      'Walk along Malibu Pier for ocean views and dining',
+      'Explore tide pools near the point during low tides'
+    ],
+    hikes:[
+      {name:'Malibu Lagoon Loop',distance:'2.0 mi loop',gain:'49 ft',difficulty:'Easy',note:'Best all-around walk combining beach, lagoon, and bird habitat'},
+      {name:'Surfrider Beach Walk',distance:'1.5 mi round trip',gain:'10 ft',difficulty:'Easy',note:'Sandy stroll along the famous surfing shoreline to the pier'},
+      {name:'Lagoon Boardwalk Trail',distance:'0.8 mi loop',gain:'10 ft',difficulty:'Easy',note:'Flat accessible path through the wetland habitat — great for birding'}
+    ],
+    photoSpots:[
+      {name:'Lagoon overlook / bird blinds',note:'Morning or high tide for reflections, wading birds, and softer light'},
+      {name:'Surfrider Beach near the pier',note:'Late afternoon for surfers and golden light'}
+    ],
+    sunsetSpots:[
+      {spot:'Surfrider Beach shoreline',note:'West-facing with surfer silhouettes, pier backdrop, and open Pacific horizon — quintessential Malibu sunset'},
+      {spot:'Malibu Pier',note:'Elevated vantage to watch the sun sink behind the Santa Monica Mountains while the lagoon glows'}
+    ],
+    wildlife:[
+      {name:'Great Blue Heron',note:'Year-round in the shallow lagoon waters'},
+      {name:'Brown Pelican',note:'Year-round diving offshore near the surf line'},
+      {name:'Bottlenose Dolphin',note:'Frequently spotted playing in the surf just past the wave break'}
+    ]
+  },
+
+  'rio-de-la':{
+    highlight:'An urban oasis built on a former railyard, with restored native wetlands, community sports fields, and river-edge views in Northeast LA. A surprisingly peaceful green space for easy walks, urban birding, and connecting to the LA River bike path.',
+    googleRating:4.5,
+    googleReviews:2300,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:null,sites:null,note:'Urban day-use park only.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No camping.'},
+    parkingTip:'Large free parking lot off San Fernando Road rarely fills except during major sporting events. Early morning is best for a quieter walk.',
+    nearbyFood:'Lemon Poppy Kitchen (~5 min, café/brunch); Salazar (~10 min, Mexican/BBQ); Howlin\' Ray\'s (~8 min, hot chicken)',
+    elevation:'350 ft',
+    things:[
+      'Walk the restored wetland loop trails',
+      'Birdwatch native habitat near the river',
+      'Connect to the LA River Bike Path for cycling or jogging',
+      'Photograph urban-river-industrial contrasts',
+      'Explore the adjacent Bowtie Parcel on the river bank'
+    ],
+    hikes:[
+      {name:'Rio Wetlands Loop',distance:'1.2 mi loop',gain:'30 ft',difficulty:'Easy',note:'Main in-park trail winding through the restored native habitat areas'},
+      {name:'LA River Bike Path',distance:'4.0 mi round trip',gain:'50 ft',difficulty:'Easy',note:'Flat paved multi-use path running alongside the LA River'},
+      {name:'Bowtie Parcel Walk',distance:'1.0 mi round trip',gain:'20 ft',difficulty:'Easy',note:'Adjacent undeveloped state park parcel right on the river banks'}
+    ],
+    photoSpots:[
+      {name:'Native plant gardens / wetland side',note:'Spring for California poppies and lupines blooming against the urban backdrop'},
+      {name:'River-facing edge',note:'Late afternoon for industrial-city contrast and atmospheric light'}
+    ],
+    sunsetSpots:[
+      {spot:'The Great Lawn',note:'West-facing toward Griffith Park hills — relaxed community atmosphere as the sun dips behind mountain silhouettes'},
+      {spot:'LA River Path',note:'Sunset colors reflecting off the water running through the river channel'}
+    ],
+    wildlife:[
+      {name:'Black Phoebe',note:'Darting from branches to catch insects near the wetland water'},
+      {name:'Great Egret',note:'Near restored wetland and river-adjacent zones'},
+      {name:'Mallard Duck',note:'Year-round in the river channel and wetland ponds'}
+    ]
+  },
+
+  'robert-meyer-sb':{
+    highlight:'Three stunning Malibu pocket beaches — El Matador, La Piedra, and El Pescador — with dramatic sea stacks, arches, hidden sea caves, and tide pools. One of Southern California\'s most photogenic coastal spots, famous for its cinematic sunset cove atmosphere.',
+    googleRating:4.8,
+    googleReviews:11000,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$12/vehicle per lot',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use pocket beaches only.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No camping.'},
+    parkingTip:'El Matador\'s tiny lot fills by 9 AM on weekends. Go weekday or very early. PCH street parking available where legally permitted — read signs carefully.',
+    nearbyFood:'Neptune\'s Net (~10 min, seafood); Spruzzo Restaurant & Bar (~10 min, Italian); Malibu Farm (~15 min, coastal American)',
+    elevation:'Sea level to 150 ft on bluffs',
+    things:[
+      'Explore El Matador\'s sea stacks and caves',
+      'Beach-hop between El Pescador, La Piedra, and El Matador',
+      'Photograph cliffs, arches, and sunset reflections',
+      'Tide-pool at low tide among the rock formations',
+      'Enjoy a romantic sunset picnic on the bluffs'
+    ],
+    hikes:[
+      {name:'El Matador, La Piedra & El Pescador Beaches',distance:'2.5 mi round trip',gain:'190 ft',difficulty:'Moderate',note:'Best longer beach-hopping route linking all three pocket beaches'},
+      {name:'El Matador Beach Trail',distance:'0.5 mi round trip',gain:'100 ft',difficulty:'Moderate',note:'Steep stairs down to iconic sea caves and rock formations'},
+      {name:'El Matador Bluff & Beach Walk',distance:'0.8 mi round trip',gain:'120 ft',difficulty:'Moderate',note:'Quick visit for the iconic formations with minimal mileage'}
+    ],
+    photoSpots:[
+      {name:'El Matador sea caves and rock stacks',note:'Golden hour or low tide for the most dramatic compositions — shoot from inside caves outward'},
+      {name:'La Piedra bluffs',note:'Mid-afternoon for deep blue Pacific contrasting with coastal scrub'}
+    ],
+    sunsetSpots:[
+      {spot:'El Matador Beach',note:'West-facing sea stacks with reflections and a cinematic Malibu cove feel — one of the most photographed sunset spots in California'},
+      {spot:'El Pescador bluff edge',note:'Quieter alternative with broad ocean horizon and fewer people'}
+    ],
+    wildlife:[
+      {name:'California Sea Lion',note:'Swimming beyond the surf or sunning on offshore rocks'},
+      {name:'Brown Pelican',note:'Gliding in formations right above the breaking waves'},
+      {name:'Sea Anemones',note:'Clustered in tide pools around the sea stack bases at low tide'}
+    ]
+  },
+
+  'saddleback-butte':{
+    highlight:'A compact high-desert park with a prominent 3,651 ft granite butte, Joshua tree woodlands, spring wildflowers, and expansive Mojave views. Wonderfully quiet and remote-feeling with dark skies perfect for stargazing and a real summit hike.',
+    googleRating:4.6,
+    googleReviews:1000,
+    bestSeason:'Spring, Fall, Winter',
+    bestMonths:[2,3,4,5,10,11],
+    entranceFee:'$5–$10/vehicle',
+    carCamping:{available:true,cost:'$20–$35/night',sites:'37–50',note:'Developed campground with fire rings and ramadas. Rarely fills — great walk-up availability. Exposed sites with little shade.'},
+    tentCamping:{available:true,cost:'$20–$35/night',sites:'37–50',note:'Excellent for tenting under extremely dark skies. Ground can be hard and sandy.'},
+    parkingTip:'Plenty of parking at day-use and trailhead lots — you\'ll almost never struggle. Spring weekends are busiest. Finish hikes before late morning in warm months.',
+    nearbyFood:'Charlie Brown Farms (~20 min, BBQ/diner); Crazy Otto\'s Diner (~25 min, diner); Domingo\'s Mexican (~25 min, Mexican)',
+    elevation:'2,600–3,651 ft',
+    things:[
+      'Summit Saddleback Butte for 360-degree Mojave panorama',
+      'Camp overnight for incredibly dark skies and stargazing',
+      'Photograph Joshua trees silhouetted against the sky',
+      'Hike the Dowen Nature Trail for desert ecology',
+      'Visit in April for coreopsis and desert wildflower blooms'
+    ],
+    hikes:[
+      {name:'Saddleback Butte Peak Trail',distance:'4.0–4.8 mi round trip',gain:'965–1,000 ft',difficulty:'Moderate',note:'Main summit trail — starts in deep sand, transitions to steep rocky scramble with 360° views'},
+      {name:'Little Butte Trail',distance:'2.3–2.5 mi round trip',gain:'250–300 ft',difficulty:'Easy',note:'Softer incline to a rock outcropping surrounded by dense Joshua trees'},
+      {name:'Dowen Nature Trail',distance:'1.0 mi loop',gain:'50 ft',difficulty:'Easy',note:'Interpretive sandy path identifying native Mojave flora and fauna'}
+    ],
+    photoSpots:[
+      {name:'Saddleback Butte summit',note:'Sunrise for long desert shadows and wide Antelope Valley views'},
+      {name:'Joshua tree groves near day use area',note:'Golden hour or night for astrophotography with trees in foreground'}
+    ],
+    sunsetSpots:[
+      {spot:'Saddleback Butte summit overlook',note:'West-facing with sweeping 360° desert basin views — the uninterrupted horizon allows for a spectacular Mojave sunset'},
+      {spot:'Day use picnic area',note:'Easier alternative where Joshua trees become striking spiky silhouettes against neon orange sky'}
+    ],
+    wildlife:[
+      {name:'Desert Tortoise',note:'Occasionally spotted in brush during spring — highly protected, do not touch'},
+      {name:'Black-tailed Jackrabbit',note:'Bounding across sandy trails at dawn and dusk'},
+      {name:'Coyote',note:'Often heard howling at night or seen trotting through camp in early morning'}
+    ]
+  },
+
+  'topanga-sp':{
+    highlight:'The largest wildland within a major US city — 11,000 acres of Santa Monica Mountains with 36 miles of trails through ridges, oak canyons, chaparral, and sandstone formations. Home to Eagle Rock and Parker Mesa Overlook, delivering big scenery and real trail mileage surprisingly close to LA.',
+    googleRating:4.8,
+    googleReviews:8500,
+    bestSeason:'Spring, Fall, Winter',
+    bestMonths:[2,3,4,5,10,11],
+    entranceFee:'$10/vehicle at main lots; some trailheads free',
+    carCamping:{available:false,cost:null,sites:null,note:'No developed car campground.'},
+    tentCamping:{available:true,cost:'$7/night',sites:'8',note:'Musch Trail Camp — 8 hike-in sites (~1 mi from parking) under oaks with water and restrooms. Beginner-friendly backpacking.'},
+    parkingTip:'Trippet Ranch lot fills by 8 AM on weekends. Choose your trailhead carefully — don\'t assume the closest map pin is the right starting point.',
+    nearbyFood:'Topanga Living Cafe (~10 min, café/healthy); Inn of the Seventh Ray (~10 min, romantic Californian); Endless Color (~10 min, pizza/wine)',
+    elevation:'1,000–2,100 ft',
+    things:[
+      'Hike to Eagle Rock\'s massive honeycombed sandstone caves',
+      'Hike Parker Mesa Overlook for sweeping Pacific panoramas',
+      'Backpack into Musch Trail Camp for a beginner wilderness overnight',
+      'Mountain bike the extensive fire road network',
+      'Enjoy spectacular spring wildflower blooms on Musch Trail'
+    ],
+    hikes:[
+      {name:'Eagle Rock via Musch Trail',distance:'4.5 mi loop',gain:'800 ft',difficulty:'Moderate',note:'Winds through chaparral and oak groves to the iconic sandstone formation'},
+      {name:'Parker Mesa Overlook via East Topanga Fire Road',distance:'6.5 mi round trip',gain:'1,200 ft',difficulty:'Moderate',note:'Steady climb to one of the most stunning coastal viewpoints in LA'},
+      {name:'Santa Ynez Canyon Trail',distance:'2.5 mi round trip',gain:'250 ft',difficulty:'Easy',note:'Shaded creek bed leading to a seasonal waterfall'}
+    ],
+    photoSpots:[
+      {name:'Eagle Rock caves',note:'Mid-afternoon — frame shots from inside the sandstone pockets looking out at the mountains'},
+      {name:'Parker Mesa Overlook bench',note:'Clear day for the sweeping curve of Santa Monica Bay to Palos Verdes'}
+    ],
+    sunsetSpots:[
+      {spot:'Parker Mesa Overlook',note:'Southwest-facing directly over the Pacific — expansive view of coast meeting sea at golden hour, breathtaking and serene'},
+      {spot:'Eagle Rock',note:'The sandstone monolith glows fiery orange as the sun dips behind the western ridges'}
+    ],
+    wildlife:[
+      {name:'Mule Deer',note:'Grazing in meadows near Trippet Ranch at dusk'},
+      {name:'California Quail',note:'Running in small flocks through trailside brush'},
+      {name:'Southern Pacific Rattlesnake',note:'Watch on warm sunny trails in spring and summer'}
+    ]
+  },
+
+  'verdugo-mountains':{
+    highlight:'A rugged urban mountain range rising dramatically above the San Fernando Valley with extensive fire roads, steep trails, and uncrowded panoramic views of Downtown LA, the San Gabriel Mountains, and surrounding valleys. Rigorous workouts with surprisingly expansive vistas.',
+    googleRating:4.7,
+    googleReviews:2000,
+    bestSeason:'Spring, Fall, Winter',
+    bestMonths:[1,2,3,4,5,10,11,12],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use only — no camping facilities.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No camping.'},
+    parkingTip:'All street-side or small dirt pull-offs at trailheads (La Tuna Canyon, Wildwood Canyon). Read signs carefully to avoid ticketing. Heat and sun exposure are major factors.',
+    nearbyFood:'Porto\'s Bakery & Cafe (~15 min, bakery/café); Raffi\'s Place (~15 min, Armenian/Middle Eastern); Din Tai Fung Glendale (~15 min, Taiwanese)',
+    elevation:'1,000–3,126 ft',
+    things:[
+      'Hike La Tuna Canyon or summit Verdugo Peak for 360° views',
+      'Catch city views toward DTLA and the snow-capped San Gabriels',
+      'Trail run or mountain bike the steep fire roads',
+      'Visit in spring for greener slopes and seasonal streams',
+      'Watch sunset from a ridge as city lights begin to sparkle'
+    ],
+    hikes:[
+      {name:'La Tuna Canyon Trail',distance:'4.5 mi round trip',gain:'1,000 ft',difficulty:'Moderate',note:'Partially shaded canyon climb opening to ridge views — best intro hike'},
+      {name:'Vital Link Trail',distance:'3.0 mi round trip',gain:'1,500 ft',difficulty:'Hard',note:'Incredibly steep and exposed — a favorite for intense training with massive LA basin views'},
+      {name:'Hostetter Fire Road',distance:'5.5 mi round trip',gain:'1,100 ft',difficulty:'Moderate',note:'Wider gradual dirt road popular with bikers and hikers'}
+    ],
+    photoSpots:[
+      {name:'Verdugo Peak',note:'Clear winter day after rain for DTLA skyline with snow-capped mountains behind'},
+      {name:'Ridge fire road',note:'Morning when marine layer settles — looks like you\'re above the clouds'}
+    ],
+    sunsetSpots:[
+      {spot:'Verdugo Peak',note:'West/southwest facing over the entire San Fernando Valley — peaceful and isolated as city lights sparkle far below'},
+      {spot:'Wildwood Canyon overlook',note:'Lower elevation alternative with fantastic vibrant sunset views over Burbank'}
+    ],
+    wildlife:[
+      {name:'Red-tailed Hawk',note:'Riding thermal updrafts along the steep mountain ridges'},
+      {name:'Coyote',note:'Early mornings or late evenings along fire roads'},
+      {name:'Striped Skunk',note:'Occasionally spotted near lower canyon trailheads at dusk'}
+    ]
+  },
+
+  'will-rogers':{
+    highlight:'The 1920s–30s ranch of beloved American humorist Will Rogers — a 31-room ranch house, working polo field, and fantastic hiking trails with ocean views. Also the official eastern trailhead for the 68-mile Backbone Trail into the Santa Monica Mountains.',
+    googleRating:4.8,
+    googleReviews:4800,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$12/vehicle',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use historic park only.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No camping; backpackers starting the Backbone Trail must camp at designated spots further in.'},
+    parkingTip:'Main lot is spacious but fills by midday on weekends. Check current access conditions — post-2025 fire closures may affect availability. Arrive early for hiking.',
+    nearbyFood:'Vittoria (~10 min, Italian); Cafe Vida (~10 min, Californian/Latin); Pearl Dragon (~10 min, Asian fusion)',
+    elevation:'400–1,700+ ft on surrounding trails',
+    things:[
+      'Hike to Inspiration Point for LA basin and ocean panoramas',
+      'Watch weekend polo matches on the historic field',
+      'Tour the historic Will Rogers ranch house and stables',
+      'Picnic on the expansive lawns',
+      'Start a Backbone Trail adventure into the Santa Monica Mountains'
+    ],
+    hikes:[
+      {name:'Inspiration Point Loop',distance:'2.2 mi loop',gain:'350 ft',difficulty:'Easy',note:'Classic family-friendly loop to a panoramic viewpoint overlooking the LA basin'},
+      {name:'Rustic Canyon Loop',distance:'6.0 mi loop',gain:'900 ft',difficulty:'Moderate',note:'Shaded overgrown canyon with creek crossings and historic ruins'},
+      {name:'Backbone Trail to Bridge Camp',distance:'5.0 mi round trip',gain:'800 ft',difficulty:'Moderate',note:'First section of the official 68-mile Backbone Trail'}
+    ],
+    photoSpots:[
+      {name:'Polo field with ranch backdrop',note:'Morning for clean light and open historic setting with eucalyptus framing'},
+      {name:'Inspiration Point overlook',note:'Clear afternoon for sweeping city-to-ocean panorama'}
+    ],
+    sunsetSpots:[
+      {spot:'Inspiration Point',note:'South/southwest facing — watch the sun dip below the Pacific while the LA basin turns golden. Awe-inspiring atmosphere.'},
+      {spot:'Polo field lawn',note:'Relax on the massive grass while surrounding hills and eucalyptus frame the pastel dusk sky'}
+    ],
+    wildlife:[
+      {name:'Acorn Woodpecker',note:'In large oak trees near the ranch house'},
+      {name:'Mule Deer',note:'Grazing in upper hills near Inspiration Point at dawn'},
+      {name:'Western Bluebird',note:'Flitting across the polo field and open lawns'}
+    ]
+  },
+
+  'bolsa-chica':{
+    highlight:'A long, broad Huntington-area beach known for surfing, bike-path cruising, hundreds of fire rings, and direct proximity to the Bolsa Chica Ecological Reserve — one of Southern California\'s richest coastal wetland systems. Classic beach bonfire atmosphere with excellent birding next door.',
+    googleRating:4.7,
+    googleReviews:12000,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$15/vehicle',
+    carCamping:{available:true,cost:'$65–$95/night',sites:'50',note:'RV-only campground right on the beach with hookups — no tents or passenger-only vehicles. One of the most convenient oceanfront RV options in OC.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'Tent camping not allowed.'},
+    parkingTip:'Massive parking lots stretching for miles — easier than most smaller beaches. Only reaches capacity on major summer holidays like the 4th of July.',
+    nearbyFood:'SeaLegs at the Beach (in park, beachfront bites); Duke\'s Huntington Beach (~10 min, seafood/American); Sancho\'s Tacos (~10 min, Mexican)',
+    elevation:'Sea level',
+    things:[
+      'Claim a fire ring for a classic California beach bonfire',
+      'Bike or rollerblade the miles of flat beachfront paved path',
+      'RV-camp literally steps from the crashing waves',
+      'Surf the mellow longboarding waves',
+      'Birdwatch at the adjacent Bolsa Chica Ecological Reserve'
+    ],
+    hikes:[
+      {name:'Bolsa Chica Paved Bike Trail',distance:'6.0 mi round trip',gain:'10 ft',difficulty:'Easy',note:'Flat paved path running parallel to the sand — shared with bikers and skaters'},
+      {name:'Bolsa Chica Ecological Reserve Loop',distance:'3.0 mi loop',gain:'20 ft',difficulty:'Easy',note:'Dirt trails through the protected wetlands just across PCH — excellent birding'},
+      {name:'Huntington Beach Pier Walk extension',distance:'5.0 mi round trip',gain:'20 ft',difficulty:'Easy',note:'Continue the beach path south to the famous pier'}
+    ],
+    photoSpots:[
+      {name:'Ecological Reserve footbridge',note:'Morning for shorebirds in calm wetland waters'},
+      {name:'Lifeguard towers along the beach',note:'Mid-day for quintessential bright SoCal beach aesthetic'}
+    ],
+    sunsetSpots:[
+      {spot:'Fire pits on the sand',note:'West/southwest facing directly over the ocean — gathering around a crackling bonfire while the sun melts into the Pacific is pure SoCal nostalgia'},
+      {spot:'Ecological Reserve footbridge',note:'Quieter alternative to see fiery colors reflect off tranquil wetland channels'}
+    ],
+    wildlife:[
+      {name:'Western Snowy Plover',note:'Sandy protected habitat zones — look for small birds darting near fenced nesting areas'},
+      {name:'California Least Tern',note:'Nesting season in protected beach habitat'},
+      {name:'Great Egret',note:'Hunting fish in the shallow wetlands across the highway'}
+    ]
+  },
+
+  'doheny-sb':{
+    highlight:'California\'s first state beach — a famously mellow surf spot in Dana Point that helped birth California surf culture. Huge, popular campground right near the beach, calm waters protected by the harbor breakwater, and a large grassy picnic area. Works equally well as a day trip or beach-camping weekend.',
+    googleRating:4.7,
+    googleReviews:10000,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$15/vehicle',
+    carCamping:{available:true,cost:'$40–$65/night',sites:'118',note:'One of the region\'s strongest beach campgrounds with sites near the ocean. Very popular — reserve early. Premium beachfront sites book 6 months in advance.'},
+    tentCamping:{available:true,cost:'$40–$65/night',sites:'118',note:'Tent camping in developed campground. Decent tree coverage in back loops but expect noise from neighbors.'},
+    parkingTip:'Day-use lots fill quickly on summer weekends and event days. Arrive before 10 AM for spots near the grass.',
+    nearbyFood:'Olamendi\'s (~5 min, Mexican); Jimmy\'s Famous American Tavern (~5 min, American); Wind & Sea Restaurant (~5 min, seafood/steakhouse)',
+    elevation:'Sea level',
+    things:[
+      'Surf the famous gentle long-peeling waves at the Boneyard',
+      'Camp overnight right next to the beach',
+      'Bike the boardwalk north toward Dana Point Harbor',
+      'Explore the visitor center aquariums and tide pool exhibits',
+      'Picnic on the lawn and watch sunset'
+    ],
+    hikes:[
+      {name:'Doheny Beach Boardwalk',distance:'1.5 mi round trip',gain:'10 ft',difficulty:'Easy',note:'Pleasant beachfront stroll connecting campground to day-use area'},
+      {name:'Dana Point Headlands Trail',distance:'3.0 mi loop',gain:'200 ft',difficulty:'Moderate',note:'Scenic blufftop dirt trail overlooking the harbor and Doheny beach'},
+      {name:'San Juan Creek Trail',distance:'4.0 mi round trip',gain:'50 ft',difficulty:'Easy',note:'Paved path following the creek inland — great for walking dogs'}
+    ],
+    photoSpots:[
+      {name:'Boneyard surf break',note:'Morning for longboarders on glass-like waves'},
+      {name:'San Juan Creek mouth',note:'High tide for mirror reflections where water meets sand'}
+    ],
+    sunsetSpots:[
+      {spot:'Boneyard / south beach bluff edge',note:'West-facing with rocky shoreline and surfers in foreground — rugged, beautiful, and active sunset view'},
+      {spot:'Campground sea wall',note:'Watch the sun go down from your beachfront campsite — effortless camping-beach mood'}
+    ],
+    wildlife:[
+      {name:'Garibaldi',note:'California\'s bright orange state marine fish — near the rocky jetties'},
+      {name:'Bottlenose Dolphin',note:'Frequently seen jumping in the surf past the longboarders'},
+      {name:'Great Blue Heron',note:'Creek mouth and calmer water edges'}
+    ]
+  },
+
+  'huntington-sb':{
+    highlight:'A huge, energetic two-mile surf beach in "Surf City USA" with a massive expanse of sand, hundreds of fire rings, and the terminus of the 30-mile Santa Ana River Trail. Reliable sunset views and classic Southern California beach atmosphere.',
+    googleRating:4.7,
+    googleReviews:14000,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$15/vehicle; summer weekends up to $20',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use only. RV camping available further north at Bolsa Chica.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No campground.'},
+    parkingTip:'Multiple lots — enter at Magnolia or Brookhurst. Choose the lot nearest your intended stretch because the beach is long. Only fills on major summer holidays.',
+    nearbyFood:'Duke\'s Huntington Beach (~10 min, Hawaiian/seafood); Sugar Shack Cafe (~10 min, breakfast); Sancho\'s Tacos (~10 min, Mexican)',
+    elevation:'Sea level',
+    things:[
+      'Walk or bike the oceanfront trail',
+      'Surf, swim, or boogie board the beach break',
+      'Claim a fire ring for an evening bonfire',
+      'Watch least terns and snowy plovers in protected areas',
+      'Stay for classic broad-horizon sunset'
+    ],
+    hikes:[
+      {name:'Huntington Beach Paved Path',distance:'4.0 mi round trip',gain:'10 ft',difficulty:'Easy',note:'Coastal multi-use trail tracking the entire massive beach length'},
+      {name:'Santa Ana River Trail',distance:'5.0 mi round trip',gain:'20 ft',difficulty:'Easy',note:'Paved path from the beach inland alongside the river channel'},
+      {name:'Talbert Nature Preserve',distance:'2.0 mi loop',gain:'50 ft',difficulty:'Easy',note:'Dirt paths through native coastal sage scrub just inland from the beach'}
+    ],
+    photoSpots:[
+      {name:'Lifeguard Tower 9',note:'Late afternoon for classic endless-summer Surf City aesthetic'},
+      {name:'Santa Ana River mouth',note:'Low tide for the contrast of river channel meeting the vast ocean'}
+    ],
+    sunsetSpots:[
+      {spot:'Lifeguard Tower 9',note:'Southwest-facing toward Catalina Island — the tower perfectly frames the classic SoCal surfing silhouette against a deeply saturated sky'},
+      {spot:'Southern end near pier direction',note:'Silhouettes and livelier atmosphere with people and activity'}
+    ],
+    wildlife:[
+      {name:'California Least Tern',note:'Protected nesting areas in fenced-off sand sections'},
+      {name:'Western Snowy Plover',note:'Sandy protected habitat zones'},
+      {name:'Sandpipers',note:'Sprinting back and forth with receding waves looking for tiny crabs'}
+    ]
+  },
+
+  'san-clemente-sb':{
+    highlight:'Blufftop camping, a broad mile-long sandy beach, and one of the easiest ocean-view overnights in SoCal. Dramatic coastal views, excellent surf, and a scenic rail line running right along the coast. The campground atmosphere is hard to beat.',
+    googleRating:4.7,
+    googleReviews:8000,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$15/vehicle',
+    carCamping:{available:true,cost:'$35–$75/night',sites:'160',note:'Blufftop campground with tent, RV, group, and equestrian areas. Full hookups available. One of the best easy-access coastal campgrounds in SoCal.'},
+    tentCamping:{available:true,cost:'$35–$75/night',sites:'160',note:'Tent area has fire pits, tables, shade trees and ramadas, and cool ocean breezes. Well-maintained restrooms and showers.'},
+    parkingTip:'Day-use parking at the Calafia entrance. Arrive before 11 AM on summer weekends to secure a spot.',
+    nearbyFood:'Nick\'s San Clemente (~8 min, American); South of Nick\'s (~8 min, Mexican); The Fisherman\'s Restaurant (~10 min, seafood)',
+    elevation:'Sea level to 100 ft on bluff',
+    things:[
+      'Camp on the bluffs above the ocean',
+      'Walk down to the mile-long beach',
+      'Surf, swim, or beachcomb the shoreline',
+      'Catch sunset from campground overlooks',
+      'Watch the Pacific Surfliner train cruise past the sand'
+    ],
+    hikes:[
+      {name:'San Clemente Coastal Trail',distance:'4.6 mi round trip',gain:'50 ft',difficulty:'Easy',note:'Packed dirt and sand trail along the ocean up to San Clemente Pier'},
+      {name:'Calafia Bluffs Walk',distance:'1.0 mi round trip',gain:'100 ft',difficulty:'Easy',note:'Short blufftop walk with vast ocean views'},
+      {name:'Beach Access Trail & Bluff Walk',distance:'1.2 mi round trip',gain:'120 ft',difficulty:'Easy',note:'Quick scenic outing for campers or sunset visitors'}
+    ],
+    photoSpots:[
+      {name:'Bluff edge near campground',note:'Mid-day for vibrant turquoise water and passing trains below'},
+      {name:'Beach tunnel under train tracks',note:'Morning — frame the ocean through the pedestrian tunnels'}
+    ],
+    sunsetSpots:[
+      {spot:'Blufftop campground overlook',note:'West-facing, perched 100 ft above the ocean — sweeping views of the sun setting over water with remarkably peaceful atmosphere'},
+      {spot:'Beach near the pier',note:'Walk slightly north to view sunset framed by the wooden pylons of San Clemente Pier'}
+    ],
+    wildlife:[
+      {name:'Dolphins',note:'Occasionally offshore — best from bluff overlooks on calm days'},
+      {name:'Brown Pelican',note:'Frequently diving vertically into the ocean for fish'},
+      {name:'Ground Squirrels',note:'Very common along bluff trails and around campground'}
+    ]
+  },
+
+  'san-onofre-sb':{
+    highlight:'One of California\'s most legendary surf-and-camping parks — world-class waves at Trestles, a laid-back surf culture at Old Man\'s, towering coastal bluffs, and miles of rugged undeveloped-feeling shoreline. A wilder, more spacious coastal experience than most SoCal beaches.',
+    googleRating:4.7,
+    googleReviews:9500,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'$15/vehicle',
+    carCamping:{available:true,cost:'$35–$75/night',sites:'380',note:'Two distinct experiences: San Onofre Bluffs (bare-bones cliff-edge sites with ocean proximity) and San Mateo (inland with hookups and grass). Top surf-camping park in the region.'},
+    tentCamping:{available:true,cost:'$35–$75/night',sites:'380',note:'Bluffs can be extremely windy with hard dirt. San Mateo inland campground is much better for tents.'},
+    parkingTip:'The park is spread out — choose your area before driving in. The dirt road into Surf Beach is bumpy and can back up for hours on good swells. Arrive at dawn.',
+    nearbyFood:'Pedro\'s Tacos (~15 min, Mexican/surf food); Riders Club Cafe (~15 min, burgers); Board & Brew (~15 min, sandwiches)',
+    elevation:'Sea level to 150 ft on bluffs',
+    things:[
+      'Surf legendary waves at Old Man\'s or Trestles',
+      'Camp on towering sandstone cliffs at the Bluffs Campground',
+      'Hike the Bluffs Beach Trail along the coast',
+      'Walk the Panhe Nature Trail to Trestles with Acjachemen history',
+      'Experience the vintage surf van culture at Surf Beach parking lot'
+    ],
+    hikes:[
+      {name:'Bluffs Beach Trail (Trails 1–6)',distance:'2.6 mi round trip',gain:'209 ft',difficulty:'Easy',note:'Coastal walk with bluff views and beach access points'},
+      {name:'Panhe Nature Trail to Trestles',distance:'4.9 mi loop',gain:'410 ft',difficulty:'Moderate',note:'Best mixed trail-and-coast route in the park with native history'},
+      {name:'San Mateo Canyon Loop Trail',distance:'8.0 mi loop',gain:'500 ft',difficulty:'Moderate',note:'Best inland option for more than a beach walk'}
+    ],
+    photoSpots:[
+      {name:'Surf Beach parking lot',note:'Morning for vintage VW buses, longboards, and beach umbrellas'},
+      {name:'Trail 4 switchbacks from blufftop',note:'Mid-day looking down at turquoise water and jagged cliffs'}
+    ],
+    sunsetSpots:[
+      {spot:'Old Man\'s surf break',note:'Southwest-facing with an iconic laid-back vibe — old-school longboarders riding final waves as the sun sets'},
+      {spot:'Bluffs Campground cliff edge',note:'High-vantage panoramic sunset over the uninterrupted Pacific from atop towering sandstone'}
+    ],
+    wildlife:[
+      {name:'Bottlenose Dolphin',note:'Frequently surfing the waves right alongside human surfers'},
+      {name:'Brown Pelican',note:'Flying low along the surf line at dusk'},
+      {name:'Western Fence Lizard',note:'Abundant on sunny rocks along the steep bluff trails'}
+    ]
+  },
+
+  'california-citrus':{
+    highlight:'A living museum of the Southern California citrus boom — hundreds of acres of fragrant working citrus groves, a replica craftsman packinghouse, and interpretive exhibits. Walk through rows of oranges, lemons, and grapefruits while learning about the "second Gold Rush" that shaped the region.',
+    googleRating:4.7,
+    googleReviews:2600,
+    bestSeason:'Winter, Spring',
+    bestMonths:[1,2,3,4,5,12],
+    entranceFee:'$5/vehicle',
+    carCamping:{available:false,cost:null,sites:null,note:'Day-use historic park only.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No camping.'},
+    parkingTip:'Large easy-to-access lot near visitor center — rarely full. Morning visits best for cooler weather and strongest citrus fragrance.',
+    nearbyFood:'Anchos Southwest Grill (~10 min, Tex-Mex); The Salted Pig (~15 min, gastropub); Mission Inn Restaurant (~20 min, American)',
+    elevation:'1,000–1,300 ft',
+    things:[
+      'Take a guided citrus tasting tour — sample rare fruit right from the trees',
+      'Walk scenic trails winding through fragrant groves',
+      'Visit the museum and replica craftsman packinghouse',
+      'Photograph rows of citrus trees with mountain backdrop',
+      'Visit in bloom season for intense fragrance and white blossoms'
+    ],
+    hikes:[
+      {name:'Citrus Grove Loop',distance:'1.5 mi loop',gain:'50 ft',difficulty:'Easy',note:'Fragrant flat walk weaving through meticulously maintained rows of historic citrus'},
+      {name:'Gage Canal Walk',distance:'2.0 mi round trip',gain:'20 ft',difficulty:'Easy',note:'Stroll alongside the historic water canal that made the early citrus boom possible'},
+      {name:'Overlook Trail',distance:'1.0 mi round trip',gain:'150 ft',difficulty:'Moderate',note:'Short steep path up a hill with views over the groves and Riverside'}
+    ],
+    photoSpots:[
+      {name:'Varietal grove',note:'Late winter/spring when trees are heavy with bright fruit and fragrant white blossoms'},
+      {name:'Packinghouse replica',note:'Morning for beautiful craftsman architecture against surrounding palms'}
+    ],
+    sunsetSpots:[
+      {spot:'Overlook pavilion',note:'West-facing over the expansive groves — sun setting behind palm trees creates a deeply nostalgic agricultural oasis atmosphere'},
+      {spot:'Varietal grove',note:'Warm evening light filtering through lush green leaves and bright citrus fruits'}
+    ],
+    wildlife:[
+      {name:'Anna\'s Hummingbird',note:'Darting among highly fragrant citrus blossoms in spring'},
+      {name:'Red-tailed Hawk',note:'Perched in tall palms bordering the groves'},
+      {name:'Cottontail Rabbit',note:'Hopping between rows of trees near dusk'}
+    ]
+  },
+
+  'lake-perris':{
+    highlight:'One of SoCal\'s most versatile state recreation areas — swimming beaches, boating, fishing, camping, rock climbing at Perris Rocks, and a museum of indigenous desert culture. Make it anything from a mellow beach day to a full active weekend with real trail mileage around the reservoir.',
+    googleRating:4.6,
+    googleReviews:8500,
+    bestSeason:'Spring, Fall',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'$10/vehicle; summer weekends/holidays up to $20',
+    carCamping:{available:true,cost:'$30–$65/night',sites:'431',note:'Very large campground with hookup and non-hookup sites. One of the easiest parks in SoCal for larger-group or RV-friendly camping. Shade is limited.'},
+    tentCamping:{available:true,cost:'$30–$65/night',sites:'167 non-hookup + more',note:'Plenty of tent options but summer heat is intense — bring extra shade.'},
+    parkingTip:'Use the lot closest to your activity — the park is large. Beach parking fills much faster than other areas on hot weekends.',
+    nearbyFood:'Sonora Grill (~15 min, Mexican); Rosa Maria\'s (~15 min, Mexican); Corky\'s Homestyle Kitchen (~15 min, American diner)',
+    elevation:'1,560 ft',
+    things:[
+      'Swim, boat, or kayak on the reservoir',
+      'Camp at one of the large campground loops',
+      'Hike Terri Peak for panoramic lake and mountain views',
+      'Visit the Ya\'i Heki\' Regional Indian Museum',
+      'Fish for largemouth bass, trout, and catfish'
+    ],
+    hikes:[
+      {name:'Lake Perris Loop Trail',distance:'9.0 mi loop',gain:'403 ft',difficulty:'Moderate',note:'Full reservoir loop — best all-around long hike'},
+      {name:'Terri Peak Loop Trail',distance:'4.5–4.8 mi loop',gain:'900–987 ft',difficulty:'Moderate',note:'Best climb and overlook in the park with panoramic lake views'},
+      {name:'Alessandro Island Trail',distance:'1.0 mi loop',gain:'50 ft',difficulty:'Easy',note:'Accessible only by boat/kayak — rugged island trail in the middle of the lake'}
+    ],
+    photoSpots:[
+      {name:'Terri Peak summit',note:'Sunrise or late afternoon for lake-and-mountain panorama'},
+      {name:'Bernasconi Beach shoreline',note:'Morning for calm water reflections with Alessandro Island'}
+    ],
+    sunsetSpots:[
+      {spot:'Bernasconi Beach',note:'West/northwest facing across the lake — sunset reflects perfectly in calm water with distant mountains dramatically silhouetted'},
+      {spot:'Terri Peak',note:'High-elevation view of sky turning pink and purple over the vast Inland Empire'}
+    ],
+    wildlife:[
+      {name:'Western Grebe',note:'Elegant diving birds on the lake surface'},
+      {name:'Bald Eagle',note:'Sometimes spotted in winter perched in tall trees near the water'},
+      {name:'Mule Deer',note:'Foraging in brushy hills away from busy beaches'}
+    ]
+  },
+
+  'indio-hills':{
+    highlight:'A wildly remote, unstaffed desert reserve where the San Andreas Fault traps groundwater and creates spectacular hidden oases of native California fan palms amid stark badlands. Rugged terrain, absolute silence, and a feeling of pure wilderness exploration right in the Coachella Valley.',
+    googleRating:4.5,
+    googleReviews:700,
+    bestSeason:'Fall, Winter, Spring',
+    bestMonths:[1,2,3,4,10,11,12],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:null,sites:null,note:'Completely undeveloped day-use reserve.'},
+    tentCamping:{available:false,cost:null,sites:null,note:'No camping of any kind.'},
+    parkingTip:'Entirely unofficial — look for dirt pull-outs off Thousand Palms Canyon Road near trailhead markers. Don\'t block the roadway. Start early and bring far more water than you think.',
+    nearbyFood:'Shield\'s Date Garden (~15 min, café/date shakes); Sloan\'s (~15 min, American); Jackalope Ranch (~20 min, BBQ/steakhouse)',
+    elevation:'200–1,000+ ft',
+    things:[
+      'Hike to Pushawalla Palms — a massive hidden canyon oasis',
+      'Photograph shaggy-skirted California fan palms rising from barren desert',
+      'Marvel at the heavily eroded badlands terrain',
+      'Look for evidence of the San Andreas Fault pushing groundwater to the surface',
+      'Experience the absolute silence of the remote Colorado Desert'
+    ],
+    hikes:[
+      {name:'Pushawalla Palms Loop',distance:'4.3–4.5 mi loop',gain:'450–705 ft',difficulty:'Moderate',note:'Spectacular — crosses barren ridge then drops into a massive hidden palm oasis'},
+      {name:'Willis Palms Trail',distance:'2.0 mi round trip',gain:'200 ft',difficulty:'Easy',note:'Shorter hike to a dense palm cluster prominently along the fault line'},
+      {name:'Hidden Palms Trail',distance:'3.0–3.4 mi round trip',gain:'350 ft',difficulty:'Moderate',note:'Rugged badlands before dropping into a secluded smaller oasis'}
+    ],
+    photoSpots:[
+      {name:'Ridge above Pushawalla',note:'Mid-morning for stark contrast between grey badlands and bright green ribbon of palms below'},
+      {name:'Inside the oasis',note:'Mid-day when harsh sun filters through massive palm fronds'}
+    ],
+    sunsetSpots:[
+      {spot:'Pushawalla Ridge',note:'West-facing with long dramatic shadows across the deeply eroded alien-looking badlands — breathtaking desert glow'},
+      {spot:'Willis Palms oasis',note:'Warm sunset light glowing against thick shaggy palm tree skirts — more intimate grove atmosphere'}
+    ],
+    wildlife:[
+      {name:'Desert Bighorn Sheep',note:'Occasionally on steep ridges above canyons in early morning'},
+      {name:'Chuckwalla',note:'Large flat lizards sunning on dark rocks during warm days'},
+      {name:'Cactus Wren',note:'Listen for raspy calls and look for nests hidden in cholla cactus'}
+    ]
   }
+
 };
 
 function diffClass(d){ return d==='Easy'?'pm-diff-easy':d==='Hard'?'pm-diff-hard':'pm-diff-mod'; }
@@ -6878,73 +8419,44 @@ function campingBox(label, info){
 // CHATGPT TRIP PLANNER
 // ============================================================
 function buildChatGPTPrompt(p, d){
-  const lines = [
-    `Plan a trip around ${p.name}.`,
-    '',
-    'Context:',
-    '- Travelers: Harsh and Osheen',
-    '- Home base: Milpitas, California',
-    `- Park: ${p.name}`,
-    `- Type: ${p.typeLabel}`,
-    `- Region: ${p.region}`,
-    `- Distance from home: ${p.distance} miles`,
-    `- Estimated drive from home: ${driveCache[p.id] || estimateDrive(p.distance)}`,
-    `- Library pass eligible: ${p.libraryPass ? 'Yes' : 'No'}`,
-    `- Visited already: ${p.visited ? 'Yes' : 'No'}`,
-    `- Activities: ${p.activities.map(a => ACT[a] || a).join(', ')}`,
-  ];
-
-  if (p.notes) lines.push(`- Quick note: ${p.notes}`);
-  if (p.website) lines.push(`- Official website: ${p.website}`);
+  const lines = [`Plan a one day trip for ${p.name}.`];
 
   if (d) {
-    const things = d.things || d.thingsToDo || [];
-    lines.push('', 'Park details:');
-    if (d.highlight) lines.push(`- Why visit: ${d.highlight}`);
-    if (d.bestSeason) lines.push(`- Best season: ${d.bestSeason}`);
-    if (d.elevation) lines.push(`- Elevation: ${d.elevation}`);
-    if (d.entranceFee) lines.push(`- Entrance fee: ${d.entranceFee}`);
-    if (d.carCamping) lines.push(`- Car camping: ${d.carCamping.available ? `${d.carCamping.cost || 'Available'}${d.carCamping.note ? ` (${d.carCamping.note})` : ''}` : 'Not available'}`);
-    if (d.tentCamping) lines.push(`- Tent camping: ${d.tentCamping.available ? `${d.tentCamping.cost || 'Available'}${d.tentCamping.note ? ` (${d.tentCamping.note})` : ''}` : 'Not available'}`);
-    if (d.parkingTip) lines.push(`- Parking tip: ${d.parkingTip}`);
-    if (d.nearbyFood) lines.push(`- Nearby food: ${d.nearbyFood}`);
-    if (things.length) lines.push(`- Things to do: ${things.join('; ')}`);
-    if (d.hikes && d.hikes.length) {
-      lines.push('- Hikes:');
-      d.hikes.forEach(h => {
+    const things = (d.things || d.thingsToDo || []).slice(0, 5);
+    const hikes = (d.hikes || []).slice(0, 5);
+    const photoSpots = (d.photoSpots || []).slice(0, 5);
+
+    if (things.length) {
+      lines.push('', 'Top things to do:');
+      things.forEach(item => lines.push(`- ${item}`));
+    }
+
+    if (hikes.length) {
+      lines.push('', 'Top hikes:');
+      hikes.forEach(h => {
         const hikeBits = [h.distance, h.gain, h.difficulty].filter(Boolean).join(', ');
-        lines.push(`  - ${h.name}${hikeBits ? ` (${hikeBits})` : ''}: ${h.note || 'No note'}`);
+        lines.push(`- ${h.name}${hikeBits ? ` (${hikeBits})` : ''}${h.note ? ` - ${h.note}` : ''}`);
       });
     }
-    if (d.photoSpots && d.photoSpots.length) {
-      lines.push('- Photo spots:');
-      d.photoSpots.forEach(s => lines.push(`  - ${s.name}: ${s.note}`));
-    }
-    if (d.wildlife && d.wildlife.length) {
-      lines.push('- Wildlife:');
-      d.wildlife.forEach(w => lines.push(`  - ${w.name}: ${w.note}`));
-    }
-  }
 
-  const weather = weatherCache[p.id];
-  if (weather && weather.time && weather.time.length) {
-    lines.push('', 'Weather snapshot:');
-    weather.time.slice(0, 3).forEach((t, i) => {
-      lines.push(`- ${dayName(t)}: high ${cToF(weather.temperature_2m_max[i])}F, low ${cToF(weather.temperature_2m_min[i])}F, cloud cover ${Math.round(weather.cloud_cover_mean[i])}%`);
-    });
-  }
+    if (photoSpots.length) {
+      lines.push('', 'Best photo spots:');
+      photoSpots.forEach(s => lines.push(`- ${s.name}${s.note ? ` - ${s.note}` : ''}`));
+    }
 
-  lines.push(
-    '',
-    'What I want from you:',
-    '- Decide whether this should be a day trip, overnight, or weekend trip from Milpitas',
-    '- Build a practical itinerary with timing',
-    '- Recommend the best hike(s) and best photo stops',
-    '- Suggest where to eat before, during, and after',
-    '- Call out permits, reservations, tides, weather, road access, and parking issues',
-    '- Include a packing list and one backup plan if conditions change',
-    '- Keep it concrete and optimized for an outdoor enthusiast'
-  );
+    if (d.sunsetSpots && d.sunsetSpots.length) {
+      lines.push('', 'Best sunset spots:');
+      d.sunsetSpots.forEach((s,i) => lines.push(`- ${i===0?'⭐ ':''}${s.spot}${s.note ? ` - ${s.note}` : ''}`));
+    }
+
+    if (d.nearbyFood) {
+      lines.push('', `See if we could get lunch or dinner at: ${d.nearbyFood}`);
+    }
+  } else {
+    lines.push('', `Park type: ${p.typeLabel}`);
+    lines.push(`Region: ${p.region}`);
+    if (p.notes) lines.push(`Note: ${p.notes}`);
+  }
 
   return lines.join('\n');
 }
@@ -6962,16 +8474,38 @@ async function openChatGPTPrompt(id, button) {
     button.disabled = true;
   }
 
+  // Open ChatGPT immediately while the click gesture is still active.
+  const chatWindow = window.open('https://chatgpt.com/', '_blank');
+
   let copied = false;
   try {
-    await navigator.clipboard.writeText(prompt);
-    copied = true;
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(prompt);
+      copied = true;
+    }
   } catch (e) {}
 
-  window.open('https://chatgpt.com/', '_blank', 'noopener');
+  if (!copied) {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = prompt;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      ta.style.pointerEvents = 'none';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      copied = document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (e) {}
+  }
 
   if (button) {
-    button.textContent = copied ? 'Copied prompt · paste into ChatGPT' : 'Opened ChatGPT · copy prompt manually';
+    if (chatWindow && copied) button.textContent = 'ChatGPT opened · prompt copied';
+    else if (chatWindow) button.textContent = 'ChatGPT opened · copy prompt manually';
+    else if (copied) button.textContent = 'Prompt copied · open ChatGPT manually';
+    else button.textContent = 'Copy failed · use manual prompt';
     window.setTimeout(() => {
       button.textContent = defaultLabel;
       button.disabled = false;
@@ -6980,6 +8514,79 @@ async function openChatGPTPrompt(id, button) {
 
   if (!copied) {
     window.prompt('Copy this prompt, then paste it into ChatGPT:', prompt);
+  }
+}
+
+async function captureModalAsImage(parkId) {
+  const modalElement = document.getElementById('park-modal');
+  const overlayElement = document.getElementById('park-modal-overlay');
+  if (!modalElement || !overlayElement) return;
+
+  const p = PARKS.find(pk=>pk.id===parkId);
+  const parkName = p ? p.name : 'California-Park';
+
+  const originalMaxHeight = modalElement.style.maxHeight;
+  const originalOverflow = modalElement.style.overflowY;
+  const originalAlignItems = overlayElement.style.alignItems;
+  const originalPadding = overlayElement.style.padding;
+  
+  // Temporarily reset scrolling and flex positioning so the modal grows straight down
+  // from the top of the viewport instead of growing out of both top and bottom.
+  modalElement.scrollTop = 0;
+  modalElement.style.maxHeight = 'none';
+  modalElement.style.overflowY = 'visible';
+  overlayElement.style.alignItems = 'flex-start';
+  overlayElement.style.padding = '0'; // Remove padding to avoid offset issues
+  
+  modalElement.classList.add('is-exporting');
+
+  try {
+    const canvas = await html2canvas(modalElement, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      scrollY: -window.scrollY // Prevent viewport scroll offset issues
+    });
+
+    canvas.toBlob(async (blob) => {
+      if (!blob) return;
+      const filename = parkName.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_guide.png';
+      const file = new File([blob], filename, { type: 'image/png' });
+      
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: parkName,
+            text: `Check out this guide for ${parkName}!`
+          });
+        } catch (err) {
+          downloadFile(blob, filename);
+        }
+      } else {
+        downloadFile(blob, filename);
+      }
+    }, 'image/png');
+
+    function downloadFile(blobData, name) {
+      const url = URL.createObjectURL(blobData);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+  } catch (error) {
+    console.error("Screenshot capture failed:", error);
+  } finally {
+    modalElement.classList.remove('is-exporting');
+    modalElement.style.maxHeight = originalMaxHeight;
+    modalElement.style.overflowY = originalOverflow;
+    overlayElement.style.alignItems = originalAlignItems;
+    overlayElement.style.padding = originalPadding;
   }
 }
 
@@ -7063,6 +8670,14 @@ function openParkModal(id){
         </div>`).join('')}
       </div>`:''}
 
+      ${d.sunsetSpots?`<div class="pm-section">
+        <div class="pm-section-title">🌅 Best Sunset Spots</div>
+        ${d.sunsetSpots.map((s,i)=>`<div class="pm-sunset-card${i===0?' pm-sunset-best':''}">
+          <div class="pm-sunset-icon">🌅</div>
+          <div><div class="pm-sunset-name">${s.spot}</div><div class="pm-sunset-note">${s.note}</div></div>
+        </div>`).join('')}
+      </div>`:''}
+
       ${d.wildlife?`<div class="pm-section">
         <div class="pm-section-title">🦌 Wildlife to Look For</div>
         <div class="pm-wildlife-grid">
@@ -7111,7 +8726,9 @@ function openParkModal(id){
         <a class="pm-btn" href="https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;transform:rotate(-45deg)"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg> Navigate</a>
         <button class="pm-btn pm-primary" onclick="closeParkModal();flyTo('${p.id}')">📍 Show on Map</button>
         <button class="pm-btn" style="flex: 1 1 100%; font-weight: 700; color: #146c43; border-color: #b7e2ca; background: #edf9f1;" title="Copies the full park brief, opens ChatGPT, then you paste it there" onclick="openChatGPTPrompt('${p.id}', this)">Ask ChatGPT to Plan This Trip</button>
+        <button class="pm-btn" style="flex: 1 1 100%; font-weight: 600; color: #2c3e50; border-color: #cbd5e1; background: #f8fafc;" onclick="captureModalAsImage('${p.id}')">📸 Save as Image</button>
       </div>
+      <div class="pm-watermark">⛰️ harshbg.github.io/caparks</div>
     </div>`;
 
   modal.innerHTML = html;
