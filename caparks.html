@@ -141,6 +141,8 @@
       border: 1.5px solid var(--border); font-size: 12px; font-family: 'Inter', sans-serif;
       background: var(--cream); cursor: pointer; outline: none; color: var(--text);
     }
+    .sb-slider { width: 100%; margin: 6px 0 2px; cursor: pointer; accent-color: var(--forest); }
+    .sb-slider-label { font-size: 12px; color: var(--text-muted); text-align: center; font-weight: 600; }
 
     /* mobile toggle */
     .sidebar-toggle {
@@ -340,7 +342,7 @@
       background: var(--cream); border-radius: var(--radius-sm); padding: 10px 12px;
       border: 1px solid var(--border);
     }
-    .pm-info-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--text-muted); margin-bottom: 4px; }
+    .pm-info-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--text-muted); margin-bottom: 4px; }
     .pm-info-value { font-size: 12px; font-weight: 600; color: var(--forest-dark); line-height: 1.4; }
     .pm-info-value small { font-weight: 400; color: var(--text-muted); font-size: 11px; display: block; margin-top: 2px; }
     .pm-info-wide { grid-column: span 3; }
@@ -379,6 +381,8 @@
     .pm-sunset-best .pm-sunset-name::after { content: ' ⭐'; font-size: 11px; }
     .pm-sunset-note { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
+    .pm-bike-badge { display:inline-block; background:linear-gradient(135deg,#ffd700,#ffb300); color:#5a3e00; font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px; margin-left:6px; vertical-align:middle; }
+
     .pm-wildlife-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .pm-wildlife-card {
       background: var(--cream); border-radius: var(--radius-sm); padding: 10px 12px;
@@ -391,6 +395,8 @@
     .pm-wday-icon { font-size: 16px; line-height: 1.5; }
     .pm-wday-hi { font-size: 11px; font-weight: 600; color: var(--text); }
     .pm-wday-lo { font-size: 10px; color: var(--text-muted); }
+    .pm-wday-wind { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+    .wday-wind { font-size: 9px; color: #888; margin-top: 1px; }
 
     .pm-section { margin-bottom: 28px; }
     .pm-section:last-child { margin-bottom: 0; }
@@ -596,6 +602,13 @@
       </select>
     </div>
 
+    <!-- Drive Time -->
+    <div class="sb-section">
+      <div class="sb-label">🚗 Max Drive Time</div>
+      <input type="range" class="sb-slider" id="drive-slider" min="0" max="12" step="0.5" value="12" oninput="setDriveMax(this.value)">
+      <div class="sb-slider-label" id="drive-slider-label">Any distance</div>
+    </div>
+
     <!-- Camping -->
     <div class="sb-section">
       <div class="sb-label">⛺ Camping</div>
@@ -603,6 +616,16 @@
         <button class="sbtn active" data-camp="all" onclick="setCamp('all')">All</button>
         <button class="sbtn" data-camp="car" onclick="setCamp('car')">🚗 Car</button>
         <button class="sbtn" data-camp="tent" onclick="setCamp('tent')">⛺ Tent</button>
+      </div>
+    </div>
+
+    <!-- Biking -->
+    <div class="sb-section">
+      <div class="sb-label">🚴 Biking</div>
+      <div class="sb-btn-row" id="bike-filters">
+        <button class="sbtn active" data-bike="all" onclick="setBike('all')">All</button>
+        <button class="sbtn" data-bike="bike" onclick="setBike('bike')">🚲 Biking</button>
+        <button class="sbtn" data-bike="ebike" onclick="setBike('ebike')">⚡ E-Bike</button>
       </div>
     </div>
 
@@ -1107,7 +1130,7 @@ function typeBadge(p){const m={sp:'badge-sp',np:'badge-np',sb:'badge-sb',snr:'ba
 // ============================================================
 // STATE
 // ============================================================
-let state = { passOnly:false, typeFilter:'all', visFilter:'all', sort:'distance', search:'', monthFilter:0, campFilter:'all', infoFilter:'all' };
+let state = { passOnly:false, typeFilter:'all', visFilter:'all', sort:'distance', search:'', monthFilter:0, driveMax:12, campFilter:'all', bikeFilter:'all', infoFilter:'all' };
 const weatherCache={}, markerMap={}, driveCache={};
 
 function estimateDrive(miles){
@@ -1219,7 +1242,7 @@ document.querySelector('.cards-panel').addEventListener('click',e=>{
 async function fetchWeather(park){
   if(weatherCache[park.id])return weatherCache[park.id];
   try{
-    const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${park.lat}&longitude=${park.lon}&daily=temperature_2m_max,temperature_2m_min,cloud_cover_mean,sunrise,sunset&timezone=auto&forecast_days=10`);
+    const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${park.lat}&longitude=${park.lon}&daily=temperature_2m_max,temperature_2m_min,cloud_cover_mean,wind_speed_10m_max,sunrise,sunset&wind_speed_unit=mph&timezone=auto&forecast_days=10`);
     const d=await r.json(); weatherCache[park.id]=d.daily; return d.daily;
   }catch(e){return null;}
 }
@@ -1291,8 +1314,11 @@ function filteredParks(){
     if(state.visFilter==='unvisited'&&p.visited)return false;
     if(state.search){const q=state.search.toLowerCase();if(!p.name.toLowerCase().includes(q)&&!p.region.toLowerCase().includes(q))return false;}
     if(state.monthFilter>0){const d=PARK_DETAILS[p.id];if(!d||!d.bestMonths||!d.bestMonths.includes(state.monthFilter))return false;}
+    if(state.driveMax<12){const driveHrs=p.distance/40;if(driveHrs>state.driveMax)return false;}
     if(state.campFilter==='car'){const d=PARK_DETAILS[p.id];if(!d||!d.carCamping||!d.carCamping.available)return false;}
     if(state.campFilter==='tent'){const d=PARK_DETAILS[p.id];if(!d||!d.tentCamping||!d.tentCamping.available)return false;}
+    if(state.bikeFilter==='bike'){const d=PARK_DETAILS[p.id];if(!d||!d.biking||!d.biking.available)return false;}
+    if(state.bikeFilter==='ebike'){const d=PARK_DETAILS[p.id];if(!d||!d.biking||!d.biking.ebike)return false;}
     if(state.infoFilter==='yes'&&!p.hasInfo)return false;
     if(state.infoFilter==='no'&&p.hasInfo)return false;
     return true;
@@ -1332,7 +1358,9 @@ function setType(t){state.typeFilter=t;document.querySelectorAll('#type-filters 
 function setVis(v){state.visFilter=v;document.querySelectorAll('#vis-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.vis===v));render();}
 function setSort(v){state.sort=v;render();}
 function setMonth(v){state.monthFilter=parseInt(v);render();}
+function setDriveMax(v){state.driveMax=parseFloat(v);const lbl=document.getElementById('drive-slider-label');if(v>=12)lbl.textContent='Any distance';else{const h=Math.floor(v),m=Math.round((v-h)*60);lbl.textContent=h>0?(m>0?`Under ${h}h ${m}m`:`Under ${h}h`):`Under ${m}m`;}render();}
 function setCamp(v){state.campFilter=v;document.querySelectorAll('#camp-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.camp===v));render();}
+function setBike(v){state.bikeFilter=v;document.querySelectorAll('#bike-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.bike===v));render();}
 function setInfo(v){state.infoFilter=v;document.querySelectorAll('#info-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.info===v));render();}
 document.getElementById('search').addEventListener('input',e=>{state.search=e.target.value.trim();render();});
 
@@ -1737,7 +1765,12 @@ const PARK_DETAILS = {
       { name: 'Black-tailed Deer', note: 'Common in oak woodland along trails' },
       { name: 'Harbor Seal', note: 'Occasionally spotted near bay waters' },
       { name: 'Wild Turkey', note: 'Flocks seen in meadows near Back Ranch' }
-    ]
+    ],
+    biking:{available:true,ebike:false,trails:[
+      {name:'Shoreline Trail',distance:'5.0 mi',difficulty:'Easy',note:'Flat bayfront singletrack — one of the Bay Area\'s classic mountain bike rides'},
+      {name:'Bay View – Ridge Fire Road Loop',distance:'6.0 mi',difficulty:'Moderate',note:'Flowing singletrack and fire roads through oak woodland with bay views'},
+      {name:'Oak Ridge – Powerline Trail',distance:'4.0 mi',difficulty:'Moderate',note:'Technical singletrack with root sections and short climbs'}
+    ]}
   },
   'samuel-taylor': {
     highlight: 'A lush Marin County gem where old-growth redwoods tower over Papermill Creek and a paved cycling trail follows a historic railroad grade. Perfect for family camping, creek wading, and peaceful forest walks.',
@@ -1774,7 +1807,11 @@ const PARK_DETAILS = {
       { name: 'Black-tailed Deer', note: 'Common along trails and meadow edges' },
       { name: 'Banana Slug', note: 'Abundant on the forest floor, especially after rain' },
       { name: 'Pacific Giant Salamander', note: 'Found in and near the creek under rocks and logs' }
-    ]
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Cross Marin Trail',distance:'6.0 mi',difficulty:'Easy',note:'Flat paved path along Papermill Creek — perfect for e-bikes and families'},
+      {name:'Barnabe Peak Fire Road',distance:'6.8 mi',difficulty:'Hard',note:'Steep fire road climb to the summit with panoramic views'}
+    ]}
   },
   'tomales-bay': {
     highlight: 'A serene state park on the shores of Tomales Bay with calm turquoise waters, white sand beaches, and dense bishop pine forests. One of the best kayaking destinations in the Bay Area.',
@@ -9328,7 +9365,12 @@ const PARK_DETAILS = {
       {name:'Desert Cottontail / Jackrabbit',note:'Dawn and dusk in open flats'},
       {name:'Bighorn Sheep',note:'Occasionally in rocky canyon terrain, more often in quieter areas'},
       {name:'Lizards & Roadrunners',note:'Warm trail edges and scrub zones'}
-    ]
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Park Boulevard (paved road riding)',distance:'25+ mi',difficulty:'Moderate',note:'Scenic paved road through Joshua tree forests and boulder fields — ride early to avoid heat'},
+      {name:'Geology Tour Road',distance:'18 mi',difficulty:'Hard',note:'Unpaved 4WD road through desert geology — fat/gravel bike recommended'},
+      {name:'Pinto Basin Road',distance:'30+ mi',difficulty:'Hard',note:'Long paved road through Colorado Desert — bring lots of water, no shade'}
+    ]}
   },
 
   'death-valley':{
@@ -9371,7 +9413,12 @@ const PARK_DETAILS = {
       {name:'Desert Bighorn Sheep',note:'Rocky canyon terrain, often mornings'},
       {name:'Coyotes',note:'Dawn/dusk near developed areas and roadsides'},
       {name:'Roadrunners / Lizards',note:'Around scrub and warmer lowland areas'}
-    ]
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Artists Drive',distance:'9.0 mi',difficulty:'Moderate',note:'One-way scenic paved loop through colorful volcanic hills — best early morning'},
+      {name:'Badwater Road',distance:'Varies',difficulty:'Easy',note:'Flat paved road across the basin floor — extreme heat caution required'},
+      {name:'Titus Canyon Road',distance:'27 mi',difficulty:'Hard',note:'One-way dirt/gravel road through narrows — advanced riders, no shade'}
+    ]}
   },
 
   'pinnacles':{
@@ -9586,7 +9633,12 @@ const PARK_DETAILS = {
       {name:'Tule Elk',note:'Tomales Point and tule elk reserve areas'},
       {name:'Elephant Seals',note:'Seasonal colonies, especially winter at protected viewpoints'},
       {name:'Gray Whales',note:'Offshore from headlands during migration seasons'}
-    ]
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Bear Valley Trail (to Divide Meadow)',distance:'6.0 mi',difficulty:'Easy',note:'Flat, wide trail through forest — bikes allowed to Divide Meadow only'},
+      {name:'Olema Valley Trail',distance:'5.3 mi',difficulty:'Easy',note:'Rolling terrain through grasslands connecting Bear Valley to Five Brooks'},
+      {name:'Stewart Trail',distance:'12.6 mi',difficulty:'Hard',note:'Long out-and-back to Wildcat Camp with significant elevation'}
+    ]}
   },
 
   'golden-gate':{
@@ -9629,7 +9681,12 @@ const PARK_DETAILS = {
       {name:'Raptors',note:'Headlands ridges and migration periods'},
       {name:'Harbor Seals',note:'Coastal haul-out areas and beaches'},
       {name:'Coyotes',note:'Quiet dawn/dusk zones in larger natural sections'}
-    ]
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Golden Gate Bridge to Sausalito',distance:'8.0 mi',difficulty:'Easy',note:'Iconic ride across the bridge and along the waterfront — most popular bike route in SF'},
+      {name:'Tennessee Valley Fire Road',distance:'3.5 mi',difficulty:'Easy',note:'Wide fire road to coastal valley, popular with families'},
+      {name:'Marin Headlands Loops (Conzelman/McCullough)',distance:'6.0 mi',difficulty:'Moderate',note:'Paved roads with steep climbs and epic bridge/ocean views'}
+    ]}
   },
 
   'muir-woods':{
@@ -9887,7 +9944,12 @@ const PARK_DETAILS = {
       {name:'Mountain Lion',note:'Year-round but extremely rare to see — iconic apex predator of these mountains'},
       {name:'Western Fence Lizard',note:'Spring and summer, doing "push-ups" on sunny rocks along almost every trail'},
       {name:'Acorn Woodpecker',note:'Year-round near oak woodlands, stashing acorns in tree trunks'}
-    ]
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Backbone Trail (select sections)',distance:'Varies',difficulty:'Hard',note:'Mountain biking allowed on some fire roads — check NPS signage for current access'},
+      {name:'Topanga Fire Road',distance:'5.0 mi',difficulty:'Moderate',note:'Wide dirt road popular with mountain bikers, ocean views'},
+      {name:'Latigo Canyon / Kanan Dume Road',distance:'10+ mi',difficulty:'Hard',note:'Paved road cycling with steep climbs and sweeping ocean panoramas'}
+    ]}
   },
 
   'cabrillo':{
@@ -10059,7 +10121,11 @@ const PARK_DETAILS = {
       {name:'Mule Deer',note:'Year-round, commonly seen near campgrounds and on the slopes'},
       {name:'Harbor Seal',note:'Year-round, spotted popping up in the water near Ayala Cove'},
       {name:'Brown Pelican',note:'Summer and fall, diving into bay waters around the island'}
-    ]
+    ],
+    biking:{available:true,ebike:false,trails:[
+      {name:'Perimeter Road',distance:'5.5 mi',difficulty:'Easy',note:'Paved loop around the entire island with bay views'},
+      {name:'Fire Road to Mt. Livermore',distance:'3.0 mi',difficulty:'Moderate',note:'Dirt fire road with elevation gain to the summit area'}
+    ]}
   },
 
   'crown-memorial-sb':{
@@ -10275,6 +10341,1161 @@ const PARK_DETAILS = {
       {name:'Raccoon',note:'Year-round, aggressively active at night in campgrounds — keep all food locked'},
       {name:'Wild Turkey',note:'Spring, frequently wandering in large flocks through grassy picnic areas'}
     ]
+  },
+
+  'marconi-conference-center':{
+    highlight:'Overlooking scenic Tomales Bay, this site preserves the history of Guglielmo Marconi\'s trans-Pacific wireless telegraph station. The peaceful pine-studded grounds, stunning water views, and retreat-like atmosphere make it a serene coastal escape.',
+    googleRating:4.7,
+    googleReviews:450,
+    bestSeason:'Spring, Summer, Fall',
+    bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use and conference lodging only; no car camping.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use and conference lodging only.'},
+    parkingTip:'Free spacious parking lot near the entrance. Event use can affect access — go earlier for the quietest trails and best bay light.',
+    nearbyFood:[
+      {name:"Nick's Cove",desc:'Seafood/American (~10 min)'},
+      {name:'The Marshall Store',desc:'Seafood/oysters (~5 min)'},
+      {name:"Tony's Seafood Restaurant",desc:'Seafood (~5 min)'}
+    ],
+    elevation:'~100 ft',
+    things:[
+      'Walk the historic grounds under Monterey pines',
+      'View sweeping vistas of Tomales Bay',
+      'Learn about early 20th-century wireless radio history',
+      'Relax and picnic on the large grassy lawns',
+      'Spot coastal birdlife along the hills'
+    ],
+    hikes:[
+      {name:'Marconi Loop',distance:'1.5 mi',gain:'259 ft',difficulty:'Easy',note:'Best first hike combining bay views and historic grounds'},
+      {name:'Tomales Bay Overlook Trail',distance:'0.5 mi',gain:'20 ft',difficulty:'Easy',note:'Short stroll to clearing with unobstructed water views'},
+      {name:'Historic Station Walk',distance:'0.8 mi',gain:'30 ft',difficulty:'Easy',note:'Pathways connecting the historic 1914 buildings'}
+    ],
+    photoSpots:[
+      {name:'Tomales Bay overlook',note:'Late afternoon for sunlight reflecting off the bay'},
+      {name:'Historic hotel building',note:'Morning light captures the architecture against the pine forest'}
+    ],
+    sunsetSpots:[
+      {spot:'Tomales Bay overlook',note:'Best sunset spot — faces west directly over the bay, providing serene mirrored sunset on the water'},
+      {spot:'Pine grove',note:'Quiet alternative with filtered sunset through tall Monterey pines'}
+    ],
+    wildlife:[
+      {name:'Osprey',note:'Spring and summer, diving for fish in the nearby bay'},
+      {name:'Mule Deer',note:'Year-round, often grazing peacefully on the conference center lawns'},
+      {name:'Great Blue Heron',note:'Along bay edges in the morning'}
+    ]
+  },
+
+  'marsh-creek-shp':{
+    highlight:'Centered around the impressive 1856 stone mansion of Dr. John Marsh in the shadow of Mount Diablo, this park preserves culturally and archaeologically significant land. Public access is limited to special events and restoration tours, but the surrounding landscapes offer rich pioneer and Native American history.',
+    googleRating:4.2,
+    googleReviews:50,
+    bestSeason:'Spring, Fall',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'Free (special tour fees may apply)',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only; limited public access.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Parking is very limited and often restricted to temporary lots during official tour days. Check the park schedule before arriving.',
+    nearbyFood:[
+      {name:"Smith's Landing Seafood Grill",desc:'Seafood (~20 min)'},
+      {name:'Brentwood Cafe',desc:'American/breakfast (~15 min)'},
+      {name:'La Costa',desc:'Mexican (~15 min)'}
+    ],
+    elevation:'~150 ft',
+    things:[
+      'Attend a guided John Marsh House tour (when available)',
+      'View the exterior of the towering 19th-century stone mansion',
+      'Walk segments of the adjacent Marsh Creek Regional Trail',
+      'Learn about the indigenous Volvon people of the area',
+      'Birdwatch in the nearby oak-studded hills'
+    ],
+    hikes:[
+      {name:'Marsh Creek Trail Segment',distance:'2.5 mi',gain:'20 ft',difficulty:'Easy',note:'Flat paved multi-use path following the creek just outside the estate'},
+      {name:'Mansion Grounds Walk',distance:'0.5 mi',gain:'10 ft',difficulty:'Easy',note:'Short perimeter walk around the historic stone house during open events'},
+      {name:'Round Valley Regional Preserve (nearby)',distance:'4.0 mi',gain:'400 ft',difficulty:'Moderate',note:'Scenic rolling trail in neighboring park with great valley views'}
+    ],
+    photoSpots:[
+      {name:'John Marsh Stone House',note:'Golden hour highlights the beautiful rough-hewn sandstone blocks'},
+      {name:'Marsh Creek Trail',note:'Best in spring when surrounding hills are green and wildflowers bloom'}
+    ],
+    sunsetSpots:[
+      {spot:'Marsh Creek Trail',note:'Best sunset spot — faces west toward Mount Diablo, capturing the iconic peak silhouetted against sunset'},
+      {spot:'Mansion exterior',note:'Evening light casts dramatic shadows across the Victorian Gothic architecture'}
+    ],
+    wildlife:[
+      {name:'Red-tailed Hawk',note:'Year-round, circling the open valley'},
+      {name:'Western Bluebird',note:'Spring, flitting between the oak trees'},
+      {name:'Coyote',note:'Year-round, often heard howling at dusk in the surrounding open space'}
+    ]
+  },
+
+  'martial-cottle':{
+    highlight:'Located in the heart of San Jose, this unique state-county partnership park preserves the region\'s rich agricultural heritage. Visitors can explore a working farm, community gardens, and paved trails surrounded by open fields — a rural escape in an urban setting.',
+    googleRating:4.7,
+    googleReviews:2600,
+    bestSeason:'Year-round',
+    bestMonths:[3,4,5,6,9,10,11],
+    entranceFee:'Free (county parking fees may apply)',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only park.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Large well-maintained paved parking lots at the main entrance on Snell Avenue that rarely fill completely. Morning and late afternoon nicest as the park is very open and sunny.',
+    nearbyFood:[
+      {name:'The Gurkha Kitchen',desc:'Nepalese/Indian (~5 min)'},
+      {name:"Bill's Cafe",desc:'Breakfast/American (~5 min)'},
+      {name:'Himalayan Kitchen',desc:'Indian/Nepalese (~10 min)'}
+    ],
+    elevation:'~150 ft',
+    things:[
+      'Walk or bike the paved perimeter trail',
+      'Visit the Master Gardeners parcel for seasonal blooms',
+      'Attend seasonal agricultural festivals and farmers\' markets',
+      'Enjoy the agriculture-themed playground with kids',
+      'Photograph orchards, barns, and historic farm equipment'
+    ],
+    hikes:[
+      {name:'Martial Cottle Perimeter Loop',distance:'2.9 mi',gain:'10 ft',difficulty:'Easy',note:'Wide flat fully paved trail encircling the agricultural fields — popular with runners and cyclists'},
+      {name:'Farm Operations Walk',distance:'1.0 mi',gain:'Minimal',difficulty:'Easy',note:'Stroll past active farming areas and historic ranch buildings'},
+      {name:'Cottle Historic Corridor',distance:'0.8 mi',gain:'Minimal',difficulty:'Easy',note:'Path highlighting the Cottle family legacy and Santa Clara Valley\'s agricultural era'}
+    ],
+    photoSpots:[
+      {name:'Master Gardeners parcel',note:'Spring and summer for bright meticulously curated flowers and crops'},
+      {name:'Historic farm equipment',note:'Mid-day sun highlights the colorful vintage tractors'}
+    ],
+    sunsetSpots:[
+      {spot:'Perimeter trail (west side)',note:'Best sunset spot — faces west toward the Santa Cruz Mountains with wide unobstructed farmland sky views'},
+      {spot:'Main picnic area',note:'Comfortable scenic spot to watch twilight colors settle over the park'}
+    ],
+    wildlife:[
+      {name:'Red-winged Blackbird',note:'Spring, easily spotted balancing on tall grasses singing loudly'},
+      {name:'Red-tailed Hawk',note:'Over the open fields year-round'},
+      {name:'California Ground Squirrel',note:'Year-round, scurrying around trail edges'}
+    ]
+  },
+
+  'petaluma-adobe':{
+    highlight:'This park features the largest remaining domestic adobe building in the United States, once headquarters of General Mariano Vallejo\'s massive working rancho. Stepping onto the rustic second-story balcony transports visitors back to the peak of California\'s Mexican rancho period.',
+    googleRating:4.6,
+    googleReviews:850,
+    bestSeason:'Spring, Fall',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'$3/adult; $2/youth; 5 and under free',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only historic site.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Ample free parking in the dirt lot next to the entrance kiosk. Wind and sun can be stronger than expected as the park is fairly open.',
+    nearbyFood:[
+      {name:'Della Fattoria',desc:'Bakery/cafe (~10 min)'},
+      {name:'Lagunitas Brewing Company',desc:'Pub/American (~10 min)'},
+      {name:'Cucina Paradiso',desc:'Italian (~10 min)'}
+    ],
+    elevation:'~100 ft',
+    things:[
+      'Take a self-guided tour of the massive adobe structure',
+      'Relax on the historic second-floor wrap-around veranda',
+      'View rancho-period artifacts, looms, and tools',
+      'Picnic under shade trees on the grounds',
+      'Walk by peaceful Adobe Creek'
+    ],
+    hikes:[
+      {name:'Adobe Grounds Walk',distance:'0.5 mi',gain:'10 ft',difficulty:'Easy',note:'Flat stroll around the courtyard and perimeter of the massive adobe'},
+      {name:'Adobe Creek Trail',distance:'1.0 mi',gain:'20 ft',difficulty:'Easy',note:'Short dirt path following the riparian corridor bordering the park'},
+      {name:'Petaluma Adobe Loop',distance:'1.2 mi',gain:'70 ft',difficulty:'Easy',note:'Best on-site walk around the adobe and open grounds'}
+    ],
+    photoSpots:[
+      {name:'The adobe balcony',note:'Morning light illuminates the wooden beams and whitewashed walls perfectly'},
+      {name:'The inner courtyard',note:'Captures the immense scale and U-shape of the historic rancho building'}
+    ],
+    sunsetSpots:[
+      {spot:'The adobe balcony',note:'Best sunset spot — faces west/southwest with beautiful golden hour light filtering through the veranda pillars'},
+      {spot:'Adobe Creek bridge',note:'Quiet spot reflecting the pastel evening sky over the water'}
+    ],
+    wildlife:[
+      {name:'Acorn Woodpecker',note:'Year-round, storing acorns in the large oak trees'},
+      {name:'Mule Deer',note:'Year-round, grazing in surrounding fields in early morning'},
+      {name:'Western Fence Lizard',note:'Spring and summer, doing push-ups on the warm adobe walls'}
+    ]
+  },
+
+  'sonoma-shp':{
+    highlight:'Spread across the beautiful Sonoma town square, this park features the northernmost and last-built California Mission alongside historic barracks and General Vallejo\'s home. An easily walkable journey through the Spanish, Mexican, and early American eras of California — one of the richest compact history walks in the state.',
+    googleRating:4.7,
+    googleReviews:2100,
+    bestSeason:'Spring, Fall',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'$3/adult; $2/youth; 5 and under free',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only historic park in the town center.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Free street parking surrounds Sonoma Plaza but gets very busy on summer weekends. Arrive before 10 AM for best spots. Park once near the plaza and walk between historic buildings.',
+    nearbyFood:[
+      {name:'the girl & the fig',desc:'French/country (~2 min walk)'},
+      {name:'El Dorado Kitchen',desc:'Cal-French (~2 min walk)'},
+      {name:'Sunflower Caffe',desc:'Cafe (~2 min walk)'}
+    ],
+    elevation:'~85 ft',
+    things:[
+      'Tour Mission San Francisco Solano',
+      'Visit General Vallejo\'s Victorian home (Lachryma Montis)',
+      'Explore the two-story adobe Sonoma Barracks',
+      'Relax on the grass in the historic Sonoma Plaza',
+      'View the Bear Flag Monument and learn the 1846 revolt history'
+    ],
+    hikes:[
+      {name:'Sonoma Plaza Historic Walk',distance:'1.5 mi',gain:'10 ft',difficulty:'Easy',note:'Flat paved urban walk connecting the Mission, Barracks, and Vallejo\'s home'},
+      {name:'Lachryma Montis Grounds',distance:'0.8 mi',gain:'20 ft',difficulty:'Easy',note:'Stroll through beautiful vineyards, gardens, and fountains at Vallejo\'s estate'},
+      {name:'Sonoma Overlook Trail (nearby)',distance:'3.0 mi',gain:'400 ft',difficulty:'Moderate',note:'Climbs the hillside for panoramic views of the Sonoma Valley'}
+    ],
+    photoSpots:[
+      {name:'Mission courtyard',note:'Early morning light illuminates the rustic bells and adobe walls beautifully'},
+      {name:'Vallejo Home exterior',note:'Gothic-Victorian architecture looks stunning against the vineyard backdrop in afternoon'}
+    ],
+    sunsetSpots:[
+      {spot:'Sonoma Plaza west side',note:'Best sunset spot — fading light beautifully illuminates the historic storefronts and Barracks'},
+      {spot:'Lachryma Montis vineyards',note:'Peaceful romantic spot to watch the sun dip below the Sonoma hills'}
+    ],
+    wildlife:[
+      {name:"Anna's Hummingbird",note:'Year-round, darting among colorful flowers at the Vallejo home gardens'},
+      {name:'Western Gray Squirrel',note:'Year-round, foraging around the large plaza trees'},
+      {name:'Red-shouldered Hawk',note:'Year-round, occasionally perched high in the plaza trees'}
+    ]
+  },
+
+  'point-cabrillo':{
+    highlight:'Set on a breathtaking coastal bluff in Mendocino County, this park centers around a beautifully restored 1909 lighthouse. The surrounding grasslands provide spectacular ocean views, excellent whale watching, and one of the most photogenic lighthouse settings on the California coast.',
+    googleRating:4.8,
+    googleReviews:3400,
+    bestSeason:'Spring, Summer, Fall',
+    bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'Free (donations appreciated)',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only, though you can book overnight vacation rentals in the historic keeper\'s houses.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Free parking at the main gate lot; it\'s a 0.5-mile walk down to the lighthouse. Handicap parking available at the lighthouse. Bring layers and expect coastal wind.',
+    nearbyFood:[
+      {name:'MacCallum House Restaurant',desc:'Fine dining in Mendocino (~10 min)'},
+      {name:"Patterson's Pub",desc:'Irish pub (~10 min)'},
+      {name:'Mendocino Cafe',desc:'Eclectic (~10 min)'}
+    ],
+    elevation:'~50 ft',
+    things:[
+      'Walk the coastal bluffs to the historic lighthouse',
+      'Tour the small museum inside the lighthouse and keeper\'s house',
+      'Look for migrating gray whales in winter and spring',
+      'View marine science and shipwreck exhibits',
+      'Photograph dramatic crashing waves and sea stacks'
+    ],
+    hikes:[
+      {name:'Lighthouse Trail',distance:'1.0 mi',gain:'50 ft',difficulty:'Easy',note:'Paved gently sloping access road from parking to the lighthouse'},
+      {name:'North Coast Trail',distance:'1.5 mi',gain:'40 ft',difficulty:'Easy',note:'Dirt path following rugged dramatic bluffs north of the lighthouse'},
+      {name:'South Coast Trail',distance:'1.2 mi',gain:'30 ft',difficulty:'Easy',note:'Scenic walk along southern grasslands with expansive Pacific views'}
+    ],
+    photoSpots:[
+      {name:'The lighthouse from the bluffs',note:'Golden hour bathes the white building and red roof in incredible warm light'},
+      {name:'The sea stacks',note:'Best on windy days to capture frothing white ocean water crashing against rocks'}
+    ],
+    sunsetSpots:[
+      {spot:'Lighthouse overlook',note:'Best sunset spot — faces directly west over the Pacific with dramatic unobstructed sunsets behind the historic beacon'},
+      {spot:'North coast bluff',note:'Quieter spot with pastel colors reflecting on endless ocean waves'}
+    ],
+    wildlife:[
+      {name:'Gray Whale',note:'Winter and spring, visible from the bluffs during their massive coastal migration'},
+      {name:'Harbor Seal',note:'Year-round, bobbing in the kelp beds just offshore'},
+      {name:'Black Oystercatcher',note:'Year-round, distinctive black bird with bright red beak on the rocky shoreline'}
+    ]
+  },
+
+  'bodie':{
+    highlight:'Maintained in a state of "arrested decay," Bodie is the nation\'s most famous and well-preserved genuine gold-mining ghost town. Walking down its dusty windswept streets past abandoned saloons and homes filled with left-behind belongings is a hauntingly authentic trip into the Wild West.',
+    googleRating:4.8,
+    googleReviews:7500,
+    bestSeason:'Summer, Early Fall',
+    bestMonths:[6,7,8,9,10],
+    entranceFee:'$8/adult; $5/youth',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only; park closes strictly at dusk.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Large dirt parking lot at entrance. The final 3 miles of road are rough unpaved dirt — drive slowly to avoid flat tires. Check conditions before going; expect wind and cold even in warmer months.',
+    nearbyFood:[
+      {name:"Rhino's Bar & Grille",desc:'American in Bridgeport (~45 min)'},
+      {name:'Bridgeport Inn',desc:'American (~45 min)'},
+      {name:'Virginia Creek Settlement',desc:'Italian/American (~30 min)'}
+    ],
+    elevation:'8,379 ft',
+    things:[
+      'Explore the abandoned streets and peek into dusty windows',
+      'Take the guided Stamp Mill tour for gold extraction history',
+      'Visit the historic Bodie Cemetery on the hill',
+      'Photograph rusty vintage cars and weathered wood buildings',
+      'Buy a guidebook to learn the stories of the townspeople'
+    ],
+    hikes:[
+      {name:'Bodie Ghost Town Walk',distance:'1.5 mi',gain:'50 ft',difficulty:'Easy',note:'Self-guided flat dirt loop winding through the main streets of the abandoned town'},
+      {name:'Cemetery Trail',distance:'0.5 mi',gain:'30 ft',difficulty:'Easy',note:'Short uphill walk to the historic graveyard with town views'},
+      {name:'Bodie Bluff Viewpoint',distance:'1.0 mi',gain:'150 ft',difficulty:'Moderate',note:'Slightly steeper walk for elevated panoramic view of the entire valley and ghost town'}
+    ],
+    photoSpots:[
+      {name:'Standard Mine building',note:'Late afternoon shadows emphasize the rugged industrial decay'},
+      {name:'Vintage cars',note:'Rusting 1930s vehicles in front of weathered houses make classic Bodie shots'}
+    ],
+    sunsetSpots:[
+      {spot:'Bodie Cemetery Hill',note:'Best sunset spot — faces west over the town, capturing long dramatic moody shadows across the abandoned buildings'},
+      {spot:'The Methodist Church',note:'Rustic wooden facade looks striking against the twilight sky'}
+    ],
+    wildlife:[
+      {name:'Sage Grouse',note:'Spring, occasionally in the scrub brush surrounding town'},
+      {name:'Coyote',note:'Summer, frequently seen trotting across distant hills or heard howling'},
+      {name:"Belding's Ground Squirrel",note:'Summer, darting around the old buildings and dirt roads'}
+    ]
+  },
+
+  'empire-mine':{
+    highlight:'One of California\'s oldest, deepest, and richest gold mines, with original mine-yard structures, a grand owner\'s estate with English rose gardens, and forested walking trails. The contrast between the opulent Bourn Cottage and the gritty mine yard tells the full Gold Rush story.',
+    googleRating:4.8,
+    googleReviews:5100,
+    bestSeason:'Spring, Fall',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'$5/adult; 5 and under free',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only park.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Plenty of free parking under large pine trees near the visitor center. Arrive early to combine mine yard, mansion grounds, and trail system before it gets busier.',
+    nearbyFood:[
+      {name:'South Pine Cafe',desc:'Cafe/American in Grass Valley (~10 min)'},
+      {name:"Diego's",desc:'Chilean/South American in Grass Valley (~10 min)'},
+      {name:'Cirino\'s at Main Street',desc:'Italian (~10 min)'}
+    ],
+    elevation:'~2,500 ft',
+    things:[
+      'Tour the elegant Bourn Cottage and its English rose gardens',
+      'View the "Secret Room" model of 367 miles of mine shafts',
+      'Explore the industrial mine yard, shaft entrances, and blacksmith shop',
+      'Hike the extensive shaded forested trails',
+      'Attend a living history demonstration on weekends'
+    ],
+    hikes:[
+      {name:'Hardrock Trail',distance:'2.5 mi',gain:'200 ft',difficulty:'Easy',note:'Shaded interpretive trail passing by historic mining remnants and old equipment'},
+      {name:'Osborne Hill Loop',distance:'3.0 mi',gain:'350 ft',difficulty:'Moderate',note:'Pleasant hike through dense pines to the highest point in the park'},
+      {name:'Union Hill Trail',distance:'2.0 mi',gain:'150 ft',difficulty:'Easy',note:'Winds through mixed conifer forest past remnants of the Union Hill mine'}
+    ],
+    photoSpots:[
+      {name:'Bourn Cottage gardens',note:'Spectacular in spring when reflecting pools and heritage roses are in full bloom'},
+      {name:'Mine shaft entrance',note:'Great for capturing the massive scale of industrial mining operations'}
+    ],
+    sunsetSpots:[
+      {spot:'Osborne Hill',note:'Best sunset spot — faces west toward Sacramento Valley with filtered sunset views through the pines'},
+      {spot:'Bourn Cottage grounds',note:'Warm evening light casts a beautiful glow on the stone cottage walls'}
+    ],
+    wildlife:[
+      {name:'Black-tailed Deer',note:'Year-round, near forest edges and trails'},
+      {name:'Acorn Woodpecker',note:'Year-round, tapping in the oak trees dotting the property'},
+      {name:'Wild Turkey',note:'Spring and fall, large flocks near the grassy areas and parking lot'}
+    ]
+  },
+
+  'governors-mansion':{
+    highlight:'This striking 1877 Victorian Gothic mansion in downtown Sacramento served as the residence for 13 California governors, including Ronald Reagan and Jerry Brown. The ornate architecture, period furnishings, and fascinating political history make it a premier historic site.',
+    googleRating:4.5,
+    googleReviews:600,
+    bestSeason:'Year-round',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'Free (guided tours may vary; check current access status)',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only historic site.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Metered street parking on H and 15th streets or nearby downtown garages. Pair with other Sacramento historic sites since public access to interior may be limited.',
+    nearbyFood:[
+      {name:'Mikuni',desc:'Sushi (~5 min)'},
+      {name:'Tres Hermanas',desc:'Mexican (~5 min)'},
+      {name:'Waterboy',desc:'Cal-French (~5 min)'}
+    ],
+    elevation:'~25 ft',
+    things:[
+      'Take the guided interior tour to see original furnishings (when available)',
+      'View the historic 1932 Cadillac exhibit',
+      'Admire the intricate Victorian Gothic architecture from the street',
+      'Walk the manicured gardens',
+      'Explore nearby downtown Sacramento and the State Capitol'
+    ],
+    hikes:[
+      {name:'Mansion Grounds Walk',distance:'0.2 mi',gain:'Minimal',difficulty:'Easy',note:'Short stroll around the perimeter of the mansion and carriage house'},
+      {name:'Capitol Park Walk (nearby)',distance:'1.0 mi',gain:'Minimal',difficulty:'Easy',note:'Gorgeous walk through massive trees and memorials surrounding the State Capitol'},
+      {name:'Old Sacramento River Walk (nearby)',distance:'2.0 mi',gain:'10 ft',difficulty:'Easy',note:'Flat paved trail along the Sacramento River near the historic district'}
+    ],
+    photoSpots:[
+      {name:'Front exterior of the mansion',note:'Stand on opposite corner to capture the full towering white Victorian'},
+      {name:'Side streets with mature trees',note:'Late afternoon for softer urban-historic atmosphere'}
+    ],
+    sunsetSpots:[
+      {spot:'Front gates',note:'Best sunset spot — sun setting in the west illuminates the bright white Victorian facade with warm golden glow'},
+      {spot:'Capitol Park (nearby)',note:'Serene alternative watching evening light filter through trees from around the world'}
+    ],
+    wildlife:[
+      {name:'Western Gray Squirrel',note:'Year-round, active in the large surrounding trees'},
+      {name:'House Finch',note:'Spring, singing in the garden bushes'},
+      {name:'Urban Songbirds',note:'Trees in the surrounding neighborhood'}
+    ]
+  },
+
+  'leland-stanford-mansion':{
+    highlight:'A masterpiece of Victorian elegance, this meticulously restored 19th-century mansion was the home of Leland Stanford — California governor, railroad baron, and Stanford University founder. Today it serves as the state\'s official reception center and offers free guided tours through opulent interiors.',
+    googleRating:4.8,
+    googleReviews:1700,
+    bestSeason:'Year-round',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'Free guided tours',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only historic site.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Metered street parking on N Street or 8th Street. Read signs carefully to avoid tickets. Reserve enough time for a guided tour.',
+    nearbyFood:[
+      {name:"Frank Fat's",desc:'Chinese/American (~5 min walk)'},
+      {name:'The Firehouse Restaurant',desc:'Fine dining (~10 min)'},
+      {name:'Cafeteria 15L',desc:'American comfort (~5 min)'}
+    ],
+    elevation:'~20 ft',
+    things:[
+      'Join the free guided interior tour',
+      'Marvel at 19th-century crystal chandeliers and gilded mirrors',
+      'Walk the historically accurate Victorian gardens',
+      'Learn about the Stanford family and transcontinental railroad history',
+      'See the opulent governor\'s office and historic library'
+    ],
+    hikes:[
+      {name:'Mansion Gardens Walk',distance:'0.2 mi',gain:'Minimal',difficulty:'Easy',note:'Beautifully paved stroll around exterior grounds and fountains'},
+      {name:'Capitol Park Loop (nearby)',distance:'1.2 mi',gain:'10 ft',difficulty:'Easy',note:'Fantastic urban walk viewing State Capitol architecture and rose gardens'},
+      {name:'Mansion to Old Sacramento Walk',distance:'2.0 mi',gain:'Minimal',difficulty:'Easy',note:'Great add-on for a railroad-history connection'}
+    ],
+    photoSpots:[
+      {name:'The exterior facade',note:'Best from the front gate to capture the grand staircase and massive doors'},
+      {name:'Victorian gardens',note:'Springtime colors pop against the mansion\'s brickwork'}
+    ],
+    sunsetSpots:[
+      {spot:'The front walkway',note:'Best sunset spot — warm fading afternoon light hits the detailed 19th-century brick facade'},
+      {spot:'Capitol Park Rose Garden (nearby)',note:'Deeply peaceful spot a few blocks away to enjoy the sunset'}
+    ],
+    wildlife:[
+      {name:"Anna's Hummingbird",note:'Year-round, zipping between curated garden flowers'},
+      {name:'Scrub Jay',note:'Year-round, bright blue bird in surrounding downtown trees'},
+      {name:'Western Gray Squirrel',note:'Year-round, foraging along brick pathways'}
+    ]
+  },
+
+  'ca-mining-museum':{
+    highlight:'Near Yosemite in Mariposa, this museum houses over 13,000 gems, minerals, and mining artifacts — including the spectacular 13.8-pound Fricot Nugget of crystalline gold. A great educational stop on any Yosemite-area or Gold Country road trip.',
+    googleRating:4.7,
+    googleReviews:900,
+    bestSeason:'Year-round',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'$4/adult',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'No camping at the museum.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Free ample parking at the Mariposa County Fairgrounds where the museum is located. Easy stop off Highway 49.',
+    nearbyFood:[
+      {name:'Charles Street Dinner House',desc:'American/steak in Mariposa (~5 min)'},
+      {name:'1850 Restaurant & Brewery',desc:'Pub/American (~5 min)'},
+      {name:'Happy Burger Diner',desc:'American/diner (~5 min)'}
+    ],
+    elevation:'~2,000 ft',
+    things:[
+      'View the spectacular 13.8-pound Fricot Nugget',
+      'Walk through the simulated underground mine tunnel exhibit',
+      'View glowing fluorescent minerals in the dark room',
+      'Examine rare gems and meteorites from around the world',
+      'Learn California\'s intense Gold Rush history'
+    ],
+    hikes:[
+      {name:'Fairgrounds Perimeter Walk',distance:'1.0 mi',gain:'20 ft',difficulty:'Easy',note:'Simple flat walk around the fairgrounds property'},
+      {name:'Mariposa Creek Parkway (nearby)',distance:'1.5 mi',gain:'50 ft',difficulty:'Easy',note:'Scenic paved path running through the historic town of Mariposa'},
+      {name:'Stockton Creek Preserve (nearby)',distance:'3.0 mi',gain:'400 ft',difficulty:'Moderate',note:'Local dirt trail with reservoir and foothill scenery'}
+    ],
+    photoSpots:[
+      {name:'The Fricot Nugget exhibit',note:'Gleaming gold under display lights is a must-capture'},
+      {name:'Fluorescent mineral room',note:'Fun dark-room photography where rocks glow in neon colors'}
+    ],
+    sunsetSpots:[
+      {spot:'Museum entrance / foothill view',note:'Best sunset spot — nice views of the golden oak-studded foothills of Mariposa as the sun goes down'},
+      {spot:'Stockton Creek Preserve (nearby)',note:'Elevated dirt trail with wide sunset views over the valley'}
+    ],
+    wildlife:[
+      {name:'California Quail',note:'Spring, running in groups through the brush near the fairgrounds'},
+      {name:'Mule Deer',note:'Year-round, grazing in surrounding hills at dusk'},
+      {name:'Western Bluebird',note:'Spring, perched on fences around the property'}
+    ]
+  },
+
+  'ca-railroad-museum':{
+    highlight:'Widely considered one of the best railroad museums in North America, featuring 21 meticulously restored locomotives and cars, immersive exhibits, and seasonal excursion train rides in Old Sacramento. It beautifully captures the romance and engineering marvel of the iron horse and its role in building California.',
+    googleRating:4.8,
+    googleReviews:12000,
+    bestSeason:'Year-round',
+    bestMonths:[3,4,5,6,9,10,11],
+    entranceFee:'$12/adult; excursion train rides extra',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only museum.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Park in Tower Bridge Garage or Old Sacramento Garage. Street parking is limited and strictly metered. Weekends busier but the area handles high visitation.',
+    nearbyFood:[
+      {name:'The Firehouse Restaurant',desc:'Fine dining/American (~5 min walk)'},
+      {name:'Rio City Cafe',desc:'American/seafood (~5 min walk)'},
+      {name:"Frank Fat's",desc:'Chinese/American (~8 min)'}
+    ],
+    elevation:'~25 ft',
+    things:[
+      'Marvel at the massive steam locomotives in the main roundhouse hall',
+      'Walk through the swaying simulated Pullman sleeping car',
+      'Take a 45-minute ride on the Sacramento Southern Railroad (weekends)',
+      'View the intricate toy train exhibits on the top floor',
+      'Explore Old Sacramento\'s wooden boardwalks and candy shops'
+    ],
+    hikes:[
+      {name:'Old Sacramento Boardwalk',distance:'1.0 mi',gain:'10 ft',difficulty:'Easy',note:'Flat stroll along the historic 1850s waterfront district wooden sidewalks'},
+      {name:'Sacramento River Bike Trail',distance:'3.0 mi',gain:'20 ft',difficulty:'Easy',note:'Paved multi-use trail following the river right behind the museum'},
+      {name:'Tower Bridge Walk',distance:'1.5 mi',gain:'30 ft',difficulty:'Easy',note:'Walk across the iconic golden bridge for great views of the museum and river'}
+    ],
+    photoSpots:[
+      {name:'Governor Stanford Locomotive',note:'The gleaming 1862 woodwork and brass make for a stunning photo'},
+      {name:'Exterior museum tracks',note:'Historic trains sitting alongside the Sacramento River'}
+    ],
+    sunsetSpots:[
+      {spot:'Sacramento River waterfront',note:'Best sunset spot — step outside the museum to face west over the river, catching gorgeous sunset reflections'},
+      {spot:'Tower Bridge',note:'Golden hour light makes the bright yellow bridge glow brilliantly against the sky'}
+    ],
+    wildlife:[
+      {name:'Sea Lions',note:'Winter and spring, swimming in the Sacramento River right outside the museum'},
+      {name:'Mallard Ducks',note:'Year-round, paddling along the river edges'},
+      {name:'Gulls',note:'Year-round, constant presence around the waterfront'}
+    ]
+  },
+
+  'sutters-fort':{
+    highlight:'One of California\'s most important historic sites, this reconstructed 1840s fort stands at the center of early Sacramento Valley colonial settlement, migration, and Gold Rush-era change. The whitewashed adobe walls, blacksmith shop, and pioneer artifacts make 1840s California unusually tangible.',
+    googleRating:4.6,
+    googleReviews:4000,
+    bestSeason:'Year-round',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'$5/adult',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only historic site.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Metered street parking on surrounding streets (K, L, 26th, 28th) — generally easy to find a spot but mind time limits. Combine with other central Sacramento sites on foot.',
+    nearbyFood:[
+      {name:'Zócalo',desc:'Mexican in Midtown (~5 min walk)'},
+      {name:"Rick's Dessert Diner",desc:'Bakery/dessert (~5 min walk)'},
+      {name:"Paragary's",desc:'Cal-French (~5 min walk)'}
+    ],
+    elevation:'~20 ft',
+    things:[
+      'Do the self-guided audio tour of the fort grounds',
+      'See live blacksmith forge and carpenter shop demonstrations',
+      'View the famous Patty Reed doll from the Donner Party',
+      'Relax on the shaded grassy lawns outside the fort',
+      'Visit the adjacent State Indian Museum'
+    ],
+    hikes:[
+      {name:"Sutter's Fort Perimeter",distance:'0.5 mi',gain:'Minimal',difficulty:'Easy',note:'Flat paved walk around the massive white exterior walls of the fort'},
+      {name:'Midtown Historical Walk',distance:'2.0 mi',gain:'10 ft',difficulty:'Easy',note:'Urban stroll through tree-lined streets and Victorian homes of Midtown'},
+      {name:'McKinley Park Rose Garden (nearby)',distance:'1.5 mi',gain:'10 ft',difficulty:'Easy',note:'Beautiful paved loop through one of Sacramento\'s most famous parks'}
+    ],
+    photoSpots:[
+      {name:'The main gates',note:'Heavy wooden doors against thick white adobe walls make a dramatic shot'},
+      {name:'The central courtyard building',note:'The historic two-story structure captures the 1840s pioneer aesthetic'}
+    ],
+    sunsetSpots:[
+      {spot:'Fort exterior walls',note:'Best sunset spot — white adobe catches warm sunset tones, glowing orange and pink'},
+      {spot:'Midtown tree-lined streets',note:'Thick canopy of city trees filters evening light for a cozy urban sunset'}
+    ],
+    wildlife:[
+      {name:'Fox Squirrel',note:'Year-round, very active in the large trees on the grounds'},
+      {name:'Scrub Jay',note:'Year-round, squawking between the oak trees'},
+      {name:'Mourning Dove',note:'Summer, cooing and resting on the fort\'s tile roofs'}
+    ]
+  },
+
+  'state-indian-museum':{
+    highlight:'Adjacent to Sutter\'s Fort, this museum honors the rich cultures, traditions, and arts of California\'s incredibly diverse Indigenous peoples. Featuring exquisite basketry, ceremonial regalia, and exhibits detailing thousands of years of Native history — a much richer perspective than many California history stops alone.',
+    googleRating:4.7,
+    googleReviews:800,
+    bestSeason:'Year-round',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'$5/adult; $3/youth 6–17; 5 and under free',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only museum.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Metered street parking along K Street and surrounding blocks. Easy to pair with Sutter\'s Fort next door.',
+    nearbyFood:[
+      {name:'Red Rabbit Kitchen and Bar',desc:'American (~5 min)'},
+      {name:'Ink Eats & Drinks',desc:'Eclectic/American (~5 min walk)'},
+      {name:'Centro Cocina Mexicana',desc:'Mexican (~5 min)'}
+    ],
+    elevation:'~20 ft',
+    things:[
+      'View the world-class Native American basketry collection',
+      'Learn about traditional tule boat construction',
+      'Explore the poignant history and artifacts of Ishi',
+      'Buy authentic Native crafts and jewelry in the gift shop',
+      'Attend annual cultural events and artisan demonstrations'
+    ],
+    hikes:[
+      {name:'Museum and Fort Grounds',distance:'0.5 mi',gain:'Minimal',difficulty:'Easy',note:'Pleasant stroll connecting the museum and surrounding park'},
+      {name:'Museum to Sutter\'s Fort Walk',distance:'0.8 mi',gain:'Minimal',difficulty:'Easy',note:'Best nearby historic pairing walk'},
+      {name:'K Street Promenade',distance:'1.0 mi',gain:'10 ft',difficulty:'Easy',note:'Urban walk past restaurants and shops in Midtown'}
+    ],
+    photoSpots:[
+      {name:'The redwood canoe exhibit',note:'Striking massive traditional boat prominently displayed'},
+      {name:'Detailed basket displays',note:'Incredible craftsmanship visible in the weaving (no flash)'}
+    ],
+    sunsetSpots:[
+      {spot:'Sutter\'s Fort walls (adjacent)',note:'Best sunset spot — the adobe walls reflect sunset colors perfectly just next door'},
+      {spot:'Museum exterior grounds',note:'Surrounding park trees filter late afternoon light beautifully'}
+    ],
+    wildlife:[
+      {name:'Western Gray Squirrel',note:'Year-round, foraging in the grass outside the museum'},
+      {name:'Northern Mockingbird',note:'Spring, singing complex songs from the park trees'},
+      {name:'House Finch',note:'Year-round, darting among bushes near the entrance'}
+    ]
+  },
+
+  'railtown-1897':{
+    highlight:'Known as "The Movie Railroad," this 26-acre park in Jamestown features an authentic working steam locomotive roundhouse and tracks famously used in High Noon and Back to the Future III. A working historic rail facility that feels industrial, authentic, and much more alive than a standard museum.',
+    googleRating:4.7,
+    googleReviews:1900,
+    bestSeason:'Spring, Summer, Fall',
+    bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'$5/adult; train rides extra',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only park.'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only.'},
+    parkingTip:'Large free parking lot directly across from the entrance depot. Special steam or excursion days bring more people — check the operating calendar if your main goal is a train ride.',
+    nearbyFood:[
+      {name:'Woods Creek Cafe',desc:'Diner/American in Jamestown (~5 min)'},
+      {name:'The Service Station',desc:'American/BBQ in Jamestown (~5 min)'},
+      {name:'Willow Steakhouse',desc:'Steak/seafood (~5 min)'}
+    ],
+    elevation:'~1,400 ft',
+    things:[
+      'Take a 45-minute excursion ride on a historic steam or diesel train',
+      'Tour the roundhouse to see active locomotive maintenance',
+      'View the famous Sierra No. 3 "Movie Star" locomotive',
+      'Explore the historic belt-driven machine shop',
+      'Picnic on the grassy lawns near the depot'
+    ],
+    hikes:[
+      {name:'Railtown Depot Walk',distance:'0.5 mi',gain:'10 ft',difficulty:'Easy',note:'Flat stroll around the historic train cars, depot, and turntable'},
+      {name:'Woods Creek Trail (nearby)',distance:'1.5 mi',gain:'50 ft',difficulty:'Easy',note:'Pleasant walk through the historic mining town of Jamestown'},
+      {name:'Table Mountain Trail (nearby)',distance:'3.0 mi',gain:'400 ft',difficulty:'Moderate',note:'Spectacular spring wildflower hike on a unique basalt mesa a short drive away'}
+    ],
+    photoSpots:[
+      {name:'Sierra No. 3 Locomotive',note:'The iconic steam engine that has starred in dozens of classic films'},
+      {name:'Inside the roundhouse',note:'Massive wooden doors, turntables, and resting trains make moody industrial shots'}
+    ],
+    sunsetSpots:[
+      {spot:'Jamestown Depot',note:'Best sunset spot — setting sun glints beautifully off the steel tracks and vintage train cars'},
+      {spot:'Table Mountain (nearby)',note:'High-vantage unobstructed view of sunset over the Sierra foothills'}
+    ],
+    wildlife:[
+      {name:'Red-tailed Hawk',note:'Year-round, soaring above the open fields surrounding the tracks'},
+      {name:'Wild Turkey',note:'Fall and spring, large flocks near the tracks'},
+      {name:'Western Fence Lizard',note:'Summer, sunning on warm wooden railroad ties'}
+    ]
+  },
+
+  'prairie-city-svra':{
+    highlight:'Prairie City SVRA is one of Northern California\'s most versatile off-highway vehicle parks, featuring motocross tracks, beginner practice zones, 4x4 obstacle courses, and extensive managed riding terrain close to Sacramento. It caters to motorcycles, ATVs, and 4x4 vehicles with dedicated areas for every skill level.',
+    googleRating:4.6,
+    googleReviews:2500,
+    bestSeason:'Fall, Winter, Spring',
+    bestMonths:[1,2,3,4,5,10,11,12],
+    entranceFee:'$5/vehicle',
+    carCamping:{available:true,cost:'$10/night per vehicle',sites:'Open camping area',note:'Simple OHV-oriented camping rather than numbered scenic sites'},
+    tentCamping:{available:true,cost:'$10/night per vehicle',sites:'Open camping area',note:'Tent camping allowed but expect a basic OHV-camp atmosphere'},
+    parkingTip:'The park is closed Wednesdays; check event calendars before going because competitions can partially close riding zones.',
+    nearbyFood:'Folsom (10 min) — Visconti\'s Ristorante for Italian; Sutter Street Steakhouse for American; Taqueria El Burrito for Mexican',
+    elevation:'100–300 ft',
+    things:['Ride the Hangtown Motocross Track','Tackle the 4x4 rock crawling obstacle course','Watch professional OHV racing events','Practice on the quarter midget track','Explore the beginner ATV dirt trails'],
+    hikes:[
+      {name:'Vernal Pool Nature Trail',distance:'0.5 mi',gain:'10 ft',difficulty:'Easy',note:'A rare quiet area to view protected vernal pools during spring blooms'},
+      {name:'Main Staging Area Perimeter Walk',distance:'1.0 mi',gain:'50 ft',difficulty:'Easy',note:'Simple leg-stretch if visiting with riders but not riding yourself'},
+      {name:'Granite Hill Viewpoint Walk',distance:'1.5 mi',gain:'150 ft',difficulty:'Moderate',note:'Walk up the perimeter slopes for sweeping views of the entire OHV park'}
+    ],
+    photoSpots:[
+      {name:'4x4 Rock Crawl Course',note:'Mid-day for high contrast shadows on vehicles navigating massive boulders'},
+      {name:'Hangtown Track Jumps',note:'Fast shutter speed to catch motocross riders mid-air against the sky'}
+    ],
+    sunsetSpots:[
+      {spot:'Granite Hill Viewpoint',note:'Best sunset spot — faces west overlooking dust clouds glowing orange in the sunset light'},
+      {spot:'Main Staging Area edge',note:'Wide open skies with warm evening light on the low hills'}
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Environmental Training Buffer Zone',distance:'2.0 mi',difficulty:'Easy',note:'Mountain biking permitted in non-motorized buffer zones around the park perimeter'}
+    ]},
+    wildlife:[
+      {name:'Red-tailed Hawk',note:'Frequently soaring above the open fields'},
+      {name:'Coyote',note:'Near dawn or dusk away from the active riding core'},
+      {name:'Wild Turkey',note:'Often seen in grassy areas near the park entrance in early morning'}
+    ]
+  },
+  'wassama-round-house':{
+    highlight:'This peaceful park in the Sierra Nevada foothills preserves a traditional Southern Sierra Miwok round house and ancient bedrock mortars. It serves as an active cultural site where local indigenous people continue to hold traditional ceremonies and gatherings.',
+    googleRating:4.6,
+    googleReviews:120,
+    bestSeason:'Spring, Fall',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only ceremonial historic site'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only'},
+    parkingTip:'Small dirt lot near the entrance; rarely fills except during special cultural event days.',
+    nearbyFood:'Oakhurst (15 min) — South Gate Brewing Company for pub fare; Plazuelas Mexican Restaurant for Mexican; Smokehouse 41 for barbecue',
+    elevation:'2,200 ft',
+    things:['View the traditional bark-covered Round House','Examine the ancient bedrock mortars and grinding rocks','Attend special indigenous cultural events and dances','Picnic under the large oak trees','Learn about Miwok basketry and history'],
+    hikes:[
+      {name:'Village Interpretive Trail',distance:'0.2 mi',gain:'10 ft',difficulty:'Easy',note:'Short flat loop passing the main cultural structures and grinding rocks'},
+      {name:'Wassama Creek Walk',distance:'0.3 mi',gain:'10 ft',difficulty:'Easy',note:'Gentle stroll down to the seasonal creek that borders the historic site'},
+      {name:'Ceremonial Grounds Perimeter Walk',distance:'0.5 mi',gain:'40 ft',difficulty:'Easy',note:'Broader look at the preserved landscape when public access is open'}
+    ],
+    photoSpots:[
+      {name:'The Round House Exterior',note:'Soft morning light highlights the natural bark textures'},
+      {name:'Bedrock Mortars',note:'Mid-day light emphasizes the deep grinding holes carved into granite'}
+    ],
+    sunsetSpots:[
+      {spot:'Main Village Clearing',note:'Best sunset spot — faces west where the setting sun filters through the ancient oak canopy'},
+      {spot:'Creek Edge',note:'Quiet shaded area where twilight sky reflects in seasonal water pools'}
+    ],
+    biking:{available:false,ebike:false,trails:[]},
+    wildlife:[
+      {name:'Acorn Woodpecker',note:'Year-round, easily heard tapping and storing acorns in the large oaks'},
+      {name:'Mule Deer',note:'Often seen grazing in meadows during early morning'},
+      {name:'Western Gray Squirrel',note:'Constantly foraging along the ground near the oak canopy'}
+    ]
+  },
+  'shasta-shp':{
+    highlight:'Six miles west of Redding, this historic park preserves the striking brick ruins of a vibrant 1850s Gold Rush city. The restored 1861 County Courthouse serves as an incredible museum packed with frontier artifacts and historic California artwork.',
+    googleRating:4.6,
+    googleReviews:900,
+    bestSeason:'Spring, Fall',
+    bestMonths:[3,4,5,9,10,11],
+    entranceFee:'$3/adult',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only historic park'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only historic park'},
+    parkingTip:'Ample free parking right off Highway 299 in front of the restored courthouse. Time your visit for courthouse open days.',
+    nearbyFood:'Redding (10 min) — Moonstone Bistro for American; Jack\'s Grill for steakhouse; Woody\'s Brewing Co. for brewpub',
+    elevation:'700 ft',
+    things:['Explore the brick ruins of the historic business district','Tour the restored 1861 Courthouse Museum','View the historic jail cells and gallows','Picnic on the shaded grassy lawns','Read the pioneer cemetery headstones'],
+    hikes:[
+      {name:'Ruins Promenade',distance:'0.5 mi',gain:'20 ft',difficulty:'Easy',note:'Flat walk along the highway exploring the remaining brick facades'},
+      {name:'Courthouse to Main Ruins Walk',distance:'1.2 mi',gain:'60 ft',difficulty:'Easy',note:'Links the museum and the brick streetscape'},
+      {name:'Cemetery Path',distance:'0.6 mi',gain:'50 ft',difficulty:'Easy',note:'Walk up the hill to the historic Catholic cemetery dating to the 1850s'}
+    ],
+    photoSpots:[
+      {name:'The Brick Ruins',note:'Late afternoon shadows add dramatic contrast to the decaying brick walls'},
+      {name:'Courthouse Jail Cells',note:'Heavy iron doors and dim lighting create striking historical photographs'}
+    ],
+    sunsetSpots:[
+      {spot:'The Brick Ruins',note:'Best sunset spot — faces west, golden hour light illuminates the red brick beautifully'},
+      {spot:'Courthouse Front Lawn',note:'Peaceful view of sunset sky behind the historic town monuments'}
+    ],
+    biking:{available:false,ebike:false,trails:[]},
+    wildlife:[
+      {name:'California Quail',note:'Often seen running in small groups through brush near the ruins'},
+      {name:'Western Fence Lizard',note:'Sunning on the warm brick ruins during summer'},
+      {name:'Turkey Vulture',note:'Frequently seen riding thermal updrafts above the valley'}
+    ]
+  },
+  'weaverville-joss-house':{
+    highlight:'Known as the Temple of the Forest Beneath the Clouds, this stunning site is the oldest continuously used Chinese temple in California. It preserves a vital piece of Gold Rush history with incredibly ornate altars, art, and artifacts brought directly from China.',
+    googleRating:4.7,
+    googleReviews:350,
+    bestSeason:'Spring, Summer, Fall',
+    bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'$4/adult',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only downtown historic site'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use only'},
+    parkingTip:'Free street parking widely available on Main Street in downtown Weaverville. Check museum hours before visiting.',
+    nearbyFood:'Weaverville (2 min) — La Grange Cafe for American; Mama Llama Eatery for cafe fare; Trinity County Brewing Company for brewpub',
+    elevation:'2,000 ft',
+    things:['Take the guided tour of the ornate temple interior','View the historic Chinese mining artifacts in the museum','Explore the lush peaceful temple gardens','Walk the historic Gold Rush era downtown Weaverville','Learn about the Chinese immigrant experience in the 1850s'],
+    hikes:[
+      {name:'Temple Grounds Walk',distance:'0.2 mi',gain:'10 ft',difficulty:'Easy',note:'Short stroll around the manicured gardens and exterior of the vibrant blue temple'},
+      {name:'Historic Downtown Walk',distance:'1.0 mi',gain:'20 ft',difficulty:'Easy',note:'Walking route past Weaverville\'s historic spiral staircases and 19th-century buildings'},
+      {name:'Weaver Basin Trail Segment',distance:'2.0 mi',gain:'150 ft',difficulty:'Moderate',note:'Nearby forested dirt trail network in the Trinity Alps foothills'}
+    ],
+    photoSpots:[
+      {name:'The Blue Temple Facade',note:'Brilliant blue exterior with traditional roof best photographed in bright mid-day sun'},
+      {name:'Temple Interior Altars',note:'The intricate wood carvings are spectacular if photography is permitted by the guide'}
+    ],
+    sunsetSpots:[
+      {spot:'Main Street Weaverville',note:'Best sunset spot — faces west, warm twilight glow on the historic Gold Rush storefronts'},
+      {spot:'Temple Gardens',note:'Serene place to watch the sky change colors through the trees'}
+    ],
+    biking:{available:false,ebike:false,trails:[]},
+    wildlife:[
+      {name:'Steller\'s Jay',note:'Bright blue bird commonly seen hopping around the temple gardens'},
+      {name:'Mule Deer',note:'Often seen wandering through the quiet streets at dusk'},
+      {name:'Black Bear',note:'Occasionally spotted on the forested ridges surrounding town in summer'}
+    ]
+  },
+  'woodland-opera-house':{
+    highlight:'This beautifully restored 1896 brick opera house stands as a testament to the cultural boom of the Sacramento Valley. It still functions as a vibrant community theater, hosting live performances year-round in an authentic historical setting.',
+    googleRating:4.8,
+    googleReviews:900,
+    bestSeason:'Year-round',
+    bestMonths:[1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee:'Free for tours (shows require tickets)',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Indoor historic site with no camping'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Indoor historic site with no camping'},
+    parkingTip:'Free street parking plentiful in downtown Woodland, with a large free public lot one block west. Performance nights are busier.',
+    nearbyFood:'Woodland (2 min) — Morgan\'s on Main for American; Father Paddy\'s for Irish pub; Maria\'s Cantina for Mexican',
+    elevation:'60 ft',
+    things:['Attend a live theater performance in the historic auditorium','Take a guided daytime historical tour of the building','Admire the intricate 19th-century brickwork and architecture','View the antique theater equipment and trap doors','Explore the surrounding historic downtown Woodland'],
+    hikes:[
+      {name:'Historic Main Street Walk',distance:'0.8 mi',gain:'10 ft',difficulty:'Easy',note:'Flat paved walk past beautifully preserved Victorian and historic commercial buildings'},
+      {name:'Opera House to Heritage Plaza Loop',distance:'0.5 mi',gain:'10 ft',difficulty:'Easy',note:'Short stroll through the adjacent plaza with community events and farmers markets'},
+      {name:'Freeman Park Loop',distance:'0.5 mi',gain:'10 ft',difficulty:'Easy',note:'Pleasant walk through a nearby city park lined with mature shade trees'}
+    ],
+    photoSpots:[
+      {name:'Opera House Exterior',note:'The iconic red brick facade looks stunning in late afternoon sun'},
+      {name:'The Main Auditorium',note:'Restored vintage seats and stage proscenium offer a perfect historical composition'}
+    ],
+    sunsetSpots:[
+      {spot:'Heritage Plaza',note:'Best sunset spot — right next to the opera house with a great view of sunset behind downtown buildings'},
+      {spot:'West side of Main Street',note:'Classic American main street aesthetic reflecting the twilight sky'}
+    ],
+    biking:{available:false,ebike:false,trails:[]},
+    wildlife:[
+      {name:'Northern Mockingbird',note:'Frequently heard singing complex songs from plaza trees in spring'},
+      {name:'Fox Squirrel',note:'Often seen in the large oak trees in nearby city parks'},
+      {name:'Rock Pigeon',note:'Urban wildlife commonly seen on historic brick ledges'}
+    ]
+  },
+  'sutter-buttes':{
+    highlight:'Often called the smallest mountain range in the world, these striking volcanic peaks rise abruptly from the flat Sacramento Valley floor. Access is exclusively limited to guided tours, offering a pristine environment that is culturally sacred to the indigenous Maidu people.',
+    googleRating:4.5,
+    googleReviews:150,
+    bestSeason:'Spring, Fall',
+    bestMonths:[3,4,5,10,11],
+    entranceFee:'Tour fees vary ($15–$35)',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'No public camping; park currently closed to general public'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'No public camping permitted'},
+    parkingTip:'Parking is coordinated by designated tour guides; you typically meet in a nearby town and carpool into private access gates.',
+    nearbyFood:'Yuba City (20 min) — Sutter Buttes Brewing for pub fare; Bombay Lounge for Indian; Marcello\'s for Italian',
+    elevation:'200–2,122 ft',
+    things:['Take a guided interpretive hike with Middle Mountain Interpretive Hikes','Photograph the spectacular spring wildflower blooms','Learn about the volcanic geology of the peaks','Birdwatch for migratory raptors and songbirds','Listen to indigenous cultural history and stories'],
+    hikes:[
+      {name:'North Butte Summit Tour',distance:'3.5 mi',gain:'1,200 ft',difficulty:'Hard',note:'Steep guided scramble to the top with incredible 360-degree valley views'},
+      {name:'Bragg Canyon Walk',distance:'2.0 mi',gain:'300 ft',difficulty:'Moderate',note:'Guided hike through oak woodlands past massive volcanic boulders'},
+      {name:'Peace Valley Trail',distance:'1.5 mi',gain:'200 ft',difficulty:'Easy',note:'Gentler guided walk focusing on indigenous history and native plant identification'}
+    ],
+    photoSpots:[
+      {name:'North Butte Summit',note:'Unparalleled elevated panoramic shot of the flat agricultural valley surrounding the mountain'},
+      {name:'Spring Wildflower Meadows',note:'Best in March–April when volcanic soil explodes with bright orange poppies and lupine'}
+    ],
+    sunsetSpots:[
+      {spot:'West Butte Road Overlook',note:'Best sunset spot — if permitted on an evening tour, faces directly west over the valley'},
+      {spot:'Moore Road Viewpoint',note:'Outside the park boundary, a public road with great views of sun setting behind the range'}
+    ],
+    biking:{available:false,ebike:false,trails:[]},
+    wildlife:[
+      {name:'Golden Eagle',note:'Year-round, frequently seen soaring above the craggy volcanic peaks'},
+      {name:'Feral Pig',note:'Occasionally spotted foraging in dense oak brush during guided hikes'},
+      {name:'Ringtail Cat',note:'Rare nocturnal mammal inhabiting the rocky crevices of the Buttes'}
+    ]
+  },
+  'hearst-castle':{
+    highlight:'This monumental estate built by newspaper magnate William Randolph Hearst and architect Julia Morgan is a jaw-dropping showcase of extreme wealth and art. Sitting high on a hill overlooking the Pacific, it features elaborate gardens, historic European tapestries, and the iconic Neptune Pool.',
+    googleRating:4.8,
+    googleReviews:18000,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,9,10,11],
+    entranceFee:'~$35/adult per tour',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'No camping on the estate; nearby San Simeon State Park offers sites'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'No camping on the estate'},
+    parkingTip:'Park in the free visitor center lot at the bottom of the hill; you must board a state park bus to access the castle. Book tours in advance.',
+    nearbyFood:'San Simeon (5 min) — Cavalier Coastal Kitchen for American; Sebastian\'s Store for sandwiches; Sea Chest Oyster Bar in Cambria (15 min) for seafood',
+    elevation:'1,600 ft',
+    things:['Take the Grand Rooms architectural tour','Marvel at the Roman-inspired outdoor Neptune Pool','View the indoor gold-tiled Roman Pool','Explore the lush botanical gardens surrounding the guest houses','Spot the roaming zebra herd from the bus ride'],
+    hikes:[
+      {name:'Grand Rooms Tour Walk',distance:'0.5 mi',gain:'50 ft',difficulty:'Easy',note:'Primary guided walking route through the extravagant main assembly rooms and terraces'},
+      {name:'Gardens and Vistas Tour Walk',distance:'0.6 mi',gain:'60 ft',difficulty:'Easy',note:'Scenic guided stroll showcasing blooming flowers and Pacific Ocean overlooks'},
+      {name:'Piedras Blancas Elephant Seal Boardwalk (nearby)',distance:'0.8 mi',gain:'20 ft',difficulty:'Easy',note:'Best nearby coastal walk to complement the castle visit'}
+    ],
+    photoSpots:[
+      {name:'The Neptune Pool',note:'Bright blue water contrasting with white marble statues and ocean backdrop is iconic'},
+      {name:'Casa Grande Facade',note:'Capture the ornate Spanish cathedral-style twin towers from the main esplanade'}
+    ],
+    sunsetSpots:[
+      {spot:'The Main Esplanade',note:'Best sunset spot — faces west overlooking the Pacific, unforgettable elevated coastal sunset (available on evening tours)'},
+      {spot:'San Simeon Pier',note:'Down at sea level near the visitor center, perfect for sunset after your tour'}
+    ],
+    biking:{available:false,ebike:false,trails:[]},
+    wildlife:[
+      {name:'Zebra',note:'Descendants of Hearst\'s private zoo, often seen grazing on hillsides during the bus ride'},
+      {name:'Elephant Seals',note:'Nearby Piedras Blancas rookery, especially active in winter and spring'},
+      {name:'Tule Elk',note:'Occasionally spotted roaming the vast ranch lands surrounding the estate'}
+    ]
+  },
+  'limekiln-sp':{
+    highlight:'Limekiln State Park features a breathtaking combination of towering redwood groves, a rugged coastline, and massive historic 19th-century lime kilns hidden deep within a lush canyon. It perfectly captures the moody, dramatic essence of the Big Sur coast.',
+    googleRating:4.8,
+    googleReviews:3300,
+    bestSeason:'Spring, Summer, Fall',
+    bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'$10/vehicle',
+    carCamping:{available:true,cost:'$35/night',sites:'29 sites',note:'Campground may have closures due to storm damage; check current status before visiting'},
+    tentCamping:{available:true,cost:'$35/night',sites:'29 sites',note:'Tent sites tucked into the redwoods along the creek are highly recommended'},
+    parkingTip:'The day-use parking lot is incredibly small and fills up fast; arrive before 9 AM or be prepared to wait.',
+    nearbyFood:'Lucia (10 min) — Lucia Lodge for seafood; Big Sur Deli (25 min) for sandwiches; Nepenthe (30 min) for Californian',
+    elevation:'Sea level to 200 ft',
+    things:['Hike into the forest to see the historic stone lime kilns','Stand at the base of the majestic Limekiln Falls','Relax on the rocky coastal beach under the highway bridge','Camp beneath the massive coastal redwoods','Spot gray whales from the beach during migration season'],
+    hikes:[
+      {name:'Limekiln Trail',distance:'1.4 mi',gain:'200 ft',difficulty:'Moderate',note:'Magical hike crossing the creek multiple times to reach the four massive 1887 stone kilns'},
+      {name:'Falls Trail',distance:'1.2 mi',gain:'150 ft',difficulty:'Moderate',note:'Branches off the main trail to a stunning cascading 100-foot waterfall'},
+      {name:'Hare Creek Trail',distance:'1.0 mi',gain:'100 ft',difficulty:'Easy',note:'Peaceful shaded out-and-back through pristine old-growth redwoods'}
+    ],
+    photoSpots:[
+      {name:'The Historic Lime Kilns',note:'Massive moss-covered stone structures look incredibly atmospheric in filtered forest light'},
+      {name:'Limekiln Falls',note:'Use a slow shutter speed to capture smooth water cascading over limestone rocks'}
+    ],
+    sunsetSpots:[
+      {spot:'Limekiln Beach',note:'Best sunset spot — faces directly west under the highway bridge for a classic rugged Big Sur ocean sunset'},
+      {spot:'Ocean Campsites',note:'Coastal campground loop offers elevated unobstructed views of the sun sinking into the Pacific'}
+    ],
+    biking:{available:false,ebike:false,trails:[]},
+    wildlife:[
+      {name:'California Condor',note:'Occasionally seen soaring above the coastal ridges on thermals'},
+      {name:'Banana Slug',note:'Frequently found on damp shaded redwood trails after rain or fog'},
+      {name:'Harbor Seal',note:'Often spotted in kelp beds just off the park beach'}
+    ]
+  },
+  'point-sur-shp':{
+    highlight:'Perched atop a striking volcanic rock jutting into the Pacific, this historic 1889 lighthouse offers dramatic coastal views and fascinating guided tours. The isolation and architecture make it one of the most memorable stops on the Big Sur coast.',
+    googleRating:4.8,
+    googleReviews:1100,
+    bestSeason:'Spring, Summer, Fall',
+    bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'$15/adult (guided tour)',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use and guided tours only'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use and guided tours only'},
+    parkingTip:'You must wait at the locked farm gate along Highway 1 until volunteer guides arrive to escort the convoy up the rock. Book ahead.',
+    nearbyFood:'Big Sur (15 min) — Big Sur Bakery for American; Nepenthe for Californian; Big Sur Deli for sandwiches',
+    elevation:'Sea level to 361 ft',
+    things:['Take the immersive guided walking tour to the lighthouse','Learn about tragic local shipwrecks and ghost stories','Experience the specialty Moonlight Tour','View the historic Cold War era Naval Facility buildings','Whale watch from the incredibly high vantage point'],
+    hikes:[
+      {name:'Lighthouse Access Road',distance:'1.2 mi',gain:'300 ft',difficulty:'Moderate',note:'Mandatory guided walk winding steeply up the volcanic rock to the lighthouse buildings'},
+      {name:'Naval Facility Walk',distance:'0.8 mi',gain:'50 ft',difficulty:'Easy',note:'Guided stroll around remaining top-secret buildings from the SOSUS submarine tracking base'},
+      {name:'Lower Bluff Path',distance:'0.4 mi',gain:'20 ft',difficulty:'Easy',note:'Short walk near the base with unique perspectives of the massive rock and crashing waves'}
+    ],
+    photoSpots:[
+      {name:'Lighthouse Tower Overlook',note:'Historic stone building with the endless deep blue Pacific as backdrop'},
+      {name:'The Base of the Rock',note:'Photograph the massive volcanic island from the access road for scale'}
+    ],
+    sunsetSpots:[
+      {spot:'The Lighthouse Catwalk',note:'Best sunset spot — faces west over the ocean, one of California\'s most spectacular elevated sunsets (Moonlight Tours only)'},
+      {spot:'Highway 1 Pullout',note:'Just north of the park gate, safely watch the sunset behind the silhouette of the lighthouse rock'}
+    ],
+    biking:{available:false,ebike:false,trails:[]},
+    wildlife:[
+      {name:'Gray Whale',note:'Easily spotted from the high cliffs during winter and spring migration'},
+      {name:'Sea Otter',note:'Occasionally seen floating in the kelp beds far below'},
+      {name:'Western Gull',note:'Constantly swirling and nesting on the steep rocky cliffs'}
+    ]
+  },
+  'monterey-shp':{
+    highlight:'Spread across downtown Monterey, this unique park preserves the original capital of Alta California. It features carefully restored historic adobe homes, beautiful hidden gardens, and the famous Custom House where the American flag was first raised in California.',
+    googleRating:4.7,
+    googleReviews:1800,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,7,8,9,10,11],
+    entranceFee:'Free (some buildings require a $3 tour ticket)',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Urban historic site with no camping'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Urban historic site with no camping'},
+    parkingTip:'Use municipal parking garages in downtown Monterey; park once and walk between the historic buildings.',
+    nearbyFood:'Monterey (2 min) — Old Fisherman\'s Grotto for seafood; Alvarado Street Brewery for pub fare; Rosine\'s for American',
+    elevation:'Sea level to 80 ft',
+    things:['Walk the historic Path of History marked by yellow tiles','Tour the 1827 Custom House, California\'s oldest public building','Explore the beautiful hidden Memory Garden','Visit the First Theater for 19th-century theatrical history','Walk down to nearby Fisherman\'s Wharf for clam chowder'],
+    hikes:[
+      {name:'Monterey Path of History',distance:'2.0 mi',gain:'50 ft',difficulty:'Easy',note:'Self-guided urban walking tour connecting over a dozen historic adobe buildings'},
+      {name:'Historic Gardens Walk',distance:'1.0 mi',gain:'30 ft',difficulty:'Easy',note:'Beautiful shorter route through Monterey\'s hidden gardens'},
+      {name:'Custom House to Cooper-Molera Loop',distance:'2.0 mi',gain:'60 ft',difficulty:'Easy',note:'Broader town-history walk with multiple buildings'}
+    ],
+    photoSpots:[
+      {name:'The Custom House Plaza',note:'Classic white adobe with vibrant blue bay behind it — perfect historical shot'},
+      {name:'Memory Garden',note:'Best in spring when magnolias bloom against the rustic adobe walls'}
+    ],
+    sunsetSpots:[
+      {spot:'Custom House Plaza',note:'Best sunset spot — faces west toward the harbor with beautiful sunset reflecting off boats and bay water'},
+      {spot:'Fisherman\'s Wharf',note:'Just steps from the park, classic Monterey sunset views with lively atmosphere'}
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Monterey Bay Coastal Trail',distance:'18.0 mi',difficulty:'Easy',note:'Famous fully paved multi-use path running through the park and along the gorgeous coastline'}
+    ]},
+    wildlife:[
+      {name:'Sea Otter',note:'Frequently seen floating in the bay just steps from Custom House Plaza'},
+      {name:'California Sea Lion',note:'Often heard barking and seen lounging on rocks near the adjacent wharf'},
+      {name:'Brown Pelican',note:'Commonly seen gliding in formation over the harbor waters'}
+    ]
+  },
+  'el-presidio':{
+    highlight:'Located in the heart of downtown Santa Barbara, this park preserves the site of the last Spanish military fortress built in Alta California. The reconstructed whitewashed adobe walls, historic chapel, and ongoing archaeological digs offer a peaceful step back into 1782.',
+    googleRating:4.6,
+    googleReviews:1200,
+    bestSeason:'Year-round',
+    bestMonths:[1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee:'$5/adult',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Urban historic site with no camping'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Urban historic site with no camping'},
+    parkingTip:'Small free lot behind the Presidio off Santa Barbara Street, or use city lot #9 nearby. Combine with downtown walking.',
+    nearbyFood:'Santa Barbara (2 min) — La Super-Rica Taqueria for Mexican; Bouchon for French; The Lark for Californian',
+    elevation:'50 ft',
+    things:['Tour the beautifully reconstructed Presidio Chapel','View the original El Cuartel adobe, the second oldest building in California','Watch ongoing archaeological excavations','Explore the heritage gardens showcasing 18th-century crops','Walk to the nearby historic Santa Barbara County Courthouse'],
+    hikes:[
+      {name:'Fortress Perimeter Walk',distance:'0.4 mi',gain:'10 ft',difficulty:'Easy',note:'Flat easy walk around the historic quadrangle and reconstructed adobe walls'},
+      {name:'State Street Historic Walk',distance:'1.0 mi',gain:'20 ft',difficulty:'Easy',note:'Connects the Presidio to vibrant historic Spanish architecture of downtown'},
+      {name:'Presidio to Mission Urban Walk',distance:'2.5 mi',gain:'150 ft',difficulty:'Easy',note:'Broader history-themed walking day connecting major Santa Barbara landmarks'}
+    ],
+    photoSpots:[
+      {name:'The Presidio Chapel',note:'Rustic wooden doors and white adobe walls look stunning in warm afternoon light'},
+      {name:'El Cuartel Exterior',note:'Authentic uneven adobe texture of one of California\'s oldest original structures'}
+    ],
+    sunsetSpots:[
+      {spot:'Santa Barbara Courthouse Tower',note:'Best sunset spot — short walk away, 360-degree views of sunset over red tile roofs and the ocean'},
+      {spot:'Presidio Central Courtyard',note:'Peaceful spot where fading light casts long shadows across the historic Spanish fort'}
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'State Street Promenade',distance:'1.5 mi',difficulty:'Easy',note:'Pedestrian-and-bike-only downtown corridor just blocks from the park'}
+    ]},
+    wildlife:[
+      {name:'Anna\'s Hummingbird',note:'Frequently seen zipping between the heritage garden flowers'},
+      {name:'Monarch Butterfly',note:'Spotted in nearby city parks and gardens during winter months'},
+      {name:'Western Gull',note:'Often seen flying over the downtown area from the nearby ocean'}
+    ]
+  },
+  'cambria-smp':{
+    highlight:'This vibrant marine park along the central coast protects a thriving ecosystem of kelp forests and rocky tide pools. It is a spectacular relaxed destination perfect for kayaking, beachcombing, and watching sea otters wrapped in kelp near the shore.',
+    googleRating:4.8,
+    googleReviews:900,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,7,8,9,10,11],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Marine park only; nearby San Simeon SP offers car camping'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Marine park only'},
+    parkingTip:'Free parking along Moonstone Beach Drive on the dirt shoulder and in designated gravel pullouts. Easier earlier in the day.',
+    nearbyFood:'Cambria (5 min) — Sea Chest Oyster Bar for seafood; Robin\'s for eclectic; Linn\'s Restaurant for American',
+    elevation:'Sea level to 50 ft',
+    things:['Walk the incredibly scenic Moonstone Beach Boardwalk','Kayak through the protected offshore kelp forests','Tidepool during low tide to see starfish and anemones','Search the beach for smooth colorful moonstones','Spot spouting whales from the coastal bluffs'],
+    hikes:[
+      {name:'Moonstone Beach Boardwalk',distance:'2.8 mi',gain:'50 ft',difficulty:'Easy',note:'Stunning fully accessible wooden boardwalk running parallel to the rugged coastline'},
+      {name:'Fiscalini Bluff Trail',distance:'1.9 mi',gain:'100 ft',difficulty:'Easy',note:'Dirt trail just south offering spectacular elevated views of the ocean and marine life'},
+      {name:'Santa Rosa Creek Trail',distance:'1.0 mi',gain:'20 ft',difficulty:'Easy',note:'Short peaceful walk where the creek meets the ocean, great for bird watching'}
+    ],
+    photoSpots:[
+      {name:'Moonstone Beach Sea Stacks',note:'Best at low tide and golden hour to capture jagged rocks jutting out of wet sand'},
+      {name:'Leffingwell Landing',note:'Rocky point with dramatic wave action for dynamic coastal photography'}
+    ],
+    sunsetSpots:[
+      {spot:'Leffingwell Landing',note:'Best sunset spot — at the north end of the beach, faces directly west for unobstructed dramatic sunsets'},
+      {spot:'Moonstone Beach Boardwalk',note:'Stroll anywhere along the path to enjoy vibrant pink and orange skies reflecting on the ocean'}
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Moonstone Beach Drive',distance:'2.0 mi',difficulty:'Easy',note:'Beautiful flat road ride along the coastal bluffs with wide shoulders'}
+    ]},
+    wildlife:[
+      {name:'Southern Sea Otter',note:'Year-round, easily spotted floating on their backs in kelp beds just offshore'},
+      {name:'Gray Whale',note:'Winter and spring, frequently seen spouting during coastal migration'},
+      {name:'Ochre Sea Star',note:'Found clinging to rocks in tide pools during negative low tides'}
+    ]
+  },
+  'cayucos-sb':{
+    highlight:'This classic laid-back central California beach offers a historic wooden pier, wide sandy shoreline, and consistent gentle surf breaks. It perfectly preserves a nostalgic beach town vibe where visitors can swim, fish, and relax without the heavy crowds of Southern California.',
+    googleRating:4.7,
+    googleReviews:2500,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,7,8,9,10,11],
+    entranceFee:'Free',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use beach; Morro Bay State Park camping is 15 minutes away'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use beach only'},
+    parkingTip:'Free parking at the base of the pier and along Ocean Front Ave, but fills quickly on summer weekends.',
+    nearbyFood:'Cayucos (2 min) — Schooner\'s for seafood; Duckie\'s Chowder House for seafood; Brown Butter Cookie Company for bakery',
+    elevation:'Sea level',
+    things:['Walk to the end of the historic 982-foot Cayucos Pier','Surf or boogie board in the gentle beach break','Explore the tide pools just north of the pier','Eat famous brown butter sea salt cookies on the beach','Fish directly off the pier with no license required'],
+    hikes:[
+      {name:'Cayucos Pier Walk',distance:'0.4 mi',gain:'10 ft',difficulty:'Easy',note:'Flat classic wooden pier walk with great views of surfers and the town'},
+      {name:'Morro Strand Beach Walk',distance:'3.0 mi',gain:'20 ft',difficulty:'Easy',note:'Long flat walk south along hard-packed sand with stunning views of Morro Rock'},
+      {name:'Estero Bluffs Trail',distance:'4.0 mi',gain:'150 ft',difficulty:'Easy',note:'Beautiful windswept dirt trail just north of town with elevated coastal views and tide pools'}
+    ],
+    photoSpots:[
+      {name:'Cayucos Pier Pilings',note:'Get under the pier at low tide to capture waves washing through the massive wooden pillars'},
+      {name:'Morro Rock Vista',note:'Looking south down the beach, the giant volcanic Morro Rock makes a spectacular focal point'}
+    ],
+    sunsetSpots:[
+      {spot:'End of the Cayucos Pier',note:'Best sunset spot — faces west over open ocean, right over the water for an immersive sunset'},
+      {spot:'The Main Beach',note:'Sit on soft sand south of the pier to watch the pier silhouette against colorful sky'}
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Ocean Front Avenue',distance:'1.5 mi',difficulty:'Easy',note:'Flat scenic street ride parallel to the beach through the quiet surf town'}
+    ]},
+    wildlife:[
+      {name:'Bottlenose Dolphin',note:'Often seen surfing the waves past the breaker line in early morning'},
+      {name:'Brown Pelican',note:'Constantly diving for fish right next to the pier'},
+      {name:'Harbor Seal',note:'Frequently spotted in the surf or resting on rocky outcrops north of town'}
+    ]
+  },
+  'oceano-dunes-svra':{
+    highlight:'This is the only state park in California where visitors can legally drive street vehicles and OHVs directly onto the beach and expansive sand dunes. It is an adrenaline-fueled coastal playground offering miles of riding terrain, beach camping, and massive rolling sand hills.',
+    googleRating:4.5,
+    googleReviews:8000,
+    bestSeason:'Fall, Winter, Spring',
+    bestMonths:[2,3,4,9,10,11],
+    entranceFee:'$5–$10/vehicle',
+    carCamping:{available:true,cost:'$10/night',sites:'Dispersed open camping on beach sand',note:'Reservations required; 4x4 highly recommended for beach driving'},
+    tentCamping:{available:true,cost:'$10/night',sites:'Dispersed open camping',note:'Tent camping allowed but wind and passing vehicles make it challenging'},
+    parkingTip:'Before driving onto the beach, air down your tires. If you lack 4x4, park at the Pier Avenue lot and walk in.',
+    nearbyFood:'Grover Beach (5 min) — Fin\'s Seafood for American; Splash Cafe in Pismo Beach (10 min) for chowder; Old Juan\'s Cantina for Mexican',
+    elevation:'Sea level to 100 ft',
+    things:['Ride ATVs or dirt bikes through the massive sand dunes','Drive your 4x4 directly along the ocean shoreline','Camp overnight on the beach with a bonfire','Rent a fat-tire e-bike to cruise the packed wet sand','Kiteboard in the strong afternoon coastal winds'],
+    hikes:[
+      {name:'Oceano Beach Walk',distance:'3.0 mi',gain:'10 ft',difficulty:'Easy',note:'Flat walk along the shoreline — be aware of fast-moving vehicles and OHVs'},
+      {name:'Guiton Trail',distance:'1.5 mi',gain:'50 ft',difficulty:'Easy',note:'Peaceful walk around the nearby Oceano Lagoon, a break from the motorized chaos'},
+      {name:'Dune Scrub Loop',distance:'1.0 mi',gain:'100 ft',difficulty:'Moderate',note:'Sandy walk into the non-motorized dune preserve to see native coastal plants'}
+    ],
+    photoSpots:[
+      {name:'Deep Sand Dunes',note:'Hike into the dunes at golden hour to capture ripples and contrasting shadows'},
+      {name:'Shoreline Drive',note:'Capture the unique spectacle of trucks and RVs parked against crashing Pacific surf'}
+    ],
+    sunsetSpots:[
+      {spot:'The Beach Camp',note:'Best sunset spot — sit next to your vehicle and fire ring facing west as the sun drops into the ocean'},
+      {spot:'High Dune Peak',note:'Climb a tall dune for panoramic sunset view over the camp below'}
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'Beach Sand Riding',distance:'5.0 mi',difficulty:'Moderate',note:'Fat-tire e-bikes popular for cruising packed wet sand near the water'}
+    ]},
+    wildlife:[
+      {name:'Western Snowy Plover',note:'Protected shorebird nesting in fenced dune preserves during spring and summer'},
+      {name:'Pismo Clam',note:'Buried in wet sand during low tide (requires a license to harvest)'},
+      {name:'California Gull',note:'Omnipresent around beach campsites'}
+    ]
+  },
+  'twin-lakes-sb':{
+    highlight:'This picturesque family-friendly beach in Santa Cruz offers stunning views of the Walton Lighthouse, a calm harbor inlet, and permitted evening fire rings. Its wide warm sands and gentle waves make it a favorite for swimming, paddleboarding, and evening bonfires.',
+    googleRating:4.7,
+    googleReviews:3400,
+    bestSeason:'Year-round',
+    bestMonths:[2,3,4,5,6,7,8,9,10,11],
+    entranceFee:'Free (paid parking managed locally)',
+    carCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use beach; nearby New Brighton State Beach offers camping'},
+    tentCamping:{available:false,cost:'N/A',sites:'N/A',note:'Day-use beach only'},
+    parkingTip:'Use county-managed parking near the harbor or East Cliff/Portola side; summer afternoons fill faster than mornings.',
+    nearbyFood:'Santa Cruz (5 min) — Crow\'s Nest for seafood; Cafe El Palomar for Mexican; Johnny\'s Harborside for seafood',
+    elevation:'Sea level',
+    things:['Have an evening beach bonfire in the provided fire rings','Swim and boogie board in the gentle surf','Walk out to the picturesque Walton Lighthouse','Rent a paddleboard to explore the calm harbor','Watch sailboats glide in and out of the harbor inlet'],
+    hikes:[
+      {name:'Harbor Lighthouse Walk',distance:'1.2 mi',gain:'20 ft',difficulty:'Easy',note:'Paved walk along the harbor channel leading to the iconic Walton Lighthouse'},
+      {name:'Schwan Lake Loop',distance:'1.5 mi',gain:'50 ft',difficulty:'Easy',note:'Quiet trail around a peaceful coastal lagoon filled with birdlife'},
+      {name:'East Cliff Drive Walk',distance:'2.0 mi',gain:'40 ft',difficulty:'Easy',note:'Scenic urban stroll along coastal bluffs overlooking the ocean and surf breaks'}
+    ],
+    photoSpots:[
+      {name:'Walton Lighthouse',note:'Classic Santa Cruz photo op, especially at golden hour when the white tower catches warm light'},
+      {name:'Harbor Inlet',note:'Capture sailboats with colorful spinnakers entering the harbor against the blue ocean'}
+    ],
+    sunsetSpots:[
+      {spot:'Twin Lakes Beach Fire Rings',note:'Best sunset spot — faces southwest, perfect for watching sunset colors while roasting marshmallows'},
+      {spot:'Walton Lighthouse Breakwater',note:'Walk onto the rocks for unobstructed sunset view over Monterey Bay'}
+    ],
+    biking:{available:true,ebike:true,trails:[
+      {name:'East Cliff Drive Coastal Route',distance:'3.0 mi',difficulty:'Easy',note:'Flat scenic bike ride linking Twin Lakes to other Santa Cruz coast segments'}
+    ]},
+    wildlife:[
+      {name:'Sea Otter',note:'Often seen floating on their backs inside the calm harbor waters'},
+      {name:'California Sea Lion',note:'Frequently heard barking near the end of the breakwater'},
+      {name:'Great Blue Heron',note:'Spotted wading in the shallow waters of nearby Schwan Lake'}
+    ]
   }
 
 };
@@ -10326,8 +11547,14 @@ function buildChatGPTPrompt(p, d){
       d.sunsetSpots.forEach((s,i) => lines.push(`- ${i===0?'⭐ ':''}${s.spot}${s.note ? ` - ${s.note}` : ''}`));
     }
 
+    if (d.biking && d.biking.available) {
+      lines.push('', 'Biking:' + (d.biking.ebike ? ' (E-bikes allowed)' : ''));
+      if (d.biking.trails) d.biking.trails.forEach(t => lines.push(`- ${t.name} — ${t.distance}, ${t.difficulty}`));
+    }
+
     if (d.nearbyFood) {
-      lines.push('', `See if we could get lunch or dinner at: ${d.nearbyFood}`);
+      const foodText = Array.isArray(d.nearbyFood) ? d.nearbyFood.map(f => f.name + (f.desc ? ' — ' + f.desc : '')).join('; ') : d.nearbyFood;
+      lines.push('', `See if we could get lunch or dinner at: ${foodText}`);
     }
   } else {
     lines.push('', `Park type: ${p.typeLabel}`);
@@ -10494,6 +11721,7 @@ function openParkModal(id){
         <div class="pm-badges">
           ${typeBadge(p)}
           ${p.libraryPass?'<span class="badge badge-pass">🎫 Library Pass</span>':''}
+          ${d&&d.bestSeason?`<span class="badge badge-pass" style="background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7">🌤️ Best Season: ${d.bestSeason}</span>`:''}
         </div>
         ${d&&d.googleRating?`<div class="pm-stars">
           <span class="pm-stars-score">${d.googleRating}</span>
@@ -10569,12 +11797,12 @@ function openParkModal(id){
         <div class="pm-section-title">ℹ️ Park Info</div>
         <div class="pm-grid">
           <div class="pm-info-card">
-            <div class="pm-info-label">Best Season</div>
-            <div class="pm-info-value">${d.bestSeason}</div>
-          </div>
-          <div class="pm-info-card">
             <div class="pm-info-label">Entrance Fee</div>
             <div class="pm-info-value">${d.entranceFee}</div>
+          </div>
+          <div class="pm-info-card">
+            <div class="pm-info-label">🚴 Biking</div>
+            <div class="pm-info-value"${d.biking && d.biking.available ? ' style="font-weight:400;font-size:11px"' : ''}>${d.biking && d.biking.available ? `E-Bike: ${d.biking.ebike ? 'Yes' : 'No'}${d.biking.trails && d.biking.trails.length ? '<br>' + d.biking.trails.map(t => t.name).join(', ') : ''}` : 'Not available'}</div>
           </div>
           ${campingBox('Car Camping', d.carCamping)}
           ${campingBox('Tent Camping', d.tentCamping)}
@@ -10584,7 +11812,7 @@ function openParkModal(id){
           </div>
           <div class="pm-info-card">
             <div class="pm-info-label">🍔 Nearby Food</div>
-            <div class="pm-info-value" style="font-weight:400;font-size:11px">${d.nearbyFood||'Info not available'}</div>
+            <div class="pm-info-value" style="font-weight:400;font-size:11px">${Array.isArray(d.nearbyFood) ? d.nearbyFood.map(f => f.name + (f.desc ? ' — ' + f.desc : '')).join('; ') : (d.nearbyFood||'Info not available')}</div>
           </div>
         </div>
       </div>`;
@@ -10618,7 +11846,7 @@ function openParkModal(id){
     if(!row)return;
     if(!w){row.innerHTML='<div style="width:100%;text-align:center;font-size:11px;color:var(--text-muted)">Weather unavailable</div>';return;}
     row.innerHTML=w.time.map((t,i)=>{
-      return`<div class="pm-wday"><div class="pm-wday-name">${dayLabel(t)}</div><div class="pm-wday-icon">${cloudIcon(w.cloud_cover_mean[i])}</div><div class="pm-wday-hi">${cToF(w.temperature_2m_max[i])}°</div><div class="pm-wday-lo">${cToF(w.temperature_2m_min[i])}°</div></div>`;
+      return`<div class="pm-wday"><div class="pm-wday-name">${dayLabel(t)}</div><div class="pm-wday-icon">${cloudIcon(w.cloud_cover_mean[i])}</div><div class="pm-wday-hi">${cToF(w.temperature_2m_max[i])}°</div><div class="pm-wday-lo">${cToF(w.temperature_2m_min[i])}°</div><div class="pm-wday-wind">${Math.round(w.wind_speed_10m_max[i])} mph</div></div>`;
     }).join('');
     // Populate sunrise/sunset from today's data
     const sunEl=document.getElementById('pm-sun');
