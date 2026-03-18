@@ -126,6 +126,8 @@
     .sbtn.active { background: var(--forest); border-color: var(--forest); color: white; }
     .sbtn.pass-btn { width: 100%; text-align: center; justify-content: center; }
     .sbtn.pass-btn.active { background: var(--gold); border-color: #c9a227; color: var(--forest-dark); }
+    .dc-hidden { display: none !important; }
+    .dc-count { font-size: 10px; opacity: 0.7; margin-left: 2px; }
 
     /* search */
     .sb-search {
@@ -262,6 +264,7 @@
     .badge-nca  { background: #e0f2fe; color: #075985; }
     .badge-nsa  { background: #fef3c7; color: #a16207; }
     .badge-reserve { background: #ecfccb; color: #3f6212; }
+    .badge-cp   { background: #dbeafe; color: #1e40af; }
     .badge-pass { background: var(--gold-light); color: #78350f; }
     .card-name { font-size: 14px; font-weight: 700; color: var(--forest-dark); line-height: 1.3; margin-bottom: 3px; }
     .card-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
@@ -569,6 +572,7 @@
         <button class="sbtn"        data-type="nm"   onclick="setType('nm')">Monument</button>
         <button class="sbtn"        data-type="sb"   onclick="setType('sb')">Beach</button>
         <button class="sbtn"        data-type="snr"  onclick="setType('snr')">Nature Reserve</button>
+        <button class="sbtn"        data-type="cp"   onclick="setType('cp')">County Park</button>
       </div>
     </div>
 
@@ -631,11 +635,20 @@
 
     <!-- Info Status -->
     <div class="sb-section">
-      <div class="sb-label">📋 Explore Info</div>
-      <div class="sb-btn-row" id="info-filters">
-        <button class="sbtn active" data-info="all" onclick="setInfo('all')">All</button>
-        <button class="sbtn" data-info="yes" onclick="setInfo('yes')">Has Info</button>
-        <button class="sbtn" data-info="no" onclick="setInfo('no')">Missing</button>
+      <div class="sb-label" style="cursor:pointer;user-select:none" onclick="document.getElementById('data-checks-body').classList.toggle('dc-hidden');this.querySelector('.dc-arrow').textContent=document.getElementById('data-checks-body').classList.contains('dc-hidden')?'▶':'▼'">🔍 Data Checks <span class="dc-arrow" style="font-size:10px;margin-left:4px">▼</span></div>
+      <div id="data-checks-body">
+        <div class="sb-btn-row" id="dc-filters" style="flex-wrap:wrap;gap:4px">
+          <button class="sbtn active" data-dc="all" onclick="setDataCheck('all')">All</button>
+          <button class="sbtn" data-dc="hasInfo-no" onclick="setDataCheck('hasInfo-no')">No Explore <span class="dc-count" id="dc-hasInfo-no"></span></button>
+          <button class="sbtn" data-dc="things-no" onclick="setDataCheck('things-no')">Top 5 ✗ <span class="dc-count" id="dc-things-no"></span></button>
+          <button class="sbtn" data-dc="bestMonths-no" onclick="setDataCheck('bestMonths-no')">Months ✗ <span class="dc-count" id="dc-bestMonths-no"></span></button>
+          <button class="sbtn" data-dc="elevation-no" onclick="setDataCheck('elevation-no')">Elevation ✗ <span class="dc-count" id="dc-elevation-no"></span></button>
+          <button class="sbtn" data-dc="hikeGain-no" onclick="setDataCheck('hikeGain-no')">Hike Gain ✗ <span class="dc-count" id="dc-hikeGain-no"></span></button>
+          <button class="sbtn" data-dc="biking-no" onclick="setDataCheck('biking-no')">Biking ✗ <span class="dc-count" id="dc-biking-no"></span></button>
+          <button class="sbtn" data-dc="photography-no" onclick="setDataCheck('photography-no')">Photo ✗ <span class="dc-count" id="dc-photography-no"></span></button>
+          <button class="sbtn" data-dc="sunsetSpots-no" onclick="setDataCheck('sunsetSpots-no')">Sunset ✗ <span class="dc-count" id="dc-sunsetSpots-no"></span></button>
+          <button class="sbtn" data-dc="googleRating-no" onclick="setDataCheck('googleRating-no')">Rating ✗ <span class="dc-count" id="dc-googleRating-no"></span></button>
+        </div>
       </div>
     </div>
 
@@ -1100,7 +1113,7 @@ const PARKS = [
   { id:'ansel-adams-wilderness',name:'Ansel Adams Wilderness',      type:'wilderness',typeLabel:'Wilderness Area',region:'Sierra Nevada',lat:37.6260,lon:-119.1780,libraryPass:false,activities:['hiking','backpacking','camping','fishing','photography','wildflowers'],         notes:'Huge High Sierra wilderness linking Mammoth, Reds Meadow, and the Minarets',                        website:'https://www.fs.usda.gov/inyo/' },
   { id:'hoover-wilderness',name:'Hoover Wilderness',                type:'wilderness',typeLabel:'Wilderness Area',region:'Sierra Nevada',lat:38.1042,lon:-119.3606,libraryPass:false,activities:['hiking','backpacking','camping','fishing','wildlife','photography'],              notes:'Eastern Sierra backpacking favorite with easy access from Virginia Lakes and Green Creek',          website:'https://www.fs.usda.gov/stanislaus/' },
   { id:'emigrant-wilderness',name:'Emigrant Wilderness',            type:'wilderness',typeLabel:'Wilderness Area',region:'Sierra Nevada',lat:38.1921,lon:-119.8121,libraryPass:false,activities:['hiking','backpacking','camping','fishing','wildflowers','photography'],        notes:'Granite basins and alpine lakes just north of Yosemite with lighter crowds than the park',          website:'https://www.fs.usda.gov/stanislaus/' },
-  { id:'trinity-alps',    name:'Trinity Alps Wilderness',           type:'wilderness',typeLabel:'Wilderness Area',region:'Northern CA',lat:40.9502,lon:-122.9824,libraryPass:false,activities:['hiking','backpacking','camping','fishing','photography','wildlife'],         notes:'Jagged granite wilderness in far Northern California with some of the state’s best lake backpacking', website:'https://www.fs.usda.gov/stnf/' },
+  { id:'trinity-alps',    name:'Trinity Alps Wilderness',           type:'wilderness',typeLabel:'Wilderness Area',region:'Northern CA',lat:40.9502,lon:-122.9824,libraryPass:false,activities:['hiking','backpacking','camping','fishing','photography','wildlife'],         notes:'Jagged granite wilderness in far Northern California with some of the state\'s best lake backpacking', website:'https://www.fs.usda.gov/stnf/' },
   { id:'ventana-wilderness',name:'Ventana Wilderness',              type:'wilderness',typeLabel:'Wilderness Area',region:'Central Coast',lat:36.2500,lon:-121.5700,libraryPass:false,activities:['hiking','backpacking','camping','wildlife','photography','hot-springs'],      notes:'Big Sur backcountry with rugged ridges, redwood canyons, and classic backpacking routes',          website:'https://www.fs.usda.gov/lpnf/' },
   { id:'king-range',      name:'King Range National Conservation Area',type:'nca',typeLabel:'National Conservation Area',region:'North Coast',lat:40.0388,lon:-124.0731,libraryPass:false,activities:['hiking','backpacking','camping','wildlife','photography','beach'],     notes:'The Lost Coast centerpiece with steep mountains dropping directly into a wild, roadless shoreline', website:'https://www.blm.gov/visit/king-range-national-conservation-area' },
   { id:'alabama-hills',   name:'Alabama Hills National Scenic Area',type:'nsa',typeLabel:'National Scenic Area',region:'Desert',      lat:36.6068,lon:-118.1228,libraryPass:false,activities:['hiking','camping','car-camping','photography','rock-climbing','stargazing'],               notes:'Movie-famous Eastern Sierra desert landscape below Whitney with arches, domes, and huge views',    website:'https://www.blm.gov/visit/alabama-hills' },
@@ -1108,11 +1121,40 @@ const PARKS = [
   { id:'berryessa-snow-mountain',name:'Berryessa Snow Mountain National Monument',type:'nm',typeLabel:'National Monument',region:'Bay Area',lat:38.8738,lon:-122.3255,libraryPass:false,activities:['hiking','camping','wildlife','wildflowers','photography'],               notes:'Huge inland monument of oak ridges, chaparral, and remote trailheads north of Napa and Solano',     website:'https://www.blm.gov/programs/national-conservation-lands/california/berryessa-snow-mountain-national-monument' },
   { id:'san-gabriel-mountains-nm',name:'San Gabriel Mountains National Monument',type:'nm',typeLabel:'National Monument',region:'Southern CA',lat:34.3270,lon:-117.8890,libraryPass:false,activities:['hiking','camping','backpacking','wildlife','photography','snowshoeing'],   notes:'Huge mountain playground above LA with peaks, waterfalls, and quick access to alpine terrain',      website:'https://www.fs.usda.gov/angeles/' },
   { id:'sand-to-snow-nm', name:'Sand to Snow National Monument',    type:'nm', typeLabel:'National Monument', region:'Southern CA',  lat:34.0488,lon:-116.6755,libraryPass:false,activities:['hiking','camping','wildlife','photography','backpacking'],                           notes:'Dramatic elevation change from Sonoran Desert to alpine forest with excellent fall-to-spring hiking', website:'https://www.blm.gov/programs/national-conservation-lands/california/sand-to-snow' },
-  { id:'santa-rosa-san-jacinto-nm',name:'Santa Rosa and San Jacinto Mountains National Monument',type:'nm',typeLabel:'National Monument',region:'Desert',lat:33.7860,lon:-116.5500,libraryPass:false,activities:['hiking','camping','wildlife','photography','backpacking'],      notes:'Palm oasis canyons and high peaks above Palm Springs with some of Southern California’s best desert hiking', website:'https://www.blm.gov/programs/national-conservation-lands/california/santa-rosa-and-san-jacinto-mountains-national-monument' },
+  { id:'santa-rosa-san-jacinto-nm',name:'Santa Rosa and San Jacinto Mountains National Monument',type:'nm',typeLabel:'National Monument',region:'Desert',lat:33.7860,lon:-116.5500,libraryPass:false,activities:['hiking','camping','wildlife','photography','backpacking'],      notes:'Palm oasis canyons and high peaks above Palm Springs with some of Southern California\'s best desert hiking', website:'https://www.blm.gov/programs/national-conservation-lands/california/santa-rosa-and-san-jacinto-mountains-national-monument' },
   { id:'california-coastal-nm',name:'California Coastal National Monument',type:'nm',typeLabel:'National Monument',region:'North Coast',lat:38.9179,lon:-123.7128,libraryPass:false,activities:['wildlife','photography','birdwatching','hiking'],                             notes:'Protected offshore rocks and shoreline units up and down the coast, best treated as a coastal discovery layer', website:'https://www.blm.gov/programs/national-conservation-lands/california/california-coastal' },
   { id:'point-arena-stornetta',name:'Point Arena-Stornetta Unit',   type:'nm', typeLabel:'National Monument Unit',region:'North Coast',lat:38.9158,lon:-123.7087,libraryPass:false,activities:['hiking','wildlife','birdwatching','photography','whale-watching'],            notes:'One of the most dramatic public bluff walks on the Mendocino coast, especially during whale season', website:'https://www.blm.gov/visit/point-arena-stornetta-public-lands' },
   { id:'cotoni-coast-dairies',name:'Cotoni-Coast Dairies Unit',     type:'nm', typeLabel:'National Monument Unit',region:'Central Coast',lat:37.0030,lon:-122.1894,libraryPass:false,activities:['hiking','biking','wildlife','birdwatching','photography'],                notes:'Expansive new public coastal unit north of Santa Cruz with trails, ranch history, and ocean views', website:'https://www.blm.gov/visit/cotoni-coast-dairies' },
-  { id:'elkhorn-slough-reserve',name:'Elkhorn Slough Reserve',      type:'reserve',typeLabel:'Reserve',       region:'Central Coast',lat:36.8162,lon:-121.7425,libraryPass:false,activities:['birdwatching','wildlife','hiking','photography','kayaking'],                   notes:'One of California’s best estuaries for otters, birding, and easy shoreline nature walks',           website:'https://elkhornslough.org/' },
+  { id:'elkhorn-slough-reserve',name:'Elkhorn Slough Reserve',      type:'reserve',typeLabel:'Reserve',       region:'Central Coast',lat:36.8162,lon:-121.7425,libraryPass:false,activities:['birdwatching','wildlife','hiking','photography','kayaking'],                   notes:'One of California\'s best estuaries for otters, birding, and easy shoreline nature walks',           website:'https://elkhornslough.org/' },
+
+  /* -- Santa Clara County Parks -- */
+  { id:'almaden-quicksilver', name:'Almaden Quicksilver County Park',   type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.1784, lon:-121.8434, libraryPass:false, activities:['hiking','mtb','historic','wildlife','horseback'],           notes:'Former mercury mining district with 34 miles of trails through oak woodlands and mine ruins',         website:'https://parks.sccgov.org/santa-clara-county-parks/almaden-quicksilver-county-park' },
+  { id:'alviso-marina',       name:'Alviso Marina County Park',         type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.4310, lon:-121.9770, libraryPass:false, activities:['birdwatching','kayaking','hiking','wildlife','photography'], notes:'South Bay tidal marsh gateway with huge skies, salt ponds, and migratory shorebirds',               website:'https://parks.sccgov.org/santa-clara-county-parks/alviso-marina-county-park' },
+  { id:'anderson-lake',       name:'Anderson Lake County Park',         type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.1660, lon:-121.6280, libraryPass:false, activities:['fishing','hiking','horseback','wildlife'],                   notes:'Reservoir park popular for bass fishing and hiking with views of the Diablo Range foothills',         website:'https://parks.sccgov.org/santa-clara-county-parks/anderson-lake-county-park' },
+  { id:'calero',               name:'Calero County Park',               type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.1575, lon:-121.7870, libraryPass:false, activities:['hiking','mtb','horseback','fishing','wildlife'],             notes:'Rolling oak hills around Calero Reservoir with excellent mountain biking and equestrian trails',      website:'https://parks.sccgov.org/santa-clara-county-parks/calero-county-park' },
+  { id:'chesbro-reservoir',   name:'Chesbro Reservoir County Park',     type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.1280, lon:-121.7460, libraryPass:false, activities:['fishing','hiking','birdwatching'],                           notes:'Quiet reservoir with shoreline fishing and peaceful walking trails',                                  website:'https://parks.sccgov.org/santa-clara-county-parks/chesbro-reservoir-county-park' },
+  { id:'chitactac-adams',     name:'Chitactac-Adams Heritage County Park',type:'cp',typeLabel:'County Park', region:'Bay Area', lat:37.0940, lon:-121.6800, libraryPass:false, activities:['historic','hiking'],                                        notes:'Ohlone heritage site with bedrock mortars, petroglyphs, and interpretive trails along Uvas Creek',    website:'https://parks.sccgov.org/santa-clara-county-parks/chitactac-adams-heritage-county-park' },
+  { id:'coyote-creek-parkway', name:'Coyote Creek Parkway',             type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2850, lon:-121.8340, libraryPass:false, activities:['biking','hiking','birdwatching'],                             notes:'Paved multi-use trail along Coyote Creek connecting to the Bay Trail network',                        website:'https://parks.sccgov.org/santa-clara-county-parks/coyote-creek-trail' },
+  { id:'coyote-lake-harvey-bear', name:'Coyote Lake - Harvey Bear Ranch County Park', type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.0860, lon:-121.5310, libraryPass:false, activities:['fishing','hiking','camping','car-camping','mtb','wildlife'], notes:'Reservoir park with lakeside camping and rolling grassland trails at Harvey Bear Ranch', website:'https://parks.sccgov.org/santa-clara-county-parks/coyote-lake-harvey-bear-ranch-county-park' },
+  { id:'ed-levin',             name:'Ed R. Levin County Park',          type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.4620, lon:-121.8610, libraryPass:false, activities:['hiking','hang-gliding','disc-golf','fishing','wildlife'],    notes:'Monument Peak hike with Bay views, popular hang gliding launch, disc golf, and dog park',             website:'https://parks.sccgov.org/santa-clara-county-parks/ed-r-levin-county-park' },
+  { id:'field-sports',         name:'Field Sports Park',                type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2530, lon:-121.7890, libraryPass:false, activities:['shooting'],                                                  notes:'Public shotgun, rifle, and archery ranges south of San Jose',                                         website:'https://parks.sccgov.org/santa-clara-county-parks/field-sports-county-park' },
+  { id:'hellyer',               name:'Hellyer County Park',             type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2850, lon:-121.8200, libraryPass:false, activities:['biking','fishing','hiking'],                                  notes:'Coyote Creek Trail hub with velodrome, stocked fishing lake, and large picnic areas',                 website:'https://parks.sccgov.org/santa-clara-county-parks/hellyer-county-park' },
+  { id:'joseph-grant',         name:'Joseph D. Grant County Park',      type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.3430, lon:-121.7170, libraryPass:false, activities:['hiking','camping','mtb','horseback','wildlife'],              notes:'Vast 9,522-acre park in the Diablo Range with 51 miles of trails and backcountry camping',            website:'https://parks.sccgov.org/santa-clara-county-parks/joseph-d-grant-county-park' },
+  { id:'lexington-reservoir',  name:'Lexington Reservoir County Park',  type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2020, lon:-121.9880, libraryPass:false, activities:['hiking','fishing','kayaking','birdwatching'],                notes:'Wooded reservoir in the Los Gatos hills with shoreline trails and non-motorized boating',             website:'https://parks.sccgov.org/santa-clara-county-parks/lexington-reservoir-county-park' },
+  { id:'los-gatos-creek',      name:'Los Gatos Creek County Park',      type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2360, lon:-121.9680, libraryPass:false, activities:['biking','hiking'],                                           notes:'Paved creekside trail connecting to downtown Los Gatos with playgrounds and picnic areas',            website:'https://parks.sccgov.org/santa-clara-county-parks/los-gatos-creek-county-park' },
+  { id:'metcalf-motorcycle',   name:'Metcalf Motorcycle County Park',   type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2260, lon:-121.7550, libraryPass:false, activities:['ohv'],                                                       notes:'OHV motorcycle park with varied terrain courses south of San Jose',                                   website:'https://parks.sccgov.org/santa-clara-county-parks/motorcycle-county-park' },
+  { id:'mt-madonna',           name:'Mt. Madonna County Park',          type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.0040, lon:-121.7140, libraryPass:false, activities:['hiking','camping','car-camping','wildlife','horseback'],     notes:'Redwood groves, white fallow deer, Monterey Bay views, and forested campgrounds',                    website:'https://parks.sccgov.org/santa-clara-county-parks/mt-madonna-county-park' },
+  { id:'penitencia-creek',     name:'Penitencia Creek',                 type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.3800, lon:-121.8500, libraryPass:false, activities:['biking','hiking','birdwatching'],                             notes:'Paved creekside trail in east San Jose connecting neighborhoods and parks',                           website:'https://parks.sccgov.org/santa-clara-county-parks/penitencia-creek-trail' },
+  { id:'rancho-san-antonio',   name:'Rancho San Antonio County Park and Open Space Preserve', type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.3330, lon:-122.0960, libraryPass:false, activities:['hiking','mtb','wildlife','birdwatching'], notes:'One of the most popular parks in the Bay Area with Deer Hollow Farm and rolling grassland trails', website:'https://parks.sccgov.org/santa-clara-county-parks/rancho-san-antonio-county-park' },
+  { id:'sanborn',               name:'Sanborn County Park',             type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2080, lon:-122.0670, libraryPass:false, activities:['hiking','camping','car-camping'],                             notes:'Second-growth redwoods in the Santa Cruz Mountains with walk-in camping and hostel',                  website:'https://parks.sccgov.org/santa-clara-county-parks/sanborn-county-park' },
+  { id:'santa-teresa',         name:'Santa Teresa County Park',         type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2100, lon:-121.8000, libraryPass:false, activities:['hiking','rock-climbing','horseback','wildlife'],             notes:'Rolling hills with valley views, popular bouldering area, and equestrian trails',                     website:'https://parks.sccgov.org/santa-clara-county-parks/santa-teresa-county-park' },
+  { id:'stevens-creek',        name:'Stevens Creek County Park',        type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.3050, lon:-122.0780, libraryPass:false, activities:['hiking','mtb','wildlife'],                                   notes:'Forested canyon trails along Stevens Creek connecting to Monte Bello Open Space',                     website:'https://parks.sccgov.org/santa-clara-county-parks/stevens-creek-county-park' },
+  { id:'sunnyvale-baylands',   name:'Sunnyvale Baylands Park',         type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.4180, lon:-122.0270, libraryPass:false, activities:['biking','birdwatching','hiking','wildlife'],                 notes:'South Bay marshland with levee trails, burrowing owls, and wide-open salt pond views',                website:'https://parks.sccgov.org/santa-clara-county-parks/sunnyvale-baylands-park' },
+  { id:'upper-stevens-creek',  name:'Upper Stevens Creek County Park',  type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2820, lon:-122.1340, libraryPass:false, activities:['hiking','mtb','wildlife'],                                   notes:'Remote redwood and mixed-evergreen forest with challenging single-track mountain biking',             website:'https://parks.sccgov.org/santa-clara-county-parks/upper-stevens-creek-county-park' },
+  { id:'uvas-canyon',           name:'Uvas Canyon County Park',         type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.0820, lon:-121.7930, libraryPass:false, activities:['hiking','camping','car-camping','waterfalls'],               notes:'Lush canyon with multiple seasonal waterfalls and shaded creekside camping',                          website:'https://parks.sccgov.org/santa-clara-county-parks/uvas-canyon-county-park' },
+  { id:'uvas-reservoir',       name:'Uvas Reservoir County Park',       type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.0670, lon:-121.6940, libraryPass:false, activities:['fishing','hiking','birdwatching','boating'],                 notes:'Quiet reservoir for non-motorized boating, shoreline fishing, and eagle watching',                    website:'https://parks.sccgov.org/santa-clara-county-parks/uvas-reservoir-county-park' },
+  { id:'vasona-lake',           name:'Vasona Lake County Park',         type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2350, lon:-121.9740, libraryPass:false, activities:['boating','fishing','biking','hiking'],                       notes:'Family-friendly park with pedal boats, miniature train, and lakeside walking paths in Los Gatos',     website:'https://parks.sccgov.org/santa-clara-county-parks/vasona-lake-county-park' },
+  { id:'villa-montalvo',       name:'Villa Montalvo',                   type:'cp', typeLabel:'County Park', region:'Bay Area', lat:37.2540, lon:-122.0170, libraryPass:false, activities:['hiking','historic','photography'],                           notes:'Historic 1912 Mediterranean villa with art galleries, formal gardens, and hillside trails',           website:'https://parks.sccgov.org/santa-clara-county-parks/villa-montalvo' },
 ];
 
 // ============================================================
@@ -1125,12 +1167,12 @@ const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function dayName(s){return DAYS[new Date(s+'T12:00:00').getDay()];}
 function dayLabel(s){const dt=new Date(s+'T12:00:00');return`${DAYS[dt.getDay()]}<br>${MONTHS[dt.getMonth()]} ${dt.getDate()}`;}
-function typeBadge(p){const m={sp:'badge-sp',np:'badge-np',sb:'badge-sb',snr:'badge-snr',sra:'badge-sra',shp:'badge-shp',smr:'badge-smr',svra:'badge-svra',smp:'badge-smp',wc:'badge-wc',poi:'badge-poi',wilderness:'badge-wilderness',nm:'badge-nm',nhs:'badge-nhs',nca:'badge-nca',nsa:'badge-nsa',reserve:'badge-reserve'};return`<span class="badge ${m[p.type]||'badge-sp'}">${p.typeLabel}</span>`;}
+function typeBadge(p){const m={sp:'badge-sp',np:'badge-np',sb:'badge-sb',snr:'badge-snr',sra:'badge-sra',shp:'badge-shp',smr:'badge-smr',svra:'badge-svra',smp:'badge-smp',wc:'badge-wc',poi:'badge-poi',wilderness:'badge-wilderness',nm:'badge-nm',nhs:'badge-nhs',nca:'badge-nca',nsa:'badge-nsa',reserve:'badge-reserve',cp:'badge-cp'};return`<span class="badge ${m[p.type]||'badge-sp'}">${p.typeLabel}</span>`;}
 
 // ============================================================
 // STATE
 // ============================================================
-let state = { passOnly:false, typeFilter:'all', visFilter:'all', sort:'distance', search:'', monthFilter:0, driveMax:12, campFilter:'all', bikeFilter:'all', infoFilter:'all' };
+let state = { passOnly:false, typeFilter:'all', visFilter:'all', sort:'distance', search:'', monthFilter:0, driveMax:12, campFilter:'all', bikeFilter:'all', dataCheck:'all' };
 const weatherCache={}, markerMap={}, driveCache={};
 
 function estimateDrive(miles){
@@ -1319,8 +1361,18 @@ function filteredParks(){
     if(state.campFilter==='tent'){const d=PARK_DETAILS[p.id];if(!d||!d.tentCamping||!d.tentCamping.available)return false;}
     if(state.bikeFilter==='bike'){const d=PARK_DETAILS[p.id];if(!d||!d.biking||!d.biking.available)return false;}
     if(state.bikeFilter==='ebike'){const d=PARK_DETAILS[p.id];if(!d||!d.biking||!d.biking.ebike)return false;}
-    if(state.infoFilter==='yes'&&!p.hasInfo)return false;
-    if(state.infoFilter==='no'&&p.hasInfo)return false;
+    if(state.dataCheck!=='all'){
+      const d=PARK_DETAILS[p.id];
+      if(state.dataCheck==='hasInfo-no'){if(d)return false;}
+      else{
+        const fld=state.dataCheck.replace('-no','');
+        let has;
+        if(fld==='things')has=d&&(d.things||d.thingsToDo||d.top5);
+        else if(fld==='hikeGain')has=d&&d.hikes&&d.hikes.every(h=>h.gain&&h.gain!=='—');
+        else has=d&&d[fld];
+        if(has)return false;
+      }
+    }
     return true;
   });
   const subSort=(a,b)=>{
@@ -1361,7 +1413,7 @@ function setMonth(v){state.monthFilter=parseInt(v);render();}
 function setDriveMax(v){state.driveMax=parseFloat(v);const lbl=document.getElementById('drive-slider-label');if(v>=12)lbl.textContent='Any distance';else{const h=Math.floor(v),m=Math.round((v-h)*60);lbl.textContent=h>0?(m>0?`Under ${h}h ${m}m`:`Under ${h}h`):`Under ${m}m`;}render();}
 function setCamp(v){state.campFilter=v;document.querySelectorAll('#camp-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.camp===v));render();}
 function setBike(v){state.bikeFilter=v;document.querySelectorAll('#bike-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.bike===v));render();}
-function setInfo(v){state.infoFilter=v;document.querySelectorAll('#info-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.info===v));render();}
+function setDataCheck(v){state.dataCheck=v;document.querySelectorAll('#dc-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.dc===v));render();}
 document.getElementById('search').addEventListener('input',e=>{state.search=e.target.value.trim();render();});
 
 // ============================================================
@@ -2247,7 +2299,7 @@ const PARK_DETAILS = {
     sunsetSpots: [{ spot: 'Riverbanks', note: 'Quiet, flat horizon views over the wetlands' }],
     googleRating: 4.5,
     googleReviews: '40',
-    highlight: 'One of California’s newest state parks, centered on restored river floodplain habitat where the San Joaquin and Tuolumne meet. Great for birding, walking, and seeing a modern park take shape.',
+    highlight: 'One of California\'s newest state parks, centered on restored river floodplain habitat where the San Joaquin and Tuolumne meet. Great for birding, walking, and seeing a modern park take shape.',
     bestSeason: 'November – April', bestMonths: [11,12,1,2,3,4],
     entranceFee: 'Free',
     carCamping: { available: false, cost: '', sites: 0, note: 'Currently day-use focused' },
@@ -2258,7 +2310,7 @@ const PARK_DETAILS = {
     things: ['Walk restored floodplain trails and river overlooks','Birdwatch for valley and riparian species','Visit in cooler months when the landscape is greener and more comfortable','Use it as a different kind of California park day focused on habitat restoration','Pair it with other Central Valley nature stops instead of expecting mountain-style scenery'],
     hikes: [
       { name: 'River Confluence Trails', distance: '2.0 mi', gain:'~100 ft', difficulty: 'Easy', note: 'Flat walking on new park trails and levee edges' },
-      { name: 'Floodplain Loop', distance: '3.0 mi', gain:'~150 ft', difficulty: 'Easy', note: 'Good starter walk to understand the park’s habitat-restoration feel' },
+      { name: 'Floodplain Loop', distance: '3.0 mi', gain:'~150 ft', difficulty: 'Easy', note: 'Good starter walk to understand the park\'s habitat-restoration feel' },
       { name: 'Levee View Walk', distance: '1.5 mi', gain:'50 ft', difficulty: 'Easy', note: 'Shorter option if you mainly want views and birding' }
     ],
     photoSpots: [
@@ -2338,7 +2390,7 @@ const PARK_DETAILS = {
     carCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
     tentCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
     parkingTip: 'Reserve ferry tickets well in advance, especially for weekends and peak seasons.',
-    nearbyFood: 'Eat before departure around Fisherman’s Wharf, the Embarcadero, or North Beach.',
+    nearbyFood: 'Eat before departure around Fisherman\'s Wharf, the Embarcadero, or North Beach.',
     elevation: '135 ft',
     things: ['Take the ferry ride across the bay','Walk the prison and island paths for changing skyline views','Look for nesting seabirds and strong photography angles','Spend extra time outside instead of treating the visit as only a cellhouse stop','Use it as one of the most unique Bay photo walks you can do in a half day'],
     hikes: [
@@ -2395,13 +2447,13 @@ const PARK_DETAILS = {
     entranceFee: 'Free',
     carCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
     tentCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
-    parkingTip: 'Treat it like a choose-your-own-adventure park: pick one zone such as Batteries to Bluffs, Crissy Field, or Lovers’ Lane.',
+    parkingTip: 'Treat it like a choose-your-own-adventure park: pick one zone such as Batteries to Bluffs, Crissy Field, or Lovers' Lane.',
     nearbyFood: 'Presidio food hall options, Crissy Field, and the Marina are all easy post-hike stops.',
     elevation: '250 ft',
     things: ['Walk one of the bluff or forest trail segments','Pair history stops with a beach or overlook loop','Use it for easy high-payoff Bay views without leaving the city','Build a choose-your-own route around bridge views, forest, or shoreline','Use it as one of the most flexible urban outdoor days in California'],
     hikes: [
       { name: 'Batteries to Bluffs Trail', distance: '3.0 mi', gain:'~600 ft', difficulty: 'Moderate', note: 'Classic bluff trail with bridge and surf views' },
-      { name: 'Lovers’ Lane and Ecology Trail', distance: '2.0 mi', gain:'~100 ft', difficulty: 'Easy', note: 'Shady eucalyptus and urban-forest feel' },
+      { name: 'Lovers' Lane and Ecology Trail', distance: '2.0 mi', gain:'~100 ft', difficulty: 'Easy', note: 'Shady eucalyptus and urban-forest feel' },
       { name: 'Crissy Field Walk', distance: '2.5 mi', gain:'50 ft', difficulty: 'Easy', note: 'Flat waterfront walk with nonstop Bay scenery' },
       { name: 'Presidio Coastal Trail Segment', distance: '3.5 mi', gain:'~700 ft', difficulty: 'Moderate', note: 'Good option if you want more mileage and bigger coastal exposure' }
     ],
@@ -2451,8 +2503,8 @@ const PARK_DETAILS = {
     entranceFee: 'Free grounds; some exhibits vary',
     carCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
     tentCamping: { available: false, cost: '', sites: 0, note: 'No camping' },
-    parkingTip: 'Transit is easiest; parking near Fisherman’s Wharf can be expensive and slow.',
-    nearbyFood: 'Aquatic Park, Fisherman’s Wharf, and North Beach are all immediate options.',
+    parkingTip: 'Transit is easiest; parking near Fisherman\'s Wharf can be expensive and slow.',
+    nearbyFood: 'Aquatic Park, Fisherman\'s Wharf, and North Beach are all immediate options.',
     elevation: '10 ft',
     things: ['Walk Hyde Street Pier and historic ships','Stroll Aquatic Park with open Bay views','Use it as part of a larger San Francisco waterfront day','Combine it with a swim, coffee, or waterfront walk nearby','Use it as a compact high-value stop on a city day with limited time'],
     hikes: [
@@ -2482,7 +2534,7 @@ const PARK_DETAILS = {
     parkingTip: 'Check site access rules ahead of time; some visits rely on scheduled tours or shuttle logistics.',
     nearbyFood: 'Danville and Alamo are the easy meal and coffee bases.',
     elevation: '600 ft',
-    things: ['See the playwright’s retreat and surrounding hillside setting','Use it as a peaceful East Bay culture stop','Pair it with nearby regional open space for a larger day outside','Treat it as a quiet half-day rather than a rushed drive-by stop','Visit for mood and setting as much as for literary history'],
+    things: ['See the playwright\'s retreat and surrounding hillside setting','Use it as a peaceful East Bay culture stop','Pair it with nearby regional open space for a larger day outside','Treat it as a quiet half-day rather than a rushed drive-by stop','Visit for mood and setting as much as for literary history'],
     hikes: [
       { name: 'Site Grounds Walk', distance: '0.8 mi', gain:'50 ft', difficulty: 'Easy', note: 'Short walking around the historic property and views' },
       { name: 'Danville Hills Add-on', distance: '2.0 mi', gain:'~100 ft', difficulty: 'Easy', note: 'Best if you pair the site with nearby East Bay open-space walking' }
@@ -2601,7 +2653,7 @@ const PARK_DETAILS = {
     ],
     wildlife: [
       { name: 'Marmot', note: 'Common around high-country boulder areas' },
-      { name: 'Clark’s Nutcracker', note: 'A classic high-Sierra bird near exposed alpine terrain' }
+      { name: 'Clark\'s Nutcracker', note: 'A classic high-Sierra bird near exposed alpine terrain' }
     ]
   },
   'ansel-adams-wilderness': {
@@ -2622,7 +2674,7 @@ const PARK_DETAILS = {
     hikes: [
       { name: 'Shadow Lake', distance: '7.0 mi', gain:'50 ft', difficulty: 'Moderate', note: 'Great intro route from Reds Meadow area' },
       { name: 'Ediza Lake', distance: '9.0 mi', gain:'50 ft', difficulty: 'Hard', note: 'Classic Minarets scenery and backpacking objective' },
-      { name: 'Thousand Island Lake', distance: '11.0 mi', gain:'50 ft', difficulty: 'Hard', note: 'One of the Sierra’s most famous alpine lake destinations' }
+      { name: 'Thousand Island Lake', distance: '11.0 mi', gain:'50 ft', difficulty: 'Hard', note: 'One of the Sierra\'s most famous alpine lake destinations' }
     ],
     photoSpots: [
       { name: 'Thousand Island Lake', note: 'Iconic Banner Peak backdrop in calm weather' },
@@ -2659,7 +2711,7 @@ const PARK_DETAILS = {
     ],
     wildlife: [
       { name: 'Mule Deer', note: 'Possible near lower trailheads and meadows' },
-      { name: 'Clark’s Nutcracker', note: 'Common in higher exposed Sierra terrain' }
+      { name: 'Clark\'s Nutcracker', note: 'Common in higher exposed Sierra terrain' }
     ]
   },
   'emigrant-wilderness': {
@@ -2697,7 +2749,7 @@ const PARK_DETAILS = {
     sunsetSpots: [{ spot: 'Weaverville Bally', note: 'High lookout providing massive panoramic views of the entire wilderness area as it glows in the evening' }],
     googleRating: 4.9,
     googleReviews: '1.1K',
-    highlight: 'One of California’s best wildernesses for dramatic lake backpacking, sharp granite ridges, and a feeling of remoteness that is hard to match outside the High Sierra.',
+    highlight: 'One of California\'s best wildernesses for dramatic lake backpacking, sharp granite ridges, and a feeling of remoteness that is hard to match outside the High Sierra.',
     bestSeason: 'July – September', bestMonths: [7,8,9],
     entranceFee: 'Free; permits may apply depending on trailhead/season',
     carCamping: { available: false, cost: '', sites: 0, note: 'Camping is primarily trailhead or backcountry based' },
@@ -4500,7 +4552,7 @@ const PARK_DETAILS = {
     elevation: '2500 ft',
     things: ['Visit during bloom season if conditions line up','See the San Andreas Fault trace and broad plain geography','Go for open-space silence and wildlife rather than park-style amenities','Use it as one of the best places to understand California interior landscape at scale','Bring more food, water, and patience than you would for a front-country park visit'],
     hikes: [
-      { name: 'Soda Lake Boardwalk', distance: '0.5 mi', gain:'50 ft', difficulty: 'Easy', note: 'Best quick introduction to the plain’s core landscape' },
+      { name: 'Soda Lake Boardwalk', distance: '0.5 mi', gain:'50 ft', difficulty: 'Easy', note: 'Best quick introduction to the plain\'s core landscape' },
       { name: 'Panorama Overlook', distance: '1.0 mi', difficulty: 'Easy', note: 'Short climb to a better sense of scale' },
       { name: 'Caliente Ridge Exploration', distance: '4.0 mi', gain:'~1,200 ft', difficulty: 'Moderate', note: 'Great in flower years for elevated views over the plain' }
     ],
@@ -4556,7 +4608,7 @@ const PARK_DETAILS = {
     ],
     wildlife: [
       { name: 'Bighorn Sheep', note: 'Possible in some steeper canyon and mountain areas' },
-      { name: 'Steller’s Jay', note: 'Common in higher pine-forest zones' }
+      { name: 'Steller\'s Jay', note: 'Common in higher pine-forest zones' }
     ]
   },
   'sand-to-snow-nm': {
@@ -4590,7 +4642,7 @@ const PARK_DETAILS = {
     parkingTip: 'Palm Springs area trailheads can be hot and busy; start early and carry more water than you think you need.',
     nearbyFood: 'Palm Springs, Palm Desert, and surrounding Coachella Valley towns are the easiest support bases.',
     elevation: '5200 ft',
-    things: ['Hike palm oases and desert canyons in winter or spring','Use it for classic Coachella Valley mountain scenery','Pair lower desert trails with cooler higher-elevation escapes','Come here for some of Southern California’s most satisfying cool-season trail days','Use it when you want desert scenery with more topographic punch than flatter parks'],
+    things: ['Hike palm oases and desert canyons in winter or spring','Use it for classic Coachella Valley mountain scenery','Pair lower desert trails with cooler higher-elevation escapes','Come here for some of Southern California\'s most satisfying cool-season trail days','Use it when you want desert scenery with more topographic punch than flatter parks'],
     hikes: [
       { name: 'Palm Canyon Trail', distance: '4.0 mi', gain:'~800 ft', difficulty: 'Moderate', note: 'Classic palm oasis desert route' },
       { name: 'Art Smith Trail', distance: '7.5 mi', gain:'~3,000 ft', difficulty: 'Hard', note: 'Big climb with sweeping valley views' },
@@ -4601,7 +4653,7 @@ const PARK_DETAILS = {
       { name: 'Coachella Valley Overlooks', note: 'Excellent after winter storms for crisp visibility' }
     ],
     wildlife: [
-      { name: 'Bighorn Sheep', note: 'One of the region’s signature wildlife sightings' },
+      { name: 'Bighorn Sheep', note: 'One of the region\'s signature wildlife sightings' },
       { name: 'Roadrunner', note: 'Possible on lower-elevation desert trails' }
     ]
   },
@@ -6638,6 +6690,13 @@ const PARK_DETAILS = {
     ]
   },
   'plumas-eureka':{
+    things: [
+      'Tour the historic Plumas-Eureka gold stamp mill',
+      'Hike to Eureka Peak for Sierra views',
+      'Fish in Jamison Creek or the lakes',
+      'Camp in the forest at Upper and Lower campgrounds',
+      'Ski the slopes where California\'s first ski races were held (1860s)'
+    ],
     highlight:"One of the best under-the-radar Sierra parks combining Gold Rush history with alpine scenery—mining relics, a museum, quiet forest camping, and strong hiking to lakes, meadows, and Eureka Peak.",
     bestSeason:"Jun–Oct",bestMonths:[6,7,8,9,10],
     fee:'Free',
@@ -6664,6 +6723,13 @@ const PARK_DETAILS = {
     ]
   },
   'auburn-sra':{
+    things: [
+      'Raft or kayak 40 miles of American River whitewater',
+      'Hike the Western States Trail along the canyon rim',
+      'Mountain bike the extensive trail network',
+      'Try gold panning in the river',
+      'Rock climb the river canyon walls'
+    ],
     highlight:"One of the best close-to-Sacramento adventure parks with steep canyon scenery, river access, and 100+ miles of trails for hiking, trail running, mountain biking, swimming holes, and summer rafting.",
     bestSeason:"Oct–May",bestMonths:[10,11,12,1,2,3,4,5],
     fee:'$10/vehicle',
@@ -6690,6 +6756,13 @@ const PARK_DETAILS = {
     ]
   },
   'folsom-lake':{
+    things: [
+      'Boat, jet ski, or waterski on the expansive reservoir',
+      'Swim at the popular Granite Bay beach',
+      'Mountain bike the extensive trail network',
+      'Fish for rainbow trout and bass',
+      'Camp at Beal\'s Point with lake views'
+    ],
     highlight:"One of the most versatile outdoor parks near Sacramento with lake beaches, boating, paddling, biking, and a huge trail network. Best when water levels are decent, late spring through early fall.",
     bestSeason:"May–Sep",bestMonths:[5,6,7,8,9],
     fee:'$10/vehicle',
@@ -6716,6 +6789,13 @@ const PARK_DETAILS = {
     ]
   },
   'washoe-meadows':{
+    things: [
+      'Hike through the meadow and Jeffrey pine forest',
+      'Watch for wildflowers in the mountain meadow (June-July)',
+      'Spot wildlife like mule deer and Steller\'s jays',
+      'Enjoy the quiet, undeveloped setting near South Lake Tahoe',
+      'Walk along the Upper Truckee River corridor'
+    ],
     highlight:"An undeveloped, quieter South Lake Tahoe park built around broad meadows, woodlands, and the Upper Truckee River. Best for peaceful walks, birding, spring wildflowers, and a break from busier Tahoe parks.",
     bestSeason:"May–Oct",bestMonths:[5,6,7,8,9,10],
     fee:'Free',
@@ -6742,6 +6822,13 @@ const PARK_DETAILS = {
     ]
   },
   'millerton-lake':{
+    things: [
+      'Boat and waterski on the San Joaquin reservoir',
+      'Swim at the day-use beaches',
+      'Fish for bass, trout, and catfish',
+      'Watch for bald eagles in winter (Nov-Mar)',
+      'Hike the lakeshore trails with foothill views'
+    ],
     highlight:"A warm-weather recreation park around a large foothill reservoir with boating, fishing, swimming, and campgrounds. Also has better-than-expected hiking on surrounding hills including Pincushion Mountain.",
     bestSeason:"Oct–May",bestMonths:[10,11,12,1,2,3,4,5],
     fee:'$10/vehicle',
@@ -6768,6 +6855,13 @@ const PARK_DETAILS = {
     ]
   },
   'burton-creek':{
+    things: [
+      'Hike the forested trails just minutes from Lake Tahoe',
+      'Snowshoe or cross-country ski in winter',
+      'Mountain bike the single-track through mixed forest',
+      'Spot wildlife in the largest undeveloped area on Tahoe',
+      'Enjoy the quiet escape from the busy Tahoe shore'
+    ],
     highlight:"An undeveloped Tahoe City park that feels quieter and more local than headline Tahoe shoreline stops. Best for mellow hiking, biking, snowshoeing, and connecting to the wider north-shore trail network.",
     bestSeason:"May–Oct",bestMonths:[5,6,7,8,9,10],
     fee:'Free',
@@ -6794,6 +6888,13 @@ const PARK_DETAILS = {
     ]
   },
   'kings-beach':{
+    things: [
+      'Swim in the clear alpine waters of Lake Tahoe',
+      'Build sandcastles on the public beach',
+      'Paddleboard or kayak along the North Shore',
+      'Watch the sunset over the lake from the pier',
+      'Walk to downtown Kings Beach shops and restaurants'
+    ],
     highlight:"One of the easiest, most family-friendly sandy beaches on the California side of Lake Tahoe. More about swimming, sand, and views than hiking—perfect for a classic North Lake Tahoe beach day.",
     bestSeason:"Jun–Sep",bestMonths:[6,7,8,9],
     fee:'$10/vehicle',
@@ -6820,6 +6921,13 @@ const PARK_DETAILS = {
     ]
   },
   'tahoe-sra':{
+    things: [
+      'Camp steps from the Lake Tahoe shoreline',
+      'Swim in the crystal-clear alpine waters',
+      'Launch a kayak or paddleboard from the park',
+      'Fish for mackinaw and rainbow trout',
+      'Walk to downtown Tahoe City shops and restaurants'
+    ],
     highlight:"A compact, historic campground-and-beach unit right in Tahoe City—one of the most convenient basecamps on the lake. Better for easy access and lakefront lounging than big wilderness hiking.",
     bestSeason:"May–Oct",bestMonths:[5,6,7,8,9,10],
     fee:'$10/vehicle',
@@ -6846,6 +6954,13 @@ const PARK_DETAILS = {
     ]
   },
   'ward-creek':{
+    things: [
+      'Hike the forest trails near Lake Tahoe\'s West Shore',
+      'Fish for trout in Ward Creek',
+      'Snowshoe through the snow-covered forest in winter',
+      'Watch for wildlife in the quiet mixed-conifer forest',
+      'Enjoy the peaceful creekside setting away from Tahoe crowds'
+    ],
     highlight:"An undeveloped Tahoe west-shore unit protecting creekside forest and meadow habitat. A quieter choice for easy family-friendly walks, mellow trail running, and linking into the Tahoe-area trail network.",
     bestSeason:"Apr–Oct",bestMonths:[4,5,6,7,8,9,10],
     fee:'Free',
@@ -6872,6 +6987,13 @@ const PARK_DETAILS = {
     ]
   },
   'marshall-gold':{
+    things: [
+      'Stand where James Marshall discovered gold in 1848',
+      'Pan for gold in the American River',
+      'Tour the replica of Sutter\'s sawmill',
+      'Walk the historic town of Coloma',
+      'Visit the Gold Discovery Museum and exhibits'
+    ],
     highlight:"One of California's most important history parks—preserving the site where gold was discovered in 1848 and triggered the Gold Rush. Excellent for history, living interpretation, gold panning, and scenic American River setting.",
     bestSeason:"Year-round",bestMonths:[3,4,5,6,9,10,11],
     fee:'$10/vehicle',
@@ -6898,6 +7020,13 @@ const PARK_DETAILS = {
     ]
   },
   'malakoff-diggins':{
+    things: [
+      'See the massive hydraulic mining cliffs — California\'s largest',
+      'Tour the ghost town of North Bloomfield',
+      'Hike the rim trail overlooking the colorful eroded landscape',
+      'Swim in Blair Lake on hot summer days',
+      'Camp in the atmospheric forest campground'
+    ],
     highlight:"One of California's most dramatic Gold Rush landscapes—a giant hydraulic mining scar, the preserved town of North Bloomfield, and quiet pine-forest camping that feels like an open-air museum meets backcountry basecamp.",
     bestSeason:"Apr–Oct",bestMonths:[4,5,6,9,10],
     fee:'$10/vehicle',
@@ -6924,6 +7053,13 @@ const PARK_DETAILS = {
     ]
   },
   'south-yuba-river':{
+    things: [
+      'Cross the 1862 Bridgeport Covered Bridge — longest single-span in the West',
+      'Swim in the emerald river pools',
+      'Hike the South Yuba Trail along the canyon',
+      'Try gold panning in the river',
+      'Photograph the covered bridge with wildflowers'
+    ],
     highlight:"One of Northern California's best river parks for swimming holes, wildflowers, mining history, and the iconic Bridgeport covered bridge. Scenic and rugged—easy access at the bridge, then steep and adventurous on the canyon trails.",
     bestSeason:"Mar–Oct",bestMonths:[3,4,5,6,9,10],
     fee:'$10/vehicle',
@@ -6950,6 +7086,13 @@ const PARK_DETAILS = {
     ]
   },
   'brannan-island':{
+    things: [
+      'Fish the Sacramento-San Joaquin Delta channels for bass and catfish',
+      'Launch a boat into the Delta waterways',
+      'Swim at the sandy beach on Franks Tract',
+      'Camp along the Delta with waterfront sites',
+      'Watch for river otters and migratory waterfowl'
+    ],
     highlight:"A laid-back Delta park built around boating, fishing, marsh views, and one of the better campgrounds in the region. More about water access, birding, and easy walking than dramatic scenery—a very practical and pleasant Delta basecamp.",
     bestSeason:"Mar–Nov",bestMonths:[3,4,5,9,10,11],
     fee:'$10/vehicle',
@@ -6976,6 +7119,13 @@ const PARK_DETAILS = {
     ]
   },
   'folsom-powerhouse':{
+    things: [
+      'Tour the historic 1895 powerhouse that pioneered long-distance power',
+      'See the original AC generators and equipment',
+      'Learn about the birth of California\'s electrical grid',
+      'Walk the short trail along the American River',
+      'Photograph the imposing Romanesque Revival building'
+    ],
     highlight:"A small but genuinely impressive engineering-history stop preserving one of the earliest long-distance AC power systems in the U.S. Scenic location above Lake Natoma makes it work as both a museum stop and starting point for longer river walks.",
     bestSeason:"Year-round",bestMonths:[1,2,3,4,5,6,9,10,11,12],
     fee:'$10/vehicle',
@@ -7002,12 +7152,19 @@ const PARK_DETAILS = {
     ]
   },
   'delta-meadows':{
+    things: [
+      'Explore the Sacramento Delta by boat',
+      'Fish the Delta channels for largemouth bass',
+      'Watch for river otters and mink',
+      'Birdwatch in the tule marshes',
+      'Enjoy the peaceful Delta waterways by kayak'
+    ],
     highlight:"One of the quieter and more atmospheric Delta units with levee walks, slough views, oak-and-willow habitat, and a strong old-Delta feel near the historic town of Locke.",
     bestSeason:"Oct–May",bestMonths:[1,2,3,4,5,10,11,12],
     fee:'Free',
     camping:{car:false,carCost:'N/A',carSites:'N/A',carNote:'Undeveloped day-use park property with no campground and minimal visitor services.',
              tent:false,tentCost:'N/A',tentSites:'N/A',tentNote:'No tent camping; pack out trash and expect minimal facilities.'},
-    parking:"Recently rehabilitated aggregate parking lot is the simplest access point; no restrooms or other services. Wear shoes you don\'t mind getting dusty or damp.",
+    parking:"Recently rehabilitated aggregate parking lot is the simplest access point; no restrooms or other services. Wear shoes you don't mind getting dusty or damp.",
     nearbyFood:"Al the Wop's in Locke (~5 min, old-school Delta steakhouse), Lockeport Grill & Fountain (~5 min, American), Mei Wah Beer Room (~5 min, casual Chinese-American)",
     elevation:'5 ft',
     googleRating:4.3,googleReviews:'150+',
@@ -7028,6 +7185,13 @@ const PARK_DETAILS = {
     ]
   },
   'locke-boarding-house':{
+    things: [
+      'Tour the historic boarding house museum',
+      'Walk the wooden sidewalks of the 1915 Chinese-American town',
+      'Learn about Delta Chinese-American history and culture',
+      'See the preserved artifacts and period rooms',
+      'Explore the unique architecture of Locke'
+    ],
     highlight:"This small museum preserves the most intimate side of Locke's Chinese American history, showing how laborers and families lived in the Delta boarding-house era. Best visited as part of a stroll through Locke—the only remaining rural town in the U.S. built by and for Chinese Americans.",
     bestSeason:"Year-round",bestMonths:[1,2,3,4,5,10,11,12],
     fee:'Free',
@@ -7054,6 +7218,13 @@ const PARK_DETAILS = {
     ]
   },
   'stone-lake':{
+    things: [
+      'Birdwatch for wintering sandhill cranes and raptors',
+      'Observe the restored wetland habitat',
+      'Photograph the large flocks of waterfowl',
+      'Walk the levee trails along the refuge',
+      'Look for river otters in the sloughs'
+    ],
     highlight:"Primarily a habitat-protection unit in the Pacific Flyway, protecting rare Central Valley lake, wetland, and riparian habitat. Excellent for birding and quiet seasonal nature walks rather than traditional park recreation.",
     bestSeason:"Oct–May",bestMonths:[1,2,3,4,5,10,11,12],
     fee:'Free',
@@ -7080,6 +7251,13 @@ const PARK_DETAILS = {
     ]
   },
   'bidwell-mansion':{
+    things: [
+      'Tour the ornate 1868 Victorian mansion',
+      'Learn about General Bidwell and the founding of Chico',
+      'Admire the period furnishings and architecture',
+      'Stroll the grounds and enjoy the shade trees',
+      'Attend a seasonal living history event'
+    ],
     highlight:"One of the most historically important state-park sites in Chico, anchoring the story of John and Annie Bidwell and the city's early development. Currently closed after a December 2024 fire—best approached as a closure-aware stop focused on the grounds and nearby Bidwell Park.",
     bestSeason:"Mar–Nov",bestMonths:[3,4,5,10,11],
     fee:'Currently closed',
@@ -7106,6 +7284,13 @@ const PARK_DETAILS = {
     ]
   },
   'bidwell-sacramento':{
+    things: [
+      'Fish for chinook salmon during the fall run',
+      'Hike the riparian corridor along the Sacramento River',
+      'Birdwatch for herons, eagles, and migrating songbirds',
+      'Swim in the river on hot summer days',
+      'Camp in the shaded riverside campground'
+    ],
     highlight:"A small, lightly developed riverside park best for fishing, quiet picnics, and a short nature loop. Its appeal is easy Sacramento River access and staying much quieter than larger Chico-area parks.",
     bestSeason:"Mar–Nov",bestMonths:[3,4,5,9,10,11],
     fee:'Free',
@@ -7132,6 +7317,13 @@ const PARK_DETAILS = {
     ]
   },
   'lake-oroville':{
+    things: [
+      'Boat on the massive reservoir surrounded by forested hills',
+      'Swim at the Lime Saddle or Loafer Creek swim areas',
+      'Fish for spotted bass, king salmon, and trout',
+      'Hike or mountain bike the lakeside trails',
+      'Camp at one of the many campgrounds with lake access'
+    ],
     highlight:"One of the biggest and most versatile inland recreation parks in Northern California with boating, swimming, horse camping, floating campsites, and a broad trail network. Especially strong for reservoir-centered trips with real campground infrastructure.",
     bestSeason:"Mar–Nov",bestMonths:[3,4,5,6,9,10,11],
     fee:'$8/vehicle',
@@ -7158,6 +7350,13 @@ const PARK_DETAILS = {
     ]
   },
   'colusa-sacramento':{
+    things: [
+      'Fish for salmon and striped bass on the Sacramento River',
+      'Camp along the tree-lined riverbank',
+      'Launch a boat into the Sacramento River',
+      'Watch for bald eagles and river otters',
+      'Enjoy shaded picnicking under the cottonwoods'
+    ],
     highlight:"A quiet Sacramento River stop with shady campsites, fishing access, boat launches, and levee walks. The towering cottonwood and willow trees provide exceptional shade for summer picnics and lazy river days along the Pacific Flyway.",
     bestSeason:"Spring–Fall",bestMonths:[3,4,5,6,9,10],
     fee:'$10/vehicle',
@@ -7184,6 +7383,13 @@ const PARK_DETAILS = {
     ]
   },
   'ahjumawi':{
+    things: [
+      'Kayak through the crystal-clear spring-fed waters',
+      'Fish for trophy trout in the volcanic springs',
+      'Hike across ancient lava formations and lava tubes',
+      'Watch for bald eagles, osprey, and great blue herons',
+      'Experience true wilderness accessible only by boat'
+    ],
     highlight:"One of California's most unique and remote parks, accessible only by boat. Crystal-clear aqua springs bubble up through jagged black lava rock, offering a silent, prehistoric landscape of lava flows, tule marshes, and unparalleled solitude.",
     bestSeason:"May–Oct",bestMonths:[5,6,7,8,9,10],
     fee:'Free (boat access only)',
@@ -7210,6 +7416,13 @@ const PARK_DETAILS = {
     ]
   },
   'william-ide':{
+    things: [
+      'Tour the restored 1852 adobe home on the Sacramento River',
+      'Learn about William B. Ide and the Bear Flag Revolt',
+      'Picnic on the shaded riverbank',
+      'Fish in the Sacramento River',
+      'Walk the short interpretive trail'
+    ],
     highlight:"A compact historic site on the Sacramento River preserving the reconstructed 1850s adobe home of California's short-lived Bear Flag Republic president. Towering heritage oak trees, living history demonstrations, and scenic river picnicking make it a charming, low-key stop.",
     bestSeason:"Spring–Fall",bestMonths:[3,4,5,9,10,11],
     fee:'Free',
@@ -7236,6 +7449,13 @@ const PARK_DETAILS = {
     ]
   },
   'woodson-bridge':{
+    things: [
+      'Fish for salmon and steelhead on the Sacramento River',
+      'Camp in the beautiful valley oak grove',
+      'Swim in the river on hot Central Valley days',
+      'Watch for migrating birds in the riparian corridor',
+      'Enjoy the peaceful riverside setting under ancient oaks'
+    ],
     highlight:"Nestled between the Sacramento River and a lush riparian forest, this quiet park is famous for its dense canopy of valley oaks. A prime location for birdwatching, peaceful river fishing, and shaded family camping between Chico and Red Bluff.",
     bestSeason:"Spring–Fall",bestMonths:[3,4,5,9,10,11],
     fee:'$8/vehicle',
@@ -7262,6 +7482,13 @@ const PARK_DETAILS = {
     ]
   },
   'hatfield-sra':{
+    things: [
+      'Fish for bass and catfish in the Merced River',
+      'Swim in the river during hot summer months',
+      'Camp in the riverside campground',
+      'Picnic under the shade trees along the water',
+      'Float the gentle river current on a tube'
+    ],
     highlight:"Bordered by the Merced River, this small shaded park is a hidden gem in the Central Valley. Towering oak trees and sandy river beaches make it a perfect, tranquil spot for summer picnics, lazy swimming, and easy family camping.",
     bestSeason:"Spring–Fall",bestMonths:[4,5,6,7,8,9,10],
     fee:'$10/vehicle',
@@ -7288,6 +7515,13 @@ const PARK_DETAILS = {
     ]
   },
   'great-valley-grasslands':{
+    things: [
+      'Hike through one of the last native bunchgrass prairies',
+      'Watch for Swainson\'s hawks and other raptors',
+      'Photograph the wildflower blooms in spring',
+      'Experience the vanishing Central Valley landscape',
+      'Birdwatch for grassland species found nowhere else nearby'
+    ],
     highlight:"One of the last remaining intact parcels of native Central Valley grassland and floodplain, protecting critical habitat for migrating birds and native grasses. Offers stark, quiet beauty with big skies and a much wilder feel than its name suggests.",
     bestSeason:"Spring",bestMonths:[3,4,5],
     fee:'Free',
@@ -7314,6 +7548,13 @@ const PARK_DETAILS = {
     ]
   },
   'mcconnell-sra':{
+    things: [
+      'Swim in the San Joaquin River on hot summer days',
+      'Fish for catfish and bass from the riverbank',
+      'Camp in the tree-lined riverside campground',
+      'Picnic in the shaded day-use areas',
+      'Walk the short nature trail through the riparian forest'
+    ],
     highlight:"A small, family-friendly oasis on the banks of the Merced River offering cool shade from massive cottonwood and sycamore trees in the hot Central Valley. A quiet local favorite for swimming, fishing, and relaxed camping.",
     bestSeason:"Spring–Fall",bestMonths:[4,5,6,7,8,9,10],
     fee:'$10/vehicle',
@@ -7340,6 +7581,13 @@ const PARK_DETAILS = {
     ]
   },
   'pacheco-sp':{
+    things: [
+      'Hike or horseback ride through rolling wildflower-covered hills',
+      'Mountain bike the fire roads with panoramic views',
+      'Watch for raptors and ground squirrels on the open grasslands',
+      'Photograph the wildflower super blooms (March-April)',
+      'Enjoy sweeping views from the coast to the Central Valley'
+    ],
     highlight:"Overlooking the San Luis Reservoir, this vast windswept landscape of rolling hills and ancient oak trees is famous for spectacular spring wildflower displays and 30 miles of rugged equestrian and mountain biking trails with sweeping Central Valley views.",
     bestSeason:"Spring–Fall",bestMonths:[3,4,5,10,11],
     fee:'$10/vehicle',
@@ -7366,6 +7614,13 @@ const PARK_DETAILS = {
     ]
   },
   'san-luis-reservoir':{
+    things: [
+      'Boat on the large reservoir in the Pacheco Pass hills',
+      'Fish for striped bass and catfish',
+      'Camp at the San Luis Creek or Basalt campgrounds',
+      'Watch for raptors and wintering waterfowl',
+      'Windsurf or kiteboard on the famously windy reservoir'
+    ],
     highlight:"A massive Central Valley reservoir renowned for steady, strong winds making it a hotspot for windsurfing and sailing. Also boasts some of the best striped bass fishing in California, with camping, swimming beaches, and panoramic grassland scenery.",
     bestSeason:"Spring–Fall",bestMonths:[3,4,5,9,10,11],
     fee:'$10/vehicle',
@@ -7392,6 +7647,13 @@ const PARK_DETAILS = {
     ]
   },
   'caswell-memorial':{
+    things: [
+      'Hike through the rare valley oak riparian forest',
+      'Swim in the Stanislaus River',
+      'Fish for bass and catfish from the riverbank',
+      'Look for river otters in the waterways',
+      'Camp in the shaded oak woodland campground'
+    ],
     highlight:"A rare, pristine remnant of the massive oak riparian forests that once blanketed the Central Valley. Walking the shaded trails feels like stepping back in time to a jungle-like California landscape, with the Stanislaus River offering swimming, tubing, and fishing.",
     bestSeason:"Spring–Fall",bestMonths:[4,5,6,7,8,9,10],
     fee:'$10/vehicle',
@@ -7418,6 +7680,13 @@ const PARK_DETAILS = {
     ]
   },
   'turlock-lake':{
+    things: [
+      'Waterski or wakeboard on the warm reservoir',
+      'Swim at the sandy lake beach',
+      'Fish for bass, bluegill, and catfish',
+      'Camp at the lakeside campground',
+      'Launch a boat from the paved ramp'
+    ],
     highlight:"A foothill reservoir park known for boating, swimming, fishing, and broad shoreline views. Note: the park has been undergoing renovations and may have limited access—check current status before visiting.",
     bestSeason:"Spring–Fall",bestMonths:[4,5,6,7,8,9,10],
     fee:'$10/vehicle',
@@ -7444,6 +7713,13 @@ const PARK_DETAILS = {
     ]
   },
   'colonel-allensworth':{
+    things: [
+      'Learn the history of the only Black-founded town in California',
+      'Tour the restored historic buildings and schoolhouse',
+      'Attend the annual Allensworth Old Time Jubilee',
+      'Walk the interpretive trail through the townsite',
+      'Visit the visitor center exhibits on Colonel Allensworth'
+    ],
     highlight:"One of the most important African American historic sites in California, preserving the only town in the state founded, financed, and governed by African Americans. Exploring the restored buildings offers a powerful and inspiring look into an important chapter of California history.",
     bestSeason:"Fall–Spring",bestMonths:[2,3,4,10,11],
     fee:'$8/vehicle',
@@ -7470,6 +7746,13 @@ const PARK_DETAILS = {
     ]
   },
   'tule-elk-snr':{
+    things: [
+      'Watch the tule elk herd from the viewing platform',
+      'Learn about this California-endemic elk subspecies',
+      'Photograph the elk in the golden grasslands',
+      'Birdwatch for hawks and grassland species',
+      'Visit during the fall rut when bulls are most active'
+    ],
     highlight:"A specialized wildlife reserve protecting California's endemic tule elk, a species once hunted to the brink of extinction. Offers an almost guaranteed opportunity to view these magnificent animals up close from a viewing platform—strongest in cooler months or early/late in the day.",
     bestSeason:"Fall–Spring",bestMonths:[1,2,3,4,9,10,11,12],
     fee:'$8/vehicle',
@@ -7496,6 +7779,13 @@ const PARK_DETAILS = {
     ]
   },
   'mcarthur-burney-falls':{
+    things: [
+      'Witness the stunning 129-ft Burney Falls',
+      'Hike the Falls Loop Trail for multiple viewpoints',
+      'Fish for trout in Lake Britton',
+      'Kayak or canoe on Lake Britton',
+      'Camp in the forested campground near the falls'
+    ],
     highlight:"Home to the spectacular 129-foot Burney Falls, famously called the 'Eighth Wonder of the World' by Theodore Roosevelt. Crystal-clear water gushes from the mossy rock face itself, creating a lush, misty oasis surrounded by forest camping and Lake Britton recreation.",
     bestSeason:"May–Oct",bestMonths:[4,5,6,7,8,9,10],
     fee:'$10/vehicle',
@@ -7522,6 +7812,13 @@ const PARK_DETAILS = {
     ]
   },
   'castle-crags':{
+    things: [
+      'Hike the Crags Trail to the base of the granite spires',
+      'Camp beneath towering castle-like rock formations',
+      'Walk a section of the Pacific Crest Trail',
+      'Fish the upper Sacramento River for trout',
+      'Photograph the dramatic granite spires at sunset'
+    ],
     highlight:"Jaw-dropping glacier-polished granite spires rising 6,000 feet above the Sacramento River canyon, with world-class hiking to Castle Dome, ancient forests, and stunning Mount Shasta views. One of Northern California's most dramatic mountain parks.",
     bestSeason:"May–Oct",bestMonths:[5,6,7,8,9,10],
     fee:'$8/vehicle',
@@ -12244,6 +12541,574 @@ const PARK_DETAILS = {
       {name:'Western Fence Lizard',note:'Constantly seen doing push-ups on warm sandstone boulders'}
     ]
   }
+,
+
+// ---- Batch 24 State Parks (LA/San Diego/OC beaches + SoCal historic) ----
+'dockweiler-sb':{
+    highlight:'Three miles of wide sandy beach beneath the LAX flight path, famous for its beach bonfire pits — one of the few LA beaches where open fires are allowed. Great for sunset watching with planes landing overhead.',
+    googleRating:4.4, googleReviews:'8.5K',
+    bestSeason:'Year-round', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free (parking fee)',
+    parkingTip:'Large pay lots along the beach; $3–$15 depending on section. RV lot on the south end.',
+    nearbyFood:'In-N-Out Burger (~5 min), El Segundo Brewing (~10 min), local food trucks along Vista Del Mar',
+    elevation:'15 ft',
+    things:['Light a bonfire in one of the beach fire pits','Watch planes land at LAX from the sand','Bike the Marvin Braude coastal trail','Fly a kite on the wide-open beach','Catch a Pacific sunset with silhouetted jets'],
+    hikes:[{name:'Marvin Braude Bike Trail (Beach Section)',distance:'3.0 mi',gain:'Flat',difficulty:'Easy',note:'Paved coastal path from Playa del Rey to El Segundo'}],
+    wildlife:[{name:'California Gull',note:'Large flocks year-round along the surf line'},{name:'Sanderling',note:'Small shorebirds running along the wave edge'}],
+    bestTime:'Sunset',
+    cellSignal:'Excellent — urban beach with full coverage'
+},
+'santa-monica-sb':{
+    highlight:'Iconic wide beach stretching from the Santa Monica Pier south to Venice, with world-class people-watching, the original Muscle Beach site, and easy access to the boardwalk and Third Street Promenade.',
+    googleRating:4.6, googleReviews:'25K',
+    bestSeason:'Year-round', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free (parking fee)',
+    parkingTip:'Pier deck lot ($10–$20), beach lots along PCH, or take Metro Expo Line to Downtown Santa Monica.',
+    nearbyFood:'Bay Cities Italian Deli (~5 min), Milo & Olive (~10 min), The Lobster at the pier',
+    elevation:'10 ft',
+    things:['Ride the Pacific Park Ferris wheel on the pier','Walk the Santa Monica Pier and watch street performers','Play volleyball on the famous beach courts','Bike or skate The Strand to Venice','Watch the sunset from the pier overlook'],
+    hikes:[{name:'The Strand (Santa Monica to Venice)',distance:'3.0 mi',gain:'Flat',difficulty:'Easy',note:'Iconic paved beachfront path past Muscle Beach and Venice canals'}],
+    wildlife:[{name:'California Brown Pelican',note:'Dive-bombing for fish near the pier'},{name:'Bottlenose Dolphin',note:'Often visible from the pier surfacing in pods'}],
+    bestTime:'Late afternoon to sunset',
+    cellSignal:'Excellent'
+},
+'will-rogers-sb':{
+    highlight:'A broad, less-crowded beach just north of Santa Monica, popular with locals for swimming, bodysurfing, and beach volleyball. Named after the humorist whose ranch sits in the hills above.',
+    googleRating:4.6, googleReviews:'5K',
+    bestSeason:'Year-round', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free (parking fee)',
+    parkingTip:'Pay lot on PCH ($3–$15); fills quickly on summer weekends. Street parking along PCH is limited.',
+    nearbyFood:'Palisades Village (~10 min) — Hank\'s, Sweet Rose Creamery, Bay Theatre area restaurants',
+    elevation:'10 ft',
+    things:['Bodysurf the consistent shore break','Play beach volleyball on well-maintained courts','Walk south to the Santa Monica Pier','Jog the wet sand at low tide','Fly a kite on the wide beach'],
+    hikes:[{name:'Beach Walk to Santa Monica Pier',distance:'2.5 mi',gain:'Flat',difficulty:'Easy',note:'Walk along the surf from Will Rogers to the pier and back'}],
+    wildlife:[{name:'Western Snowy Plover',note:'Endangered shorebird nesting on upper beach in spring'},{name:'California Sea Lion',note:'Occasionally hauled out on rocks near lifeguard towers'}],
+    bestTime:'Morning (less crowded)',
+    cellSignal:'Excellent'
+},
+'point-dume-sb':{
+    highlight:'Dramatic blufftop headland and cove beach in Malibu with stunning views of Santa Monica Bay and the Channel Islands. The rocky point is a premier whale-watching spot in winter and spring.',
+    googleRating:4.7, googleReviews:'6K',
+    bestSeason:'Year-round', bestMonths:[1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee:'Free',
+    parkingTip:'Small Westward Beach lot fills early ($8). Alternatively, park on Westward Beach Road. The bluff trail is accessed from Cliffside Drive.',
+    nearbyFood:'Malibu Seafood (~10 min, PCH), Broad Street Oyster Co (~15 min), Malibu Farm Pier Cafe (~15 min)',
+    elevation:'203 ft (bluff top)',
+    things:['Hike to the bluff top for panoramic ocean views','Watch gray whales migrate (Dec–Apr)','Explore tide pools at the base of the point','Swim or bodysurf at Westward Beach','Photograph the dramatic sea cliffs at sunset'],
+    hikes:[{name:'Point Dume Bluff Trail',distance:'0.5 mi',gain:'100 ft',difficulty:'Easy',note:'Short steep climb to sweeping coastal views and whale-watching platform'}],
+    wildlife:[{name:'Gray Whale',note:'Visible from the bluff during winter migration (Dec–Apr)'},{name:'California Sea Lion',note:'Hauled out on rocks below the point'},{name:'Brown Pelican',note:'Soaring along the cliff face'}],
+    bestTime:'Early morning or sunset',
+    cellSignal:'Good'
+},
+'pio-pico':{
+    highlight:'The last Mexican governor of California\'s rancho, now a state historic park preserving the 1852 adobe home of Pio Pico. Small but significant site for California history, with a restored courtyard garden.',
+    googleRating:4.3, googleReviews:'800',
+    bestSeason:'Year-round', bestMonths:[1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee:'$3 per adult',
+    parkingTip:'Free lot on Pioneer Blvd with ample spaces.',
+    nearbyFood:'Whittier Blvd restaurants (~5 min) — Mexican, American, and Filipino options',
+    elevation:'180 ft',
+    things:['Tour the restored 1852 Pio Pico adobe','Learn about California\'s Mexican-era history','Walk the courtyard garden with native plants','See original rancho-era artifacts','Photograph the historic adobe architecture'],
+    hikes:[],
+    wildlife:[{name:'Say\'s Phoebe',note:'Common around the adobe buildings'},{name:'Anna\'s Hummingbird',note:'Year-round in the courtyard garden'}],
+    bestTime:'Morning',
+    cellSignal:'Excellent'
+},
+'watts-towers':{
+    highlight:'Simon Rodia\'s monumental folk art masterpiece — 17 interconnected sculptural towers built over 33 years (1921–1954) from steel, mortar, and found objects including pottery shards, seashells, and glass bottles. A National Historic Landmark and UNESCO consideration site.',
+    googleRating:4.5, googleReviews:'3K',
+    bestSeason:'Year-round', bestMonths:[1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee:'$7 adults (guided tour)',
+    parkingTip:'Street parking on 107th St and Graham Ave. Limited but usually available.',
+    nearbyFood:'Local soul food and Mexican restaurants along 103rd Street',
+    elevation:'120 ft',
+    things:['Take a guided tour of the 17 towers','Admire the intricate mosaic detail up close','Visit the Watts Towers Arts Center next door','Learn about Simon Rodia\'s 33-year vision','Photograph the towers against the sky'],
+    hikes:[],
+    wildlife:[],
+    bestTime:'Mid-morning (best light on towers)',
+    cellSignal:'Excellent'
+},
+'corona-del-mar':{
+    highlight:'A beautiful cove beach framed by rocky headlands in Newport Beach, with excellent tide pools, clear water for snorkeling, and a picturesque flower-lined stairway access. More sheltered than open coast beaches.',
+    googleRating:4.7, googleReviews:'4K',
+    bestSeason:'Year-round', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free (parking fee)',
+    parkingTip:'Metered street parking on Ocean Blvd fills early. Paid lot at Inspiration Point. Arrive before 9am on weekends.',
+    nearbyFood:'Bear Flag Fish Company (~5 min), Bandera (~10 min), Cafe Gratitude (~5 min)',
+    elevation:'15 ft',
+    things:['Explore the rocky tide pools at low tide','Snorkel in the clear cove waters','Photograph the flower-lined stairway to the beach','Watch the sunset from Inspiration Point','Bodysurf the sheltered waves'],
+    hikes:[{name:'Inspiration Point to Little Corona',distance:'0.5 mi',gain:'100 ft',difficulty:'Easy',note:'Short walk between the two beach areas with great overlook'}],
+    wildlife:[{name:'Garibaldi',note:'Bright orange fish visible in the clear cove waters'},{name:'Pacific Sea Star',note:'Common in the tide pools'},{name:'Black Oystercatcher',note:'Feeds on rocks at the cove edges'}],
+    bestTime:'Morning (tide pools) or sunset',
+    cellSignal:'Excellent'
+},
+'leucadia-sb':{
+    highlight:'A laid-back Encinitas beach known for its surf breaks and scenic blufftop access. The Leucadia neighborhood above has a funky, artistic character with plant nurseries and local cafes. Less crowded than nearby beaches.',
+    googleRating:4.6, googleReviews:'1.5K',
+    bestSeason:'Year-round', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free',
+    parkingTip:'Limited street parking on Neptune Ave. Beacon\'s Beach stairway access on the south end.',
+    nearbyFood:'Leucadia Pizzeria (~5 min), Pannikin Coffee & Tea (~5 min), Haggo\'s Organic Taco (~5 min)',
+    elevation:'10 ft',
+    things:['Surf the consistent Beacon\'s Beach break','Descend the long Beacon\'s Beach stairway to the sand','Walk the blufftop along Neptune Ave','Browse Leucadia\'s quirky plant nurseries and shops','Watch the sunset from the bluff'],
+    hikes:[{name:'Leucadia Beach Walk',distance:'2.0 mi',gain:'Flat',difficulty:'Easy',note:'Walk the sand between Beacon\'s and Grandview beach accesses'}],
+    wildlife:[{name:'Brown Pelican',note:'Soaring in lines along the surf zone'},{name:'Leopard Shark',note:'Harmless sharks aggregate in warm shallow water in summer'}],
+    bestTime:'Sunset',
+    cellSignal:'Excellent'
+},
+'moonlight-sb':{
+    highlight:'Encinitas\' most popular beach, named for the moonlight picnics once held here. A wide, family-friendly strand with a large parking lot, snack bar, volleyball courts, and gentle waves ideal for learning to surf.',
+    googleRating:4.7, googleReviews:'5K',
+    bestSeason:'Year-round', bestMonths:[5,6,7,8,9,10],
+    entranceFee:'Free',
+    parkingTip:'Large free lot on B Street fills by mid-morning on summer weekends. Overflow street parking on 3rd and 4th Streets.',
+    nearbyFood:'Fish 101 (~5 min), Swami\'s Cafe (~5 min), Union Kitchen & Tap (~5 min)',
+    elevation:'10 ft',
+    things:['Learn to surf on the gentle beginner waves','Play beach volleyball on the public courts','Walk south to Swami\'s surf break and the Self-Realization Gardens','Grab food at the beachside snack bar','Watch surfers from the D Street viewpoint'],
+    hikes:[{name:'Moonlight to Swami\'s Beach Walk',distance:'1.5 mi',gain:'Flat',difficulty:'Easy',note:'Sandy walk past rocky coves to the famous surf break'}],
+    wildlife:[{name:'Great Blue Heron',note:'Stalks the rocky reef at low tide'},{name:'California Ground Squirrel',note:'Common on the bluff edges'}],
+    bestTime:'Morning (surfing) or sunset',
+    cellSignal:'Excellent'
+},
+
+// ---- Santa Clara County Parks ----
+'almaden-quicksilver':{
+    highlight:'A former mercury mining district turned 4,163-acre park with 34 miles of multi-use trails through oak woodlands, grasslands, and historic mine ruins. The Hacienda furnace yard and mining museum tell the story of California\'s quicksilver heritage.',
+    googleRating:4.7, googleReviews:'3.5K',
+    bestSeason:'Fall – Spring', bestMonths:[2,3,4,5,10,11],
+    entranceFee:'Free (parking fee at some lots)',
+    parkingTip:'Hacienda entrance is most popular; Mockingbird Hill entrance is less crowded with better trail access.',
+    nearbyFood:'Almaden Valley restaurants (~10 min) — various options along Almaden Expwy',
+    elevation:'1,810 ft',
+    things:['Explore the historic Hacienda furnace yard and mining ruins','Hike to the summit of Mine Hill for 360-degree views','Mountain bike the rolling fire roads','Spot raptors and wildflowers in spring','Visit the New Almaden Mining Museum'],
+    hikes:[
+      {name:'Mine Hill Trail to Bull Run',distance:'6.5 mi',gain:'1,100 ft',difficulty:'Moderate',note:'Loop through mine ruins and oak woodlands'},
+      {name:'Randol Trail Loop',distance:'4.5 mi',gain:'800 ft',difficulty:'Moderate',note:'Rolling hills with great wildflowers in spring'},
+      {name:'Hacienda Trail to English Camp',distance:'3.5 mi',gain:'600 ft',difficulty:'Easy-Moderate',note:'Historic route to the mining settlement'}
+    ],
+    wildlife:[{name:'Golden Eagle',note:'Nests in the park; visible soaring over ridges'},{name:'Acorn Woodpecker',note:'Abundant in the oak woodlands'},{name:'Tarantula',note:'Males cross trails during fall mating season (Oct-Nov)'}],
+    bestTime:'Morning'
+},
+'alviso-marina':{
+    highlight:'A South Bay gateway to 30+ square miles of tidal marshland and restored salt ponds on the edge of San Francisco Bay. Expansive skies, migratory shorebirds, and a ghost-town feel from the sinking former port town of Alviso.',
+    googleRating:4.3, googleReviews:'1.5K',
+    bestSeason:'Fall – Spring', bestMonths:[10,11,12,1,2,3,4],
+    entranceFee:'Free',
+    parkingTip:'Small lot at the marina — usually available. Trails start from the boat launch area.',
+    nearbyFood:'Vahl\'s Restaurant in Alviso (~2 min, classic steakhouse since 1947)',
+    elevation:'10 ft',
+    things:['Walk the levee trails for wide-open bay views','Birdwatch for thousands of migratory shorebirds','Kayak through tidal sloughs at high tide','Photograph the salt ponds\' vivid colors from the trail','Explore the fading historic buildings of Alviso village'],
+    hikes:[
+      {name:'Alviso Slough Trail',distance:'3.0 mi',gain:'Flat',difficulty:'Easy',note:'Levee walk along the slough to the bay edge'},
+      {name:'Environmental Education Center Loop',distance:'1.5 mi',gain:'Flat',difficulty:'Easy',note:'Flat boardwalk and levee trail with interpretive signs'}
+    ],
+    wildlife:[{name:'American Avocet',note:'Elegant shorebird common in the salt ponds'},{name:'Burrowing Owl',note:'Nests in levee edges year-round'},{name:'Northern Harrier',note:'Low-flying raptor hunting over the marsh'}],
+    bestTime:'Early morning'
+},
+'anderson-lake':{
+    highlight:'Santa Clara County\'s largest reservoir park, set against the Diablo Range foothills. Popular for bass fishing and hiking with valley views, though the lake level varies dramatically with rainfall.',
+    googleRating:4.3, googleReviews:'1K',
+    bestSeason:'Spring – Fall', bestMonths:[3,4,5,6,9,10],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Day-use parking at the main lot near the boat ramp.',
+    nearbyFood:'Morgan Hill restaurants (~10 min) along Monterey Road',
+    elevation:'640 ft',
+    things:['Fish for largemouth bass and catfish','Hike the trails with reservoir and valley views','Horseback ride the equestrian trails','Watch raptors soar over the Diablo Range foothills','Photograph wildflowers in the grasslands (spring)'],
+    hikes:[
+      {name:'Live Oak Trail',distance:'3.0 mi',gain:'400 ft',difficulty:'Easy-Moderate',note:'Gentle climb with lake and valley views'},
+      {name:'Coyote Ridge Trail',distance:'5.0 mi',gain:'700 ft',difficulty:'Moderate',note:'Ridge walk with panoramic views of the reservoir'}
+    ],
+    wildlife:[{name:'Red-tailed Hawk',note:'Very common soaring over the open grasslands'},{name:'Wild Turkey',note:'Flocks in the oak woodlands'},{name:'Black-tailed Deer',note:'Frequently seen on hillsides at dawn and dusk'}],
+    bestTime:'Morning'
+},
+'calero':{
+    highlight:'Rolling oak-studded hills around Calero Reservoir with 19 miles of trails popular with mountain bikers and equestrians. The Bald Peaks area offers some of the best valley views in the county park system.',
+    googleRating:4.6, googleReviews:'1.8K',
+    bestSeason:'Fall – Spring', bestMonths:[2,3,4,5,10,11],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Main lot on McKean Road can fill on spring weekends. Rancho San Vicente entrance offers alternate access.',
+    nearbyFood:'Almaden Valley or South San Jose restaurants (~15 min)',
+    elevation:'1,440 ft',
+    things:['Mountain bike the excellent single-track and fire roads','Ride horseback through the oak woodlands','Hike to Bald Peaks for panoramic valley views','Fish for bass at the reservoir','Watch for raptors and tarantula crossings in fall'],
+    hikes:[
+      {name:'Figueroa Trail to Bald Peaks',distance:'6.0 mi',gain:'1,000 ft',difficulty:'Moderate',note:'Rewarding climb to the best viewpoint'},
+      {name:'Pena Trail Loop',distance:'4.0 mi',gain:'600 ft',difficulty:'Easy-Moderate',note:'Popular MTB loop through oak woodland'},
+      {name:'Los Cerritos Trail',distance:'3.0 mi',gain:'500 ft',difficulty:'Easy-Moderate',note:'Connects to Almaden Quicksilver park'}
+    ],
+    wildlife:[{name:'Golden Eagle',note:'Occasionally spotted over Bald Peaks'},{name:'Acorn Woodpecker',note:'Common in the dense oak groves'},{name:'Bobcat',note:'Elusive but present; sometimes seen at dawn'}],
+    bestTime:'Morning'
+},
+'chesbro-reservoir':{
+    highlight:'A small, quiet reservoir park in the hills south of San Jose, popular for shoreline fishing and peaceful walking. Less visited than neighboring parks, making it a good escape for solitude.',
+    googleRating:4.2, googleReviews:'500',
+    bestSeason:'Fall – Spring', bestMonths:[3,4,5,10,11],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Small lot at the entrance — rarely fills.',
+    nearbyFood:'Morgan Hill restaurants (~10 min)',
+    elevation:'500 ft',
+    things:['Fish for bass and bluegill from the shoreline','Walk the peaceful trail around the reservoir','Birdwatch for herons and egrets','Enjoy a quiet picnic by the water','Photograph reflections on calm mornings'],
+    hikes:[
+      {name:'Chesbro Reservoir Loop',distance:'2.0 mi',gain:'100 ft',difficulty:'Easy',note:'Gentle path around the reservoir shoreline'}
+    ],
+    wildlife:[{name:'Great Blue Heron',note:'Often seen fishing along the shoreline'},{name:'Green Heron',note:'Skulks in the vegetation at the water\'s edge'},{name:'Western Pond Turtle',note:'Basks on logs in warm weather'}],
+    bestTime:'Morning'
+},
+'chitactac-adams':{
+    highlight:'A significant Ohlone cultural heritage site with bedrock mortars, petroglyphs, and interpretive trails along Uvas Creek. One of the few places in the county where you can see tangible evidence of indigenous life spanning thousands of years.',
+    googleRating:4.4, googleReviews:'300',
+    bestSeason:'Year-round', bestMonths:[3,4,5,9,10,11],
+    entranceFee:'Free',
+    parkingTip:'Small lot on Watsonville Road — usually available.',
+    nearbyFood:'Gilroy restaurants (~10 min)',
+    elevation:'350 ft',
+    things:['View the ancient bedrock mortars used for grinding acorns','Study the Ohlone petroglyphs carved into boulders','Walk the interpretive trail along Uvas Creek','Learn about the Ohlone people at the information displays','Enjoy the shaded creekside setting'],
+    hikes:[
+      {name:'Heritage Trail Loop',distance:'0.5 mi',gain:'Flat',difficulty:'Easy',note:'Interpretive loop past mortars and petroglyphs'}
+    ],
+    wildlife:[{name:'Acorn Woodpecker',note:'Abundant in the oak trees along the creek'},{name:'Western Scrub-Jay',note:'Noisy and common throughout'}],
+    bestTime:'Morning'
+},
+'coyote-creek-parkway':{
+    highlight:'A paved multi-use trail corridor along Coyote Creek connecting south San Jose to the Bay Trail network. Popular commuter and recreation route for cyclists, joggers, and birdwatchers.',
+    googleRating:4.2, googleReviews:'800',
+    bestSeason:'Year-round', bestMonths:[3,4,5,6,9,10],
+    entranceFee:'Free',
+    parkingTip:'Access from Hellyer County Park lot or various street-side trailheads.',
+    nearbyFood:'Restaurants along Monterey Road (~5 min from Hellyer)',
+    elevation:'100 ft',
+    things:['Bike the paved trail for commuting or recreation','Jog or walk along the shaded creek corridor','Birdwatch for herons, egrets, and songbirds','Connect to the Bay Trail for longer rides','Enjoy the riparian scenery'],
+    hikes:[
+      {name:'Coyote Creek Trail (Hellyer to Anderson)',distance:'15.0 mi',gain:'Flat',difficulty:'Easy',note:'Paved multi-use path along the creek — great for cycling'}
+    ],
+    wildlife:[{name:'Great Egret',note:'Wades along the creek year-round'},{name:'Anna\'s Hummingbird',note:'Common in the riparian vegetation'},{name:'Green Heron',note:'Skulks along quieter creek sections'}],
+    bestTime:'Morning'
+},
+'coyote-lake-harvey-bear':{
+    highlight:'Two parks in one: Coyote Lake offers lakeside camping and bass fishing, while the adjoining Harvey Bear Ranch features rolling grasslands with wildflowers and wide-open ridge views of the southern Santa Clara Valley.',
+    googleRating:4.4, googleReviews:'1.2K',
+    bestSeason:'Spring – Fall', bestMonths:[3,4,5,6,9,10],
+    entranceFee:'$6 parking fee',
+    carCamping:{available:true,cost:'$25/night',sites:'74',note:'Lakeside sites; some with shade. Reservable.'},
+    tentCamping:{available:true,cost:'$25/night',sites:'74',note:'Same sites as car camping; no separate tent area'},
+    parkingTip:'Coyote Lake lot near the boat ramp. Harvey Bear Ranch has its own entrance on Roop Road.',
+    nearbyFood:'Gilroy restaurants (~15 min)',
+    elevation:'800 ft',
+    things:['Camp by the lake under the stars','Fish for bass, crappie, and catfish','Hike the Harvey Bear Ranch grasslands for wildflowers','Mountain bike the fire roads with valley views','Watch for raptors over the open hills'],
+    hikes:[
+      {name:'Harvey Bear - Mendoza Trail Loop',distance:'5.0 mi',gain:'700 ft',difficulty:'Moderate',note:'Rolling grasslands with spring wildflowers and valley views'},
+      {name:'Coyote Lake Shoreline Trail',distance:'2.0 mi',gain:'100 ft',difficulty:'Easy',note:'Flat walk along the lake edge'}
+    ],
+    wildlife:[{name:'Bald Eagle',note:'Winters at the lake (Nov–Mar)'},{name:'Wild Turkey',note:'Flocks in the grasslands'},{name:'California Newt',note:'Crosses trails after rains in winter/spring'}],
+    bestTime:'Morning'
+},
+'ed-levin':{
+    highlight:'A Bay Area favorite for its steep hike to Monument Peak with sweeping views, plus hang gliding, disc golf, and one of the area\'s best off-leash dog parks. The park spans from the valley floor to 2,594 ft.',
+    googleRating:4.6, googleReviews:'3K',
+    bestSeason:'Fall – Spring', bestMonths:[2,3,4,5,10,11],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Sandy Wool Lake lot for most trails. Spring Valley lot for Monument Peak via Agua Caliente Trail.',
+    nearbyFood:'Milpitas restaurants (~10 min) along Calaveras Blvd',
+    elevation:'2,594 ft',
+    things:['Hike to Monument Peak for 360-degree Bay views','Watch hang gliders launch from the ridge','Play the 27-hole disc golf course','Fish at Sandy Wool Lake','Bring your dog to the large off-leash area'],
+    hikes:[
+      {name:'Monument Peak via Tularcitos Trail',distance:'7.6 mi',gain:'2,100 ft',difficulty:'Hard',note:'Steep grind rewarded with the best panoramic views in the East Bay foothills'},
+      {name:'Sandy Wool Lake Loop',distance:'1.5 mi',gain:'50 ft',difficulty:'Easy',note:'Family-friendly walk around the stocked fishing lake'},
+      {name:'Agua Caliente Trail to Monument Peak',distance:'5.5 mi',gain:'2,000 ft',difficulty:'Hard',note:'Steeper, shorter route to the summit'}
+    ],
+    wildlife:[{name:'Golden Eagle',note:'Nests in the hills; visible over the ridgeline'},{name:'California Ground Squirrel',note:'Ubiquitous at the parking lots and picnic areas'},{name:'Red-tailed Hawk',note:'Common year-round soaring on thermals'}],
+    bestTime:'Early morning (cooler for the steep climb)'
+},
+'field-sports':{
+    highlight:'Santa Clara County\'s public shooting range, offering shotgun (trap, skeet), rifle, and archery ranges south of San Jose. A practical, no-frills facility for target sports.',
+    googleRating:4.0, googleReviews:'500',
+    bestSeason:'Year-round', bestMonths:[1,2,3,4,5,6,7,8,9,10,11,12],
+    entranceFee:'Range fees vary ($6–$10)',
+    parkingTip:'Ample parking at the facility.',
+    nearbyFood:'South San Jose restaurants (~10 min) along Monterey Road',
+    elevation:'300 ft',
+    things:['Shoot trap and skeet on the shotgun ranges','Practice at the rifle range','Try archery at the dedicated range','Take a beginner shooting class','Join local shooting club events'],
+    hikes:[],
+    wildlife:[],
+    bestTime:'Morning (less busy)'
+},
+'hellyer':{
+    highlight:'A Coyote Creek trail hub in south San Jose with a velodrome (bike racing track), stocked fishing lake, large picnic areas, and direct access to the paved Coyote Creek Trail. Great for families and cyclists.',
+    googleRating:4.4, googleReviews:'2.5K',
+    bestSeason:'Year-round', bestMonths:[3,4,5,6,9,10],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Large main lot near the lake — usually available.',
+    nearbyFood:'Restaurants along Monterey Road (~5 min)',
+    elevation:'150 ft',
+    things:['Ride the Coyote Creek Trail on bike','Fish the stocked Cottonwood Lake','Watch velodrome bike races','Picnic in the large shaded areas','Walk or jog the creekside trails'],
+    hikes:[
+      {name:'Coyote Creek Trail (from Hellyer)',distance:'Variable',gain:'Flat',difficulty:'Easy',note:'Paved path north to the bay or south to Anderson Lake'}
+    ],
+    wildlife:[{name:'Great Blue Heron',note:'Common along Coyote Creek'},{name:'Mallard',note:'Abundant at Cottonwood Lake'},{name:'Red-shouldered Hawk',note:'Perches in trees along the creek corridor'}],
+    bestTime:'Morning or late afternoon'
+},
+'joseph-grant':{
+    highlight:'At 9,522 acres, one of the largest parks in the county system, spanning rolling grasslands and oak woodlands in the Diablo Range. With 51 miles of trails, it offers true backcountry feel surprisingly close to San Jose.',
+    googleRating:4.7, googleReviews:'2K',
+    bestSeason:'Spring – Fall', bestMonths:[3,4,5,6,10],
+    entranceFee:'$6 parking fee',
+    carCamping:{available:true,cost:'$25/night',sites:'22',note:'Grant Lake campground — basic but scenic. Reservable.'},
+    tentCamping:{available:true,cost:'$25/night',sites:'22',note:'Backcountry camping available with permit'},
+    parkingTip:'Grant Lake lot is the main access. Hall\'s Valley lot offers an alternate entrance.',
+    nearbyFood:'No food nearby — bring everything. San Jose restaurants (~25 min)',
+    elevation:'2,995 ft',
+    things:['Hike the remote backcountry trails through oak savannas','Camp at Grant Lake under dark skies','Mountain bike 51 miles of fire roads','Spot wildflowers across the vast grasslands in spring','Stargaze from one of the darkest sites near San Jose'],
+    hikes:[
+      {name:'Halls Valley to Antler Point Loop',distance:'8.0 mi',gain:'1,200 ft',difficulty:'Moderate',note:'Classic loop through wildflower grasslands'},
+      {name:'Hotel Trail to Deer Valley',distance:'12.0 mi',gain:'1,800 ft',difficulty:'Hard',note:'Deep backcountry with few other hikers'},
+      {name:'Yerba Buena Trail to Eagle Lake',distance:'5.0 mi',gain:'800 ft',difficulty:'Moderate',note:'Nice out-and-back to a seasonal lake'}
+    ],
+    wildlife:[{name:'Tule Elk',note:'Reintroduced herd sometimes visible in the valleys'},{name:'Golden Eagle',note:'Nests in the remote interior'},{name:'Tarantula',note:'Males cross trails during fall mating walks (Oct-Nov)'}],
+    bestTime:'Morning'
+},
+'lexington-reservoir':{
+    highlight:'A scenic reservoir nestled in the Los Gatos hills, surrounded by forested slopes and connected to the Los Gatos Creek Trail. Popular for non-motorized boating, shore fishing, and peaceful trail walking.',
+    googleRating:4.5, googleReviews:'1.5K',
+    bestSeason:'Year-round', bestMonths:[3,4,5,6,9,10],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Day-use lot near the dam. Trail access also from Alma Bridge Road.',
+    nearbyFood:'Los Gatos downtown (~10 min) — many restaurants on North Santa Cruz Ave',
+    elevation:'650 ft',
+    things:['Kayak or canoe the reservoir (non-motorized only)','Fish for bass and trout from the shoreline','Walk the shaded trail around the reservoir','Birdwatch for osprey and herons','Enjoy the wooded setting close to town'],
+    hikes:[
+      {name:'Lexington Dam Trail',distance:'2.5 mi',gain:'200 ft',difficulty:'Easy',note:'Walk along the dam and shoreline'},
+      {name:'Limekiln Trail to St. Joseph\'s Hill',distance:'3.5 mi',gain:'600 ft',difficulty:'Moderate',note:'Connects to adjacent open space with valley views'}
+    ],
+    wildlife:[{name:'Osprey',note:'Fishes the reservoir, especially in spring and fall'},{name:'Western Pond Turtle',note:'Basks on logs along the shore'},{name:'Acorn Woodpecker',note:'Common in the oaks around the reservoir'}],
+    bestTime:'Morning'
+},
+'los-gatos-creek':{
+    highlight:'A paved creekside trail park connecting Los Gatos to Campbell, with playgrounds, picnic areas, and easy flat walking. Popular with families and commuter cyclists.',
+    googleRating:4.4, googleReviews:'1K',
+    bestSeason:'Year-round', bestMonths:[3,4,5,6,9,10],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Parking at the main lot near Dell Avenue. Street parking also available.',
+    nearbyFood:'Los Gatos downtown (~5 min), Campbell downtown (~5 min)',
+    elevation:'250 ft',
+    things:['Bike or walk the paved Los Gatos Creek Trail','Let kids play at the large playground','Picnic under the shaded oak groves','Birdwatch along the creek','Jog the flat, shaded path'],
+    hikes:[
+      {name:'Los Gatos Creek Trail',distance:'Variable',gain:'Flat',difficulty:'Easy',note:'Paved trail connecting to Vasona Lake and beyond'}
+    ],
+    wildlife:[{name:'Mallard',note:'Common along the creek'},{name:'Anna\'s Hummingbird',note:'Year-round in garden areas'},{name:'Black Phoebe',note:'Perches on fences near the water'}],
+    bestTime:'Morning or late afternoon'
+},
+'metcalf-motorcycle':{
+    highlight:'An OHV motorcycle park with varied terrain courses south of San Jose. One of the few public motorcycle riding areas in the South Bay, offering trails for beginners through advanced riders.',
+    googleRating:3.8, googleReviews:'300',
+    bestSeason:'Year-round', bestMonths:[3,4,5,6,9,10,11],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Lot at the park entrance with unloading area for bikes.',
+    nearbyFood:'South San Jose restaurants (~10 min) along Monterey Road',
+    elevation:'400 ft',
+    things:['Ride the beginner, intermediate, and advanced motorcycle courses','Practice technical riding skills on varied terrain','Join weekend riding events','Enjoy the open-air riding environment'],
+    hikes:[],
+    wildlife:[],
+    bestTime:'Morning (cooler riding conditions)'
+},
+'mt-madonna':{
+    highlight:'A 3,688-acre park straddling the Santa Cruz Mountains ridge with redwood groves, Monterey Bay views, white fallow deer, and family-friendly campgrounds. One of the most scenic and diverse county parks.',
+    googleRating:4.6, googleReviews:'2K',
+    bestSeason:'Year-round', bestMonths:[4,5,6,7,8,9,10],
+    entranceFee:'$6 parking fee',
+    carCamping:{available:true,cost:'$25–$35/night',sites:'117',note:'Valley View and Tan Oak campgrounds in redwood forest. Reservable.'},
+    tentCamping:{available:true,cost:'$25/night',sites:'117',note:'Some walk-in tent sites available'},
+    parkingTip:'Multiple lots throughout the park. Sprig Lake lot for the amphitheater area.',
+    nearbyFood:'Gilroy restaurants (~15 min), Watsonville restaurants (~15 min)',
+    elevation:'1,897 ft',
+    things:['Spot the famous white fallow deer herd','Camp in the redwood groves','Hike to the ridge for Monterey Bay views','Horseback ride the mountain trails','Explore the historic ruins of Henry Miller\'s estate'],
+    hikes:[
+      {name:'Bayview Loop',distance:'3.0 mi',gain:'500 ft',difficulty:'Easy-Moderate',note:'Views of Monterey Bay through the trees'},
+      {name:'Merry-Go-Round Trail',distance:'5.5 mi',gain:'800 ft',difficulty:'Moderate',note:'Loops through redwood and oak forest'},
+      {name:'Sprig Lake to Summit',distance:'2.0 mi',gain:'400 ft',difficulty:'Easy',note:'Short climb to the highest point'}
+    ],
+    wildlife:[{name:'White Fallow Deer',note:'Unique herd visible near the campgrounds and meadows'},{name:'Banana Slug',note:'Common on forest floor in wet weather'},{name:'Pileated Woodpecker',note:'Large woodpecker heard drumming in the redwoods'}],
+    bestTime:'Morning'
+},
+'penitencia-creek':{
+    highlight:'A paved creekside trail in east San Jose connecting neighborhoods and linking to the Coyote Creek Trail and Alum Rock Park. A convenient urban greenway for walking, biking, and birdwatching.',
+    googleRating:4.1, googleReviews:'400',
+    bestSeason:'Year-round', bestMonths:[3,4,5,6,9,10],
+    entranceFee:'Free',
+    parkingTip:'Access from street parking at various trailheads along Penitencia Creek Road.',
+    nearbyFood:'East San Jose restaurants (~5 min) along Berryessa Road',
+    elevation:'150 ft',
+    things:['Bike or walk the paved creekside trail','Birdwatch for songbirds and waterbirds','Connect to the Coyote Creek Trail network','Jog along the shaded corridor','Enjoy the urban nature escape'],
+    hikes:[
+      {name:'Penitencia Creek Trail',distance:'Variable',gain:'Flat',difficulty:'Easy',note:'Paved multi-use trail along the creek'}
+    ],
+    wildlife:[{name:'Black Phoebe',note:'Common along the creek'},{name:'Great Egret',note:'Wades in the shallow creek sections'},{name:'Anna\'s Hummingbird',note:'Year-round in riparian vegetation'}],
+    bestTime:'Morning'
+},
+'rancho-san-antonio':{
+    highlight:'One of the most popular hiking destinations in the Bay Area, with gentle trails through rolling grasslands, Deer Hollow Farm (a working farm with animals kids can visit), and connections to the Monte Bello ridge with sweeping valley views.',
+    googleRating:4.8, googleReviews:'6K',
+    bestSeason:'Year-round', bestMonths:[2,3,4,5,10,11],
+    entranceFee:'Free',
+    parkingTip:'Main lot fills by 9am on weekends year-round. Arrive early or try the Cristo Rey Drive overflow lot.',
+    nearbyFood:'Cupertino restaurants (~10 min) — various options along Stevens Creek Blvd',
+    elevation:'2,800 ft (highest point)',
+    things:['Visit Deer Hollow Farm and see the farm animals','Hike to PG&E Trail vista for Bay views','Mountain bike the Permanente Creek Trail','Walk the flat Wildcat Loop with kids','Connect to the Monte Bello ridge for longer adventures'],
+    hikes:[
+      {name:'Wildcat Loop Trail',distance:'2.8 mi',gain:'200 ft',difficulty:'Easy',note:'Most popular loop — rolling grassland past Deer Hollow Farm'},
+      {name:'PG&E Trail to High Meadow',distance:'6.0 mi',gain:'1,200 ft',difficulty:'Moderate',note:'Climb to panoramic ridge views of the South Bay'},
+      {name:'Rogue Valley to Black Mountain',distance:'9.5 mi',gain:'1,800 ft',difficulty:'Hard',note:'Epic climb to the highest point connecting to Monte Bello'}
+    ],
+    wildlife:[{name:'Black-tailed Deer',note:'Very common on the grassland trails'},{name:'Red-tailed Hawk',note:'Soars over the open hillsides'},{name:'California Quail',note:'Runs along the trails in coveys'}],
+    bestTime:'Early morning (beat the crowds)'
+},
+'sanborn':{
+    highlight:'Second-growth redwood forest in the Santa Cruz Mountains with walk-in camping, a historic hostel (the old Welch-Hurst House), and connections to Skyline-to-the-Sea trail segments. A peaceful, shaded retreat.',
+    googleRating:4.5, googleReviews:'1K',
+    bestSeason:'Year-round', bestMonths:[4,5,6,9,10],
+    entranceFee:'$6 parking fee',
+    carCamping:{available:true,cost:'$25/night',sites:'33',note:'Walk-in tent sites in the redwoods — atmospheric and shaded'},
+    tentCamping:{available:true,cost:'$25/night',sites:'33',note:'Same walk-in sites; no RV access'},
+    parkingTip:'Small lot on Sanborn Road. For the hostel, a separate access road.',
+    nearbyFood:'Saratoga Village (~10 min) — restaurants on Big Basin Way',
+    elevation:'2,600 ft',
+    things:['Camp in the walk-in redwood tent sites','Hike through the second-growth redwood forest','Stay at the historic Sanborn Park Hostel','Connect to the Skyline Ridge trail system','Enjoy the cool forest on a hot day'],
+    hikes:[
+      {name:'Sanborn Trail to Summit',distance:'4.0 mi',gain:'800 ft',difficulty:'Moderate',note:'Climbs through redwood and mixed forest to the ridge'},
+      {name:'San Andreas Trail',distance:'2.5 mi',gain:'400 ft',difficulty:'Easy-Moderate',note:'Follows the San Andreas Fault line through the park'}
+    ],
+    wildlife:[{name:'Banana Slug',note:'Common on the forest floor in wet weather'},{name:'Steller\'s Jay',note:'Noisy blue jays common in the canopy'},{name:'Pacific Wren',note:'Tiny bird with a huge song; heard in the understory'}],
+    bestTime:'Morning'
+},
+'santa-teresa':{
+    highlight:'Rolling hills with sweeping valley views, a popular bouldering area, equestrian trails, and a golf course. One of the more varied county parks, combining nature with active recreation.',
+    googleRating:4.5, googleReviews:'2K',
+    bestSeason:'Fall – Spring', bestMonths:[2,3,4,5,10,11],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Main lot off Bernal Road. Pueblo day-use area for the golf course side.',
+    nearbyFood:'South San Jose restaurants (~10 min) along Bernal Road',
+    elevation:'1,155 ft',
+    things:['Boulder at the park\'s rock formations','Hike to Coyote Peak for valley views','Horseback ride the equestrian trails','Play a round at the Santa Teresa Golf Course','Watch raptors over the open grasslands'],
+    hikes:[
+      {name:'Coyote Peak Loop',distance:'3.5 mi',gain:'600 ft',difficulty:'Moderate',note:'Scenic climb to the highest point with panoramic views'},
+      {name:'Hidden Springs Trail',distance:'4.0 mi',gain:'700 ft',difficulty:'Moderate',note:'Quieter trail through oak woodland and grassland'},
+      {name:'Mine Trail to Bouldering Area',distance:'1.5 mi',gain:'300 ft',difficulty:'Easy',note:'Short walk to the popular climbing rocks'}
+    ],
+    wildlife:[{name:'White-tailed Kite',note:'Hovers over the grasslands hunting'},{name:'California Ground Squirrel',note:'Very common in the meadow areas'},{name:'Western Fence Lizard',note:'Sunbathes on the bouldering rocks'}],
+    bestTime:'Morning'
+},
+'stevens-creek':{
+    highlight:'A forested canyon park along Stevens Creek with connections to Monte Bello Open Space above and the Bay Trail below. Popular for mountain biking and hiking through mixed evergreen forest.',
+    googleRating:4.5, googleReviews:'1.5K',
+    bestSeason:'Year-round', bestMonths:[2,3,4,5,10,11],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Small lot on Stevens Canyon Road. Arrives early on weekends.',
+    nearbyFood:'Cupertino restaurants (~10 min)',
+    elevation:'1,200 ft',
+    things:['Mountain bike the canyon trails','Hike through the shaded creek canyon','Connect to Monte Bello Open Space for ridge views','Walk the creekside trail for a cool escape','Spot birds in the riparian woodland'],
+    hikes:[
+      {name:'Stevens Creek Canyon Trail',distance:'3.0 mi',gain:'400 ft',difficulty:'Easy-Moderate',note:'Shaded creekside hike through mixed forest'},
+      {name:'Rim Trail to Monte Bello',distance:'6.0 mi',gain:'1,000 ft',difficulty:'Moderate',note:'Climbs to the ridge with expansive views'}
+    ],
+    wildlife:[{name:'Pacific-slope Flycatcher',note:'Common in the shaded canyon'},{name:'Steller\'s Jay',note:'Noisy and conspicuous in the forest'},{name:'California Newt',note:'Crosses trails after winter rains'}],
+    bestTime:'Morning'
+},
+'sunnyvale-baylands':{
+    highlight:'A South Bay marshland park with levee trails, wide-open salt pond views, and exceptional birdwatching — especially for burrowing owls. The twin peaks (former landfill caps) offer unusual elevated bay views.',
+    googleRating:4.3, googleReviews:'1.5K',
+    bestSeason:'Fall – Spring', bestMonths:[10,11,12,1,2,3,4],
+    entranceFee:'Free',
+    parkingTip:'Lot at the end of Caribbean Drive — usually available.',
+    nearbyFood:'Sunnyvale restaurants (~10 min) along Mathilda Ave',
+    elevation:'10 ft',
+    things:['Walk the levee trails with panoramic bay views','Spot burrowing owls along the trail edges','Birdwatch for migratory shorebirds in the ponds','Bike the flat bayside paths','Photograph the vivid salt pond colors'],
+    hikes:[
+      {name:'Bay Trail Levee Loop',distance:'3.5 mi',gain:'Flat',difficulty:'Easy',note:'Flat loop around the salt ponds and marsh edge'},
+      {name:'Twin Creeks Trail to Bay',distance:'2.0 mi',gain:'Flat',difficulty:'Easy',note:'Connects the park to the bay shoreline'}
+    ],
+    wildlife:[{name:'Burrowing Owl',note:'Year-round residents along the levee trails — look for them at ground level'},{name:'American White Pelican',note:'Large flocks in the salt ponds during winter'},{name:'Northern Harrier',note:'Hunts low over the marsh'}],
+    bestTime:'Early morning'
+},
+'upper-stevens-creek':{
+    highlight:'A remote and rugged 1,017-acre park with dense redwood and mixed-evergreen forest, challenging single-track mountain biking, and a true wilderness feel despite being in the heart of Silicon Valley.',
+    googleRating:4.4, googleReviews:'500',
+    bestSeason:'Year-round', bestMonths:[4,5,6,9,10],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Small gravel lot on Stevens Canyon Road. Limited to about 15 cars.',
+    nearbyFood:'Cupertino restaurants (~15 min)',
+    elevation:'2,000 ft',
+    things:['Mountain bike the challenging single-track trails','Hike through old-growth redwood groves','Enjoy deep forest solitude close to civilization','Spot woodland wildlife on quiet mornings','Connect to other Skyline Ridge trails'],
+    hikes:[
+      {name:'Grizzly Flat Trail',distance:'3.0 mi',gain:'600 ft',difficulty:'Moderate',note:'Winds through dense forest to a creekside flat'},
+      {name:'Table Mountain Trail',distance:'5.0 mi',gain:'900 ft',difficulty:'Hard',note:'Challenging climb on narrow single-track through deep forest'}
+    ],
+    wildlife:[{name:'Pileated Woodpecker',note:'Large woodpecker heard drumming on dead trees'},{name:'Pacific Giant Salamander',note:'Found under logs near streams'},{name:'Varied Thrush',note:'Winter visitor with distinctive whistled call'}],
+    bestTime:'Morning'
+},
+'uvas-canyon':{
+    highlight:'A lush canyon park with multiple seasonal waterfalls, shaded creekside camping, and one of the most beautiful waterfall hike loops in the Bay Area when winter rains bring the falls to life.',
+    googleRating:4.6, googleReviews:'2K',
+    bestSeason:'Winter – Spring', bestMonths:[12,1,2,3,4,5],
+    entranceFee:'$6 parking fee',
+    carCamping:{available:true,cost:'$25/night',sites:'25',note:'Shaded creekside sites in the canyon — intimate and forested'},
+    tentCamping:{available:true,cost:'$25/night',sites:'25',note:'Same sites — walk-in feel though car-accessible'},
+    parkingTip:'Day-use lot fills on rainy-season weekends when waterfalls are flowing. Arrive early.',
+    nearbyFood:'Morgan Hill restaurants (~20 min)',
+    elevation:'1,100 ft',
+    things:['Hike the Waterfall Loop to see multiple cascades','Camp in the shaded canyon beside Swanson Creek','Listen to the creek and waterfall sounds','Photograph the waterfalls after a good rain','Spot newts crossing the trail in winter'],
+    hikes:[
+      {name:'Waterfall Loop Trail',distance:'3.5 mi',gain:'500 ft',difficulty:'Moderate',note:'Visits Black Rock Falls, Basin Falls, Upper Falls, and more'},
+      {name:'Alec Canyon Trail',distance:'4.0 mi',gain:'700 ft',difficulty:'Moderate',note:'Climbs out of the canyon to ridge views'},
+      {name:'Swanson Creek Nature Trail',distance:'1.0 mi',gain:'100 ft',difficulty:'Easy',note:'Short creekside walk — great for kids'}
+    ],
+    wildlife:[{name:'California Newt',note:'Abundant crossing trails after winter rains'},{name:'Banana Slug',note:'Common on the damp forest floor'},{name:'Pacific-slope Flycatcher',note:'Calls from the canyon walls in spring'}],
+    bestTime:'After rain (for waterfalls)'
+},
+'uvas-reservoir':{
+    highlight:'A quiet reservoir park for non-motorized boating, shoreline fishing, and winter eagle watching. The calm water and surrounding oak hills create a peaceful escape from the valley below.',
+    googleRating:4.3, googleReviews:'800',
+    bestSeason:'Fall – Spring', bestMonths:[10,11,12,1,2,3,4,5],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Parking at the boat ramp area.',
+    nearbyFood:'Morgan Hill restaurants (~15 min)',
+    elevation:'500 ft',
+    things:['Kayak or canoe the reservoir (non-motorized only)','Fish for bass and catfish from shore or boat','Watch for bald eagles in winter (Nov–Mar)','Walk the shoreline trails','Photograph reflections on calm mornings'],
+    hikes:[
+      {name:'Uvas Reservoir Shoreline',distance:'2.0 mi',gain:'100 ft',difficulty:'Easy',note:'Walk along the reservoir edge with oak-studded hills'}
+    ],
+    wildlife:[{name:'Bald Eagle',note:'Winters at the reservoir (Nov–Mar) — look in tall trees near the dam'},{name:'Great Blue Heron',note:'Common along the shoreline'},{name:'Double-crested Cormorant',note:'Perches on dead trees in the water'}],
+    bestTime:'Morning'
+},
+'vasona-lake':{
+    highlight:'A family-friendly park in Los Gatos with pedal boats, a miniature steam train (Billy Jones Wildcat Railroad), a playground, stocked fishing lake, and easy connections to the Los Gatos Creek Trail.',
+    googleRating:4.6, googleReviews:'4K',
+    bestSeason:'Year-round', bestMonths:[3,4,5,6,7,8,9,10],
+    entranceFee:'$6 parking fee',
+    parkingTip:'Main lot fills by mid-morning on spring/summer weekends. Overflow parking available.',
+    nearbyFood:'Los Gatos downtown (~5 min) — many restaurants on North Santa Cruz Ave',
+    elevation:'350 ft',
+    things:['Ride the Billy Jones Wildcat Railroad miniature train','Pedal boat on the lake','Fish for trout and catfish (stocked lake)','Bike the Los Gatos Creek Trail','Picnic under the large oak trees'],
+    hikes:[
+      {name:'Vasona Lake Loop',distance:'1.5 mi',gain:'Flat',difficulty:'Easy',note:'Gentle walk around the lake — great with kids'},
+      {name:'Los Gatos Creek Trail (from Vasona)',distance:'Variable',gain:'Flat',difficulty:'Easy',note:'Connects north to Campbell or south to Lexington Reservoir'}
+    ],
+    wildlife:[{name:'Canada Goose',note:'Large flocks on the lake and lawn areas'},{name:'Mallard',note:'Abundant year-round'},{name:'Great Egret',note:'Wades in the shallows'}],
+    bestTime:'Morning or late afternoon'
+},
+'villa-montalvo':{
+    highlight:'A stunning 1912 Mediterranean villa built by San Francisco Mayor James Phelan, now an arts center with rotating galleries, formal Italianate gardens, a concert amphitheater, and hillside nature trails through redwood and oak forest.',
+    googleRating:4.7, googleReviews:'3K',
+    bestSeason:'Year-round', bestMonths:[3,4,5,6,9,10],
+    entranceFee:'Free (parking fee, event tickets separate)',
+    parkingTip:'Main lot on Montalvo Road fills for concerts and events. Free on regular days.',
+    nearbyFood:'Saratoga Village (~5 min) — restaurants on Big Basin Way',
+    elevation:'600 ft',
+    things:['Tour the villa\'s art galleries and rotating exhibitions','Walk the formal Italianate gardens','Hike the Love Trail to the lookout above the valley','Attend a concert at the outdoor Garden Theatre','Photograph the villa and its grounds'],
+    hikes:[
+      {name:'Love Trail to Lookout Point',distance:'2.0 mi',gain:'400 ft',difficulty:'Easy-Moderate',note:'Climbs through forest to views of the Santa Clara Valley'},
+      {name:'Redwood Trail Loop',distance:'1.5 mi',gain:'200 ft',difficulty:'Easy',note:'Shaded walk through the redwood grove'}
+    ],
+    wildlife:[{name:'Anna\'s Hummingbird',note:'Common in the villa gardens'},{name:'Acorn Woodpecker',note:'Stores acorns in the oak trees around the property'},{name:'Black-tailed Deer',note:'Often seen on the hillside trails at dusk'}],
+    bestTime:'Morning (quiet) or afternoon (gardens in full light)'
+}
 
 };
 
@@ -12451,6 +13316,7 @@ function normalizeParkDetail(d){
   if(!d.photoSpots && d.photos) d.photoSpots = d.photos.map(s=>({name:s.spot||s.name, note:s.tip||s.note}));
   if(!d.carCamping && d.camping) d.carCamping = {available:!!d.camping.car, cost:d.camping.carCost, sites:d.camping.carSites, note:d.camping.carNote};
   if(!d.tentCamping && d.camping) d.tentCamping = {available:!!d.camping.tent, cost:d.camping.tentCost, sites:d.camping.tentSites, note:d.camping.tentNote};
+  if(d.wildlife && d.wildlife.length && typeof d.wildlife[0]==='string') d.wildlife = d.wildlife.map(w=>({name:w, note:''}));
   return d;
 }
 
@@ -12487,16 +13353,16 @@ function openParkModal(id){
 
   if(d){
     html += `
-      <div class="pm-highlight"><strong>Why visit:</strong> ${d.highlight}</div>
+      <div class="pm-highlight"><strong>Why visit:</strong> ${d.highlight||d.desc||''}</div>
 
-      <div class="pm-section">
+      ${d.things?`<div class="pm-section">
         <div class="pm-section-title">🌟 Top 5 Things to Do</div>
         <ol class="pm-list">
           ${d.things.map((t,i)=>`<li><span class="pm-list-num">${i+1}</span><span>${t}</span></li>`).join('')}
         </ol>
-      </div>
+      </div>`:''}
 
-      <div class="pm-section">
+      ${d.hikes?`<div class="pm-section">
         <div class="pm-section-title">🥾 Top Hikes</div>
         <table class="pm-hike-table">
           <thead><tr><th>Trail</th><th>Distance</th><th>Gain</th><th>Difficulty</th><th>Notes</th></tr></thead>
@@ -12510,7 +13376,7 @@ function openParkModal(id){
             </tr>`).join('')}
           </tbody>
         </table>
-      </div>
+      </div>`:''}
 
       <div class="pm-weather-row" id="pm-weather-row"><div style="width:100%;text-align:center;font-size:12px;color:var(--text-muted)">Loading weather…</div></div>
 
@@ -12621,6 +13487,29 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeParkModal(); 
 // Normalize all park details to use consistent property names
 Object.keys(PARK_DETAILS).forEach(id=>{ normalizeParkDetail(PARK_DETAILS[id]); });
 PARKS.forEach(p=>{ p.hasInfo=!!PARK_DETAILS[p.id]; });
+
+// Compute data check counts
+(function(){
+  const fields=['things','bestMonths','elevation','biking','photography','sunsetSpots','googleRating'];
+  const counts={hasInfo:0,hikeGain:0};
+  fields.forEach(f=>{counts[f]=0;});
+  PARKS.forEach(p=>{
+    const d=PARK_DETAILS[p.id];
+    if(!d){counts.hasInfo++;return;}
+    fields.forEach(f=>{
+      const has=f==='things'?(d.things||d.thingsToDo||d.top5):d[f];
+      if(!has)counts[f]++;
+    });
+    if(d.hikes&&d.hikes.some(h=>!h.gain||h.gain==='—'))counts.hikeGain++;
+  });
+  const el=id=>document.getElementById(id);
+  if(el('dc-hasInfo-no'))el('dc-hasInfo-no').textContent='('+counts.hasInfo+')';
+  if(el('dc-hikeGain-no'))el('dc-hikeGain-no').textContent='('+counts.hikeGain+')';
+  fields.forEach(f=>{
+    const e=el('dc-'+f+'-no');
+    if(e)e.textContent='('+counts[f]+')';
+  });
+})();
 updateStats();
 render();
 </script>
