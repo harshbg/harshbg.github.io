@@ -277,7 +277,7 @@
     .weather-strip { border-top: 1px solid var(--border); padding-top: 10px; margin-top: auto; }
     .weather-title { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 7px; }
     .weather-loading { font-size: 11px; color: var(--text-muted); text-align: center; padding: 6px 0; }
-    .weather-days { display: flex; gap: 2px; }
+    .weather-days { display: flex; gap: 2px; overflow-x: auto; }
     .wday { flex: 1; text-align: center; }
     .wday-name { font-size: 10px; color: var(--text-muted); font-weight: 500; }
     .wday-icon { font-size: 15px; line-height: 1.4; }
@@ -362,7 +362,7 @@
     .pm-quick-stats span { display: flex; align-items: center; gap: 4px; }
     .pm-quick-stats strong { color: var(--forest-dark); font-weight: 600; }
 
-    .pm-weather-row { display: flex; gap: 4px; margin-bottom: 20px; padding: 14px 16px; background: var(--cream); border-radius: var(--radius); border: 1px solid var(--border); }
+    .pm-weather-row { display: flex; gap: 4px; margin-bottom: 20px; padding: 14px 16px; background: var(--cream); border-radius: var(--radius); border: 1px solid var(--border); overflow-x: auto; }
 
     .pm-photo-card {
       display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border);
@@ -463,6 +463,10 @@
       .pm-body { padding: 16px 20px 24px; }
       .pm-grid { grid-template-columns: 1fr; }
       .pm-hike-table { font-size: 12px; }
+    }
+
+    @media (max-width: 1100px) {
+      .parks-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     /* ─── Mobile ──────────────────────────────────────── */
@@ -1332,9 +1336,9 @@ function buildCard(p){
     ${p.notes?`<div class="card-note">${p.notes}</div>`:''}
     <div class="weather-strip"><div class="weather-loading">Loading weather…</div></div>
     <div class="card-footer">
-      <a class="cbtn icon-only" href="${p.website}" target="_blank" rel="noopener" title="Official Website">🌐</a>
-      <a class="cbtn icon-only" href="https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}" target="_blank" rel="noopener" title="Navigate"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;transform:rotate(-45deg)"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></a>
-      <button class="cbtn primary" onclick="openParkModal('${p.id}')">🔍 Explore</button>
+      ${p.website?`<a class="cbtn icon-only" href="${p.website}" target="_blank" rel="noopener" title="Official Website">🌐</a>`:''}
+      <a class="cbtn icon-only" href="https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}" target="_blank" rel="noopener" title="Navigate" aria-label="Get directions to ${p.name}"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;transform:rotate(-45deg)" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></a>
+      <button class="cbtn primary" onclick="openParkModal('${p.id}')" aria-label="Explore ${p.name}">🔍 Explore</button>
     </div>`;
   div.addEventListener('click',e=>{if(e.target.closest('a')||e.target.closest('button'))return;clearHighlight();div.classList.add('highlighted');activeCard=div;flyTo(p.id);});
   return div;
@@ -1368,7 +1372,7 @@ function filteredParks(){
         const fld=state.dataCheck.replace('-no','');
         let has;
         if(fld==='things')has=d&&(d.things||d.thingsToDo||d.top5);
-        else if(fld==='hikeGain')has=d&&d.hikes&&d.hikes.every(h=>h.gain&&h.gain!=='—');
+        else if(fld==='hikeGain')has=d&&d.hikes&&d.hikes.length&&d.hikes.every(h=>h.gain&&h.gain!=='—');
         else has=d&&d[fld];
         if(has)return false;
       }
@@ -1414,7 +1418,8 @@ function setDriveMax(v){state.driveMax=parseFloat(v);const lbl=document.getEleme
 function setCamp(v){state.campFilter=v;document.querySelectorAll('#camp-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.camp===v));render();}
 function setBike(v){state.bikeFilter=v;document.querySelectorAll('#bike-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.bike===v));render();}
 function setDataCheck(v){state.dataCheck=v;document.querySelectorAll('#dc-filters .sbtn').forEach(b=>b.classList.toggle('active',b.dataset.dc===v));render();}
-document.getElementById('search').addEventListener('input',e=>{state.search=e.target.value.trim();render();});
+let _searchTimer;
+document.getElementById('search').addEventListener('input',e=>{clearTimeout(_searchTimer);_searchTimer=setTimeout(()=>{state.search=e.target.value.trim();render();},250);});
 
 // ============================================================
 // PARK DETAIL MODAL
@@ -13316,6 +13321,17 @@ function normalizeParkDetail(d){
   if(!d.carCamping && d.camping) d.carCamping = {available:!!d.camping.car, cost:d.camping.carCost, sites:d.camping.carSites, note:d.camping.carNote};
   if(!d.tentCamping && d.camping) d.tentCamping = {available:!!d.camping.tent, cost:d.camping.tentCost, sites:d.camping.tentSites, note:d.camping.tentNote};
   if(d.wildlife && d.wildlife.length && typeof d.wildlife[0]==='string') d.wildlife = d.wildlife.map(w=>({name:w, note:''}));
+  // Normalize sites to string in camping objects
+  if(d.carCamping && typeof d.carCamping.sites==='number') d.carCamping.sites=String(d.carCamping.sites);
+  if(d.tentCamping && typeof d.tentCamping.sites==='number') d.tentCamping.sites=String(d.tentCamping.sites);
+  // Normalize googleReviews to formatted string
+  if(typeof d.googleReviews==='number'){
+    d.googleReviews=d.googleReviews>=1000?(d.googleReviews/1000).toFixed(1).replace(/\.0$/,'')+'K':String(d.googleReviews);
+  }
+  // Normalize photography to photoSpots if needed
+  if(!d.photoSpots && d.photography && d.photography.spots){
+    d.photoSpots=d.photography.spots.map(s=>typeof s==='string'?{name:s,note:d.photography.tip||''}:{name:s.name||s.spot,note:s.note||s.tip||''});
+  }
   return d;
 }
 
@@ -13432,15 +13448,15 @@ function openParkModal(id){
     html += `
       <div class="pm-highlight" style="text-align:center;">
         <strong>Details coming soon!</strong><br>
-        Explore information for this park is being curated.
+        This park's explore information is being curated.
       </div>
       <div class="pm-weather-row" id="pm-weather-row"><div style="width:100%;text-align:center;font-size:12px;color:var(--text-muted)">Loading weather…</div></div>`;
   }
 
   html += `
       <div class="pm-footer-btns" style="flex-wrap: wrap;">
-        <a class="pm-btn" href="${p.website}" target="_blank" rel="noopener">🌐 Official Website</a>
-        <a class="pm-btn" href="https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;transform:rotate(-45deg)"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg> Navigate</a>
+        ${p.website?`<a class="pm-btn" href="${p.website}" target="_blank" rel="noopener">🌐 Official Website</a>`:''}
+        <a class="pm-btn" href="https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}" target="_blank" rel="noopener" aria-label="Get directions to ${p.name}"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;transform:rotate(-45deg)" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg> Navigate</a>
         <button class="pm-btn pm-primary" onclick="closeParkModal();flyTo('${p.id}')">📍 Show on Map</button>
         <button class="pm-btn" style="flex: 1 1 100%; font-weight: 700; color: #146c43; border-color: #b7e2ca; background: #edf9f1;" title="Copies the full park brief, opens ChatGPT, then you paste it there" onclick="openChatGPTPrompt('${p.id}', this)">Ask ChatGPT to Plan This Trip</button>
         <button class="pm-btn" style="flex: 1 1 100%; font-weight: 600; color: #2c3e50; border-color: #cbd5e1; background: #f8fafc;" onclick="captureModalAsImage('${p.id}')">📸 Save as Image</button>
@@ -13456,13 +13472,13 @@ function openParkModal(id){
   fetchWeather(p).then(w=>{
     const row=document.getElementById('pm-weather-row');
     if(!row)return;
-    if(!w){row.innerHTML='<div style="width:100%;text-align:center;font-size:11px;color:var(--text-muted)">Weather unavailable</div>';return;}
+    if(!w||!w.time){row.innerHTML='<div style="width:100%;text-align:center;font-size:11px;color:var(--text-muted)">Weather unavailable</div>';return;}
     row.innerHTML=w.time.map((t,i)=>{
       return`<div class="pm-wday"><div class="pm-wday-name">${dayLabel(t)}</div><div class="pm-wday-icon">${cloudIcon(w.cloud_cover_mean[i])}</div><div class="pm-wday-hi">${cToF(w.temperature_2m_max[i])}°</div><div class="pm-wday-lo">${cToF(w.temperature_2m_min[i])}°</div><div class="pm-wday-wind">${Math.round(w.wind_speed_10m_max[i])} mph</div></div>`;
     }).join('');
     // Populate sunrise/sunset from today's data
     const sunEl=document.getElementById('pm-sun');
-    if(sunEl&&w.sunrise&&w.sunset){
+    if(sunEl&&w.sunrise&&w.sunrise[0]&&w.sunset&&w.sunset[0]){
       const rise=w.sunrise[0].split('T')[1], set=w.sunset[0].split('T')[1];
       sunEl.innerHTML=`🌅 Sunrise <strong>${rise}</strong> &nbsp;·&nbsp; 🌇 Sunset <strong>${set}</strong>`;
     }
