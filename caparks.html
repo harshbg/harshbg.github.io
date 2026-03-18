@@ -1369,6 +1369,9 @@ document.getElementById('search').addEventListener('input',e=>{state.search=e.ta
 // ============================================================
 const PARK_DETAILS = {
   'yosemite': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Yosemite Valley Loop', distance: '12.0 mi', difficulty: 'Easy', note: 'Paved, relatively flat loop taking in the classic valley views' }] },
+    photography: { spots: ['Tunnel View', 'Glacier Point', 'Valley View', 'Taft Point', 'Sentinel Bridge'], tip: 'Early morning light cuts through valley haze best; use a tripod for sunset at Tunnel View.' },
+    sunsetSpots: [{ spot: 'Glacier Point', note: 'Provides an iconic, elevated view of Half Dome turning orange as the sun sets' }, { spot: 'Tunnel View', note: 'Classic sweeping view of the valley; watch the light fade on El Capitan' }],
     highlight: 'Home to towering granite cliffs, giant sequoias, and some of the most iconic waterfalls in the world. Yosemite is a crown jewel of the National Park system and a must-visit for any outdoor enthusiast.',
     googleRating: 4.8,
     googleReviews: '68.2K',
@@ -1408,6 +1411,9 @@ const PARK_DETAILS = {
     ]
   },
   'henry-coe': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Hunting Hollow to Coe Headquarters', distance: '15.0 mi', difficulty: 'Hard', note: 'Challenging steep fire roads but incredible spring views' }] },
+    photography: { spots: ['Hunting Hollow', 'Coe Headquarters ridge', 'Mississippi Lake'], tip: 'Spring brings brilliant green hills and wildflowers, best photographed in the morning.' },
+    sunsetSpots: [{ spot: 'Coe Headquarters Ridge', note: 'Expansive views to the west over the Santa Clara Valley' }],
     highlight: 'Northern California\'s largest state park with vast wilderness, rugged ridges, and remote backcountry hiking. Ideal for solitude, wildflower seasons, and challenging hikes.',
     googleRating: 4.7, googleReviews: '2K',
     bestSeason: 'March – May', bestMonths: [3,4,5],
@@ -1445,6 +1451,9 @@ const PARK_DETAILS = {
     ]
   },
   'mount-diablo': {
+    biking: { available: true, ebike: true, trails: [{ name: 'South Gate Road to Summit', distance: '11.0 mi', difficulty: 'Hard', note: 'Iconic road cycling climb' }, { name: 'Mitchell Canyon', distance: '8.0 mi', difficulty: 'Moderate', note: 'Good dirt trails for mountain biking' }] },
+    photography: { spots: ['Summit observation deck', 'Rock City', 'Mitchell Canyon'], tip: 'Winter days right after a rain offer the clearest views, sometimes all the way to the Sierra.' },
+    sunsetSpots: [{ spot: 'Summit', note: 'Incredible 360-degree views as the sun drops behind the coastal ranges' }, { spot: 'Rock City', note: 'Interesting sandstone formations glow in the late afternoon light' }],
     highlight: 'Iconic Bay Area peak with panoramic views stretching over 100 miles on clear days. Unique rock formations, wildflower blooms, and one of the best sunset spots in the region.',
     googleRating: 4.8, googleReviews: '8K',
     bestSeason: 'February – May', bestMonths: [2,3,4,5],
@@ -1482,6 +1491,9 @@ const PARK_DETAILS = {
     ]
   },
   'big-basin': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Skyline to the Sea (Fire Road sections)', distance: 'varies', difficulty: 'Moderate', note: 'Bikes allowed on designated fire roads only' }] },
+    photography: { spots: ['Berry Creek Falls', 'Redwood Loop', 'Sempervirens Falls'], tip: 'Cloudy or foggy days are best for photographing redwoods to avoid harsh contrast.' },
+    sunsetSpots: [{ spot: 'Buzzard\'s Roost', note: 'A climb above the canopy provides a view toward the ocean for sunset' }],
     highlight: 'California\'s oldest state park (1902) featuring ancient old-growth redwoods and dramatic post-2020-fire forest regeneration. A living testament to nature\'s resilience.',
     googleRating: 4.7, googleReviews: '5K',
     bestSeason: 'April – October', bestMonths: [4,5,6,7,8,9,10],
@@ -1519,6 +1531,9 @@ const PARK_DETAILS = {
     ]
   },
   'castle-rock': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Castle Rock', 'Goat Rock', 'Saratoga Gap'], tip: 'Late afternoon light illuminates the sandstone formations against the forest backdrop.' },
+    sunsetSpots: [{ spot: 'Goat Rock Overlook', note: 'Unobstructed views looking west toward the Santa Cruz Mountains and the Pacific' }],
     highlight: 'Dramatic sandstone formations and sweeping views of the Santa Cruz Mountains. Popular with climbers and hikers seeking challenging terrain close to Silicon Valley.',
     googleRating: 4.7, googleReviews: '3K',
     bestSeason: 'September – May', bestMonths: [9,10,11,12,1,2,3,4,5],
@@ -1555,6 +1570,9 @@ const PARK_DETAILS = {
     ]
   },
   'portola-redwoods': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Old Haul Road', distance: '10.0 mi', difficulty: 'Moderate', note: 'Wide dirt road winding through deep second-growth redwoods' }] },
+    photography: { spots: ['Peters Creek', 'Old Tree Trail', 'Slate Creek'], tip: 'Use a polarizing filter to make the lush green ferns and creek water pop.' },
+    sunsetSpots: [{ spot: 'Slate Creek Trail ridge', note: 'One of the few spots where you gain enough elevation to see the evening sky' }],
     highlight: 'A quiet, uncrowded redwood park with ancient trees and scenic creeks — the hidden gem of the Santa Cruz Mountains.',
     googleRating: 4.7, googleReviews: '2K',
     bestSeason: 'April – October', bestMonths: [4,5,6,7,8,9,10],
@@ -1591,6 +1609,9 @@ const PARK_DETAILS = {
     ]
   },
   'butano': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Olmo Fire Road', distance: '6.0 mi', difficulty: 'Hard', note: 'Steep climbs through mixed evergreen and redwood forest' }] },
+    photography: { spots: ['Little Butano Creek', 'Ano Nuevo Overlook', 'Jackson Flats'], tip: 'Fog often rolls in during the late afternoon, creating moody forest shots.' },
+    sunsetSpots: [{ spot: 'Ano Nuevo Overlook', note: 'Distant views of the Pacific Ocean and Point Ano Nuevo as the sun goes down' }],
     highlight: 'A hidden redwood canyon with dense forest and excellent birdwatching — far fewer visitors than nearby parks. Perfect for a peaceful day hike.',
     googleRating: 4.6, googleReviews: '1K',
     bestSeason: 'April – October', bestMonths: [4,5,6,7,8,9,10],
@@ -1627,6 +1648,9 @@ const PARK_DETAILS = {
     ]
   },
   'ano-nuevo': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Elephant Seal Viewing Area', 'Cove Beach', 'Point Ano Nuevo'], tip: 'Bring a telephoto lens (200mm+) to safely photograph the elephant seals.' },
+    sunsetSpots: [{ spot: 'Point Ano Nuevo', note: 'Spectacular coastal sunsets, just be sure to leave before the reserve closes' }],
     highlight: 'One of the best wildlife destinations in California where thousands of elephant seals gather along the coast to breed, birth, and molt. A truly unforgettable experience.',
     googleRating: 4.8, googleReviews: '3K',
     bestSeason: 'December – March', bestMonths: [12,1,2,3],
@@ -1661,6 +1685,9 @@ const PARK_DETAILS = {
     ]
   },
   'half-moon-bay': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Coastside Trail', distance: '7.0 mi', difficulty: 'Easy', note: 'Paved, flat, and highly scenic oceanfront riding' }] },
+    photography: { spots: ['Francis Beach', 'Venice Beach', 'Pillar Point Harbor'], tip: 'Great for golden hour beach portraits and surfing action shots.' },
+    sunsetSpots: [{ spot: 'Francis Beach', note: 'Direct west-facing beach for unobstructed ocean sunsets' }],
     highlight: 'Long sandy beaches along the Pacific with coastal trails, tide pools, and dramatic sunsets. A classic California beach day just 30 minutes from Silicon Valley.',
     googleRating: 4.7, googleReviews: '6K',
     bestSeason: 'September – November', bestMonths: [9,10,11],
@@ -1695,6 +1722,9 @@ const PARK_DETAILS = {
     ]
   },
   'mount-tamalpais': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Railroad Grade', distance: '7.5 mi', difficulty: 'Moderate', note: 'Historic rail route with a steady climb to the East Peak area' }] },
+    photography: { spots: ['East Peak', 'Trojan Point', 'Cataract Falls'], tip: 'Get above the marine layer in summer for surreal "sea of clouds" images at sunset.' },
+    sunsetSpots: [{ spot: 'Trojan Point', note: 'Panoramic views of the Pacific' }, { spot: 'East Peak', note: 'Look down on the entire Bay Area at dusk' }],
     highlight: 'Spectacular Marin peak with sweeping views of the Pacific, San Francisco skyline, and rolling coastal mountains. The birthplace of mountain biking.',
     googleRating: 4.8, googleReviews: '7K',
     bestSeason: 'September – May', bestMonths: [9,10,11,12,1,2,3,4,5],
@@ -1732,6 +1762,8 @@ const PARK_DETAILS = {
     ]
   },
   'china-camp': {
+    photography: { spots: ['China Camp Village', 'Point San Pedro', 'Shoreline Trail'], tip: 'The historic village is photogenic at high tide in the early morning.' },
+    sunsetSpots: [{ spot: 'Point San Pedro', note: 'Views north to San Pablo Bay catching evening light' }],
     highlight: 'Historic Chinese shrimping village from the 1880s surrounded by oak forests, bay views, and scenic shoreline trails. A unique blend of history and nature in Marin.',
     googleRating: 4.6, googleReviews: '2K',
     bestSeason: 'September – May', bestMonths: [9,10,11,12,1,2,3,4,5],
@@ -1773,6 +1805,8 @@ const PARK_DETAILS = {
     ]}
   },
   'samuel-taylor': {
+    photography: { spots: ['Lagunitas Creek', 'Pioneer Tree Trail', 'Campground Redwoods'], tip: 'Look for spawning salmon in the creek during winter months.' },
+    sunsetSpots: [{ spot: 'Barnabe Peak', note: 'A steep hike up the fire road rewards you with sweeping views of the Marin hills at dusk' }],
     highlight: 'A lush Marin County gem where old-growth redwoods tower over Papermill Creek and a paved cycling trail follows a historic railroad grade. Perfect for family camping, creek wading, and peaceful forest walks.',
     googleRating: 4.7, googleReviews: '3.4K',
     bestSeason: 'April – October', bestMonths: [4,5,6,7,8,9,10],
@@ -1814,6 +1848,9 @@ const PARK_DETAILS = {
     ]}
   },
   'tomales-bay': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Heart\'s Desire Beach', 'Shell Beach', 'Jepson Trail'], tip: 'The calm, sheltered waters of the bay are perfect for morning reflection shots.' },
+    sunsetSpots: [{ spot: 'Heart\'s Desire Beach', note: 'Looks east, but the sky glows beautifully over the water as the sun sets behind you' }],
     highlight: 'A serene state park on the shores of Tomales Bay with calm turquoise waters, white sand beaches, and dense bishop pine forests. One of the best kayaking destinations in the Bay Area.',
     googleRating: 4.7, googleReviews: '2.9K',
     bestSeason: 'June – October', bestMonths: [6,7,8,9,10],
@@ -1850,6 +1887,9 @@ const PARK_DETAILS = {
     ]
   },
   'henry-cowell': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Pipeline Road', distance: '4.0 mi', difficulty: 'Easy', note: 'Paved and dirt sections winding alongside the San Lorenzo River' }] },
+    photography: { spots: ['Redwood Grove Loop', 'San Lorenzo River', 'Observation Deck'], tip: 'Bring a fast lens (f/2.8 or wider) for the dark old-growth loop.' },
+    sunsetSpots: [{ spot: 'Observation Deck', note: 'The highest point in the park offers 360-degree views, including Monterey Bay' }],
     highlight: 'Home to a magnificent old-growth redwood grove just steps from the parking lot, plus miles of trails through diverse habitats from riverside to ridgetop. The San Lorenzo River adds swimming holes for summer fun.',
     googleRating: 4.7, googleReviews: '5.1K',
     bestSeason: 'April – October', bestMonths: [4,5,6,7,8,9,10],
@@ -1887,6 +1927,9 @@ const PARK_DETAILS = {
     ]
   },
   'nisene-marks': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Aptos Creek Fire Road', distance: '14.0 mi', difficulty: 'Moderate', note: 'Long, steady fire road climb deep into the redwood canyon' }] },
+    photography: { spots: ['Loma Prieta Grade', 'Twisted Grove', 'Aptos Creek'], tip: 'Capture the remnants of the old logging operations overgrown with lush forest.' },
+    sunsetSpots: [{ spot: 'Sand Point Overlook', note: 'A long hike or ride up the fire road to a viewpoint looking out to the ocean' }],
     highlight: 'A wild 10,000-acre forest of second-growth redwoods in the Santa Cruz Mountains, once heavily logged and now beautifully recovering. Peaceful trails follow Aptos Creek deep into the canyon — feels remote yet close to town.',
     googleRating: 4.7, googleReviews: '2.5K',
     bestSeason: 'March – November', bestMonths: [3,4,5,6,7,8,9,10,11],
@@ -1924,6 +1967,9 @@ const PARK_DETAILS = {
     ]
   },
   'fremont-peak': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Summit', 'Observatory area', 'Valley overlook'], tip: 'Famous for astrophotography and stunningly clear views above the Salinas Valley fog.' },
+    sunsetSpots: [{ spot: 'Fremont Peak Summit', note: 'One of the best sunsets in the region, watching the sun sink into Monterey Bay from 3,169 ft' }],
     highlight: 'A small but dramatic peak with a historic observatory and some of the best stargazing in the Bay Area. On clear days, views stretch from Monterey Bay to the Sierra Nevada. A dark sky treasure.',
     googleRating: 4.6, googleReviews: '1.4K',
     bestSeason: 'March – October', bestMonths: [3,4,5,6,7,8,9,10],
@@ -1959,6 +2005,9 @@ const PARK_DETAILS = {
     ]
   },
   'albany-smr': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Bay Trail', distance: '2.0 mi', difficulty: 'Easy', note: 'Paved shoreline path leading out to the bulb' }] },
+    photography: { spots: ['Albany Bulb art', 'Shoreline', 'Bay bridge views'], tip: 'The eclectic driftwood and scrap metal art makes for unique foregrounds against the SF skyline.' },
+    sunsetSpots: [{ spot: 'Albany Bulb', note: 'Unmatched views of the Golden Gate and SF skyline silhouetted against the sunset' }],
     highlight: 'A small but ecologically significant marine reserve protecting the intertidal and subtidal habitats along the Albany shoreline of San Francisco Bay. Great for tidepooling, birding, and bay views.',
     googleRating: 4.3, googleReviews: '0.5K',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -1991,6 +2040,9 @@ const PARK_DETAILS = {
     ]
   },
   'bethany-reservoir': {
+    biking: { available: true, ebike: true, trails: [{ name: 'California Aqueduct Bikeway', distance: '8.0+ mi', difficulty: 'Easy', note: 'Paved, very flat path following the aqueduct' }] },
+    photography: { spots: ['Reservoir banks', 'Windmills on the hills', 'Aqueduct intake'], tip: 'Best photographed in spring when the surrounding hills are green.' },
+    sunsetSpots: [{ spot: 'Reservoir shoreline', note: 'The water reflects the sky, framed by the Altamont Pass windmills' }],
     highlight: 'A peaceful reservoir in the eastern foothills popular with windsurfers, anglers, and boaters. Part of the California Aqueduct system, it offers wide open water and grassland views far from Bay Area crowds.',
     googleRating: 4.2, googleReviews: '1.1K',
     bestSeason: 'March – October', bestMonths: [3,4,5,6,7,8,9,10],
@@ -2023,6 +2075,9 @@ const PARK_DETAILS = {
     ]
   },
   'emeryville-crescent': {
+    biking: { available: true, ebike: true, trails: [{ name: 'SF Bay Trail', distance: '3.0 mi', difficulty: 'Easy', note: 'Paved multi-use trail bridging Emeryville and Oakland' }] },
+    photography: { spots: ['Marsh grass', 'Bay Bridge views', 'Shorebirds'], tip: 'Bring a telephoto lens to capture shorebirds without disturbing the protected marsh.' },
+    sunsetSpots: [{ spot: 'Bay Trail', note: 'Direct views of the Bay Bridge spanning the water at sunset' }],
     highlight: 'An urban marine reserve along the Emeryville shoreline protecting bay mudflats and tidal habitats. A quiet spot for a walk with dramatic views of the Bay Bridge and San Francisco skyline.',
     googleRating: 4.1, googleReviews: '0.3K',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -2055,6 +2110,9 @@ const PARK_DETAILS = {
     ]
   },
   'mclaughlin-eastshore': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Bay Trail', distance: '8.5 mi', difficulty: 'Easy', note: 'Long, continuous paved path tracing the East Bay shoreline' }] },
+    photography: { spots: ['Berkeley Marina', 'César Chávez Park', 'Richmond shoreline'], tip: 'Great kite-flying photography at César Chávez Park.' },
+    sunsetSpots: [{ spot: 'César Chávez Park', note: 'Broad, grassy hills with clear views of the Golden Gate Bridge and SF skyline' }, { spot: 'Berkeley Pier', note: 'A classic foreground element stretching into the bay for sunset' }],
     highlight: 'A two-mile urban shoreline park stretching from Oakland to Richmond along the east bay waterfront. Stunning bay and bridge views, excellent for cycling the Bay Trail, dog walking, and watching sunsets over San Francisco.',
     googleRating: 4.5, googleReviews: '1.8K',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -2089,6 +2147,9 @@ const PARK_DETAILS = {
     ]
   },
   'olompali': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Miwok Village replica', 'Historic Adobe ruins', 'Burleigh Murray Ranch trail'], tip: 'Afternoon light filtering through the oak trees brings out the textures of the stone ruins.' },
+    sunsetSpots: [{ spot: 'Mt. Burdell Ridge', note: 'Expansive views over the Petaluma River valley as the sun sets' }],
     highlight: 'One of the most historically layered sites in California — from a 6,000-year-old Coast Miwok village to an 1844 adobe to a 1960s counterculture commune. Peaceful trails wind through oak grasslands with views of Mt. Tamalpais.',
     googleRating: 4.5, googleReviews: '1.2K',
     bestSeason: 'February – May', bestMonths: [2,3,4,5],
@@ -2124,6 +2185,11 @@ const PARK_DETAILS = {
     ]
   },
   'old-sacramento-shp': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Jedediah Smith Memorial Trail', distance: '32.0 mi', difficulty: 'Easy', note: 'Paved trail starting at Old Sac and following the American River' }] },
+    photography: { spots: ['Tower Bridge', 'Delta King Riverboat', 'Historic wooden boardwalks'], tip: 'Night photography here is excellent when the vintage streetlamps and Tower Bridge are illuminated.' },
+    sunsetSpots: [{ spot: 'Sacramento River waterfront', note: 'Watch the sunset reflect off the water and the golden Tower Bridge' }],
+    googleRating: 4.7,
+    googleReviews: '12.5K',
     highlight: 'A preserved Gold Rush waterfront district in Sacramento with wooden sidewalks, river views, museums, and one of the best concentrated pockets of California history.',
     bestSeason: 'October – April', bestMonths: [10,11,12,1,2,3,4],
     entranceFee: 'Free to walk; museums vary',
@@ -2148,6 +2214,11 @@ const PARK_DETAILS = {
     ]
   },
   'state-capitol-museum': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Capitol Dome exterior', 'Rotunda interior', 'World Peace Rose Garden'], tip: 'Bring a wide-angle lens to capture the full grandeur of the rotunda\'s interior dome.' },
+    sunsetSpots: [{ spot: 'Capitol Mall', note: 'Facing west down the mall provides a perfect alignment with the setting sun' }],
+    googleRating: 4.7,
+    googleReviews: '4K',
     highlight: 'A polished Sacramento stop combining restored state rooms, California political history, and expansive formal grounds that are good for an easy urban walk.',
     bestSeason: 'October – April', bestMonths: [10,11,12,1,2,3,4],
     entranceFee: 'Free museum admission',
@@ -2171,6 +2242,11 @@ const PARK_DETAILS = {
     ]
   },
   'dos-rios': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Tuolumne and San Joaquin River confluence', 'Restored floodplains', 'Riparian forests'], tip: 'Early morning is best for capturing the heavy mist rolling off the river.' },
+    sunsetSpots: [{ spot: 'Riverbanks', note: 'Quiet, flat horizon views over the wetlands' }],
+    googleRating: 4.5,
+    googleReviews: '40',
     highlight: 'One of California’s newest state parks, centered on restored river floodplain habitat where the San Joaquin and Tuolumne meet. Great for birding, walking, and seeing a modern park take shape.',
     bestSeason: 'November – April', bestMonths: [11,12,1,2,3,4],
     entranceFee: 'Free',
@@ -2195,6 +2271,11 @@ const PARK_DETAILS = {
     ]
   },
   'ishxenta': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Garrapata Creek watershed', 'Santa Lucia Mountains backdrop', 'Coastal terraces'], tip: 'Fog creates dramatic, moody atmospheres against the steep mountains in the morning.' },
+    sunsetSpots: [{ spot: 'Coastal terrace', note: 'Unobstructed views looking straight out into the Pacific Ocean' }],
+    googleRating: 4.8,
+    googleReviews: '15',
     highlight: 'A far-north coastal landscape with deep cultural meaning and a quiet, remote feel near the Klamath mouth, more about place and presence than checklist sightseeing.',
     bestSeason: 'May – October', bestMonths: [5,6,7,8,9,10],
     entranceFee: 'Free',
@@ -2218,6 +2299,11 @@ const PARK_DETAILS = {
     ]
   },
   'old-town-san-diego': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Casa de Estudillo', 'Fiesta de Reyes courtyard', 'Seeley Stables'], tip: 'The colorful adobes and vibrant courtyards look best in bright, midday sun or vibrant golden hour.' },
+    sunsetSpots: [{ spot: 'Presidio Park', note: 'Slightly elevated view looking west over San Diego and the ocean' }],
+    googleRating: 4.6,
+    googleReviews: '28K',
     highlight: 'A lively historic district that works well as an easy culture stop between bigger Southern California outdoor days, with adobe buildings, plazas, and food all in one compact area.',
     bestSeason: 'November – April', bestMonths: [11,12,1,2,3,4],
     entranceFee: 'Free to enter; museums vary',
@@ -2241,6 +2327,11 @@ const PARK_DETAILS = {
     ]
   },
   'alcatraz-island': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Main Cellhouse', 'Lighthouse', 'Parade Grounds'], tip: 'The night tour offers incredible, moody lighting and spectacular views of the illuminated SF skyline.' },
+    sunsetSpots: [{ spot: 'West side of the island', note: 'Direct views of the Golden Gate Bridge silhouetted against the sinking sun' }],
+    googleRating: 4.7,
+    googleReviews: '42K',
     highlight: 'An iconic boat-access Bay experience that mixes prison history, seabirds, harbor panoramas, and one of the most unusual viewpoints in California.',
     bestSeason: 'September – November', bestMonths: [9,10,11],
     entranceFee: 'Ticketed ferry experience',
@@ -2265,6 +2356,11 @@ const PARK_DETAILS = {
     ]
   },
   'fort-point-nhs': {
+    biking: { available: true, ebike: true, trails: [{ name: 'San Francisco Bay Trail', distance: 'varies', difficulty: 'Easy', note: 'Paved path running right up to the fort along the water' }] },
+    photography: { spots: ['Inside the brick casemates', 'Rooftop battery', 'Hopper\'s Hands'], tip: 'The geometric brick arches inside the fort combined with the massive steel of the bridge above create incredible leading lines.' },
+    sunsetSpots: [{ spot: 'Marine Drive outside the fort', note: 'Watch the sunset behind the Golden Gate Bridge just steps away' }],
+    googleRating: 4.7,
+    googleReviews: '6.5K',
     highlight: 'A compact but unforgettable San Francisco stop where brick military architecture sits directly under the Golden Gate Bridge with constant wind, surf, and photo drama.',
     bestSeason: 'September – November', bestMonths: [9,10,11],
     entranceFee: 'Free',
@@ -2289,6 +2385,11 @@ const PARK_DETAILS = {
     ]
   },
   'presidio-sf': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Golden Gate Promenade', distance: '4.3 mi', difficulty: 'Easy', note: 'Iconic paved trail along Crissy Field to the Golden Gate Bridge' }] },
+    photography: { spots: ['Crissy Field shoreline', 'Inspiration Point', 'Andy Goldsworthy\'s Wood Line'], tip: 'Morning fog receding from the Golden Gate Bridge offers the most classic San Francisco shots.' },
+    sunsetSpots: [{ spot: 'Baker Beach', note: 'The ultimate sunset spot with the Golden Gate Bridge glowing in the background' }],
+    googleRating: 4.8,
+    googleReviews: '14K',
     highlight: 'One of the most versatile urban outdoor landscapes in California, blending beaches, overlooks, forested trails, military history, and huge Bay views inside San Francisco.',
     bestSeason: 'September – November', bestMonths: [9,10,11],
     entranceFee: 'Free',
@@ -2314,6 +2415,11 @@ const PARK_DETAILS = {
     ]
   },
   'rosie-riveter': {
+    biking: { available: true, ebike: true, trails: [{ name: 'SF Bay Trail', distance: 'varies', difficulty: 'Easy', note: 'Paved bayside trail passing right by the visitor center and memorial' }] },
+    photography: { spots: ['Rosie Memorial at Marina Bay', 'Visitor Center Oil Houses', 'SS Red Oak Victory ship'], tip: 'The memorial\'s structural elements align beautifully with the San Francisco skyline across the bay.' },
+    sunsetSpots: [{ spot: 'Marina Bay Park', note: 'Great views across the bay towards the hills of Marin and Mount Tamalpais' }],
+    googleRating: 4.7,
+    googleReviews: '1K',
     highlight: 'A Richmond waterfront history stop that gives useful context to Bay industrial history and works well as a short walk rather than a full-day outdoor destination.',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
     entranceFee: 'Free',
@@ -2335,6 +2441,11 @@ const PARK_DETAILS = {
     ]
   },
   'sf-maritime': {
+    biking: { available: true, ebike: true, trails: [{ name: 'SF Bay Trail', distance: 'varies', difficulty: 'Easy', note: 'Paved waterfront path connecting to Fisherman\'s Wharf' }] },
+    photography: { spots: ['Hyde Street Pier historic ships', 'Aquatic Park cove', 'Maritime Museum building'], tip: 'The historic ships framed against Alcatraz make for stunning nautical photography.' },
+    sunsetSpots: [{ spot: 'Aquatic Park Pier', note: 'The curved pier offers a panoramic view of the bay and the setting sun behind the Golden Gate' }],
+    googleRating: 4.7,
+    googleReviews: '5.2K',
     highlight: 'A compact San Francisco waterfront historic park where tall ships, Aquatic Park, and Hyde Street Pier make a strong short-stop addition to a city day outdoors.',
     bestSeason: 'September – November', bestMonths: [9,10,11],
     entranceFee: 'Free grounds; some exhibits vary',
@@ -2358,6 +2469,11 @@ const PARK_DETAILS = {
     ]
   },
   'eugene-oneill': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Tao House exterior', 'Courtyard gates', 'Las Trampas hills view'], tip: 'The stark white walls and dark wood accents of Tao House photograph beautifully in soft afternoon light.' },
+    sunsetSpots: [{ spot: 'Tao House grounds', note: 'Elevated views of the San Ramon Valley turning golden at dusk' }],
+    googleRating: 4.8,
+    googleReviews: 300,
     highlight: 'A quiet, hillside historic retreat above Danville that is more about atmosphere and a short scenic outing than major trail mileage.',
     bestSeason: 'October – April', bestMonths: [10,11,12,1,2,3,4],
     entranceFee: 'Free, often shuttle/tour dependent',
@@ -2379,6 +2495,11 @@ const PARK_DETAILS = {
     ]
   },
   'tule-lake-nm': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Camp segregation center remains', 'Jail building', 'Castle Rock (nearby)'], tip: 'A stark, solemn place. Black and white photography often captures the historic weight of the site effectively.' },
+    sunsetSpots: [{ spot: 'Monument landscape', note: 'The wide open Modoc basin provides unobstructed horizon skies' }],
+    googleRating: 4.6,
+    googleReviews: 150,
     highlight: 'A remote, powerful history site in far Northern California that pairs best with Lava Beds and Klamath Basin birding rather than as a standalone detour.',
     bestSeason: 'April – June', bestMonths: [4,5,6],
     entranceFee: 'Free',
@@ -2400,6 +2521,11 @@ const PARK_DETAILS = {
     ]
   },
   'castle-mountains': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Desert dirt roads', distance: 'varies', difficulty: 'Moderate', note: 'Rugged, remote dirt vehicle roads open to bikes' }] },
+    photography: { spots: ['Joshua tree forests', 'Castle Peaks silhouettes', 'Hart Mine ruins'], tip: 'Spring wildflower superblooms (when they happen) contrast incredibly against the red volcanic peaks.' },
+    sunsetSpots: [{ spot: 'Lanfair Valley', note: 'Vast desert landscape where the horizon turns neon pink and purple at dusk' }],
+    googleRating: 4.6,
+    googleReviews: 85,
     highlight: 'A very remote Mojave unit with Joshua trees, open volcanic terrain, and spring wildflowers, best for people who value solitude over amenities.',
     bestSeason: 'February – April', bestMonths: [2,3,4],
     entranceFee: 'Free',
@@ -2424,6 +2550,11 @@ const PARK_DETAILS = {
     ]
   },
   'cesar-chavez-nm': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Visitor Center exhibits', 'Memorial Gardens', 'Historic UFW buildings'], tip: 'The memorial garden provides a peaceful, shaded area with beautiful landscaping.' },
+    sunsetSpots: [{ spot: 'Tehachapi Mountains overlook', note: 'Quiet golden hour views of the surrounding oak-studded hills' }],
+    googleRating: 4.8,
+    googleReviews: 450,
     highlight: 'A focused cultural-history stop at La Paz that adds meaning and context to California labor history rather than serving as a hiking destination.',
     bestSeason: 'October – April', bestMonths: [10,11,12,1,2,3,4],
     entranceFee: 'Free',
@@ -2445,6 +2576,11 @@ const PARK_DETAILS = {
     ]
   },
   'desolation-wilderness': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Lake Aloha', 'Eagle Lake', 'Mt. Tallac summit', 'Dick\'s Peak'], tip: 'The granite basins reflect the deep blue sky. Use a polarizing filter to cut the glare on the many alpine lakes.' },
+    sunsetSpots: [{ spot: 'Mt. Tallac', note: 'Iconic, though challenging to reach at sunset, offering sweeping views of Lake Tahoe' }],
+    googleRating: 4.9,
+    googleReviews: '1.8K',
     highlight: 'One of the top backpacking landscapes in California: granite slabs, cold alpine lakes, and huge Sierra scenery packed into a relatively accessible zone west of Tahoe.',
     bestSeason: 'July – September', bestMonths: [7,8,9],
     entranceFee: 'Day use free; overnight permit required',
@@ -2469,6 +2605,11 @@ const PARK_DETAILS = {
     ]
   },
   'ansel-adams-wilderness': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Minaret Vista', 'Thousand Island Lake', 'Ediza Lake', 'Ritter Range'], tip: 'Named after the legendary photographer for a reason—the jagged Minarets reflected in alpine lakes are some of the most photogenic peaks in the world.' },
+    sunsetSpots: [{ spot: 'Thousand Island Lake', note: 'The alpenglow on Banner Peak reflecting in the island-dotted lake is legendary' }],
+    googleRating: 4.9,
+    googleReviews: 900,
     highlight: 'A huge High Sierra wilderness of Ritter Range drama, alpine lakes, and classic backpacking routes, ideal if you want Yosemite-level scenery with a more distributed feel.',
     bestSeason: 'July – September', bestMonths: [7,8,9],
     entranceFee: 'Wilderness permits required for overnight trips',
@@ -2493,6 +2634,11 @@ const PARK_DETAILS = {
     ]
   },
   'hoover-wilderness': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Virginia Lakes', 'Saddlebag Lake area', 'Lundy Canyon'], tip: 'Lundy Canyon in October offers some of the best fall color (aspen trees) in the Eastern Sierra.' },
+    sunsetSpots: [{ spot: 'Green Creek Valley', note: 'The fading light hitting the steep granite walls of the high Sierra' }],
+    googleRating: 4.9,
+    googleReviews: 120,
     highlight: 'An excellent Eastern Sierra wilderness for first big backpacking trips thanks to good trailhead access, alpine lakes, and strong payoff without Yosemite-level crowd pressure.',
     bestSeason: 'July – September', bestMonths: [7,8,9],
     entranceFee: 'Permit required for overnight trips',
@@ -2517,6 +2663,11 @@ const PARK_DETAILS = {
     ]
   },
   'emigrant-wilderness': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Relief Reservoir', 'Kennedy Meadows', 'Emigrant Lake'], tip: 'The vast, rolling granite expanses are perfect for wide-angle landscape shots, especially when afternoon thunderstorms roll in.' },
+    sunsetSpots: [{ spot: 'Kennedy Point', note: 'Sweeping views of the Stanislaus River drainage as the sun dips below the Sierra foothills' }],
+    googleRating: 4.8,
+    googleReviews: 350,
     highlight: 'A lighter-crowd Sierra wilderness north of Yosemite with granite basins, volcanic areas, and many flexible route options for backpackers.',
     bestSeason: 'July – September', bestMonths: [7,8,9],
     entranceFee: 'Permit required for overnight use',
@@ -2541,6 +2692,11 @@ const PARK_DETAILS = {
     ]
   },
   'trinity-alps': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Canyon Creek Lakes', 'Emerald Lake', 'Sawtooth Ridge'], tip: 'The white granite of the Alps contrasts beautifully with the deep green forests. Early summer offers spectacular rushing waterfalls.' },
+    sunsetSpots: [{ spot: 'Weaverville Bally', note: 'High lookout providing massive panoramic views of the entire wilderness area as it glows in the evening' }],
+    googleRating: 4.9,
+    googleReviews: '1.1K',
     highlight: 'One of California’s best wildernesses for dramatic lake backpacking, sharp granite ridges, and a feeling of remoteness that is hard to match outside the High Sierra.',
     bestSeason: 'July – September', bestMonths: [7,8,9],
     entranceFee: 'Free; permits may apply depending on trailhead/season',
@@ -2565,6 +2721,11 @@ const PARK_DETAILS = {
     ]
   },
   'ventana-wilderness': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Sykes Hot Springs', 'Big Sur River', 'Pine Ridge Trail'], tip: 'Capture the dense oak and redwood canopies transitioning to chaparral ridges.' },
+    sunsetSpots: [{ spot: 'Cone Peak', note: 'One of the steepest coastal gradients in the contiguous US, offering unmatched Pacific sunsets' }],
+    googleRating: 4.8,
+    googleReviews: '1.2K',
     highlight: 'The rugged backcountry heart of Big Sur, where steep ridges, redwood canyons, chaparral, and occasional hot springs make every route feel more adventurous than the mileage suggests.',
     bestSeason: 'October – May', bestMonths: [10,11,12,1,2,3,4,5],
     entranceFee: 'Free; permits may vary by trailhead/camp zone',
@@ -2589,6 +2750,9 @@ const PARK_DETAILS = {
     ]
   },
   'candlestick-point': {
+    biking: { available: true, ebike: true, trails: [{ name: 'SF Bay Trail', distance: 'varies', difficulty: 'Easy', note: 'Paved bayside loop' }] },
+    photography: { spots: ['Fishing piers', 'Windsurf launch', 'Tidal flats'], tip: 'Great views of the East Bay hills on clear winter days.' },
+    sunsetSpots: [{ spot: 'Sunrise Point', note: 'Despite the name, affords beautiful evening light over the bay skyline' }],
     highlight: 'California\'s first urban state recreation area transforms a former industrial shoreline into a peaceful Bay Area oasis with restored wetlands, fishing piers, paved trails, and sweeping views of the San Francisco skyline and Bay Bridge.',
     googleRating: 4.3, googleReviews: '1.1K',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -2622,6 +2786,9 @@ const PARK_DETAILS = {
     ]
   },
   'benicia-sra': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Carquinez Strait Scenic Loop', distance: 'varies', difficulty: 'Easy', note: 'Paved path passing through marshes' }] },
+    photography: { spots: ['Southampton Bay', 'Dillon Point', 'Tidal marshes'], tip: 'A fantastic spot to photograph huge cargo ships passing through the strait.' },
+    sunsetSpots: [{ spot: 'Dillon Point', note: 'Look straight down the Carquinez Strait as the sun sets over the water' }],
     highlight: 'A serene stretch of marshland and grassy hillsides along the Carquinez Strait, perfect for breezy walks, cycling, fishing, and exceptional birdwatching. Pair with a stroll through historic downtown Benicia.',
     googleRating: 4.5, googleReviews: '1.1K',
     bestSeason: 'March – November', bestMonths: [3,4,5,6,7,8,9,10,11],
@@ -2655,6 +2822,9 @@ const PARK_DETAILS = {
     ]
   },
   'benicia-capitol': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Capitol exterior', 'Historic desk replicas', 'Fischer-Hanlon House gardens'], tip: 'The brick facade of the 1852 capitol looks best in late afternoon light.' },
+    sunsetSpots: [{ spot: 'First Street waterfront (nearby)', note: 'Walk just down the street from the capitol to watch the sunset over the strait' }],
     highlight: 'California\'s only surviving pre-Sacramento capitol building (1853–1854), with beautifully restored chambers, period furnishings, and Gold Rush-era history. A quick but fascinating stop that pairs perfectly with Benicia\'s charming waterfront.',
     googleRating: 4.7, googleReviews: '250',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -2685,6 +2855,9 @@ const PARK_DETAILS = {
     ]
   },
   'franks-tract': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Flooded island waters', 'Remnant levees', 'Waterfowl'], tip: 'Requires a boat — best photographed on calm mornings when the Delta water reflects perfectly.' },
+    sunsetSpots: [{ spot: 'Open water', note: 'Unobstructed delta sunsets reflecting in the flooded tract' }],
     highlight: 'A unique flooded Delta island accessible only by boat, prized by anglers for striped and largemouth bass, boaters exploring tule-lined channels, and birders watching waterfowl along the Pacific Flyway.',
     googleRating: 4.3, googleReviews: '60',
     bestSeason: 'April – October', bestMonths: [4,5,6,7,8,9,10],
@@ -2714,6 +2887,9 @@ const PARK_DETAILS = {
     ]
   },
   'sugarloaf-ridge': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Bald Mountain Fire Road', distance: '2.5 mi', difficulty: 'Hard', note: 'Steep climb rewarding with 360-degree views of wine country' }] },
+    photography: { spots: ['Bald Mountain summit', 'Sonoma Creek waterfall', 'Robert Ferguson Observatory'], tip: 'Amazing dark sky location; the observatory parking lot is ideal for astrophotography.' },
+    sunsetSpots: [{ spot: 'Bald Mountain', note: 'Views stretch all the way to the Golden Gate and Sierras on a clear evening' }],
     highlight: 'One of the North Bay\'s best all-around hiking parks with Bald Mountain\'s 360° summit views, a seasonal waterfall, wildflower meadows, camping under oaks, and stargazing at the Robert Ferguson Observatory.',
     googleRating: 4.8, googleReviews: '1.2K',
     bestSeason: 'February – June', bestMonths: [2,3,4,5,6],
@@ -2751,6 +2927,9 @@ const PARK_DETAILS = {
     ]
   },
   'trione-annadel': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Lawndale-Schultz-Ridge loop', distance: '12.0 mi', difficulty: 'Moderate', note: 'Legendary mountain bike singletrack through volcanic rocks and oaks' }] },
+    photography: { spots: ['Lake Ilsanjo', 'Ledson Marsh', 'Cobblestone Quarry'], tip: 'Spring brings brilliant green grasses and wildflower blooms among the volcanic rocks.' },
+    sunsetSpots: [{ spot: 'Buena Vista Trail', note: 'Elevated views looking west over the Santa Rosa plain' }],
     highlight: 'One of Wine Country\'s best trail networks with 5,000+ acres of volcanic terrain, oak woodland, spring wildflowers, and serene Lake Ilsanjo as its centerpiece. Especially good for mountain biking, trail running, and horseback riding.',
     googleRating: 4.7, googleReviews: '1.5K',
     bestSeason: 'March – June', bestMonths: [3,4,5,6],
@@ -2786,6 +2965,9 @@ const PARK_DETAILS = {
     ]
   },
   'bothe-napa': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Ritchey Creek', 'Pioneer Cemetery', 'Redwood canopy'], tip: 'One of the furthest inland coastal redwood stands—capture the mix of redwoods and oaks.' },
+    sunsetSpots: [{ spot: 'Coyote Peak', note: 'Hike to the top for dusk views of the Napa Valley floor' }],
     highlight: 'The outdoor counterpoint to Napa\'s wineries: camp among redwoods, swim in a seasonal pool, hike to Coyote Peak views, and walk to the historic Bale Grist Mill — all in the heart of wine country between St. Helena and Calistoga.',
     googleRating: 4.7, googleReviews: '950',
     bestSeason: 'April – October', bestMonths: [4,5,6,7,8,9,10],
@@ -2822,6 +3004,9 @@ const PARK_DETAILS = {
     ]
   },
   'jack-london': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Sonoma Mountain Ridge', distance: '8.0 mi', difficulty: 'Moderate', note: 'Multi-use dirt trail winding up the slopes of Sonoma Mountain' }] },
+    photography: { spots: ['Wolf House ruins', 'Beauty Ranch', 'Pig Palace'], tip: 'The massive stone ruins of the burnt Wolf House are most dramatic in overcast light.' },
+    sunsetSpots: [{ spot: 'Sonoma Mountain Trail', note: 'High vantage point over the Valley of the Moon turning golden' }],
     highlight: 'One of California\'s best literary-history parks: explore Jack London\'s Beauty Ranch, the dramatic Wolf House ruins, and the House of Happy Walls Museum, then hike 20+ miles of Sonoma Mountain backcountry trails through redwoods and meadows.',
     googleRating: 4.8, googleReviews: '1.8K',
     bestSeason: 'March – November', bestMonths: [3,4,5,6,7,8,9,10,11],
@@ -2858,6 +3043,9 @@ const PARK_DETAILS = {
     ]
   },
   'robert-louis-stevenson': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Mt. St. Helena Fire Road', distance: '10.0 mi', difficulty: 'Hard', note: 'Steady 2,000+ ft climb to the summit on dirt fire road' }] },
+    photography: { spots: ['Mt. St. Helena summit', 'Palisades', 'Silverado Mine ruins'], tip: 'Winter offers the clearest views; sometimes Mt. Shasta is visible 190 miles away.' },
+    sunsetSpots: [{ spot: 'Mt. St. Helena', note: 'The highest peak in wine country catches the absolute last light of the day' }],
     highlight: 'An undeveloped park all about the Mount St. Helena climb — a strenuous 10-mile round-trip to a 4,343 ft summit with huge views over Napa, Sonoma, and Lake counties. On the clearest days, you can see Mount Shasta and the Sierra Nevada.',
     googleRating: 4.6, googleReviews: '650',
     bestSeason: 'October – May', bestMonths: [1,2,3,4,5,10,11,12],
@@ -2891,6 +3079,9 @@ const PARK_DETAILS = {
     ]
   },
   'austin-creek': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Bullfrog Pond', 'Rolling meadows', 'Backcountry oak woodlands'], tip: 'Accessible via Armstrong Redwoods, the contrast from redwoods to open oaks is striking.' },
+    sunsetSpots: [{ spot: 'Campground ridge', note: 'Looks out over the rugged, rolling coastal range as the sun sets' }],
     highlight: 'The wilder, open contrast to neighboring Armstrong Redwoods — rolling grasslands, deep canyons, Bullfrog Pond, and one of the best campgrounds near Guerneville. Perfect for backcountry solitude and stargazing above the redwood grove.',
     googleRating: 4.7, googleReviews: '220',
     bestSeason: 'April – October', bestMonths: [4,5,6,7,8,9,10],
@@ -2926,6 +3117,9 @@ const PARK_DETAILS = {
     ]
   },
   'kruse-rhododendron': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Understory blooms', 'Regrowth redwoods', 'Fern canyons'], tip: 'Visit in April or May to photograph the spectacular pink rhododendron blooms.' },
+    sunsetSpots: [{ spot: 'Trail breaks', note: 'Mostly dense forest, but filtered evening light through the pink flowers is magical' }],
     highlight: 'A quiet 317-acre coastal reserve that bursts with pink rhododendron blooms each spring beneath a canopy of Douglas fir and redwood. A short but magical botanical walk best timed for mid-April to mid-June.',
     googleRating: 4.7, googleReviews: '230',
     bestSeason: 'April – June', bestMonths: [4,5,6],
@@ -2958,6 +3152,9 @@ const PARK_DETAILS = {
     ]
   },
   'bale-grist-mill': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Wooden water wheel', 'Historic mill stones', 'Forested creek'], tip: 'The massive 36-foot wooden water wheel is fully operational; use a slow shutter to blur the dripping water.' },
+    sunsetSpots: [{ spot: 'Mill exterior', note: 'The historic wood structure catches beautiful dappled afternoon light' }],
     highlight: 'A beautifully restored 1846 water-powered grist mill with a massive 36-foot wooden waterwheel — a marvel of pioneer-era engineering in a shaded Napa Valley canyon. Watch milling demonstrations and buy fresh stone-ground flour.',
     googleRating: 4.7, googleReviews: '380',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -2989,6 +3186,9 @@ const PARK_DETAILS = {
     ]
   },
   'anderson-marsh': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Cache Creek', 'Historic Ranch House', 'Tule marshlands'], tip: 'A premier birding spot—bring your longest lens to capture bald eagles and herons.' },
+    sunsetSpots: [{ spot: 'Audubon Trail boardwalk', note: 'Watch the sunset over the tule reeds of Clear Lake' }],
     highlight: 'A rare freshwater tule marsh on Clear Lake\'s southeast shore with 14,000 years of Pomo cultural history. One of Northern California\'s best birding spots with bald eagles in winter, plus easy interpretive trails through oak woodland and wetland.',
     googleRating: 4.4, googleReviews: '180',
     bestSeason: 'October – May', bestMonths: [10,11,12,1,2,3,4,5],
@@ -3023,6 +3223,9 @@ const PARK_DETAILS = {
     ]
   },
   'clear-lake': {
+    biking: { available: true, ebike: false, trails: [] },
+    photography: { spots: ['Cole Creek', 'Dorn Trail', 'Lake shoreline'], tip: 'The oldest lake in North America; photograph the ancient volcanic silhouettes reflected in the water.' },
+    sunsetSpots: [{ spot: 'Kelsey Creek area', note: 'Unobstructed western views across the massive lake body' }],
     highlight: 'On the shores of California\'s largest natural freshwater lake, offering premier bass fishing, swimming beaches, kayaking, and lakeside camping across four campground loops. A relaxed, family-friendly water recreation base.',
     googleRating: 4.5, googleReviews: '1.3K',
     bestSeason: 'March – October', bestMonths: [3,4,5,6,7,8,9,10],
@@ -3057,6 +3260,9 @@ const PARK_DETAILS = {
     ]
   },
   'armstrong-redwoods': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Colonel Armstrong Tree', 'Parson Jones Tree', 'Forest theater'], tip: 'Foggiest in the morning; shoot straight up to capture the 310-foot giants converging.' },
+    sunsetSpots: [{ spot: 'Canopy gaps', note: 'Deep within the canyon, sunset comes early as light retreats up the colossal trunks' }],
     highlight: 'The easiest way to stand among towering old-growth coast redwoods — including the 1,400-year-old Colonel Armstrong Tree and the 310-foot Parson Jones Tree. A serene, shaded, ADA-accessible grove minutes from Guerneville.',
     googleRating: 4.8, googleReviews: '4.5K',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -3092,6 +3298,9 @@ const PARK_DETAILS = {
     ]
   },
   'salt-point': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Tafoni sandstone rocks', 'Gerstle Cove', 'Pygmy Forest'], tip: 'The honeycomb-like "tafoni" rock formations along the coastline create otherworldly foregrounds.' },
+    sunsetSpots: [{ spot: 'Fisk Mill Cove', note: 'Dramatic cliffs dropping straight into the crashing Pacific surf' }],
     highlight: 'One of Sonoma County\'s most varied coastal parks — honeycomb tafoni sandstone, tide pools at Gerstle Cove, an underwater marine reserve for divers, pygmy forests, campgrounds, and 20+ miles of trails. The scenery changes dramatically in a compact stretch.',
     googleRating: 4.7, googleReviews: '2.1K',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -3129,6 +3338,9 @@ const PARK_DETAILS = {
     ]
   },
   'sonoma-coast': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Goat Rock', 'Bodega Head', 'Blind Beach', 'Russian River mouth'], tip: 'Spectacular sea stacks dot the ocean; long exposures (30+ seconds) smooth out the crashing surf.' },
+    sunsetSpots: [{ spot: 'Goat Rock Beach', note: 'One of the most iconic sunset beaches in California, with massive arched rocks framing the sun' }],
     highlight: 'Seventeen miles of classic rugged Northern California coast — long sandy beaches, hidden coves, rock arches, blufftop trails, tide pools, and whale watching. One of the most photogenic state parks in the region, especially when weather turns dramatic.',
     googleRating: 4.8, googleReviews: '5.2K',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -3166,6 +3378,9 @@ const PARK_DETAILS = {
     ]
   },
   'fort-ross': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Russian Orthodox Chapel', 'Wooden palisades', 'Cove and cannons'], tip: 'The stark wooden chapel set against the moody, foggy coastline is incredibly photogenic.' },
+    sunsetSpots: [{ spot: 'Fort compound', note: 'Watch the sunset behind the wooden stockade walls looking out to the Pacific' }],
     highlight: 'One of California\'s most distinctive historic parks — an 1812 Russian colonial fort with restored stockade and chapel perched on stunning coastal bluffs. Layers of Russian, Kashia Pomo, and ranch-era history meet dramatic Pacific scenery.',
     googleRating: 4.7, googleReviews: '2.8K',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -3200,6 +3415,9 @@ const PARK_DETAILS = {
     ]
   },
   'van-damme': {
+    biking: { available: true, ebike: false, trails: [{ name: 'Fern Canyon Trail', distance: '5.0 mi', difficulty: 'Easy', note: 'Lush, flat dirt trail following Little River; paved at the beginning' }] },
+    photography: { spots: ['Fern Canyon', 'Pygmy Forest boardwalk', 'Little River beach'], tip: 'The dense, wet fern canyon is a macro photographer\'s dream for mosses and fungi.' },
+    sunsetSpots: [{ spot: 'Van Damme Beach', note: 'A protected cove where the river meets the sea, catching the western evening light' }],
     highlight: 'One of the most complete Mendocino coast parks — a lush fern-filled canyon, a pygmy forest of centuries-old miniature trees, a beach cove for kayaking sea caves, and a popular campground. Memorable walking and coastal recreation in one stop.',
     googleRating: 4.7, googleReviews: '2.4K',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -3235,6 +3453,9 @@ const PARK_DETAILS = {
     ]
   },
   'russian-gulch': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Bike path to waterfall', distance: '2.5 mi', difficulty: 'Easy', note: 'Paved multi-use trail leading deep into the forested canyon' }] },
+    photography: { spots: ['Devil\'s Punchbowl', 'Panther Bridge', 'Russian Gulch Falls'], tip: 'The 36-foot waterfall cascading through ferns is best captured with a 1-second exposure.' },
+    sunsetSpots: [{ spot: 'Headlands Trail', note: 'Look down into the Devil\'s Punchbowl sinkhole as the sun sets over the ocean' }],
     highlight: 'One of the Mendocino coast\'s most dramatic parks — a mossy canyon waterfall, the Devil\'s Punchbowl collapsed sea cave, rugged headlands, the photogenic Panhorst Bridge, and camping. Forest and coastline in one visit.',
     googleRating: 4.8, googleReviews: '2.5K',
     bestSeason: 'Year-round', bestMonths: [1,2,3,4,5,6,7,8,9,10,11,12],
@@ -3271,6 +3492,9 @@ const PARK_DETAILS = {
     ]
   },
   'mackerricher': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Haul Road Trail', distance: '3.0 mi', difficulty: 'Easy', note: 'Old paved logging road running right along the coastal cliffs' }] },
+    photography: { spots: ['Glass Beach (nearby)', 'Laguna Point boardwalk', 'Lake Cleone'], tip: 'Harbor seals often haul out on the rocks at Laguna Point; bring a zoom lens.' },
+    sunsetSpots: [{ spot: 'Laguna Point', note: 'Unobstructed 180-degree ocean views and a prime spot to photograph whales at sunset' }],
     highlight: 'One of the North Coast\'s best variety parks — seal-viewing bluffs at Laguna Point, dunes, wetlands, Lake Cleone, Ten Mile Beach, tide pools, and the paved coastal Haul Road all in one place. Perfect for mixing wildlife watching, biking, and beachcombing without much driving.',
     googleRating: 4.8, googleReviews: '2.5K',
     bestSeason: 'April – October', bestMonths: [4,5,6,7,8,9,10],
@@ -3307,6 +3531,9 @@ const PARK_DETAILS = {
     ]
   },
   'humboldt-redwoods': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Avenue of the Giants', distance: '31.0 mi', difficulty: 'Moderate', note: 'World-famous paved scenic highway riding alongside the colossal trees' }] },
+    photography: { spots: ['Founders Grove', 'Eel River', 'Rockefeller Forest'], tip: 'The largest contiguous old-growth redwood forest on earth. Use a person in frame for scale.' },
+    sunsetSpots: [{ spot: 'Eel River sandbars', note: 'Sunset reflects on the river surface framed by 300-foot tall shadows' }],
     highlight: 'Home to the Avenue of the Giants and the largest remaining contiguous old-growth coast redwood forest on Earth. The sheer scale of 300-foot ancient trees towering over the Eel River is profoundly humbling — one of the best redwood parks for both easy immersion and serious trail mileage.',
     googleRating: 4.9, googleReviews: '5.2K',
     bestSeason: 'May – October', bestMonths: [5,6,7,8,9,10],
@@ -3344,6 +3571,9 @@ const PARK_DETAILS = {
     ]
   },
   'richardson-grove': {
+    biking: { available: false, ebike: false, trails: [] },
+    photography: { spots: ['Dawn Redwood path', 'South Fork Eel River', 'Visitor Center'], tip: 'Often the first redwood park visitors hit driving north; great afternoon light cutting through the canopy.' },
+    sunsetSpots: [{ spot: 'River shoreline', note: 'Calm water near the swimming hole reflects the evening sky' }],
     highlight: 'A beautiful "gateway redwoods" park along Highway 101 with big old-growth trees, river access, and a convenient campground. Features unusual chandelier-style multi-trunk trees and a historic 1930s lodge. Ideal as a relaxing overnight stop or mellow redwood walk.',
     googleRating: 4.7, googleReviews: '2.1K',
     bestSeason: 'May – September', bestMonths: [5,6,7,8,9],
@@ -3380,6 +3610,9 @@ const PARK_DETAILS = {
     ]
   },
   'prairie-creek': {
+    biking: { available: true, ebike: true, trails: [{ name: 'Newton B. Drury Parkway', distance: '10.0 mi', difficulty: 'Moderate', note: 'Paved road through immense redwoods (often closed to cars, making it a cycling paradise)' }] },
+    photography: { spots: ['Fern Canyon', 'Elk Prairie', 'Big Tree wayside'], tip: 'Fern Canyon (where Jurassic Park was filmed) is spectacular, but herds of Roosevelt Elk in the meadow provide the best wildlife shots.' },
+    sunsetSpots: [{ spot: 'Gold Bluffs Beach', note: 'Crashing Pacific waves backed by steep redwood bluffs' }],
     highlight: 'The most cinematic of the redwood parks — immense groves, Roosevelt elk grazing in meadows, the spectacular Fern Canyon with 50-foot fern-draped walls, Gold Bluffs Beach, and the gorgeous Newton B. Drury Scenic Parkway. A World Heritage site and Jurassic Park filming location.',
     googleRating: 4.9, googleReviews: '4.1K',
     bestSeason: 'May – October', bestMonths: [5,6,7,8,9,10],
