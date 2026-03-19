@@ -1,12 +1,16 @@
 const fs = require('fs');
-const content = fs.readFileSync('caparks.html', 'utf-8');
-const scriptStart = content.indexOf('<script>');
-const scriptEnd = content.lastIndexOf('</script>');
-const jsCode = content.substring(scriptStart + 8, scriptEnd);
 try {
-  // We can't eval easily because it depends on DOM or other things, but we can syntax check it
-  new Function(jsCode);
-  console.log("Syntax is valid!");
+  const content = fs.readFileSync('caparks.html', 'utf-8');
+  const startStr = 'const PARK_DETAILS = {';
+  const startIdx = content.indexOf(startStr);
+  const endIdx = content.indexOf('};\n\nfunction', startIdx) + 1;
+  const objectStr = content.substring(startIdx + startStr.length - 1, endIdx);
+  
+  // Try evaluating it
+  const evalFunc = new Function('return ' + objectStr);
+  const obj = evalFunc();
+  console.log(`Successfully parsed ${Object.keys(obj).length} park details objects.`);
 } catch (e) {
-  console.error("Syntax Error:", e.message);
+  console.error("Syntax Error!! " + e);
+  process.exit(1);
 }
