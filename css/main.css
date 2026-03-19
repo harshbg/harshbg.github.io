@@ -2307,6 +2307,9 @@ body.mobile-nav-active #mobile-nav-toggle {
     position: absolute;
     top: 50%;
     left: 50%;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -3429,18 +3432,16 @@ html {
         opacity: 0;
         position: absolute;
         top: 50%;
-        left: 20%;
-        @include transform(translate(-10%, -50%));
+        left: 50%;
+        width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
         text-align: center;
-        @include transition();
-        h4 {
-            font-size: 21px;
-            color: $white;
-        }
-        .cat {
-            font-size: 15px;
-            color: $white;
-        }
     }
     &:hover {
         .thumb {
