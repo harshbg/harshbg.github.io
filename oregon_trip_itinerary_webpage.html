@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oregon Road Trip Itinerary — Jun 27 to Jul 5, 2026</title>
+  <style>
+    :root{
+      --bg:#f6f7f2; --paper:#ffffff; --ink:#19202a; --muted:#657080; --line:#dde2e7;
+      --green:#157a48; --green2:#e9f7ef; --gold:#ad7400; --gold2:#fff4d8; --blue:#0e4f79; --red:#b33a3a;
+      --shadow:0 8px 28px rgba(15,30,40,.10); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.45}
+    a{color:inherit}
+    .hero{background:linear-gradient(135deg,#0b2239,#0e4f79 48%,#1a7d50);color:#fff;padding:32px 22px 24px;position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,rgba(255,255,255,.22),transparent 28%),radial-gradient(circle at 15% 80%,rgba(255,255,255,.12),transparent 30%);pointer-events:none}
+    .hero-inner{max-width:1180px;margin:auto;position:relative;z-index:1}
+    h1{font-size:clamp(30px,4vw,54px);line-height:1.05;margin:0 0 10px;font-weight:850;letter-spacing:-.04em}
+    .subtitle{font-size:18px;opacity:.92;max-width:900px}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .badge{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);font-weight:700;font-size:13px}
+    .container{max-width:1180px;margin:0 auto;padding:22px}
+    .sticky{position:sticky;top:0;z-index:5;background:rgba(246,247,242,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav{max-width:1180px;margin:auto;padding:12px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+    .nav a,.toggle{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;text-decoration:none;font-size:13px;font-weight:750;box-shadow:0 1px 0 rgba(0,0,0,.03)}
+    .toggle{cursor:pointer;color:var(--ink)}
+    .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+    .stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
+    .stat b{font-size:22px;display:block}.stat span{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+    .day{margin:34px 0 26px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .day-head{display:grid;grid-template-columns:220px 1fr;gap:0;border-bottom:1px solid var(--line)}
+    .datebox{background:#102d45;color:#fff;padding:20px}.datebox .daynum{font-size:28px;font-weight:900;letter-spacing:-.03em}.datebox .date{font-weight:800;margin-top:3px}.datebox .drive{font-size:13px;opacity:.86;margin-top:10px}
+    .day-info{padding:18px 20px;background:linear-gradient(90deg,#fff,#f8fbff)}
+    .day-info h2{margin:0 0 8px;font-size:26px;line-height:1.1;letter-spacing:-.03em}.hotel{margin-top:10px;padding:12px;border-radius:14px;background:#f4f7fa;border:1px dashed #cdd8e3;font-size:14px}.hotel strong{color:var(--blue)}
+    .plan{display:grid;grid-template-columns:280px 1fr;gap:18px;padding:20px}
+    .day-notes{border-right:1px solid var(--line);padding-right:16px}.day-notes h3{margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+    .timing{font-size:14px;color:#2f3b4a;margin:0 0 12px;padding-left:18px}.timing li{margin:8px 0}.warning{padding:12px;background:#fff4e5;border:1px solid #f2ca79;border-radius:14px;font-size:13px;color:#57400b;margin-top:12px}
+    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .card{border:1px solid var(--line);border-radius:17px;background:#fff;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.06);position:relative}.card.optional.hidden{display:none}
+    .thumb{height:160px;background:#d9e3ea;position:relative;overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.08) contrast(1.02)}
+    .ribbon{position:absolute;left:10px;top:10px;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:900;color:#fff}.mandatory .ribbon{background:var(--green)}.optional .ribbon{background:var(--gold)}
+    .card-body{padding:13px}.seq{font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}.card h4{margin:3px 0 7px;font-size:18px;line-height:1.12;letter-spacing:-.02em}.meta{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}.pill{font-size:12px;font-weight:800;border-radius:999px;padding:4px 7px;background:#eef3f7;color:#37465a}.pill.visit{background:#e9f7ef;color:var(--green)}.pill.hike{background:#fff4d8;color:#7a5200}.pill.drive{background:#edf4ff;color:#0e4f79}.desc{font-size:13.5px;color:#334155;margin:8px 0 12px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;border-radius:10px;border:1px solid var(--line);padding:8px 9px;font-size:12px;font-weight:850;background:#fff}.btn.map{background:#0e4f79;color:#fff;border-color:#0e4f79}.btn.check{cursor:pointer}.done{opacity:.54}.done h4{text-decoration:line-through}.footer{padding:24px;color:#536170;text-align:center;font-size:13px}.print-note{display:none}
+    @media(max-width:1000px){.summary{grid-template-columns:repeat(2,1fr)}.day-head{grid-template-columns:1fr}.plan{grid-template-columns:1fr}.day-notes{border-right:none;border-bottom:1px solid var(--line);padding:0 0 14px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:650px){.cards{grid-template-columns:1fr}.container{padding:14px}.hero{padding:26px 14px}.nav{padding:10px 14px}.summary{grid-template-columns:1fr}.thumb{height:190px}}
+    @media print{.sticky,.actions,.toggle{display:none}.hero{background:#fff;color:#000}.day,.stat{box-shadow:none}.card{break-inside:avoid}.print-note{display:block}.container{max-width:none}.cards{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+  <section class="hero"><div class="hero-inner">
+    <h1>Oregon Road Trip Field Guide</h1>
+    <div class="subtitle">A day-by-day decision guide for every major stop, ordered in the sequence you will visit. Use the Mandatory/Optional tags to decide what to keep or cut in real time.</div>
+    <div class="badges"><span class="badge">Jun 27 – Jul 5, 2026</span><span class="badge">2 Adults</span><span class="badge">WFH in Bend: Jun 29–30</span><span class="badge">Hotels booked</span><span class="badge">Google Maps links included</span></div>
+  </div></section>
+  <div class="sticky"><nav class="nav">
+    <a href="#day1">Day 1</a><a href="#day2">Day 2</a><a href="#day3">Day 3</a><a href="#day4">Day 4</a><a href="#day5">Day 5</a><a href="#day6">Day 6</a><a href="#day7">Day 7</a><a href="#day8">Day 8</a><a href="#day9">Day 9</a>
+    <button class="toggle" id="optionalToggle">Hide optional stops</button>
+    <button class="toggle" onclick="window.print()">Print / Save PDF</button>
+  </nav></div>
+  <main class="container">
+    <div class="summary"><div class="stat"><span>Days</span><b>9</b></div><div class="stat"><span>Booked stays</span><b>6</b></div><div class="stat"><span>Mandatory stops</span><b id="mCount">—</b></div><div class="stat"><span>Optional stops</span><b id="oCount">—</b></div></div>
+    <p class="print-note">Tip: Use the Google Maps links before driving. Times are approximate and assume normal summer traffic/parking.</p>
+<section class="day" id="day1">
+<div class="day-head">
+<div class="datebox"><div class="daynum">Day 1</div><div class="date">Sat, Jun 27</div><div class="drive">🚗 ~7–8 hrs total with boating detour</div></div>
+<div class="day-info"><h2>Milpitas → Lake Britton → Medford</h2><div class="hotel"><strong>Hotel / base:</strong> Medford — Quality Inn &amp; Suites Medford Airport. Check-in 3 PM / check-out 11 AM. Free breakfast. $150 security/deposit hold.</div></div>
+</div>
+<div class="plan"><aside class="day-notes"><h3>How to run this day</h3><ul class="timing">
+<li>Leave Milpitas around 7:30–8:00 AM if you want the boating stop.</li>
+<li>Lunch + Tesla charge around Red Bluff or Redding.</li>
+<li>Keep the day flexible; this is still mostly a positioning day.</li>
+<li>If late, skip boating and go straight to Medford/Ashland.</li>
+</ul>
+<div class="warning"><strong>Key caveat:</strong> Lake Britton boating depends on marina hours, weather, and availability. Keep it to ~1 hour so you do not reach Medford too late.</div>
+</aside><div class="cards">
+<article class="card mandatory" data-name="Lake Britton / Burney Falls Marina">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Lake%20Britton%20Oregon%20boating%20marina" alt="Lake Britton / Burney Falls Marina"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 1 • Mandatory</div><h4>Lake Britton / Burney Falls Marina</h4>
+<div class="meta"><span class="pill drive">Drive detour: +1.5–2 hrs vs straight I‑5</span><span class="pill visit">Visit: 1–1.5 hrs</span><span class="pill hike">Easy / lake activity</span></div>
+<p class="desc">One fun activity to make the drive feel like a trip. Do 1 hour boating/kayak/lake time; skip repeating Burney Falls unless you really want it.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lake%20Britton%20/%20Burney%20Falls%20Marina%20Lake%20Britton%20Oregon%20boating%20marina">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Lake%20Britton%20Oregon%20boating%20marina">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Mount Shasta / Weed quick viewpoint">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Mount%20Shasta%20viewpoint%20Weed%20California" alt="Mount Shasta / Weed quick viewpoint"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 2 • Optional</div><h4>Mount Shasta / Weed quick viewpoint</h4>
+<div class="meta"><span class="pill drive">On route</span><span class="pill visit">Visit: 10–15 min</span><span class="pill hike">Roadside viewpoint</span></div>
+<p class="desc">Quick photo stop only; you already did Shasta deeply, so do not burn time here.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Mount%20Shasta%20/%20Weed%20quick%20viewpoint%20Mount%20Shasta%20viewpoint%20Weed%20California">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Mount%20Shasta%20viewpoint%20Weed%20California">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Lithia Park, Ashland">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Lithia%20Park%20Ashland%20Oregon" alt="Lithia Park, Ashland"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 3 • Optional</div><h4>Lithia Park, Ashland</h4>
+<div class="meta"><span class="pill drive">Medford → Ashland: ~20 min</span><span class="pill visit">Visit: 45–75 min</span><span class="pill hike">Easy walk</span></div>
+<p class="desc">Pretty creekside park and the best easy evening walk near Medford if you arrive with energy.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lithia%20Park%2C%20Ashland%20Lithia%20Park%20Ashland%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Lithia%20Park%20Ashland%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Downtown Ashland">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Downtown%20Ashland%20Oregon" alt="Downtown Ashland"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 4 • Optional</div><h4>Downtown Ashland</h4>
+<div class="meta"><span class="pill drive">Near Lithia Park</span><span class="pill visit">Visit: 45–90 min</span><span class="pill hike">City walk</span></div>
+<p class="desc">Good dinner/coffee stroll after checking in; cute town vibe without adding much driving.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Downtown%20Ashland%20Downtown%20Ashland%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Downtown%20Ashland%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Jacksonville, OR">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Jacksonville%20Oregon%20historic%20downtown" alt="Jacksonville, OR"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 5 • Optional</div><h4>Jacksonville, OR</h4>
+<div class="meta"><span class="pill drive">Medford → Jacksonville: ~15 min</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Small-town walk</span></div>
+<p class="desc">Historic small town alternative to Ashland; good for a quieter evening stroll.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jacksonville%2C%20OR%20Jacksonville%20Oregon%20historic%20downtown">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Jacksonville%20Oregon%20historic%20downtown">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+</div></div></section>
+<section class="day" id="day2">
+<div class="day-head">
+<div class="datebox"><div class="daynum">Day 2</div><div class="date">Sun, Jun 28</div><div class="drive">🚗 ~4–5 hrs driving + viewpoints</div></div>
+<div class="day-info"><h2>Medford → Rogue Gorge → Natural Bridge → Crater Lake → Bend</h2><div class="hotel"><strong>Hotel / base:</strong> Bend — TownePlace Suites by Marriott Bend. Check-in 4 PM / check-out 12 PM. Free breakfast. Full kitchen. Prepaid/non-refundable.</div></div>
+</div>
+<div class="plan"><aside class="day-notes"><h3>How to run this day</h3><ul class="timing">
+<li>Leave Medford around 7:30–8:30 AM.</li>
+<li>Do Rogue Gorge + Natural Bridge before Crater Lake.</li>
+<li>Prioritize rim viewpoints; no need to over-hike this day.</li>
+<li>Grocery run in Bend for WFH days.</li>
+</ul>
+<div class="warning"><strong>Key caveat:</strong> Crater Lake weather can be windy/cold even when sunny. Carry windcheater or jacket. Lake access/boat tours are not part of this plan.</div>
+</aside><div class="cards">
+<article class="card mandatory" data-name="Rogue Gorge">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Rogue%20Gorge%20Oregon" alt="Rogue Gorge"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 1 • Mandatory</div><h4>Rogue Gorge</h4>
+<div class="meta"><span class="pill drive">Medford → ~1 hr 20 min</span><span class="pill visit">Visit: 25–40 min</span><span class="pill hike">Easy short walk</span></div>
+<p class="desc">Short, high-payoff river canyon stop on the way to Crater Lake.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Rogue%20Gorge%20Rogue%20Gorge%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Rogue%20Gorge%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Natural Bridge, Rogue River">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Natural%20Bridge%20Rogue%20River%20Oregon" alt="Natural Bridge, Rogue River"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 2 • Mandatory</div><h4>Natural Bridge, Rogue River</h4>
+<div class="meta"><span class="pill drive">Rogue Gorge → ~10 min</span><span class="pill visit">Visit: 25–40 min</span><span class="pill hike">Easy short walk</span></div>
+<p class="desc">Lava-tube river feature; good paired with Rogue Gorge.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Natural%20Bridge%2C%20Rogue%20River%20Natural%20Bridge%20Rogue%20River%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Natural%20Bridge%20Rogue%20River%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Crater Lake Rim Village">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Crater%20Lake%20Rim%20Village" alt="Crater Lake Rim Village"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 3 • Mandatory</div><h4>Crater Lake Rim Village</h4>
+<div class="meta"><span class="pill drive">Natural Bridge → ~45–60 min</span><span class="pill visit">Visit: 30–45 min</span><span class="pill hike">Viewpoints</span></div>
+<p class="desc">First big view of the lake; start here for classic Crater Lake photos.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Crater%20Lake%20Rim%20Village%20Crater%20Lake%20Rim%20Village">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Crater%20Lake%20Rim%20Village">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Sinnott Memorial Overlook">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Sinnott%20Memorial%20Overlook%20Crater%20Lake" alt="Sinnott Memorial Overlook"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 4 • Mandatory</div><h4>Sinnott Memorial Overlook</h4>
+<div class="meta"><span class="pill drive">At Rim Village</span><span class="pill visit">Visit: 15–25 min</span><span class="pill hike">Short paved access</span></div>
+<p class="desc">Best structured overlook near Rim Village; huge payoff for little effort.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sinnott%20Memorial%20Overlook%20Sinnott%20Memorial%20Overlook%20Crater%20Lake">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Sinnott%20Memorial%20Overlook%20Crater%20Lake">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Discovery Point">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Discovery%20Point%20Crater%20Lake" alt="Discovery Point"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 5 • Mandatory</div><h4>Discovery Point</h4>
+<div class="meta"><span class="pill drive">Rim Village → ~10 min</span><span class="pill visit">Visit: 15–25 min</span><span class="pill hike">Viewpoint / short walk</span></div>
+<p class="desc">Classic west-rim lake view and easy photo stop.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Discovery%20Point%20Discovery%20Point%20Crater%20Lake">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Discovery%20Point%20Crater%20Lake">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Watchman Overlook">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Watchman%20Overlook%20Crater%20Lake" alt="Watchman Overlook"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 6 • Mandatory</div><h4>Watchman Overlook</h4>
+<div class="meta"><span class="pill drive">Discovery Point → ~10 min</span><span class="pill visit">Visit: 20–45 min</span><span class="pill hike">Viewpoint / optional hike</span></div>
+<p class="desc">One of the strongest Wizard Island / lake compositions. Do viewpoint; hike only if energy.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Watchman%20Overlook%20Watchman%20Overlook%20Crater%20Lake">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Watchman%20Overlook%20Crater%20Lake">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Phantom Ship Overlook">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Phantom%20Ship%20Overlook%20Crater%20Lake" alt="Phantom Ship Overlook"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 7 • Mandatory</div><h4>Phantom Ship Overlook</h4>
+<div class="meta"><span class="pill drive">Watchman → 20–30 min depending road access</span><span class="pill visit">Visit: 15–25 min</span><span class="pill hike">Viewpoint</span></div>
+<p class="desc">Different angle of the lake and the Phantom Ship rock formation.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Phantom%20Ship%20Overlook%20Phantom%20Ship%20Overlook%20Crater%20Lake">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Phantom%20Ship%20Overlook%20Crater%20Lake">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Sun Notch">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Sun%20Notch%20Crater%20Lake" alt="Sun Notch"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 8 • Optional</div><h4>Sun Notch</h4>
+<div class="meta"><span class="pill drive">Near south/east rim</span><span class="pill visit">Visit: 30–45 min</span><span class="pill hike">Short hike</span></div>
+<p class="desc">Short trail with a great Phantom Ship view if time and road access allow.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sun%20Notch%20Sun%20Notch%20Crater%20Lake">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Sun%20Notch%20Crater%20Lake">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Drake Park / Mirror Pond">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Drake%20Park%20Bend%20Oregon" alt="Drake Park / Mirror Pond"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 9 • Optional</div><h4>Drake Park / Mirror Pond</h4>
+<div class="meta"><span class="pill drive">Bend hotel → ~5–10 min</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">City park walk</span></div>
+<p class="desc">Easy Bend evening walk if you reach before dark.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Drake%20Park%20/%20Mirror%20Pond%20Drake%20Park%20Bend%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Drake%20Park%20Bend%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Old Mill District / Deschutes River Trail">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Old%20Mill%20District%20Bend%20Oregon" alt="Old Mill District / Deschutes River Trail"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 10 • Optional</div><h4>Old Mill District / Deschutes River Trail</h4>
+<div class="meta"><span class="pill drive">Bend hotel → ~5–10 min</span><span class="pill visit">Visit: 45–90 min</span><span class="pill hike">Urban river walk</span></div>
+<p class="desc">Dinner/walk option in Bend after checking in.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Old%20Mill%20District%20/%20Deschutes%20River%20Trail%20Old%20Mill%20District%20Bend%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Old%20Mill%20District%20Bend%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+</div></div></section>
+<section class="day" id="day3">
+<div class="day-head">
+<div class="datebox"><div class="daynum">Day 3</div><div class="date">Mon, Jun 29</div><div class="drive">🚗 Evening round-trip ~1.5 hrs</div></div>
+<div class="day-info"><h2>WFH in Bend + Smith Rock Golden Hour</h2><div class="hotel"><strong>Hotel / base:</strong> Bend — TownePlace Suites by Marriott Bend. WFH base with kitchen/desk.</div></div>
+</div>
+<div class="plan"><aside class="day-notes"><h3>How to run this day</h3><ul class="timing">
+<li>WFH during the day.</li>
+<li>Leave for Smith Rock after work.</li>
+<li>Goal is golden-hour scenery, not a punishing hike.</li>
+<li>Eat before/after depending timing.</li>
+</ul>
+<div class="warning"><strong>Key caveat:</strong> Smith Rock is exposed: hot sun before sunset, then cooler after sunset. Carry a layer and water.</div>
+</aside><div class="cards">
+<article class="card mandatory" data-name="Smith Rock State Park">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Smith%20Rock%20State%20Park%20Oregon" alt="Smith Rock State Park"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 1 • Mandatory</div><h4>Smith Rock State Park</h4>
+<div class="meta"><span class="pill drive">Bend → ~40 min</span><span class="pill visit">Visit: 1.5–2.5 hrs</span><span class="pill hike">Easy to moderate walking</span></div>
+<p class="desc">Iconic Central Oregon red-rock cliffs, Crooked River bend, climbers, and golden-hour views.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Smith%20Rock%20State%20Park%20Smith%20Rock%20State%20Park%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Smith%20Rock%20State%20Park%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Crooked River / River Trail">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Smith%20Rock%20River%20Trail%20Crooked%20River" alt="Crooked River / River Trail"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 2 • Mandatory</div><h4>Crooked River / River Trail</h4>
+<div class="meta"><span class="pill drive">Inside Smith Rock</span><span class="pill visit">Visit: 60–90 min</span><span class="pill hike">Easy scenic trail</span></div>
+<p class="desc">Best low-effort scenic trail at Smith Rock; stay along the river instead of forcing Misery Ridge.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Crooked%20River%20/%20River%20Trail%20Smith%20Rock%20River%20Trail%20Crooked%20River">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Smith%20Rock%20River%20Trail%20Crooked%20River">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Monkey Face Viewpoint">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Monkey%20Face%20Smith%20Rock" alt="Monkey Face Viewpoint"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 3 • Optional</div><h4>Monkey Face Viewpoint</h4>
+<div class="meta"><span class="pill drive">From River Trail area</span><span class="pill visit">Visit: +30–60 min</span><span class="pill hike">Moderate add-on</span></div>
+<p class="desc">Add only if moving well and want a little more trail/view variety.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Monkey%20Face%20Viewpoint%20Monkey%20Face%20Smith%20Rock">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Monkey%20Face%20Smith%20Rock">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Misery Ridge Trail">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Misery%20Ridge%20Trail%20Smith%20Rock" alt="Misery Ridge Trail"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 4 • Optional</div><h4>Misery Ridge Trail</h4>
+<div class="meta"><span class="pill drive">Inside Smith Rock</span><span class="pill visit">Visit: 2–3 hrs</span><span class="pill hike">Strenuous</span></div>
+<p class="desc">Only if you suddenly want a hard hike; not recommended as the default after WFH.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Misery%20Ridge%20Trail%20Misery%20Ridge%20Trail%20Smith%20Rock">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Misery%20Ridge%20Trail%20Smith%20Rock">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Downtown Bend / Breweries">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Downtown%20Bend%20Oregon%20breweries" alt="Downtown Bend / Breweries"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 5 • Optional</div><h4>Downtown Bend / Breweries</h4>
+<div class="meta"><span class="pill drive">Smith Rock → Bend ~40 min</span><span class="pill visit">Visit: 45–90 min</span><span class="pill hike">City / food</span></div>
+<p class="desc">Post-sunset dinner or low-key Bend evening.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Downtown%20Bend%20/%20Breweries%20Downtown%20Bend%20Oregon%20breweries">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Downtown%20Bend%20Oregon%20breweries">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+</div></div></section>
+<section class="day" id="day4">
+<div class="day-head">
+<div class="datebox"><div class="daynum">Day 4</div><div class="date">Tue, Jun 30</div><div class="drive">🚗 Evening driving varies ~1–2.5 hrs</div></div>
+<div class="day-info"><h2>WFH in Bend + Tumalo / Sparks Lake / Pilot Butte</h2><div class="hotel"><strong>Hotel / base:</strong> Bend — TownePlace Suites by Marriott Bend. Last night in Bend.</div></div>
+</div>
+<div class="plan"><aside class="day-notes"><h3>How to run this day</h3><ul class="timing">
+<li>WFH during the day.</li>
+<li>Pick one evening style: efficient waterfall/viewpoint OR scenic lake sunset.</li>
+<li>Best beauty version: Tumalo Falls → Sparks Lake sunset.</li>
+<li>Tired version: Tumalo Falls → Pilot Butte.</li>
+</ul>
+<div class="warning"><strong>Key caveat:</strong> Cascade Lakes area can get breezy/cool at sunset. Roads/parking can be busy in summer.</div>
+</aside><div class="cards">
+<article class="card mandatory" data-name="Tumalo Falls">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Tumalo%20Falls%20Bend%20Oregon" alt="Tumalo Falls"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 1 • Mandatory</div><h4>Tumalo Falls</h4>
+<div class="meta"><span class="pill drive">Bend → ~30 min</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Short walk/viewpoint</span></div>
+<p class="desc">Short, easy, powerful waterfall near Bend. Best quick scenic stop after work.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Tumalo%20Falls%20Tumalo%20Falls%20Bend%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Tumalo%20Falls%20Bend%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Sparks Lake">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Sparks%20Lake%20Oregon" alt="Sparks Lake"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 2 • Mandatory</div><h4>Sparks Lake</h4>
+<div class="meta"><span class="pill drive">Tumalo → ~45–60 min; Bend → ~45 min</span><span class="pill visit">Visit: 60–90 min</span><span class="pill hike">Easy viewpoints/walks</span></div>
+<p class="desc">Best evening landscape option near Bend: water, mountains, sunset reflections.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Sparks%20Lake%20Sparks%20Lake%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Sparks%20Lake%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Pilot Butte">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Pilot%20Butte%20Bend%20Oregon" alt="Pilot Butte"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 3 • Optional</div><h4>Pilot Butte</h4>
+<div class="meta"><span class="pill drive">Bend → ~10–15 min</span><span class="pill visit">Visit: 30–45 min</span><span class="pill hike">Drive-up/walk-up viewpoint</span></div>
+<p class="desc">Easy Bend city/Cascade viewpoint. Use this instead of Sparks if tired or short on time.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Pilot%20Butte%20Pilot%20Butte%20Bend%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Pilot%20Butte%20Bend%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Cascade Lakes Highway pullouts">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Cascade%20Lakes%20Highway%20Oregon" alt="Cascade Lakes Highway pullouts"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 4 • Optional</div><h4>Cascade Lakes Highway pullouts</h4>
+<div class="meta"><span class="pill drive">Near Sparks Lake</span><span class="pill visit">Visit: flexible</span><span class="pill hike">Scenic drive</span></div>
+<p class="desc">Scenic drive with mountain/lake pullouts if the weather is clear.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cascade%20Lakes%20Highway%20pullouts%20Cascade%20Lakes%20Highway%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Cascade%20Lakes%20Highway%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Shevlin Park">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Shevlin%20Park%20Bend%20Oregon" alt="Shevlin Park"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 5 • Optional</div><h4>Shevlin Park</h4>
+<div class="meta"><span class="pill drive">Bend → ~15 min</span><span class="pill visit">Visit: 45–75 min</span><span class="pill hike">Easy park walk</span></div>
+<p class="desc">Easy shaded walk if waterfall/lake plans feel too far after work.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shevlin%20Park%20Shevlin%20Park%20Bend%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Shevlin%20Park%20Bend%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Newberry / Paulina Falls">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Paulina%20Falls%20Newberry%20Oregon" alt="Newberry / Paulina Falls"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 6 • Optional</div><h4>Newberry / Paulina Falls</h4>
+<div class="meta"><span class="pill drive">Bend → ~45–60 min</span><span class="pill visit">Visit: 1–2 hrs</span><span class="pill hike">Short walks</span></div>
+<p class="desc">Good alternate if you want lava/lake/waterfall scenery, but it is less aligned with your final route.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Newberry%20/%20Paulina%20Falls%20Paulina%20Falls%20Newberry%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Paulina%20Falls%20Newberry%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+</div></div></section>
+<section class="day" id="day5">
+<div class="day-head">
+<div class="datebox"><div class="daynum">Day 5</div><div class="date">Wed, Jul 1</div><div class="drive">🚗 ~4–5 hrs driving + stops</div></div>
+<div class="day-info"><h2>Bend → Mt. Hood → Hood River → The Dalles</h2><div class="hotel"><strong>Hotel / base:</strong> The Dalles — Cousins Country Inn. Check-in 4 PM / check-out 11 AM. Room-only; tiny $0.07 resort fee due.</div></div>
+</div>
+<div class="plan"><aside class="day-notes"><h3>How to run this day</h3><ul class="timing">
+<li>Leave Bend after breakfast; earlier is better.</li>
+<li>Core is Mt. Hood: Trillium Lake + Timberline Lodge.</li>
+<li>Hood River waterfront is a good late-afternoon stop.</li>
+<li>Rowena Crest is best near golden hour if timing works.</li>
+</ul>
+<div class="warning"><strong>Key caveat:</strong> Do not force McKenzie waterfalls today unless you are willing to drop/shorten Mt. Hood. This day is already full.</div>
+</aside><div class="cards">
+<article class="card mandatory" data-name="Trillium Lake">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Trillium%20Lake%20Mount%20Hood" alt="Trillium Lake"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 1 • Mandatory</div><h4>Trillium Lake</h4>
+<div class="meta"><span class="pill drive">Bend → ~2.5–3 hrs</span><span class="pill visit">Visit: 45–75 min</span><span class="pill hike">Easy lake walk/viewpoints</span></div>
+<p class="desc">Classic Mt. Hood reflection shot; easy and high-payoff.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Trillium%20Lake%20Trillium%20Lake%20Mount%20Hood">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Trillium%20Lake%20Mount%20Hood">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Timberline Lodge">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Timberline%20Lodge%20Mount%20Hood%20Oregon" alt="Timberline Lodge"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 2 • Mandatory</div><h4>Timberline Lodge</h4>
+<div class="meta"><span class="pill drive">Trillium → ~20–30 min</span><span class="pill visit">Visit: 45–90 min</span><span class="pill hike">Easy / lodge exploration</span></div>
+<p class="desc">Historic alpine lodge with Mt. Hood close-up views, stone/wood interiors, and photo-friendly architecture.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Timberline%20Lodge%20Timberline%20Lodge%20Mount%20Hood%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Timberline%20Lodge%20Mount%20Hood%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Hood River Waterfront">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Hood%20River%20Waterfront%20Oregon" alt="Hood River Waterfront"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 3 • Mandatory</div><h4>Hood River Waterfront</h4>
+<div class="meta"><span class="pill drive">Timberline → ~1–1.5 hrs</span><span class="pill visit">Visit: 45–90 min</span><span class="pill hike">Waterfront walk</span></div>
+<p class="desc">Relaxed Columbia River stop; watch kiteboarders/windsurfers and get food if needed.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hood%20River%20Waterfront%20Hood%20River%20Waterfront%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Hood%20River%20Waterfront%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Rowena Crest Viewpoint">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Rowena%20Crest%20Viewpoint%20Oregon" alt="Rowena Crest Viewpoint"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 4 • Mandatory</div><h4>Rowena Crest Viewpoint</h4>
+<div class="meta"><span class="pill drive">Hood River → ~25 min</span><span class="pill visit">Visit: 20–40 min</span><span class="pill hike">Viewpoint</span></div>
+<p class="desc">Big Columbia River curve viewpoint; excellent sunset/golden-hour stop if timing works.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Rowena%20Crest%20Viewpoint%20Rowena%20Crest%20Viewpoint%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Rowena%20Crest%20Viewpoint%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Mt. Hood Skibowl Alpine Slide">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Mt%20Hood%20Skibowl%20Alpine%20Slide" alt="Mt. Hood Skibowl Alpine Slide"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 5 • Optional</div><h4>Mt. Hood Skibowl Alpine Slide</h4>
+<div class="meta"><span class="pill drive">Near Timberline/Government Camp</span><span class="pill visit">Visit: 1–2 hrs</span><span class="pill hike">Paid activity</span></div>
+<p class="desc">Fun activity break near Government Camp. Add only if you want activity over extra scenery.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Mt.%20Hood%20Skibowl%20Alpine%20Slide%20Mt%20Hood%20Skibowl%20Alpine%20Slide">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Mt%20Hood%20Skibowl%20Alpine%20Slide">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Mirror Lake Trail">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Mirror%20Lake%20Trail%20Mount%20Hood" alt="Mirror Lake Trail"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 6 • Optional</div><h4>Mirror Lake Trail</h4>
+<div class="meta"><span class="pill drive">Near Government Camp</span><span class="pill visit">Visit: 2–3 hrs</span><span class="pill hike">Moderate hike</span></div>
+<p class="desc">Pretty Mt. Hood lake hike, but adds time. Only if you drop other stops.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Mirror%20Lake%20Trail%20Mirror%20Lake%20Trail%20Mount%20Hood">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Mirror%20Lake%20Trail%20Mount%20Hood">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Lost Lake">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Lost%20Lake%20Mount%20Hood%20Oregon" alt="Lost Lake"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 7 • Optional</div><h4>Lost Lake</h4>
+<div class="meta"><span class="pill drive">Mt Hood area detour</span><span class="pill visit">Visit: 1–2 hrs</span><span class="pill hike">Lake / scenic drive</span></div>
+<p class="desc">Beautiful Hood reflection, but it is a detour; not efficient unless you intentionally slow the day.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lost%20Lake%20Lost%20Lake%20Mount%20Hood%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Lost%20Lake%20Mount%20Hood%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Fruit Loop Scenic Drive">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Hood%20River%20Fruit%20Loop%20Oregon" alt="Fruit Loop Scenic Drive"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 8 • Optional</div><h4>Fruit Loop Scenic Drive</h4>
+<div class="meta"><span class="pill drive">Hood River area</span><span class="pill visit">Visit: 1–2 hrs</span><span class="pill hike">Scenic drive</span></div>
+<p class="desc">Orchards and Mt. Hood views around Hood River. Add if you arrive early and want a softer scenic drive.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Fruit%20Loop%20Scenic%20Drive%20Hood%20River%20Fruit%20Loop%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Hood%20River%20Fruit%20Loop%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+</div></div></section>
+<section class="day" id="day6">
+<div class="day-head">
+<div class="datebox"><div class="daynum">Day 6</div><div class="date">Thu, Jul 2</div><div class="drive">🚗 ~3–4 hrs driving + many stops</div></div>
+<div class="day-info"><h2>The Dalles → Columbia Gorge Waterfalls → Portland → Hillsboro</h2><div class="hotel"><strong>Hotel / base:</strong> Hillsboro — Hampton Inn &amp; Suites Portland/Hillsboro-Evergreen Park. Check-in 4 PM / check-out 11 AM. Free breakfast. Non-refundable.</div></div>
+</div>
+<div class="plan"><aside class="day-notes"><h3>How to run this day</h3><ul class="timing">
+<li>Start early from The Dalles.</li>
+<li>Use your Multnomah Falls permit window if arriving from I‑84 Exit 31.</li>
+<li>Waterfalls first, Portland city highlights later.</li>
+<li>Prioritize mandatory stops; Portland is flexible.</li>
+</ul>
+<div class="warning"><strong>Key caveat:</strong> Multnomah Falls timed-use permit does not guarantee parking. Lodge restrooms may be under renovation; use portable toilets/plan ahead.</div>
+</aside><div class="cards">
+<article class="card mandatory" data-name="Horsetail Falls">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Horsetail%20Falls%20Columbia%20River%20Gorge" alt="Horsetail Falls"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 1 • Mandatory</div><h4>Horsetail Falls</h4>
+<div class="meta"><span class="pill drive">The Dalles → ~55–70 min</span><span class="pill visit">Visit: 10–20 min</span><span class="pill hike">Roadside viewpoint</span></div>
+<p class="desc">Easy roadside waterfall to start the Gorge sequence.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Horsetail%20Falls%20Horsetail%20Falls%20Columbia%20River%20Gorge">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Horsetail%20Falls%20Columbia%20River%20Gorge">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Multnomah Falls">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Multnomah%20Falls%20Oregon" alt="Multnomah Falls"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 2 • Mandatory</div><h4>Multnomah Falls</h4>
+<div class="meta"><span class="pill drive">Horsetail → ~5 min</span><span class="pill visit">Visit: 45–75 min</span><span class="pill hike">Viewpoint/bridge walk</span></div>
+<p class="desc">Most iconic Oregon waterfall; use timed permit if entering via I‑84 Exit 31 during required hours.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Multnomah%20Falls%20Multnomah%20Falls%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Multnomah%20Falls%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Wahkeena Falls">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Wahkeena%20Falls%20Oregon" alt="Wahkeena Falls"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 3 • Mandatory</div><h4>Wahkeena Falls</h4>
+<div class="meta"><span class="pill drive">Multnomah → ~3–5 min</span><span class="pill visit">Visit: 15–30 min</span><span class="pill hike">Short walk</span></div>
+<p class="desc">Close to Multnomah and good for a quick waterfall stop or short walk.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Wahkeena%20Falls%20Wahkeena%20Falls%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Wahkeena%20Falls%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Bridal Veil Falls">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Bridal%20Veil%20Falls%20Oregon" alt="Bridal Veil Falls"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 4 • Mandatory</div><h4>Bridal Veil Falls</h4>
+<div class="meta"><span class="pill drive">Wahkeena → ~10 min</span><span class="pill visit">Visit: 30–45 min</span><span class="pill hike">Short hike</span></div>
+<p class="desc">Short trail to a classic Gorge waterfall; good if parking is reasonable.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Bridal%20Veil%20Falls%20Bridal%20Veil%20Falls%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Bridal%20Veil%20Falls%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Latourell Falls">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Latourell%20Falls%20Oregon" alt="Latourell Falls"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 5 • Mandatory</div><h4>Latourell Falls</h4>
+<div class="meta"><span class="pill drive">Bridal Veil → ~15 min</span><span class="pill visit">Visit: 25–45 min</span><span class="pill hike">Short walk/hike</span></div>
+<p class="desc">High-payoff plunge waterfall with basalt/moss colors; one of the best photo stops.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Latourell%20Falls%20Latourell%20Falls%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Latourell%20Falls%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Vista House / Crown Point">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Vista%20House%20Crown%20Point%20Oregon" alt="Vista House / Crown Point"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 6 • Mandatory</div><h4>Vista House / Crown Point</h4>
+<div class="meta"><span class="pill drive">Latourell → ~10 min</span><span class="pill visit">Visit: 20–40 min</span><span class="pill hike">Viewpoint</span></div>
+<p class="desc">Grand Gorge overlook and historic viewpoint.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Vista%20House%20/%20Crown%20Point%20Vista%20House%20Crown%20Point%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Vista%20House%20Crown%20Point%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="International Rose Test Garden">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?International%20Rose%20Test%20Garden%20Portland" alt="International Rose Test Garden"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 7 • Mandatory</div><h4>International Rose Test Garden</h4>
+<div class="meta"><span class="pill drive">Vista House → ~35–45 min</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Garden walk</span></div>
+<p class="desc">Free Portland stop; peak summer color and easy walk.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=International%20Rose%20Test%20Garden%20International%20Rose%20Test%20Garden%20Portland">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=International%20Rose%20Test%20Garden%20Portland">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Powell’s City of Books">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Powells%20City%20of%20Books%20Portland" alt="Powell’s City of Books"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 8 • Mandatory</div><h4>Powell’s City of Books</h4>
+<div class="meta"><span class="pill drive">Rose Garden → ~10–15 min</span><span class="pill visit">Visit: 30–75 min</span><span class="pill hike">City/indoor</span></div>
+<p class="desc">Classic Portland city experience; good evening/indoor stop if tired from waterfalls.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Powell%E2%80%99s%20City%20of%20Books%20Powells%20City%20of%20Books%20Portland">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Powells%20City%20of%20Books%20Portland">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Portland Japanese Garden">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Portland%20Japanese%20Garden" alt="Portland Japanese Garden"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 9 • Optional</div><h4>Portland Japanese Garden</h4>
+<div class="meta"><span class="pill drive">Next to Rose Garden</span><span class="pill visit">Visit: 60–90 min</span><span class="pill hike">Paid garden walk</span></div>
+<p class="desc">Beautiful but paid; do if you want a premium garden experience and have time.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Portland%20Japanese%20Garden%20Portland%20Japanese%20Garden">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Portland%20Japanese%20Garden">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Pittock Mansion Viewpoint">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Pittock%20Mansion%20Portland%20viewpoint" alt="Pittock Mansion Viewpoint"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 10 • Optional</div><h4>Pittock Mansion Viewpoint</h4>
+<div class="meta"><span class="pill drive">Washington Park area</span><span class="pill visit">Visit: 20–45 min</span><span class="pill hike">Viewpoint</span></div>
+<p class="desc">City + mountain view if skies are clear. Add if not exhausted.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Pittock%20Mansion%20Viewpoint%20Pittock%20Mansion%20Portland%20viewpoint">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Pittock%20Mansion%20Portland%20viewpoint">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Wahclella Falls">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Wahclella%20Falls%20Oregon" alt="Wahclella Falls"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 11 • Optional</div><h4>Wahclella Falls</h4>
+<div class="meta"><span class="pill drive">Gorge east of Multnomah</span><span class="pill visit">Visit: 1.5–2 hrs</span><span class="pill hike">Short/moderate hike</span></div>
+<p class="desc">Better short hike than many optional Gorge stops, but adds time.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Wahclella%20Falls%20Wahclella%20Falls%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Wahclella%20Falls%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Alberta Arts / Food Carts">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Portland%20food%20carts%20Alberta%20Arts" alt="Alberta Arts / Food Carts"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 12 • Optional</div><h4>Alberta Arts / Food Carts</h4>
+<div class="meta"><span class="pill drive">Portland</span><span class="pill visit">Visit: 45–90 min</span><span class="pill hike">Food/city walk</span></div>
+<p class="desc">Flexible dinner/city vibe option.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Alberta%20Arts%20/%20Food%20Carts%20Portland%20food%20carts%20Alberta%20Arts">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Portland%20food%20carts%20Alberta%20Arts">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+</div></div></section>
+<section class="day" id="day7">
+<div class="day-head">
+<div class="datebox"><div class="daynum">Day 7</div><div class="date">Fri, Jul 3</div><div class="drive">🚗 ~5 hrs driving + many coastal stops</div></div>
+<div class="day-info"><h2>Hillsboro → North &amp; Central Oregon Coast → Florence</h2><div class="hotel"><strong>Hotel / base:</strong> Florence — Quality Inn Florence. Check-in 4 PM / check-out 11 AM. Free breakfast. Room: 1 King, non-smoking.</div></div>
+</div>
+<div class="plan"><aside class="day-notes"><h3>How to run this day</h3><ul class="timing">
+<li>Start early; this is one of the densest days.</li>
+<li>Cannon Beach and Ecola are core; Hug Point depends on tide.</li>
+<li>Cape Perpetua/Thor’s Well and Heceta are the end-of-day priorities.</li>
+<li>Cut food/creamery/minor stops if running late.</li>
+</ul>
+<div class="warning"><strong>Key caveat:</strong> Coast is windy/cool and parking can be slow. Do not stand too close to Thor’s Well or slick rocks.</div>
+</aside><div class="cards">
+<article class="card mandatory" data-name="Cannon Beach / Haystack Rock">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Cannon%20Beach%20Haystack%20Rock%20Oregon" alt="Cannon Beach / Haystack Rock"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 1 • Mandatory</div><h4>Cannon Beach / Haystack Rock</h4>
+<div class="meta"><span class="pill drive">Hillsboro → ~1.5–2 hrs</span><span class="pill visit">Visit: 45–75 min</span><span class="pill hike">Beach walk</span></div>
+<p class="desc">Iconic Oregon coast view; tide pools if tide timing works.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cannon%20Beach%20/%20Haystack%20Rock%20Cannon%20Beach%20Haystack%20Rock%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Cannon%20Beach%20Haystack%20Rock%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Ecola State Park">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Ecola%20State%20Park%20Oregon" alt="Ecola State Park"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 2 • Mandatory</div><h4>Ecola State Park</h4>
+<div class="meta"><span class="pill drive">Cannon → ~10–15 min</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Viewpoint/short walks</span></div>
+<p class="desc">Clifftop views toward Cannon Beach; one of the best north-coast viewpoint stops.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Ecola%20State%20Park%20Ecola%20State%20Park%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Ecola%20State%20Park%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Hug Point">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Hug%20Point%20Oregon" alt="Hug Point"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 3 • Optional</div><h4>Hug Point</h4>
+<div class="meta"><span class="pill drive">Ecola → ~15–20 min</span><span class="pill visit">Visit: 30–45 min</span><span class="pill hike">Beach walk / tide dependent</span></div>
+<p class="desc">Caves and beach waterfall only work well at lower tide; skip if tide/parking is bad.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hug%20Point%20Hug%20Point%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Hug%20Point%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Oswald West / Short Sand Beach">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Oswald%20West%20State%20Park%20Short%20Sand%20Beach" alt="Oswald West / Short Sand Beach"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 4 • Optional</div><h4>Oswald West / Short Sand Beach</h4>
+<div class="meta"><span class="pill drive">Hug Point → ~15–20 min</span><span class="pill visit">Visit: 45–75 min</span><span class="pill hike">Short trail/beach</span></div>
+<p class="desc">Forest-to-beach scenery; good but can be cut if the day is running late.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Oswald%20West%20/%20Short%20Sand%20Beach%20Oswald%20West%20State%20Park%20Short%20Sand%20Beach">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Oswald%20West%20State%20Park%20Short%20Sand%20Beach">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Tillamook Creamery">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Tillamook%20Creamery%20Oregon" alt="Tillamook Creamery"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 5 • Optional</div><h4>Tillamook Creamery</h4>
+<div class="meta"><span class="pill drive">Oswald → ~45 min</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Food stop</span></div>
+<p class="desc">Useful food/ice cream break but not a scenic priority.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Tillamook%20Creamery%20Tillamook%20Creamery%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Tillamook%20Creamery%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Cape Kiwanda">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Cape%20Kiwanda%20Pacific%20City%20Oregon" alt="Cape Kiwanda"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 6 • Mandatory</div><h4>Cape Kiwanda</h4>
+<div class="meta"><span class="pill drive">Tillamook → ~35–45 min</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Beach/dune viewpoint</span></div>
+<p class="desc">Big dune and dramatic sea-stack coast; strong photo stop.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cape%20Kiwanda%20Cape%20Kiwanda%20Pacific%20City%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Cape%20Kiwanda%20Pacific%20City%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Devil’s Punchbowl">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Devils%20Punchbowl%20Oregon" alt="Devil’s Punchbowl"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 7 • Optional</div><h4>Devil’s Punchbowl</h4>
+<div class="meta"><span class="pill drive">Cape Kiwanda → ~1 hr</span><span class="pill visit">Visit: 15–30 min</span><span class="pill hike">Viewpoint</span></div>
+<p class="desc">Quick unique coastal rock formation if timing fits near Newport.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Devil%E2%80%99s%20Punchbowl%20Devils%20Punchbowl%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Devils%20Punchbowl%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Yaquina Head Lighthouse">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Yaquina%20Head%20Lighthouse%20Newport%20Oregon" alt="Yaquina Head Lighthouse"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 8 • Mandatory</div><h4>Yaquina Head Lighthouse</h4>
+<div class="meta"><span class="pill drive">Devil’s Punchbowl → ~20–30 min</span><span class="pill visit">Visit: 45–75 min</span><span class="pill hike">Viewpoint/short walk</span></div>
+<p class="desc">Tall lighthouse, coastal cliffs, and tidepool area near Newport.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Yaquina%20Head%20Lighthouse%20Yaquina%20Head%20Lighthouse%20Newport%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Yaquina%20Head%20Lighthouse%20Newport%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Cape Perpetua / Thor’s Well / Spouting Horn">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Cape%20Perpetua%20Thors%20Well%20Spouting%20Horn%20Oregon" alt="Cape Perpetua / Thor’s Well / Spouting Horn"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 9 • Mandatory</div><h4>Cape Perpetua / Thor’s Well / Spouting Horn</h4>
+<div class="meta"><span class="pill drive">Yaquina → ~45–60 min</span><span class="pill visit">Visit: 45–75 min</span><span class="pill hike">Short walks/viewpoints</span></div>
+<p class="desc">Dramatic wave action zone. Great but safety-sensitive; view from safe spots.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cape%20Perpetua%20/%20Thor%E2%80%99s%20Well%20/%20Spouting%20Horn%20Cape%20Perpetua%20Thors%20Well%20Spouting%20Horn%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Cape%20Perpetua%20Thors%20Well%20Spouting%20Horn%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Heceta Head Lighthouse">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Heceta%20Head%20Lighthouse%20Oregon" alt="Heceta Head Lighthouse"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 10 • Mandatory</div><h4>Heceta Head Lighthouse</h4>
+<div class="meta"><span class="pill drive">Cape Perpetua → ~20–30 min</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Short walk/viewpoint</span></div>
+<p class="desc">One of the prettiest lighthouse views on the coast; ideal late afternoon/evening stop.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Heceta%20Head%20Lighthouse%20Heceta%20Head%20Lighthouse%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Heceta%20Head%20Lighthouse%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Florence Old Town">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Old%20Town%20Florence%20Oregon" alt="Florence Old Town"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 11 • Optional</div><h4>Florence Old Town</h4>
+<div class="meta"><span class="pill drive">Heceta → Florence ~20 min</span><span class="pill visit">Visit: 45–90 min</span><span class="pill hike">Town walk/food</span></div>
+<p class="desc">Easy dinner/walk after check-in if you still have energy.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Florence%20Old%20Town%20Old%20Town%20Florence%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Old%20Town%20Florence%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+</div></div></section>
+<section class="day" id="day8">
+<div class="day-head">
+<div class="datebox"><div class="daynum">Day 8</div><div class="date">Sat, Jul 4</div><div class="drive">🚗 ~5–6 hrs driving + stop-heavy coast day</div></div>
+<div class="day-info"><h2>Florence → Dunes → Bandon → Samuel H. Boardman → Harbor/Brookings</h2><div class="hotel"><strong>Hotel / base:</strong> Harbor/Brookings — Harbor Inn. Check-in 3 PM / check-out 11 AM. No breakfast listed. Front desk 9 AM–10 PM; arrive before 10 PM or call ahead.</div></div>
+</div>
+<div class="plan"><aside class="day-notes"><h3>How to run this day</h3><ul class="timing">
+<li>Start early from Florence.</li>
+<li>Keep Oregon Dunes quick unless you are willing to cut south-coast stops.</li>
+<li>Bandon + Boardman are the payoff.</li>
+<li>Do not force every Boardman stop; use Jul 5 morning as overflow.</li>
+</ul>
+<div class="warning"><strong>Key caveat:</strong> Harbor Inn has no after-hours check-in. The whole day should be managed around arriving before 10 PM.</div>
+</aside><div class="cards">
+<article class="card mandatory" data-name="Oregon Dunes Overlook / quick walk">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Oregon%20Dunes%20National%20Recreation%20Area%20Florence" alt="Oregon Dunes Overlook / quick walk"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 1 • Mandatory</div><h4>Oregon Dunes Overlook / quick walk</h4>
+<div class="meta"><span class="pill drive">Florence → 15–30 min depending stop</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Sand/dune walk</span></div>
+<p class="desc">Quick dunes experience without consuming the whole day.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Oregon%20Dunes%20Overlook%20/%20quick%20walk%20Oregon%20Dunes%20National%20Recreation%20Area%20Florence">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Oregon%20Dunes%20National%20Recreation%20Area%20Florence">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Shore Acres State Park">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Shore%20Acres%20State%20Park%20Oregon" alt="Shore Acres State Park"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 2 • Mandatory</div><h4>Shore Acres State Park</h4>
+<div class="meta"><span class="pill drive">Dunes → ~1.5–2 hrs</span><span class="pill visit">Visit: 45–75 min</span><span class="pill hike">Coastal park/viewpoints</span></div>
+<p class="desc">Cliff gardens and wave-battered headlands near Coos Bay.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shore%20Acres%20State%20Park%20Shore%20Acres%20State%20Park%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Shore%20Acres%20State%20Park%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Cape Arago / Simpson Reef">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Cape%20Arago%20Simpson%20Reef%20Oregon" alt="Cape Arago / Simpson Reef"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 3 • Optional</div><h4>Cape Arago / Simpson Reef</h4>
+<div class="meta"><span class="pill drive">Near Shore Acres</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Viewpoints</span></div>
+<p class="desc">Good sea-lion/coastal viewpoint add-on if Shore Acres timing is smooth.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Cape%20Arago%20/%20Simpson%20Reef%20Cape%20Arago%20Simpson%20Reef%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Cape%20Arago%20Simpson%20Reef%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Bandon Beach / Face Rock">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Bandon%20Beach%20Face%20Rock%20Oregon" alt="Bandon Beach / Face Rock"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 4 • Mandatory</div><h4>Bandon Beach / Face Rock</h4>
+<div class="meta"><span class="pill drive">Shore Acres → ~45–60 min</span><span class="pill visit">Visit: 60–90 min</span><span class="pill hike">Beach/viewpoints</span></div>
+<p class="desc">Major south coast highlight: sea stacks, wide beach, and dramatic photos.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Bandon%20Beach%20/%20Face%20Rock%20Bandon%20Beach%20Face%20Rock%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Bandon%20Beach%20Face%20Rock%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Coquille River Lighthouse">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Coquille%20River%20Lighthouse%20Bandon" alt="Coquille River Lighthouse"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 5 • Optional</div><h4>Coquille River Lighthouse</h4>
+<div class="meta"><span class="pill drive">Bandon area</span><span class="pill visit">Visit: 15–30 min</span><span class="pill hike">Viewpoint</span></div>
+<p class="desc">Quick lighthouse/photo stop near Bandon if you want one more coastal landmark.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Coquille%20River%20Lighthouse%20Coquille%20River%20Lighthouse%20Bandon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Coquille%20River%20Lighthouse%20Bandon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Port Orford Heads">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Port%20Orford%20Heads%20State%20Park" alt="Port Orford Heads"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 6 • Mandatory</div><h4>Port Orford Heads</h4>
+<div class="meta"><span class="pill drive">Bandon → ~1 hr</span><span class="pill visit">Visit: 30–45 min</span><span class="pill hike">Short walk/viewpoint</span></div>
+<p class="desc">Dramatic headland viewpoint and good break before Boardman.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Port%20Orford%20Heads%20Port%20Orford%20Heads%20State%20Park">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Port%20Orford%20Heads%20State%20Park">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Arch Rock Viewpoint">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Arch%20Rock%20Samuel%20H%20Boardman" alt="Arch Rock Viewpoint"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 7 • Mandatory</div><h4>Arch Rock Viewpoint</h4>
+<div class="meta"><span class="pill drive">Port Orford → ~45–60 min</span><span class="pill visit">Visit: 15–25 min</span><span class="pill hike">Viewpoint</span></div>
+<p class="desc">Easy Boardman viewpoint and good first stop in the corridor.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Arch%20Rock%20Viewpoint%20Arch%20Rock%20Samuel%20H%20Boardman">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Arch%20Rock%20Samuel%20H%20Boardman">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Natural Bridges">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Natural%20Bridges%20Samuel%20H%20Boardman%20Oregon" alt="Natural Bridges"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 8 • Mandatory</div><h4>Natural Bridges</h4>
+<div class="meta"><span class="pill drive">Arch Rock → ~5–10 min</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Viewpoint / rougher paths optional</span></div>
+<p class="desc">Most iconic Samuel H. Boardman viewpoint; prioritize this even if you cut other stops.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Natural%20Bridges%20Natural%20Bridges%20Samuel%20H%20Boardman%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Natural%20Bridges%20Samuel%20H%20Boardman%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Secret Beach">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Secret%20Beach%20Samuel%20H%20Boardman" alt="Secret Beach"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 9 • Optional</div><h4>Secret Beach</h4>
+<div class="meta"><span class="pill drive">Boardman corridor</span><span class="pill visit">Visit: 60–90 min</span><span class="pill hike">Trail/beach</span></div>
+<p class="desc">Gorgeous but access can be more effort/tide/time dependent. Add if still ahead of schedule.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Secret%20Beach%20Secret%20Beach%20Samuel%20H%20Boardman">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Secret%20Beach%20Samuel%20H%20Boardman">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Whaleshead Beach">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Whaleshead%20Beach%20Oregon" alt="Whaleshead Beach"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 10 • Optional</div><h4>Whaleshead Beach</h4>
+<div class="meta"><span class="pill drive">Boardman corridor</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Beach/viewpoint</span></div>
+<p class="desc">Good easier beach stop in Boardman corridor.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Whaleshead%20Beach%20Whaleshead%20Beach%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Whaleshead%20Beach%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Lone Ranch Beach">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Lone%20Ranch%20Beach%20Oregon" alt="Lone Ranch Beach"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 11 • Optional</div><h4>Lone Ranch Beach</h4>
+<div class="meta"><span class="pill drive">Near Brookings</span><span class="pill visit">Visit: 20–45 min</span><span class="pill hike">Beach walk</span></div>
+<p class="desc">Easy end-of-corridor beach stop; good if you want a softer final stop before hotel.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lone%20Ranch%20Beach%20Lone%20Ranch%20Beach%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Lone%20Ranch%20Beach%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Harris Beach State Park">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Harris%20Beach%20State%20Park%20Oregon" alt="Harris Beach State Park"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 12 • Optional</div><h4>Harris Beach State Park</h4>
+<div class="meta"><span class="pill drive">Brookings area</span><span class="pill visit">Visit: 30–60 min</span><span class="pill hike">Beach/viewpoint</span></div>
+<p class="desc">Sunset or quick evening stop near Brookings if you arrive early.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Harris%20Beach%20State%20Park%20Harris%20Beach%20State%20Park%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Harris%20Beach%20State%20Park%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+</div></div></section>
+<section class="day" id="day9">
+<div class="day-head">
+<div class="datebox"><div class="daynum">Day 9</div><div class="date">Sun, Jul 5</div><div class="drive">🚗 ~8+ hrs to Milpitas before long stops</div></div>
+<div class="day-info"><h2>Boardman Overflow / Optional Redwoods → Milpitas</h2><div class="hotel"><strong>Hotel / base:</strong> Home — long return drive.</div></div>
+</div>
+<div class="plan"><aside class="day-notes"><h3>How to run this day</h3><ul class="timing">
+<li>Use the morning for any missed Samuel H. Boardman stops.</li>
+<li>Skip redwoods if you want a cleaner return day.</li>
+<li>Start the drive home by late morning if possible.</li>
+<li>Expect Tesla charging + food stops to stretch the day.</li>
+</ul>
+<div class="warning"><strong>Key caveat:</strong> This is the longest return day. Do not add Avenue of the Giants unless you accept a very late arrival.</div>
+</aside><div class="cards">
+<article class="card mandatory" data-name="Samuel H. Boardman overflow">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Samuel%20H%20Boardman%20Scenic%20Corridor%20Oregon" alt="Samuel H. Boardman overflow"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 1 • Mandatory</div><h4>Samuel H. Boardman overflow</h4>
+<div class="meta"><span class="pill drive">From Harbor Inn → 10–30 min</span><span class="pill visit">Visit: 1–2 hrs total</span><span class="pill hike">Viewpoints/beaches</span></div>
+<p class="desc">Use morning to finish any missed corridor highlights before the long drive.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Samuel%20H.%20Boardman%20overflow%20Samuel%20H%20Boardman%20Scenic%20Corridor%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Samuel%20H%20Boardman%20Scenic%20Corridor%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card mandatory" data-name="Natural Bridges revisit / final photos">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Natural%20Bridges%20Oregon%20Coast" alt="Natural Bridges revisit / final photos"><span class="ribbon">MANDATORY</span></div>
+<div class="card-body">
+<div class="seq">Stop 2 • Mandatory</div><h4>Natural Bridges revisit / final photos</h4>
+<div class="meta"><span class="pill drive">Harbor → ~20–30 min</span><span class="pill visit">Visit: 30–45 min</span><span class="pill hike">Viewpoint</span></div>
+<p class="desc">If July 4 ran late, make this your morning priority.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Natural%20Bridges%20revisit%20/%20final%20photos%20Natural%20Bridges%20Oregon%20Coast">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Natural%20Bridges%20Oregon%20Coast">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Secret Beach / Whaleshead / Lone Ranch">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Secret%20Beach%20Whaleshead%20Lone%20Ranch%20Oregon" alt="Secret Beach / Whaleshead / Lone Ranch"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 3 • Optional</div><h4>Secret Beach / Whaleshead / Lone Ranch</h4>
+<div class="meta"><span class="pill drive">Boardman corridor</span><span class="pill visit">Visit: 30–90 min</span><span class="pill hike">Beach/trail</span></div>
+<p class="desc">Choose one if you want a final beach walk before heading home.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Secret%20Beach%20/%20Whaleshead%20/%20Lone%20Ranch%20Secret%20Beach%20Whaleshead%20Lone%20Ranch%20Oregon">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Secret%20Beach%20Whaleshead%20Lone%20Ranch%20Oregon">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Jedediah Smith Redwoods / Stout Grove">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Stout%20Grove%20Jedediah%20Smith%20Redwoods" alt="Jedediah Smith Redwoods / Stout Grove"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 4 • Optional</div><h4>Jedediah Smith Redwoods / Stout Grove</h4>
+<div class="meta"><span class="pill drive">Brookings → ~45–60 min</span><span class="pill visit">Visit: 45–75 min</span><span class="pill hike">Easy forest loop</span></div>
+<p class="desc">Beautiful easy redwood loop, but only add if you are okay lengthening the return.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jedediah%20Smith%20Redwoods%20/%20Stout%20Grove%20Stout%20Grove%20Jedediah%20Smith%20Redwoods">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Stout%20Grove%20Jedediah%20Smith%20Redwoods">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Crescent City / Battery Point Lighthouse">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Battery%20Point%20Lighthouse%20Crescent%20City" alt="Crescent City / Battery Point Lighthouse"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 5 • Optional</div><h4>Crescent City / Battery Point Lighthouse</h4>
+<div class="meta"><span class="pill drive">Near Jedediah Smith</span><span class="pill visit">Visit: 20–45 min</span><span class="pill hike">Town/viewpoint</span></div>
+<p class="desc">Quick coastal town/lighthouse stop if taking the redwoods route.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Crescent%20City%20/%20Battery%20Point%20Lighthouse%20Battery%20Point%20Lighthouse%20Crescent%20City">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Battery%20Point%20Lighthouse%20Crescent%20City">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Trees of Mystery">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Trees%20of%20Mystery%20California" alt="Trees of Mystery"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 6 • Optional</div><h4>Trees of Mystery</h4>
+<div class="meta"><span class="pill drive">South of Crescent City</span><span class="pill visit">Visit: 60–120 min</span><span class="pill hike">Paid attraction</span></div>
+<p class="desc">Touristy redwood attraction; only if you want a paid/quirky stop.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Trees%20of%20Mystery%20Trees%20of%20Mystery%20California">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Trees%20of%20Mystery%20California">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+<article class="card optional" data-name="Avenue of the Giants">
+<div class="thumb"><img loading="lazy" src="https://source.unsplash.com/featured/900x650/?Avenue%20of%20the%20Giants%20California" alt="Avenue of the Giants"><span class="ribbon">OPTIONAL</span></div>
+<div class="card-body">
+<div class="seq">Stop 7 • Optional</div><h4>Avenue of the Giants</h4>
+<div class="meta"><span class="pill drive">Adds ~1–1.5+ hrs</span><span class="pill visit">Visit: 1–2 hrs</span><span class="pill hike">Scenic drive</span></div>
+<p class="desc">Epic redwood drive but too much for the default plan; use only if you want a very long day.</p>
+<div class="actions"><a class="btn map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Avenue%20of%20the%20Giants%20Avenue%20of%20the%20Giants%20California">Open Maps</a><a class="btn" target="_blank" href="https://www.google.com/search?tbm=isch&q=Avenue%20of%20the%20Giants%20California">More images</a><button class="btn check" type="button">Mark visited</button></div>
+</div></article>
+</div></div></section>
+  </main>
+  <div class="footer">
+    Built as a live trip companion. Images are loaded from web image services/searches and are meant to help you decide visually; use Google Maps links for navigation and always verify live road/parking/weather conditions before driving.
+  </div>
+  <script>
+    const toggle=document.getElementById('optionalToggle');
+    let hidden=false;
+    function updateCounts(){document.getElementById('mCount').textContent=document.querySelectorAll('.card.mandatory').length;document.getElementById('oCount').textContent=document.querySelectorAll('.card.optional').length;}
+    toggle.addEventListener('click',()=>{hidden=!hidden;document.querySelectorAll('.card.optional').forEach(c=>c.classList.toggle('hidden',hidden));toggle.textContent=hidden?'Show optional stops':'Hide optional stops';});
+    document.querySelectorAll('.btn.check').forEach(btn=>{btn.addEventListener('click',()=>{const card=btn.closest('.card');const key='visited:'+card.dataset.name;card.classList.toggle('done');localStorage.setItem(key,card.classList.contains('done')?'1':'0');btn.textContent=card.classList.contains('done')?'Visited ✓':'Mark visited';});});
+    document.querySelectorAll('.card').forEach(card=>{const key='visited:'+card.dataset.name;if(localStorage.getItem(key)==='1'){card.classList.add('done');const b=card.querySelector('.btn.check');if(b)b.textContent='Visited ✓';}});
+    updateCounts();
+  </script>
+</body>
+</html>
