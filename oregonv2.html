@@ -18,9 +18,9 @@ header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#0b2b4
 header h1{font-size:19px;margin:0 0 3px}
 header p{margin:0;color:#d7e7ef;font-size:12px}
 .nav{display:flex;gap:7px;overflow-x:auto;padding-top:9px}
-.nav a,.nav button{white-space:nowrap;border:1px solid rgba(255,255,255,.25);background:#174d70;color:white;border-radius:999px;padding:8px 10px;text-decoration:none;font-size:12px;font-weight:800}
+.nav a,.nav button{white-space:nowrap;border:1px solid rgba(255,255,255,.25);background:#174d70;color:white;border-radius:999px;padding:10px 12px;text-decoration:none;font-size:12px;font-weight:800;min-height:44px;display:flex;align-items:center}
 .filters{display:flex;gap:8px;overflow-x:auto;background:white;padding:9px 10px;border-bottom:1px solid var(--line);position:sticky;top:76px;z-index:18}
-.filters button{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:800;color:var(--blue)}
+.filters button{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:999px;padding:10px 13px;font-size:12px;font-weight:800;color:var(--blue);min-height:44px}
 .filters button.active{background:var(--blue);color:white;border-color:var(--blue)}
 main{max-width:1100px;margin:0 auto;padding:12px 9px 60px}
 .hero,.day{background:white;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
@@ -37,16 +37,21 @@ main{max-width:1100px;margin:0 auto;padding:12px 9px 60px}
 h2{font-size:20px;line-height:1.18;margin:2px 0 6px}
 .hotel{border-left:4px solid var(--blue);background:#f1f7fb;padding:10px;border-radius:12px;font-size:13px;color:#344}
 .dayroute{display:flex;gap:8px;padding:0 15px 14px;overflow:auto}
-.dayroute a,.dayroute button{border:1px solid var(--line);background:white;border-radius:12px;padding:9px 10px;color:var(--blue);font-weight:900;text-decoration:none;font-size:12px}
+.dayroute a,.dayroute button{border:1px solid var(--line);background:white;border-radius:12px;padding:10px 12px;color:var(--blue);font-weight:900;text-decoration:none;font-size:12px;min-height:44px;display:flex;align-items:center}
 .stops{background:#f7f9fb;padding:10px;display:grid;grid-template-columns:1fr;gap:11px}
 .card{background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .card[data-kind="mandatory"]{border-left:5px solid var(--green)}
 .card[data-kind="optional"]{border-left:5px solid var(--gold)}
 .card[data-kind="swap"]{border-left:5px solid var(--purple)}
-.imgwrap{height:190px;background:#dfe7ee;position:relative;overflow:hidden}
-.imgwrap img{width:100%;height:100%;object-fit:cover;display:block;background:#dfe7ee}
-.imgwrap .loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#50606d;font-weight:800;padding:12px;background:linear-gradient(135deg,#edf3f7,#dce8ef)}
-.imgcredit{position:absolute;right:7px;bottom:7px;background:rgba(0,0,0,.55);color:white;border-radius:999px;font-size:10px;padding:4px 7px;max-width:80%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.imgwrap{aspect-ratio:16/10;min-height:190px;background:#dfe7ee;position:relative;overflow:hidden}
+.imgwrap img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;display:block;background:#dfe7ee}
+.imgfallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;color:#50606d;font-weight:900;padding:18px;background:linear-gradient(135deg,#edf3f7,#dce8ef)}
+.imgfallback strong{font-size:16px;line-height:1.2}
+.imgfallback a{border:1px solid #c8d6e0;background:white;border-radius:12px;color:var(--blue);font-size:12px;font-weight:900;min-height:44px;padding:11px 14px;text-decoration:none;display:flex;align-items:center}
+.imgwrap.loaded .imgfallback{display:none}
+.imgwrap.missing .imgfallback{display:flex}
+.imgcredit{position:absolute;z-index:2;right:7px;bottom:7px;background:rgba(0,0,0,.55);color:white;border-radius:999px;font-size:10px;padding:4px 7px;max-width:80%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.imgwrap.missing .imgcredit{display:none}
 .content{padding:12px}
 .head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
 .seq{font-size:10px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.07em}
@@ -58,14 +63,14 @@ h3{font-size:18px;margin:2px 0 8px}
 p{margin:8px 0;font-size:14px;color:#2e3b46}
 .note{color:#52606b}
 .actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.actions a,.visited{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 10px;text-decoration:none;color:var(--blue);font-weight:900;font-size:12px}
+.actions a,.visited{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;text-decoration:none;color:var(--blue);font-weight:900;font-size:12px;min-height:44px;display:flex;align-items:center}
 .visited{color:var(--ink);display:flex;align-items:center;gap:6px}
-input[type=checkbox]{width:18px;height:18px}
+input[type=checkbox]{width:22px;height:22px}
 .hidden{display:none!important}
 @media(min-width:760px){
   .daytop{grid-template-columns:1.4fr .9fr;align-items:start}
   .stops{grid-template-columns:1fr 1fr}
-  .imgwrap{height:210px}
+  .imgwrap{min-height:210px}
 }
 @media(min-width:1020px){
   .stops{grid-template-columns:1fr 1fr 1fr}
@@ -76,7 +81,7 @@ input[type=checkbox]{width:18px;height:18px}
 <body>
 <header>
   <h1>Oregon Road Trip — Mobile Visual Guide</h1>
-  <p>Day-by-day, in visit order · Images load from Wikimedia/Wikipedia where available · Maps + photo backup links included</p>
+  <p>Day-by-day, in visit order · Images load locally from oregon-assets/ · Maps + photo backup links included</p>
   <div class="nav" id="nav"></div>
 </header>
 <div class="filters">
@@ -90,71 +95,29 @@ input[type=checkbox]{width:18px;height:18px}
 <script>
 const days = [{"date": "Sun Jun 28", "title": "Medford → Rogue Gorge → Natural Bridge → Crater Lake → Bend", "hotel": "Stay: Bend — TownePlace Suites by Marriott Bend", "stops": [["Rogue Gorge", "MANDATORY", "Rogue River (Oregon)", "Short scenic canyon stop on the Crater Lake approach.", "20–35 min", "Short easy walk", "From Medford ~1.5 hr"], ["Natural Bridge", "MANDATORY", "Natural Bridge (Rogue River)", "Rogue River disappears into lava tubes and resurfaces.", "30–45 min", "Short easy walk", "10–15 min after Rogue Gorge"], ["Crater Lake Rim Village", "MANDATORY", "Crater Lake National Park", "Main Crater Lake reveal, visitor hub, classic lake views.", "45–75 min", "Easy paved walks", "Natural Bridge to Rim Village ~45–70 min"], ["Sinnott Memorial Overlook", "MANDATORY", "Sinnott Memorial Overlook", "Protected overlook into the caldera, great first viewpoint.", "15–25 min", "Short paved descent", "At Rim Village"], ["Discovery Point", "MANDATORY", "Discovery Point (Crater Lake)", "Classic Wizard Island and deep-blue lake viewpoint.", "20–40 min", "Easy viewpoint / optional rim walk", "5–10 min from Rim Village"], ["Watchman Overlook", "MANDATORY", "Watchman Peak", "Best big view of Wizard Island from the west rim.", "20–60 min", "Viewpoint easy; peak hike moderate", "10–15 min from Discovery Point"], ["Phantom Ship Overlook", "MANDATORY", "Phantom Ship", "Different angle of lake with Phantom Ship rock formation.", "15–25 min", "Easy viewpoint", "Road access dependent"], ["Sun Notch Trail", "OPTIONAL", "Sun Notch", "Short trail with extra Phantom Ship views if open.", "30–45 min", "Short easy/moderate loop", "Add only if time"], ["Drake Park / Old Mill District", "OPTIONAL", "Drake Park", "Easy Bend evening walk, dinner/grocery area.", "30–90 min", "Flat urban walk", "After drive to Bend"]]}, {"date": "Mon Jun 29", "title": "WFH in Bend → Smith Rock Golden Hour", "hotel": "Stay: Bend — TownePlace Suites by Marriott Bend", "stops": [["WFH from Bend hotel", "MANDATORY", "", "Workday base. Leave only in the evening.", "Daytime", "None", "No drive"], ["Smith Rock State Park", "MANDATORY", "Smith Rock State Park", "Iconic red rock cliffs and Crooked River; best at golden hour.", "1.5–3 hr", "Easy to strenuous depending route", "Bend to Smith Rock ~35–45 min"], ["Crooked River / River Trail", "MANDATORY", "Crooked River (Oregon)", "Easy scenic walk below the cliffs; best practical after-work route.", "45–90 min", "Easy riverside trail", "Inside Smith Rock"], ["Monkey Face Viewpoint", "OPTIONAL", "Monkey Face (Smith Rock)", "Famous rock formation; good add-on if daylight and energy are good.", "30–60 min extra", "Moderate extension", "Inside Smith Rock"], ["Misery Ridge Trail", "OPTIONAL", "Misery Ridge Trail", "Harder high-view trail; only if you actively want a workout.", "2–3+ hr", "Strenuous", "Inside Smith Rock"]]}, {"date": "Tue Jun 30", "title": "WFH in Bend → Tumalo Falls / Sparks Lake / Pilot Butte", "hotel": "Stay: Bend — TownePlace Suites by Marriott Bend", "stops": [["WFH from Bend hotel", "MANDATORY", "", "Second workday. Keep evening plan flexible.", "Daytime", "None", "No drive"], ["Tumalo Falls", "MANDATORY", "Tumalo Falls", "Quick waterfall payoff near Bend.", "30–60 min", "Short viewpoint; optional longer trail", "Bend to Tumalo ~30–45 min"], ["Sparks Lake", "MANDATORY", "Sparks Lake", "Best scenic sunset lake option near Bend if skies are clear.", "45–90 min", "Easy shoreline / pullouts", "From Bend ~45–60 min"], ["Pilot Butte", "OPTIONAL", "Pilot Butte", "Easy in-town 360° Bend/Cascade viewpoint; backup sunset.", "20–45 min", "Drive-up or short walk", "In Bend"], ["Cascade Lakes Highway Pullouts", "OPTIONAL", "Cascade Lakes Scenic Byway", "Extra mountain views and photo pullouts.", "15–45 min", "Minimal", "Along Sparks Lake route"], ["Paulina Falls / Newberry", "OPTIONAL", "Newberry National Volcanic Monument", "Backup volcanic/waterfall area if you skip Sparks/Tumalo.", "1–2 hr", "Short walks", "Not ideal to combine with everything"]]}, {"date": "Wed Jul 1", "title": "Bend → Mt. Hood → Hood River → The Dalles", "hotel": "Stay: The Dalles — Cousins Country Inn", "stops": [["Trillium Lake", "MANDATORY", "Trillium Lake", "Classic Mt. Hood reflection shot; low effort, high payoff.", "45–90 min", "Easy lake walk/viewpoints", "Bend to Trillium ~2.5–3 hr"], ["Timberline Lodge", "MANDATORY", "Timberline Lodge", "Historic alpine lodge, Mt. Hood close-up, interiors and views.", "45–90 min", "Easy lodge walks", "20–30 min from Trillium"], ["Timberline Trail / Snowfield View", "OPTIONAL", "Timberline Trail", "Short alpine walk/viewpoint if weather is clear.", "20–45 min", "Short but windy/elevation", "At Timberline"], ["Mt. Hood Skibowl Alpine Slide", "OPTIONAL", "Mount Hood Skibowl", "Fun paid activity if you want variety.", "1–2 hr", "No hike", "Near Government Camp"], ["Hood River Waterfront", "MANDATORY", "Hood River Waterfront Park", "Kiteboarders, river walk, dinner/stretch stop.", "45–90 min", "Easy walk", "Mt Hood to Hood River ~1–1.5 hr"], ["Rowena Crest Viewpoint", "OPTIONAL", "Rowena Crest", "Iconic Columbia River horseshoe viewpoint, great sunset.", "20–45 min", "Drive-up viewpoint", "Hood River to Rowena ~25–35 min"], ["Fruit Loop Scenic Drive", "OPTIONAL", "Hood River County Fruit Loop", "Orchards, farms, Mt. Hood views; add if ahead of schedule.", "45–120 min", "Minimal", "Hood River Valley"], ["Sahalie + Koosah Falls", "OPTIONAL SWAP", "Sahalie Falls", "Best McKenzie-corridor waterfall swap if you drop some Mt. Hood time.", "1–2 hr", "Short viewpoints or loop", "Major route swap, not casual add"]]}, {"date": "Thu Jul 2", "title": "The Dalles → Columbia Gorge Waterfalls → Portland → Hillsboro", "hotel": "Stay: Hillsboro — Hampton Inn & Suites Portland/Hillsboro-Evergreen Park", "stops": [["Rowena Crest", "OPTIONAL", "Rowena Crest", "Quick sunrise/early viewpoint if missed on Jul 1.", "15–30 min", "Drive-up", "The Dalles to Rowena ~20–25 min"], ["Horsetail Falls", "MANDATORY", "Horsetail Falls (Oregon)", "Easy first waterfall stop before Multnomah.", "15–25 min", "Drive-up/easy", "From The Dalles ~55–70 min"], ["Multnomah Falls", "MANDATORY", "Multnomah Falls", "Most iconic Oregon waterfall; timed permit if arriving 9 AM–6 PM via I-84.", "45–90 min", "Easy to bridge; longer if hiking up", "5 min from Horsetail"], ["Wahkeena Falls", "MANDATORY", "Wahkeena Falls", "Good contrast to Multnomah; part of the waterfall wall.", "20–40 min", "Short walk; optional steeper trail", "5 min from Multnomah"], ["Bridal Veil Falls", "MANDATORY", "Bridal Veil Falls (Oregon)", "Compact, photogenic waterfall stop.", "30–50 min", "Short easy/moderate trail", "10–15 min from Wahkeena"], ["Latourell Falls", "MANDATORY", "Latourell Falls", "Green moss + basalt column waterfall; one of the best photo stops.", "30–60 min", "Short viewpoint or longer loop", "10 min from Bridal Veil"], ["Vista House at Crown Point", "MANDATORY", "Vista House", "Classic Columbia Gorge panorama and architecture.", "20–45 min", "Drive-up", "10–15 min from Latourell"], ["Wahclella Falls", "OPTIONAL", "Wahclella Falls", "Excellent short waterfall hike if you want more than viewpoints.", "1.5–2 hr", "Moderate short hike", "Cuts into Portland time"], ["Portland Rose Test Garden", "MANDATORY", "International Rose Test Garden", "Free, beautiful early July, easy Portland highlight.", "30–60 min", "Easy garden walking", "From Vista House ~35–55 min"], ["Portland Japanese Garden", "OPTIONAL", "Portland Japanese Garden", "Beautiful paid garden next to Rose Test Garden.", "60–90 min", "Garden walking", "Optional paid stop"], ["Pittock Mansion Viewpoint", "OPTIONAL", "Pittock Mansion", "City + Mt. Hood view if clear.", "20–45 min", "Easy viewpoint", "Near Washington Park"], ["Powell’s City of Books", "MANDATORY", "Powell's City of Books", "Iconic Portland indoor stop; useful if hot/rainy.", "30–75 min", "Indoor walking", "Downtown Portland"], ["Portland Food Carts / Dinner", "MANDATORY", "Portland food carts", "Easy vegetarian-friendly dinner stop before Hillsboro.", "45–90 min", "Minimal", "Portland area"]]}, {"date": "Fri Jul 3", "title": "Hillsboro → North & Central Oregon Coast → Florence", "hotel": "Stay: Florence — Quality Inn Florence", "stops": [["Cannon Beach / Haystack Rock", "MANDATORY", "Haystack Rock", "Most recognizable Oregon coast view; tidepools if timing works.", "45–90 min", "Easy beach walk", "Hillsboro to Cannon ~1.5–2 hr"], ["Ecola State Park", "MANDATORY", "Ecola State Park", "Sweeping north coast clifftop views.", "45–90 min", "Viewpoints/easy walks", "10–15 min from Cannon Beach"], ["Hug Point", "OPTIONAL", "Hug Point State Recreation Site", "Low-tide caves and beach waterfall.", "30–60 min", "Beach walk; tide-dependent", "15–20 min from Cannon/Ecola"], ["Oswald West / Short Sand Beach", "OPTIONAL", "Oswald West State Park", "Forest-to-beach walk to a beautiful cove.", "45–90 min", "Short forest walk", "20 min from Hug Point"], ["Cape Kiwanda", "MANDATORY", "Cape Kiwanda", "Huge dune and dramatic coast views.", "45–90 min", "Sand climb optional", "North coast to Cape Kiwanda ~1.5–2 hr"], ["Tillamook Creamery", "OPTIONAL", "Tillamook Creamery", "Good ice cream/restroom break.", "30–60 min", "Indoor", "On/near route"], ["Devil’s Punchbowl", "OPTIONAL", "Devils Punch Bowl State Natural Area", "Collapsed sea cave viewpoint.", "20–40 min", "Short walk", "Near Depoe Bay/Newport"], ["Depoe Bay", "OPTIONAL", "Depoe Bay", "Quick ocean town stop and possible whale spotting.", "15–45 min", "Minimal", "On US-101"], ["Yaquina Head Lighthouse", "MANDATORY", "Yaquina Head Light", "Tall lighthouse, cliffs, wildlife, strong photos.", "45–90 min", "Short walks", "Near Newport"], ["Nye Beach / Newport Waterfront", "OPTIONAL", "Nye Beach", "Food/coffee/town break.", "30–60 min", "Easy town walk", "Newport area"], ["Cape Perpetua Scenic Area", "MANDATORY", "Cape Perpetua", "Best central coast cluster: ocean viewpoints and wave features.", "60–120 min", "Short walks; slippery rocks", "Newport to Cape Perpetua ~45–60 min"], ["Thor’s Well", "MANDATORY", "Thor's Well", "Dramatic ocean-drain feature.", "20–45 min", "Short walk; wet rocks", "Cape Perpetua area"], ["Spouting Horn / Cook’s Chasm", "MANDATORY", "Spouting Horn", "Easy wave-drama add-on near Thor’s Well.", "20–40 min", "Short walk", "Cape Perpetua area"], ["Devils Churn", "OPTIONAL", "Devils Churn", "Wave-crash chasm if ocean is active.", "20–45 min", "Short walk/stairs", "Cape Perpetua area"], ["Heceta Head Lighthouse", "MANDATORY", "Heceta Head Light", "One of Oregon’s most photogenic lighthouses.", "45–90 min", "Short uphill walk", "25–35 min from Cape Perpetua"], ["Sea Lion Caves", "OPTIONAL", "Sea Lion Caves", "Paid roadside attraction if you want something different.", "30–60 min", "Indoor/elevator/short walk", "Near Heceta Head"], ["Florence Old Town", "OPTIONAL", "Florence, Oregon", "Evening dinner/walk after check-in.", "30–90 min", "Easy town walk", "At hotel area"]]}, {"date": "Sat Jul 4", "title": "Florence → South Coast → Samuel Boardman → Harbor/Brookings", "hotel": "Stay: Harbor/Brookings — Harbor Inn. Arrive before 10 PM.", "stops": [["Oregon Dunes", "MANDATORY", "Oregon Dunes National Recreation Area", "Unique coastal dunes landscape; quick walk/overlook.", "30–75 min", "Sand walk; tiring", "From Florence ~10–30 min"], ["Dean Creek Elk Viewing Area", "OPTIONAL", "Dean Creek Elk Viewing Area", "Easy wildlife pullout if elk are visible.", "10–25 min", "Drive-up", "Near Reedsport"], ["Shore Acres State Park", "MANDATORY", "Shore Acres State Park", "Wave-battered cliffs and gardens.", "60–90 min", "Easy walks", "Dunes to Shore Acres ~1.5–2 hr"], ["Cape Arago / Simpson Reef", "OPTIONAL", "Cape Arago State Park", "Wildlife and coastal viewpoints near Shore Acres.", "30–60 min", "Easy viewpoints", "Near Shore Acres"], ["Bandon Beach / Face Rock", "MANDATORY", "Face Rock State Scenic Viewpoint", "Major sea-stack beach highlight.", "60–120 min", "Beach walk", "Shore Acres to Bandon ~45–60 min"], ["Beach Loop Drive Viewpoints", "MANDATORY", "Bandon Beach", "Multiple easy sea-stack viewpoints.", "20–45 min", "Drive-up/short walks", "Bandon area"], ["Coquille River Lighthouse", "OPTIONAL", "Coquille River Light", "Small lighthouse add-on near Bandon.", "20–40 min", "Easy", "Near Bandon"], ["Port Orford Heads", "MANDATORY", "Port Orford Heads State Park", "Dramatic coastal viewpoint and break before Boardman.", "30–60 min", "Short walks", "Bandon to Port Orford ~45–60 min"], ["Cape Blanco State Park", "OPTIONAL", "Cape Blanco State Park", "Scenic lighthouse and western-point detour.", "60–90 min", "Easy walks", "Detour near Port Orford"], ["Arch Rock", "MANDATORY", "Arch Rock", "Easy first Samuel Boardman sea-stack/arch viewpoint.", "15–30 min", "Short viewpoint", "Boardman corridor"], ["Natural Bridges", "MANDATORY", "Natural Bridges, Oregon", "Most iconic Boardman stop.", "30–60 min", "Viewpoint easy; unofficial trails risky", "Boardman corridor"], ["Secret Beach", "OPTIONAL", "Secret Beach Oregon", "Secluded cove if tide/energy/time work.", "60–90 min", "Short but steep/muddy", "Boardman corridor"], ["Whaleshead Beach", "OPTIONAL", "Whaleshead Beach", "Good extra beach stop with sea-stack views.", "30–60 min", "Easy/moderate", "Boardman corridor"], ["Lone Ranch Beach", "OPTIONAL", "Lone Ranch Beach", "Easy final beach stop near Brookings.", "30–60 min", "Easy", "Near Brookings"], ["Harris Beach State Park", "OPTIONAL", "Harris Beach State Park", "Convenient Brookings beach for sunset or morning.", "30–60 min", "Easy", "Near Brookings"], ["Brookings Harbor", "OPTIONAL", "Brookings Harbor", "Easy evening/dinner area if arriving early.", "30–90 min", "Easy", "Near hotel"]]}, {"date": "Sun Jul 5", "title": "Brookings / Boardman Overflow → Optional Redwoods → Milpitas", "hotel": "Home", "stops": [["Samuel H. Boardman Overflow", "MANDATORY", "Samuel H. Boardman State Scenic Corridor", "Buffer for any missed Boardman stops.", "1–3 hr", "Depends on choices", "Near Brookings"], ["Natural Bridges", "MANDATORY IF MISSED", "Natural Bridges, Oregon", "Must-see if missed on Jul 4.", "30–60 min", "Viewpoint easy", "Boardman corridor"], ["Secret Beach", "OPTIONAL", "Secret Beach Oregon", "Special secluded beach if conditions are good.", "60–90 min", "Short but steep/muddy", "Boardman corridor"], ["Whaleshead Beach", "OPTIONAL", "Whaleshead Beach", "Easier coastal stop than Secret Beach.", "30–60 min", "Easy/moderate", "Boardman corridor"], ["Lone Ranch Beach", "OPTIONAL", "Lone Ranch Beach", "Simple low-stress morning stop near hotel.", "30–60 min", "Easy", "Near Brookings"], ["Harris Beach State Park", "OPTIONAL", "Harris Beach State Park", "Convenient final Oregon coast stop.", "30–60 min", "Easy", "Near Brookings"], ["Jedediah Smith Redwoods / Stout Grove", "OPTIONAL", "Jedediah Smith Redwoods State Park", "Beautiful old-growth redwoods if you want a forest finale.", "45–90 min", "Short easy grove walk", "Brookings to Stout Grove ~45–75 min"], ["Battery Point Lighthouse / Crescent City", "OPTIONAL", "Battery Point Light", "Easy coastal/lighthouse add-on if routing through Crescent City.", "30–60 min", "Easy; tide-dependent", "Crescent City"], ["Avenue of the Giants / Founders Grove", "OPTIONAL BIG ADD", "Avenue of the Giants", "Best redwood scenic drive if you accept a longer return day.", "1–2+ hr extra", "Short grove walks", "Adds time on return"], ["Drive back to Milpitas", "MANDATORY", "", "Long return drive with charging/food stops.", "All afternoon/evening", "None", "Brookings to Milpitas ~7.5–9+ hr with stops"]]}];
 
-const manualImages = {
-  "Rogue Gorge": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Rogue_River_Gorge_2.jpg/800px-Rogue_River_Gorge_2.jpg",
-  "Natural Bridge": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Natural_Bridge%2C_Rogue_River%2C_Oregon.jpg/800px-Natural_Bridge%2C_Rogue_River%2C_Oregon.jpg",
-  "Crater Lake Rim Village": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Crater_Lake_wizard_island2.jpg/800px-Crater_Lake_wizard_island2.jpg",
-  "Sinnott Memorial Overlook": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Crater_Lake_wizard_island2.jpg/800px-Crater_Lake_wizard_island2.jpg",
-  "Discovery Point": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Crater_Lake_National_Park_%28aerial_view%29.jpg/800px-Crater_Lake_National_Park_%28aerial_view%29.jpg",
-  "Watchman Overlook": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Crater_Lake_National_Park_%28aerial_view%29.jpg/800px-Crater_Lake_National_Park_%28aerial_view%29.jpg",
-  "Phantom Ship Overlook": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Phantom_Ship_from_Sun_Notch%2C_Crater_Lake_National_Park.jpg/800px-Phantom_Ship_from_Sun_Notch%2C_Crater_Lake_National_Park.jpg",
-  "Sun Notch Trail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Phantom_Ship_from_Sun_Notch%2C_Crater_Lake_National_Park.jpg/800px-Phantom_Ship_from_Sun_Notch%2C_Crater_Lake_National_Park.jpg",
-  "Smith Rock State Park": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Smith_Rock_State_Park%2C_Oregon.jpg/800px-Smith_Rock_State_Park%2C_Oregon.jpg",
-  "Crooked River / River Trail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Smith_Rock_State_Park_Oregon_Crooked_River.jpg/800px-Smith_Rock_State_Park_Oregon_Crooked_River.jpg",
-  "Monkey Face Viewpoint": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Monkey_Face%2C_Smith_Rock_State_Park.jpg/800px-Monkey_Face%2C_Smith_Rock_State_Park.jpg",
-  "Tumalo Falls": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Tumalo_Falls_2013.jpg/800px-Tumalo_Falls_2013.jpg",
-  "Sparks Lake": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Sparks_Lake_Oregon.jpg/800px-Sparks_Lake_Oregon.jpg",
-  "Pilot Butte": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Pilot_Butte%2C_Bend%2C_Oregon.jpg/800px-Pilot_Butte%2C_Bend%2C_Oregon.jpg",
-  "Trillium Lake": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Mount_Hood_reflected_in_Trillium_Lake.jpg/800px-Mount_Hood_reflected_in_Trillium_Lake.jpg",
-  "Timberline Lodge": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Timberline_Lodge_in_winter.jpg/800px-Timberline_Lodge_in_winter.jpg",
-  "Mt. Hood Skibowl Alpine Slide": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Mount_Hood_from_Timberline_Lodge.jpg/800px-Mount_Hood_from_Timberline_Lodge.jpg",
-  "Hood River Waterfront": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Hood_River_from_Washington.jpg/800px-Hood_River_from_Washington.jpg",
-  "Rowena Crest Viewpoint": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Rowena_Crest_Viewpoint%2C_Columbia_River_Gorge.jpg/800px-Rowena_Crest_Viewpoint%2C_Columbia_River_Gorge.jpg",
-  "Sahalie + Koosah Falls": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Sahalie_Falls.jpg/800px-Sahalie_Falls.jpg",
-  "Horsetail Falls": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Horsetail_Falls_Oregon.jpg/800px-Horsetail_Falls_Oregon.jpg",
-  "Multnomah Falls": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Multnomah_Falls%2C_Oregon.jpg/800px-Multnomah_Falls%2C_Oregon.jpg",
-  "Wahkeena Falls": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Wahkeena_Falls.jpg/800px-Wahkeena_Falls.jpg",
-  "Bridal Veil Falls": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Bridal_Veil_Falls_Oregon.jpg/800px-Bridal_Veil_Falls_Oregon.jpg",
-  "Latourell Falls": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Latourell_Falls%2C_Oregon.jpg/800px-Latourell_Falls%2C_Oregon.jpg",
-  "Vista House at Crown Point": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Vista_House%2C_Crown_Point.jpg/800px-Vista_House%2C_Crown_Point.jpg",
-  "Wahclella Falls": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Wahclella_Falls.jpg/800px-Wahclella_Falls.jpg",
-  "Portland Rose Test Garden": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/International_Rose_Test_Garden_Portland.jpg/800px-International_Rose_Test_Garden_Portland.jpg",
-  "Portland Japanese Garden": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Portland_Japanese_Garden_2010.jpg/800px-Portland_Japanese_Garden_2010.jpg",
-  "Pittock Mansion Viewpoint": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Pittock_Mansion.jpg/800px-Pittock_Mansion.jpg",
-  "Powell’s City of Books": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Powell%27s_City_of_Books_entrance%2C_Portland%2C_Oregon.jpg/800px-Powell%27s_City_of_Books_entrance%2C_Portland%2C_Oregon.jpg",
-  "Cannon Beach / Haystack Rock": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Haystack_Rock%2C_Cannon_Beach%2C_Oregon.jpg/800px-Haystack_Rock%2C_Cannon_Beach%2C_Oregon.jpg",
-  "Ecola State Park": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Ecola_State_Park_view.jpg/800px-Ecola_State_Park_view.jpg",
-  "Hug Point": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Hug_Point_State_Recreation_Site.jpg/800px-Hug_Point_State_Recreation_Site.jpg",
-  "Oswald West / Short Sand Beach": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Short_Sand_Beach%2C_Oswald_West_State_Park.jpg/800px-Short_Sand_Beach%2C_Oswald_West_State_Park.jpg",
-  "Cape Kiwanda": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cape_Kiwanda_and_Haystack_Rock.jpg/800px-Cape_Kiwanda_and_Haystack_Rock.jpg",
-  "Tillamook Creamery": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Tillamook_Creamery.jpg/800px-Tillamook_Creamery.jpg",
-  "Devil’s Punchbowl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Devils_Punchbowl_State_Natural_Area.jpg/800px-Devils_Punchbowl_State_Natural_Area.jpg",
-  "Depoe Bay": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Depoe_Bay%2C_Oregon.jpg/800px-Depoe_Bay%2C_Oregon.jpg",
-  "Yaquina Head Lighthouse": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Yaquina_Head_Lighthouse.jpg/800px-Yaquina_Head_Lighthouse.jpg",
-  "Cape Perpetua Scenic Area": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Cape_Perpetua_Viewpoint.jpg/800px-Cape_Perpetua_Viewpoint.jpg",
-  "Thor’s Well": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Thor%27s_Well%2C_Cape_Perpetua.jpg/800px-Thor%27s_Well%2C_Cape_Perpetua.jpg",
-  "Heceta Head Lighthouse": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Heceta_Head_Lighthouse_%28Oregon%29.jpg/800px-Heceta_Head_Lighthouse_%28Oregon%29.jpg",
-  "Sea Lion Caves": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Sea_Lion_Caves_Entrance.jpg/800px-Sea_Lion_Caves_Entrance.jpg",
-  "Florence Old Town": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Florence_Oregon_Siuslaw_River_Bridge.jpg/800px-Florence_Oregon_Siuslaw_River_Bridge.jpg",
-  "Oregon Dunes": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Oregon_Dunes_National_Recreation_Area.jpg/800px-Oregon_Dunes_National_Recreation_Area.jpg",
-  "Shore Acres State Park": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Shore_Acres_State_Park_Oregon_coast.jpg/800px-Shore_Acres_State_Park_Oregon_coast.jpg",
-  "Cape Arago / Simpson Reef": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Cape_Arago_State_Park.jpg/800px-Cape_Arago_State_Park.jpg",
-  "Bandon Beach / Face Rock": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Face_Rock_State_Scenic_Viewpoint.jpg/800px-Face_Rock_State_Scenic_Viewpoint.jpg",
-  "Beach Loop Drive Viewpoints": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Bandon_Oregon_Coast.jpg/800px-Bandon_Oregon_Coast.jpg",
-  "Coquille River Lighthouse": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Coquille_River_Lighthouse.jpg/800px-Coquille_River_Lighthouse.jpg",
-  "Port Orford Heads": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Port_Orford_Heads_State_Park.jpg/800px-Port_Orford_Heads_State_Park.jpg",
-  "Cape Blanco State Park": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Cape_Blanco_Lighthouse.jpg/800px-Cape_Blanco_Lighthouse.jpg",
-  "Arch Rock": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Samuel_H._Boardman_State_Scenic_Corridor.jpg/800px-Samuel_H._Boardman_State_Scenic_Corridor.jpg",
-  "Natural Bridges": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Natural_Bridges_Samuel_H._Boardman_State_Scenic_Corridor.jpg/800px-Natural_Bridges_Samuel_H._Boardman_State_Scenic_Corridor.jpg",
-  "Secret Beach": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Samuel_H._Boardman_State_Scenic_Corridor.jpg/800px-Samuel_H._Boardman_State_Scenic_Corridor.jpg",
-  "Whaleshead Beach": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Samuel_H._Boardman_State_Scenic_Corridor.jpg/800px-Samuel_H._Boardman_State_Scenic_Corridor.jpg",
-  "Lone Ranch Beach": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Samuel_H._Boardman_State_Scenic_Corridor.jpg/800px-Samuel_H._Boardman_State_Scenic_Corridor.jpg",
-  "Harris Beach State Park": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Harris_Beach_State_Park.jpg/800px-Harris_Beach_State_Park.jpg",
-  "Brookings Harbor": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Brookings_Harbor_Oregon.jpg/800px-Brookings_Harbor_Oregon.jpg",
-  "Jedediah Smith Redwoods / Stout Grove": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Stout_Grove%2C_Jedediah_Smith_Redwoods_State_Park.jpg/800px-Stout_Grove%2C_Jedediah_Smith_Redwoods_State_Park.jpg",
-  "Battery Point Lighthouse / Crescent City": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Battery_Point_Lighthouse.jpg/800px-Battery_Point_Lighthouse.jpg",
-  "Avenue of the Giants / Founders Grove": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Avenue_of_the_Giants.jpg/800px-Avenue_of_the_Giants.jpg"
-};
+const ASSET_DIR = "oregon-assets";
+function imageFileName(name) {
+  const slug = String(name || "oregon-stop")
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[’']/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return (slug || "oregon-stop") + ".jpg";
+}
+function imageSrc(name) {
+  return `${ASSET_DIR}/${imageFileName(name)}`;
+}
+function markImageLoaded(img) {
+  img.closest(".imgwrap")?.classList.add("loaded");
+}
+function markImageMissing(img) {
+  const wrap = img.closest(".imgwrap");
+  img.remove();
+  wrap?.classList.add("missing");
+}
 
 function mapsUrl(name) {
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name + " Oregon");
@@ -187,7 +150,7 @@ function render() {
     <section class="hero">
       <h2>Use this page during the trip</h2>
       <ul>
-        <li>Images are embedded from stable Wikimedia links where possible, plus Google Images backup.</li>
+        <li>Images are stored locally in <b>oregon-assets/</b>, plus Google Images backup links.</li>
         <li>Tap <b>Open Maps</b> for actual navigation. Tap <b>View More Photos</b> when deciding optional stops.</li>
         <li>Mandatory = high-priority. Optional = only if time, energy, weather, and parking work.</li>
       </ul>
@@ -209,18 +172,21 @@ function render() {
     </section>
   `).join("");
   loadVisited();
-  hydrateImages();
 }
 function cardHtml(s,di,si) {
   const [name,status,wiki,desc,visit,hike,drive] = s;
   const k = kind(status);
   const id = `d${di}s${si}`;
+  const photoUrl = photosUrl(name);
   return `
   <article class="card" data-kind="${k}">
     <div class="imgwrap">
-      <div class="loading">Loading image<br><small>${esc(name)}</small></div>
-      <img data-name="${esc(name)}" data-wiki="${esc(wiki)}" alt="${esc(name)} photo" loading="lazy">
-      <span class="imgcredit">Wikimedia/Wikipedia</span>
+      <div class="imgfallback">
+        <strong>${esc(name)}</strong>
+        <a href="${photoUrl}" target="_blank" rel="noopener">View More Photos</a>
+      </div>
+      <img src="${imageSrc(name)}" alt="${esc(name)} photo" loading="lazy" decoding="async" onload="markImageLoaded(this)" onerror="markImageMissing(this)">
+      <span class="imgcredit">Local asset</span>
     </div>
     <div class="content">
       <div class="head"><div><div class="seq">Stop ${si+1}</div><h3>${esc(name)}</h3></div><span class="badge ${k}">${esc(status)}</span></div>
@@ -233,51 +199,11 @@ function cardHtml(s,di,si) {
       <p><b>Details:</b> ${esc(desc)}</p>
       <div class="actions">
         <a href="${mapsUrl(name)}" target="_blank" rel="noopener">📍 Open Maps</a>
-        <a href="${photosUrl(name)}" target="_blank" rel="noopener">🖼️ View More Photos</a>
+        <a href="${photoUrl}" target="_blank" rel="noopener">🖼️ View More Photos</a>
         <label class="visited"><input type="checkbox" data-id="${id}" onchange="saveVisited(this)"> Visited</label>
       </div>
     </div>
   </article>`;
-}
-async function wikiThumb(title) {
-  if (!title) return null;
-  try {
-    const url = "https://en.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(title);
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    const data = await res.json();
-    if (data.thumbnail && data.thumbnail.source) return data.thumbnail.source.replace(/\/\d+px-/,"/900px-");
-    if (data.originalimage && data.originalimage.source) return data.originalimage.source;
-  } catch(e) {}
-  return null;
-}
-async function hydrateImages() {
-  const imgs = document.querySelectorAll("img[data-name]");
-  for (const img of imgs) {
-    const name = img.dataset.name;
-    const wiki = img.dataset.wiki;
-    let src = manualImages[name];
-    if (!src && wiki) src = await wikiThumb(wiki);
-    if (!src) {
-      img.parentElement.querySelector(".loading").innerHTML = `No embedded image<br><small>Tap View More Photos</small>`;
-      img.style.display = "none";
-      continue;
-    }
-    img.src = src;
-    img.onload = () => {
-      const l = img.parentElement.querySelector(".loading");
-      if (l) l.style.display = "none";
-    };
-    img.onerror = async () => {
-      if (wiki && src !== await wikiThumb(wiki)) {
-        const fallback = await wikiThumb(wiki);
-        if (fallback) { img.src = fallback; return; }
-      }
-      img.style.display = "none";
-      const l = img.parentElement.querySelector(".loading");
-      if (l) l.innerHTML = `Image blocked<br><small>Tap View More Photos</small>`;
-    };
-  }
 }
 function filterCards(k, btn) {
   document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
